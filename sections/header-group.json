@@ -1,14 +1,18 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
     "spa-announcement-marquee": {
       "type": "spa-announcement-marquee",
-      "settings": {
-        "background_color": "#3A1CFF",
-        "text_color": "#FFFFFF",
-        "dot_color": "#F4FF29"
-      },
       "blocks": {
         "message-0": {
           "type": "message",
@@ -34,7 +38,7 @@
         "message-3": {
           "type": "message",
           "settings": {
-            "text": "Showroom à Évry : venez tester nos spas en eau",
+            "text": "Showroom à Fontenay-Le-Vicomte : venez tester nos spas en eau",
             "link": ""
           }
         },
@@ -52,21 +56,26 @@
         "message-2",
         "message-3",
         "message-4"
-      ]
+      ],
+      "settings": {
+        "background_color": "#3a1cff",
+        "text_color": "#ffffff",
+        "dot_color": "#f4ff29"
+      }
     },
     "header": {
       "type": "header",
       "settings": {
-        "color_scheme": "scheme-1",
-        "menu_color_scheme": "scheme-1",
         "logo_position": "middle-left",
+        "mobile_logo_position": "center",
         "menu": "main-menu",
         "menu_type_desktop": "dropdown",
         "sticky_header_type": "on-scroll-up",
         "show_line_separator": true,
+        "color_scheme": "scheme-1",
+        "menu_color_scheme": "scheme-1",
         "enable_country_selector": true,
         "enable_language_selector": true,
-        "mobile_logo_position": "center",
         "margin_bottom": 0,
         "padding_top": 20,
         "padding_bottom": 20
