@@ -15,6 +15,19 @@
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
 
+    {%- comment -%}
+      Polices de la maquette : Unbounded pour les titres, Instrument Sans pour le corps.
+      Les familles sont rebranchées sur les variables de Dawn dans spa-theme.css.
+    {%- endcomment -%}
+    {% comment %}theme-check-disable RemoteAsset{% endcomment %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+    >
+    {% comment %}theme-check-enable RemoteAsset{% endcomment %}
+
     <title>
       {{ page_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
@@ -279,6 +292,7 @@
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'spa-theme.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
     {%- if settings.cart_type == 'drawer' -%}

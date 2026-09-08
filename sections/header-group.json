@@ -2,30 +2,56 @@
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
-    "announcement-bar": {
-      "type": "announcement-bar",
+    "spa-announcement-marquee": {
+      "type": "spa-announcement-marquee",
       "settings": {
-        "color_scheme": "scheme-1",
-        "show_line_separator": true,
-        "show_social": false,
-        "auto_rotate": false,
-        "change_slides_speed": 5,
-        "enable_country_selector": false,
-        "enable_language_selector": false
+        "background_color": "#3A1CFF",
+        "text_color": "#FFFFFF",
+        "dot_color": "#F4FF29"
       },
       "blocks": {
-        "announcement-bar-0": {
-          "type": "announcement",
+        "message-0": {
+          "type": "message",
           "settings": {
-            "text": "Welcome to our store",
-            "text_alignment": "center",
-            "color_scheme": "scheme-1",
+            "text": "Livraison et mise en eau offertes en Essonne",
+            "link": ""
+          }
+        },
+        "message-1": {
+          "type": "message",
+          "settings": {
+            "text": "Jusqu'au 30 septembre : couverture isolante offerte sur tout spa rigide",
+            "link": ""
+          }
+        },
+        "message-2": {
+          "type": "message",
+          "settings": {
+            "text": "Paiement en 3 ou 4 fois sans frais",
+            "link": ""
+          }
+        },
+        "message-3": {
+          "type": "message",
+          "settings": {
+            "text": "Showroom à Évry : venez tester nos spas en eau",
+            "link": ""
+          }
+        },
+        "message-4": {
+          "type": "message",
+          "settings": {
+            "text": "Garantie coque 10 ans, électronique 3 ans",
             "link": ""
           }
         }
       },
       "block_order": [
-        "announcement-bar-0"
+        "message-0",
+        "message-1",
+        "message-2",
+        "message-3",
+        "message-4"
       ]
     },
     "header": {
@@ -48,7 +74,7 @@
     }
   },
   "order": [
-    "announcement-bar",
+    "spa-announcement-marquee",
     "header"
   ]
 }

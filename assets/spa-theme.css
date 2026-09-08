@@ -1,0 +1,323 @@
+/* ==========================================================================
+   SPA THEME — socle de design
+   Reproduit les tokens de la maquette boutique-spa-bubbly.html par-dessus Dawn.
+   Chargé après base.css : les surcharges de variables Dawn gagnent la cascade.
+
+   NB : Dawn fixe html { font-size: calc(var(--font-body-scale) * 62.5%) },
+   donc 1rem = 10px. Les valeurs de la maquette sont converties en conséquence.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. TOKENS
+   -------------------------------------------------------------------------- */
+:root {
+  /* Palette */
+  --cream: #ffffff;
+  --ink: #1a1440;
+  --ink-soft: #4b4468;
+  --aqua: #00f0ff;
+  --aqua-deep: #00b4c9;
+  --blue: #3a1cff;
+  --coral: #ff2d95;
+  --sun: #f4ff29;
+  --lime: #5bff3a;
+  --white: #ffffff;
+
+  /* Fonds clairs dérivés (médias de cartes) */
+  --tint-neutral: #f3f0fa;
+  --tint-aqua: #ccfcff;
+  --tint-sun: #fbffc2;
+  --tint-coral: #ffd6ea;
+  --tint-lime: #d9ffd1;
+
+  /* Typographie */
+  --font-display: 'Unbounded', system-ui, sans-serif;
+  --font-body: 'Instrument Sans', system-ui, sans-serif;
+
+  /* Rayons */
+  --r-pill: 999px;
+  --r-xl: 40px;
+  --r-lg: 28px;
+  --r-md: 18px;
+
+  /* Grille */
+  --max: 1240px;
+  --gutter: clamp(20px, 4vw, 48px);
+}
+
+/* --------------------------------------------------------------------------
+   2. SURCHARGE DES VARIABLES DE POLICE DE DAWN
+   Dawn les définit dans le {% style %} de theme.liquid à partir des réglages
+   du thème ; on les repointe vers les polices de la maquette.
+   -------------------------------------------------------------------------- */
+:root {
+  --font-body-family: var(--font-body);
+  --font-body-style: normal;
+  --font-body-weight: 400;
+  --font-body-weight-bold: 600;
+
+  --font-heading-family: var(--font-display);
+  --font-heading-style: normal;
+  --font-heading-weight: 700;
+
+  /* Focus : anneau bleu de la maquette, branché sur le système de Dawn */
+  --focused-base-outline: 0.3rem solid var(--blue);
+  --focused-base-outline-offset: 0.3rem;
+}
+
+/* --------------------------------------------------------------------------
+   3. RESET TYPOGRAPHIQUE
+   -------------------------------------------------------------------------- */
+body {
+  font-size: 1.7rem;
+  letter-spacing: normal;
+  line-height: 1.55;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media screen and (min-width: 750px) {
+  body {
+    font-size: 1.7rem;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+.h0,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+h1,
+.h0,
+.h1 {
+  font-weight: 900;
+}
+
+/* Chapô */
+.lead {
+  font-size: clamp(1.7rem, 1.4vw, 2rem);
+  color: var(--ink-soft);
+  max-width: 34em;
+}
+
+/* --------------------------------------------------------------------------
+   4. BOUTONS
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.6rem 2.8rem;
+  border: 0;
+  border-radius: var(--r-pill);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.6rem;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  background: var(--ink);
+  color: var(--white);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  color: var(--white);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn.blue {
+  background: var(--blue);
+  color: var(--white);
+}
+
+.btn.coral {
+  background: var(--coral);
+  color: var(--ink);
+}
+
+.btn.sun {
+  background: var(--sun);
+  color: var(--ink);
+}
+
+.btn.aqua {
+  background: var(--aqua);
+  color: var(--ink);
+}
+
+.btn.ghost {
+  background: transparent;
+  color: var(--ink);
+  box-shadow: inset 0 0 0 2px var(--ink);
+}
+
+.btn.coral:hover,
+.btn.sun:hover,
+.btn.aqua:hover,
+.btn.ghost:hover {
+  color: var(--ink);
+}
+
+.btn.small {
+  padding: 1.2rem 2rem;
+  font-size: 1.5rem;
+}
+
+.btn.full {
+  width: 100%;
+}
+
+/* Lien souligné corail — préfixé pour ne pas heurter le .link de Dawn */
+.spa-link {
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 2px solid var(--coral);
+  padding-bottom: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   5. TAGS / BADGES
+   -------------------------------------------------------------------------- */
+.tag {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--r-pill);
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1;
+  background: var(--sun);
+  color: var(--ink);
+}
+
+.tag.coral {
+  background: var(--coral);
+  color: var(--ink);
+}
+
+.tag.aqua {
+  background: var(--aqua);
+  color: var(--ink);
+}
+
+.tag.lime {
+  background: var(--lime);
+  color: var(--ink);
+}
+
+.tag.blue {
+  background: var(--blue);
+  color: var(--white);
+}
+
+/* --------------------------------------------------------------------------
+   6. MARQUEE
+   La piste contient deux copies identiques des messages : à -50% de sa
+   largeur, la seconde copie occupe exactement la place de la première,
+   d'où une boucle sans saut.
+   -------------------------------------------------------------------------- */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.spa-marquee {
+  --spa-marquee-gap: 56px;
+
+  background: var(--spa-marquee-bg, var(--blue));
+  color: var(--spa-marquee-fg, var(--white));
+  overflow: hidden;
+  padding-block: 1rem;
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: normal;
+  white-space: nowrap;
+}
+
+.spa-marquee__track {
+  display: inline-flex;
+  gap: var(--spa-marquee-gap);
+  /* Doit valoir exactement le gap pour que la translation de -50% tombe juste. */
+  padding-left: var(--spa-marquee-gap);
+  animation: marquee var(--spa-marquee-duration, 34s) linear infinite;
+  will-change: transform;
+}
+
+.spa-marquee__item {
+  color: inherit;
+  text-decoration: none;
+}
+
+.spa-marquee__item::before {
+  content: '•';
+  margin-right: var(--spa-marquee-gap);
+  color: var(--spa-marquee-dot, var(--sun));
+}
+
+a.spa-marquee__item:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Pause au survol et au focus clavier */
+.spa-marquee:hover .spa-marquee__track,
+.spa-marquee:focus-within .spa-marquee__track {
+  animation-play-state: paused;
+}
+
+/* --------------------------------------------------------------------------
+   7. MOUVEMENT RÉDUIT
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .btn:hover,
+  .btn:active {
+    transform: none;
+  }
+
+  .spa-marquee {
+    --spa-marquee-gap: 24px;
+
+    white-space: normal;
+  }
+
+  .spa-marquee__track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-left: 0;
+    row-gap: 0.6rem;
+  }
+
+  /* La seconde copie ne sert qu'à la boucle : inutile à l'arrêt. */
+  .spa-marquee__item[aria-hidden='true'] {
+    display: none;
+  }
+
+  .spa-marquee__item:first-child::before {
+    content: none;
+  }
+}
