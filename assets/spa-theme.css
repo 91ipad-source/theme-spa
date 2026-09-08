@@ -290,7 +290,40 @@ a.spa-marquee__item:hover {
 }
 
 /* --------------------------------------------------------------------------
-   7. MOUVEMENT RÉDUIT
+   7. BADGES PRODUIT (promo / épuisé)
+   Dawn pose déjà ces badges tout seul : le badge promo apparaît dès qu'un prix
+   barré (compare_at_price) est renseigné sur le produit, le badge épuisé quand
+   le stock est à zéro. On ne touche donc pas au Liquid — on remplace seulement
+   le rectangle de Dawn par la pastille .tag de la maquette.
+
+   Dawn distingue les deux badges par leur jeu de couleurs (réglages du thème) :
+   scheme-4 pour la promo, scheme-3 pour la rupture. On s'appuie dessus plutôt
+   que d'ajouter une classe.
+   -------------------------------------------------------------------------- */
+.badge {
+  border: 0;
+  border-radius: var(--r-pill);
+  padding: 0.6rem 1.2rem;
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.badge.color-scheme-4 {
+  background: var(--coral);
+  color: var(--ink);
+}
+
+.badge.color-scheme-3 {
+  background: var(--ink);
+  color: var(--white);
+}
+
+/* --------------------------------------------------------------------------
+   8. MOUVEMENT RÉDUIT
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   .btn:hover,
