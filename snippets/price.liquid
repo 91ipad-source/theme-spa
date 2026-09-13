@@ -117,9 +117,12 @@
         {{ 'products.product.on_sale' | t }}
       </span>
 
-      <span class="badge price__badge-sold-out color-{{ settings.sold_out_badge_color_scheme }}">
-        {{ 'products.product.sold_out' | t }}
-      </span>
+      {%- comment -%} Badge « Épuisé » : réservé aux produits portant le tag 'badge-epuise' {%- endcomment -%}
+      {%- if product.tags contains 'badge-epuise' -%}
+        <span class="badge price__badge-sold-out color-{{ settings.sold_out_badge_color_scheme }}">
+          {{ 'products.product.sold_out' | t }}
+        </span>
+      {%- endif -%}
     {%- endif -%}
   </div>
 {% endunless %}
