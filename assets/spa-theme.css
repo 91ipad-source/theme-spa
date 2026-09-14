@@ -598,29 +598,21 @@ a.spa-marquee__item:hover {
 }
 
 /* --------------------------------------------------------------------------
-   13. PAGE AU TEXTE CENTRÉ
+   13. PAGE AUX TITRES CENTRÉS
    --------------------------------------------------------------------------
    Activé par le réglage « Alignement du texte » de la section Page.
 
-   À réserver aux pages courtes : centrer un long texte fait perdre le bord
-   gauche à chaque retour à la ligne, et la lecture ralentit sensiblement.
+   Seuls les titres sont centrés ; les paragraphes restent alignés à gauche.
+   Centrer aussi le corps ferait perdre le bord gauche à chaque retour à la
+   ligne : sur un texte long, l'œil cherche le début de chaque ligne et la
+   lecture ralentit. Le centrage porte donc là où il se voit, sans le coût.
    -------------------------------------------------------------------------- */
-.main-page--centre {
+.main-page--centre .main-page-title,
+.main-page--centre .rte h2,
+.main-page--centre .rte h3,
+.main-page--centre .rte h4,
+.main-page--centre .rte .page-subtitle {
   text-align: center;
-}
-
-/* Une liste centrée garderait sinon ses puces alignées à gauche du bloc,
-   très loin du texte : on les ramène dans le flux. */
-.main-page--centre .rte ul,
-.main-page--centre .rte ol {
-  list-style-position: inside;
-  padding-left: 0;
-}
-
-/* Les blocs à la mise en page propre — rangée de pictos — gardent la leur. */
-.main-page--centre .rte .spa-picto-grid {
-  list-style: none;
-  padding: 0;
 }
 
 /* --------------------------------------------------------------------------
