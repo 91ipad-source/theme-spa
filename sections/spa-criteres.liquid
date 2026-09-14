@@ -35,11 +35,11 @@
     {%- endif -%}
 
     {%- if criteres.size > 0 -%}
-      <ul class="spa-criteres__grid list-unstyled" role="list">
+      <ul class="spa-picto-grid" role="list">
         {%- for block in criteres -%}
-          <li class="spa-criteres__item" {{ block.shopify_attributes }}>
-            <span class="spa-criteres__icone">{% render 'spa-icone', nom: block.settings.icone %}</span>
-            <span class="spa-criteres__label">{{ block.settings.label | escape }}</span>
+          <li class="spa-picto" {{ block.shopify_attributes }}>
+            <span class="spa-picto__icone">{% render 'spa-icone', nom: block.settings.icone %}</span>
+            <span class="spa-picto__label">{{ block.settings.label | escape }}</span>
           </li>
         {%- endfor -%}
       </ul>

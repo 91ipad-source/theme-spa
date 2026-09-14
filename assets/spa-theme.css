@@ -422,22 +422,31 @@ a.spa-marquee__item:hover {
   text-align: center;
 }
 
-.spa-criteres__grid {
+/* La grille de pictos sert à deux endroits : dans cette section, et dans le
+   corps d'une page — d'où les sélecteurs doublés sous .rte, qui doivent
+   l'emporter sur les styles de liste du texte enrichi. */
+.spa-picto-grid,
+.rte .spa-picto-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 2.4rem 1.6rem;
   margin: 0 0 4rem;
   padding: 0;
+  list-style: none;
 }
 
-.spa-criteres__item {
+.spa-picto,
+.rte .spa-picto {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.2rem;
+  margin: 0;
   text-align: center;
+  list-style: none;
 }
 
+.spa-picto__icone,
 .spa-criteres__icone {
   display: grid;
   place-items: center;
@@ -449,14 +458,21 @@ a.spa-marquee__item:hover {
   flex-shrink: 0;
 }
 
+.spa-picto__icone svg,
 .spa-criteres__icone svg {
   width: 3rem;
   height: 3rem;
 }
 
-.spa-criteres__label {
+.spa-picto__label {
   font-size: 1.5rem;
   line-height: 1.35;
+}
+
+/* Titre de la rangée quand elle est posée dans le corps d'une page. */
+.rte .spa-picto-titre {
+  margin: 4rem 0 3rem;
+  text-align: center;
 }
 
 /* --- Encadré d'appel à l'action --- */
@@ -552,7 +568,8 @@ a.spa-marquee__item:hover {
     font-size: calc(var(--font-heading-scale) * 2.5rem);
   }
 
-  .spa-criteres__grid {
+  .spa-picto-grid,
+  .rte .spa-picto-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
@@ -573,7 +590,8 @@ a.spa-marquee__item:hover {
 }
 
 @media screen and (min-width: 990px) {
-  .spa-criteres__grid {
+  .spa-picto-grid,
+  .rte .spa-picto-grid {
     grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 }

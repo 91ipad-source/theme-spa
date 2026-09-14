@@ -21,7 +21,7 @@
 -%}
 
 {%- if image != blank -%}
-  <div class="spa-store-banner{% unless section.settings.show_on_mobile %} spa-store-banner--no-mobile{% endunless %}">
+  <div class="spa-store-banner{% unless section.settings.full_width %} page-width{% endunless %}{% unless section.settings.show_on_mobile %} spa-store-banner--no-mobile{% endunless %}">
     {%- if section.settings.link != blank -%}
       <a class="spa-store-banner__link" href="{{ section.settings.link }}">
     {%- endif -%}
@@ -78,6 +78,13 @@
       "id": "image_mobile",
       "label": "Image (téléphone)",
       "info": "Facultatif mais recommandé pour une image panoramique : sur un écran de 400 px elle ne fait plus que ~130 px de haut et les textes deviennent illisibles. Prévoyez une version plus haute, recadrée sur l'essentiel. Sans cette image, celle du dessus est réutilisée."
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Image sur toute la largeur de l'écran",
+      "info": "Décochez pour contenir l'image dans la largeur du contenu, comme le reste de la page.",
+      "default": true
     },
     {
       "type": "checkbox",
