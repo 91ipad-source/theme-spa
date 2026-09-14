@@ -1009,3 +1009,95 @@ a.spa-marquee__item:hover {
     --spa-parcours-gouttiere: 2rem;
   }
 }
+
+/* --------------------------------------------------------------------------
+   16 bis. LE TABLEAU SUR TÉLÉPHONE
+   --------------------------------------------------------------------------
+   Le défilement horizontal était la mauvaise réponse : rien à l'écran ne
+   dit qu'on peut pousser le tableau vers la gauche, alors il a simplement
+   l'air tronqué. Sous 750 px, chaque ligne devient donc une fiche : le
+   format en titre, puis les trois autres colonnes empilées, chacune
+   précédée de son en-tête repris en petites capitales.
+
+   D'où les attributs data-label posés sur chaque cellule dans le corps de
+   la page : le CSS ne sait pas lire le <thead>, il faut lui redonner
+   l'intitulé. Si vous ajoutez une colonne, pensez à ajouter son
+   data-label, sinon elle apparaîtra sans titre sur téléphone.
+
+   Les sélecteurs sont doublés sous .rte parce que Dawn cible déjà
+   « .rte table td » : sans cela, ses marges l'emporteraient sur les
+   nôtres.
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 749px) {
+  .spa-tableau {
+    overflow-x: visible;
+  }
+
+  .spa-tableau table,
+  .rte .spa-tableau table {
+    display: block;
+    min-width: 0;
+  }
+
+  .spa-tableau thead {
+    display: none;
+  }
+
+  .spa-tableau tbody {
+    display: block;
+  }
+
+  .spa-tableau tbody tr {
+    display: block;
+    margin-bottom: 1.6rem;
+    padding: 1.8rem 2rem;
+    border-radius: var(--r-md);
+    background: var(--mist);
+  }
+
+  .spa-tableau tbody tr:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Le fond passe de la cellule à la fiche entière : on neutralise le
+     zébrage du grand écran, qui ferait ici deux fonds superposés. */
+  .spa-tableau tbody tr:nth-child(odd) td,
+  .spa-tableau tbody tr:nth-child(odd) th {
+    background: transparent;
+  }
+
+  .spa-tableau tbody th,
+  .rte .spa-tableau tbody th {
+    display: block;
+    padding: 0 0 1.4rem;
+    font-size: 1.9rem;
+    white-space: normal;
+  }
+
+  .spa-tableau tbody td,
+  .rte .spa-tableau tbody td {
+    display: block;
+    padding: 0 0 1.4rem;
+  }
+
+  .spa-tableau tbody td:last-child,
+  .rte .spa-tableau tbody td:last-child {
+    padding-bottom: 0;
+  }
+
+  .spa-tableau tbody td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--deep-soft);
+  }
+
+  /* Une cellule sans data-label ne doit pas ouvrir une ligne vide. */
+  .spa-tableau tbody td:not([data-label])::before {
+    content: none;
+  }
+}
