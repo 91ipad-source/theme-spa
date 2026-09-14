@@ -685,13 +685,18 @@ a.spa-marquee__item:hover {
   list-style: none;
 }
 
+/* Le nombre tient sur une seule ligne, toujours : dès que « 12 jours »
+   passe à la ligne, son libellé descend et les quatre colonnes ne sont
+   plus alignées entre elles. C'est ce décalage qui se voit, bien plus que
+   la taille du chiffre. */
 .spa-chiffre__valeur {
   display: block;
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: calc(var(--font-heading-scale) * 3.2rem);
+  font-size: calc(var(--font-heading-scale) * 2.4rem);
   line-height: 1.1;
   color: var(--deep);
+  white-space: nowrap;
 }
 
 .spa-chiffre__label {
@@ -710,7 +715,7 @@ a.spa-marquee__item:hover {
   }
 
   .spa-chiffre__valeur {
-    font-size: calc(var(--font-heading-scale) * 4rem);
+    font-size: calc(var(--font-heading-scale) * 2.8rem);
   }
 }
 
