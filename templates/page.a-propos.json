@@ -17,6 +17,23 @@
         "padding_bottom": 28
       }
     },
+    "articles": {
+      "type": "featured-blog",
+      "settings": {
+        "blog": "conseils-spa",
+        "post_limit": 6,
+        "heading": "Nos conseils",
+        "heading_size": "h2",
+        "columns_desktop": 3,
+        "show_view_all": true,
+        "show_image": true,
+        "show_date": false,
+        "show_author": false,
+        "color_scheme": "scheme-2",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
     "criteres": {
       "type": "spa-criteres",
       "blocks": {
@@ -70,6 +87,7 @@
   "order": [
     "photo",
     "main",
+    "articles",
     "criteres"
   ]
 }
