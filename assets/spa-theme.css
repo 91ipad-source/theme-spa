@@ -409,7 +409,177 @@ a.spa-marquee__item:hover {
 }
 
 /* --------------------------------------------------------------------------
-   12. MOUVEMENT RÉDUIT
+   12. CRITÈRES ET RÉASSURANCE (section spa-criteres)
+   --------------------------------------------------------------------------
+   Reprise en HTML du visuel « À propos » : pastilles de pictos, encadré
+   d'appel à l'action, bande de gages. Tout est fluide — six colonnes sur
+   grand écran, trois sur tablette, deux sur téléphone — pour que les
+   libellés restent lisibles là où l'image d'origine les rendait minuscules.
+   -------------------------------------------------------------------------- */
+.spa-criteres__heading {
+  margin: 0 0 3rem;
+  font-size: calc(var(--font-heading-scale) * 2rem);
+  text-align: center;
+}
+
+.spa-criteres__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2.4rem 1.6rem;
+  margin: 0 0 4rem;
+  padding: 0;
+}
+
+.spa-criteres__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  text-align: center;
+}
+
+.spa-criteres__icone {
+  display: grid;
+  place-items: center;
+  width: 6.4rem;
+  height: 6.4rem;
+  border-radius: 50%;
+  background: var(--mist);
+  color: var(--deep);
+  flex-shrink: 0;
+}
+
+.spa-criteres__icone svg {
+  width: 3rem;
+  height: 3rem;
+}
+
+.spa-criteres__label {
+  font-size: 1.5rem;
+  line-height: 1.35;
+}
+
+/* --- Encadré d'appel à l'action --- */
+.spa-criteres__cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem;
+  padding: 2.4rem;
+  border-radius: var(--r-md);
+  background: var(--deep);
+  color: var(--white);
+}
+
+.spa-criteres__cta-icone {
+  display: grid;
+  place-items: center;
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: 50%;
+  background: var(--sky);
+  color: var(--deep);
+  flex-shrink: 0;
+}
+
+.spa-criteres__cta-icone svg {
+  width: 2.8rem;
+  height: 2.8rem;
+}
+
+.spa-criteres__cta-texte {
+  flex: 1 1 24rem;
+}
+
+.spa-criteres__cta-titre {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: calc(var(--font-heading-scale) * 1.9rem);
+  line-height: 1.2;
+}
+
+.spa-criteres__cta-sous-titre {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1.45;
+}
+
+/* Le bouton est posé sur un fond marine : le cyan du logo s'y détache
+   (4,95:1 avec le libellé marine), là où le marine du thème disparaîtrait. */
+.spa-criteres__bouton {
+  --color-button: 47, 180, 229;
+  --color-button-text: 15, 58, 90;
+
+  flex-shrink: 0;
+}
+
+/* --- Bande de gages --- */
+.spa-criteres__reassurance {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem 1.6rem;
+  margin: 4rem 0 0;
+  padding: 0;
+}
+
+.spa-criteres__gage {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.spa-criteres__icone--petit {
+  width: 4.4rem;
+  height: 4.4rem;
+  background: transparent;
+}
+
+.spa-criteres__icone--petit svg {
+  width: 2.6rem;
+  height: 2.6rem;
+}
+
+.spa-criteres__gage-label {
+  font-size: 1.4rem;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+@media screen and (min-width: 750px) {
+  .spa-criteres__heading {
+    font-size: calc(var(--font-heading-scale) * 2.5rem);
+  }
+
+  .spa-criteres__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .spa-criteres__cta {
+    flex-wrap: nowrap;
+    padding: 2.8rem 3.2rem;
+  }
+
+  .spa-criteres__reassurance {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  /* Les séparateurs n'apparaissent qu'une fois la bande sur une seule ligne. */
+  .spa-criteres__gage + .spa-criteres__gage {
+    border-left: 0.1rem solid rgba(var(--color-foreground), 0.12);
+    padding-left: 1.6rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .spa-criteres__grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+/* --------------------------------------------------------------------------
+   13. MOUVEMENT RÉDUIT
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   .btn:hover,

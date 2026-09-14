@@ -1,0 +1,46 @@
+{
+  "sections": {
+    "photo": {
+      "type": "spa-store-banner",
+      "settings": {
+        "image": "shopify://shop_images/Capture_d_ecran_2026-09-14_a_13.06.48.png",
+        "show_on_mobile": true,
+        "image_alt": "Spa SPAS9 by Liners France installé sur une terrasse, au coucher du soleil"
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "criteres": {
+      "type": "spa-criteres",
+      "blocks": {
+        "c1": { "type": "critere", "settings": { "icone": "utilisateurs", "label": "Le nombre d'utilisateurs" } },
+        "c2": { "type": "critere", "settings": { "icone": "assises", "label": "Le type d'assises" } },
+        "c3": { "type": "critere", "settings": { "icone": "maison", "label": "L'espace disponible" } },
+        "c4": { "type": "critere", "settings": { "icone": "acces", "label": "Les conditions d'accès" } },
+        "c5": { "type": "critere", "settings": { "icone": "electricite", "label": "L'alimentation électrique" } },
+        "c6": { "type": "critere", "settings": { "icone": "livraison", "label": "La livraison et l'installation" } },
+        "r1": { "type": "reassurance", "settings": { "icone": "conseil", "label": "Conseil personnalisé" } },
+        "r2": { "type": "reassurance", "settings": { "icone": "expertise", "label": "Expertise technique" } },
+        "r3": { "type": "reassurance", "settings": { "icone": "showroom", "label": "Showroom à Fontenay-le-Vicomte" } },
+        "r4": { "type": "reassurance", "settings": { "icone": "accompagnement", "label": "Accompagnement de A à Z" } }
+      },
+      "block_order": ["c1", "c2", "c3", "c4", "c5", "c6", "r1", "r2", "r3", "r4"],
+      "settings": {
+        "heading": "Plusieurs éléments essentiels pour un choix adapté",
+        "color_scheme": "scheme-1",
+        "cta_heading": "Vous avez un projet ?",
+        "cta_text": "Parlez-nous de vos besoins et nous vous aiderons à comparer les modèles adaptés.",
+        "cta_button_label": "Nous contacter",
+        "cta_button_link": "shopify://pages/contact",
+        "padding_top": 16,
+        "padding_bottom": 56
+      }
+    }
+  },
+  "order": ["photo", "main", "criteres"]
+}
