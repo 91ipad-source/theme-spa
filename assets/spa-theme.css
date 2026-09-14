@@ -657,3 +657,140 @@ a.spa-marquee__item:hover {
     content: none;
   }
 }
+
+/* --------------------------------------------------------------------------
+   14. CHIFFRES CLÉS
+   --------------------------------------------------------------------------
+   Quatre nombres, posés haut dans la page. C'est le bloc qui répond en trois
+   secondes à la seule question que se pose un visiteur qui ne nous connaît
+   pas : « est-ce que ces gens sont sérieux ? ». Il vit dans le corps d'une
+   page, d'où les sélecteurs doublés sous .rte.
+   -------------------------------------------------------------------------- */
+.spa-chiffres,
+.rte .spa-chiffres {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2.4rem 1.6rem;
+  margin: 0 0 4rem;
+  padding: 3rem 2rem;
+  border-radius: var(--r-md);
+  background: var(--mist);
+  list-style: none;
+  text-align: center;
+}
+
+.spa-chiffre,
+.rte .spa-chiffre {
+  margin: 0;
+  list-style: none;
+}
+
+.spa-chiffre__valeur {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: calc(var(--font-heading-scale) * 3.2rem);
+  line-height: 1.1;
+  color: var(--deep);
+}
+
+.spa-chiffre__label {
+  display: block;
+  margin-top: 0.6rem;
+  font-size: 1.4rem;
+  line-height: 1.35;
+  color: var(--deep-soft);
+}
+
+@media screen and (min-width: 750px) {
+  .spa-chiffres,
+  .rte .spa-chiffres {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    padding: 3.6rem 2.4rem;
+  }
+
+  .spa-chiffre__valeur {
+    font-size: calc(var(--font-heading-scale) * 4rem);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   15. FOIRE AUX QUESTIONS
+   --------------------------------------------------------------------------
+   Replié par défaut : huit réponses ouvertes d'un coup, c'est un mur, et sur
+   téléphone ça repousse tout ce qui suit hors de portée. Le repli s'appuie
+   sur <details>, donc il fonctionne sans JavaScript — et le contenu reste
+   présent dans le HTML, ce qu'exige le balisage FAQPage.
+   -------------------------------------------------------------------------- */
+.spa-faq,
+.rte .spa-faq {
+  margin: 0 0 4rem;
+  border-top: 1px solid var(--water);
+}
+
+.spa-faq__item {
+  border-bottom: 1px solid var(--water);
+}
+
+.spa-faq__question {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.6rem;
+  padding: 1.8rem 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.7rem;
+  line-height: 1.4;
+  color: var(--deep);
+  cursor: pointer;
+  list-style: none;
+  text-align: left;
+}
+
+/* Safari dessine encore son propre triangle : on le retire pour poser le
+   nôtre, qui pivote à l'ouverture. */
+.spa-faq__question::-webkit-details-marker {
+  display: none;
+}
+
+.spa-faq__question::after {
+  content: '';
+  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
+  margin: 0.5rem 0 0 auto;
+  border-right: 2px solid var(--sky-deep);
+  border-bottom: 2px solid var(--sky-deep);
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.spa-faq__item[open] .spa-faq__question::after {
+  transform: rotate(225deg);
+}
+
+.spa-faq__question:hover {
+  color: var(--sky-deep);
+}
+
+.spa-faq__reponse {
+  padding: 0 0 2rem;
+}
+
+.spa-faq__reponse p,
+.rte .spa-faq__reponse p {
+  margin: 0 0 1.2rem;
+  font-size: 1.5rem;
+  line-height: 1.6;
+}
+
+.spa-faq__reponse p:last-child,
+.rte .spa-faq__reponse p:last-child {
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 750px) {
+  .spa-faq__question {
+    font-size: 1.9rem;
+  }
+}

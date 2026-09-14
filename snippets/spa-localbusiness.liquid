@@ -15,6 +15,13 @@
   Les horaires du week-end ne figurent pas volontairement : les visites
   sont sur rendez-vous, et déclarer des heures d'ouverture qui n'en sont
   pas serait faux — Google recoupe avec la fiche Business.
+
+  PAS d'aggregateRating ici, et c'est délibéré : la note 4,8/5 vient des
+  avis Google, pas d'avis collectés sur ce site. Déclarer en données
+  structurées une note qu'on ne recueille pas soi-même est contraire aux
+  règles de Google et expose à une action manuelle. La note peut être
+  affichée en clair dans la page — c'est vrai et c'est vérifiable — mais
+  elle ne doit pas être balisée.
 {%- endcomment -%}
 
 {%- liquid
@@ -30,7 +37,7 @@
     "@type": "Store",
     "@id": {{ request.origin | append: '/#localbusiness' | json }},
     "name": "SPAS9 by LINERS FRANCE",
-    "alternateName": "SPAS9",
+    "alternateName": ["SPAS9", "Liners France"],
     "description": "Vente et installation de spas en Île-de-France. Showroom sur rendez-vous à Fontenay-le-Vicomte (91), spas de 2 à 6 places, conseil, livraison et mise en service.",
     "url": {{ request.origin | append: '/pages/contact' | json }},
     {% if business_image %}
@@ -49,10 +56,21 @@
       "addressRegion": "Île-de-France",
       "addressCountry": "FR"
     },
-    "areaServed": {
-      "@type": "AdministrativeArea",
-      "name": "Île-de-France"
+    "foundingDate": "2007-10-08",
+    "brand": {
+      "@type": "Brand",
+      "name": "ROCA SPA"
     },
+    "areaServed": [
+      {
+        "@type": "AdministrativeArea",
+        "name": "Île-de-France"
+      },
+      {
+        "@type": "AdministrativeArea",
+        "name": "Loiret"
+      }
+    ],
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",

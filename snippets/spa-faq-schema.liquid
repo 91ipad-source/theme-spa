@@ -1,0 +1,90 @@
+{%- comment -%}
+  Balisage FAQPage de la page « À propos ».
+
+  ATTENTION — RÈGLE ABSOLUE : chaque question et chaque réponse ci-dessous
+  doivent exister mot pour mot dans le corps de la page, et rester visibles
+  à l'écran. Google contrôle la correspondance ; une FAQ balisée mais
+  absente de la page (ou masquée) est une violation des consignes, pas une
+  astuce. Le repli en accordéon est autorisé parce que le texte reste dans
+  le HTML et s'ouvre au clic.
+
+  Donc : si vous modifiez une réponse dans l'admin Shopify, il faut la
+  modifier ici aussi. C'est le prix du balisage — Dawn ne sait pas générer
+  ce bloc depuis le contenu d'une page.
+{%- endcomment -%}
+
+{%- if page.handle == 'a-propos' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": {{ request.origin | append: '/pages/a-propos#faq' | json }},
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Où se trouve le showroom SPAS9 ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Notre showroom est situé au 16 rue de l'Orme, 91540 Fontenay-le-Vicomte, dans l'Essonne. Il est ouvert du lundi au vendredi de 9h à 12h30 et de 14h à 18h, et le week-end sur rendez-vous."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Dans quels départements livrez-vous un spa ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nous livrons et installons dans toute l'Île-de-France — Paris (75), Seine-et-Marne (77), Yvelines (78), Essonne (91), Hauts-de-Seine (92), Seine-Saint-Denis (93), Val-de-Marne (94) et Val-d'Oise (95) — ainsi que dans le Loiret (45)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quel est le délai entre la commande et l'installation ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Douze jours en moyenne entre la commande et l'installation. Ce délai dépend du modèle choisi, de sa disponibilité et des conditions d'accès à l'emplacement, que nous étudions avant de le confirmer."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quelle est la garantie sur un spa SPAS9 ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La coque est garantie 10 ans et l'électronique 3 ans. Le détail des conditions figure dans nos conditions générales de vente."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quel branchement électrique faut-il prévoir pour un spa ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cela dépend du modèle. Les spas Plug & Play se raccordent sur une prise dédiée de 16 A ; les modèles plus équipés demandent une ligne dédiée de plus forte intensité. Dans tous les cas, la ligne doit partir du tableau électrique et être protégée par un dispositif différentiel 30 mA, conformément à la norme NF C 15-100. Nous vérifions ce point avec vous avant la commande."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Peut-on installer un spa sur une terrasse en bois ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "C'est possible si la structure supporte la charge. Un spa rempli et occupé peut peser une à deux tonnes selon le modèle, soit une charge au sol très supérieure à celle d'une terrasse courante. Nous examinons le support existant et vous indiquons si un renforcement, des plots ou une dalle sont nécessaires."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Comment se passe la livraison quand l'accès est difficile ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nous étudions chaque accès au cas par cas : passage étroit, escalier, franchissement d'un mur ou d'une clôture, et si nécessaire recours à un grutage. C'est pour cette raison que nous demandons des photos ou une visite avant de confirmer une livraison."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quelle taille de spa choisir ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nous proposons des modèles de 2 à 6 places. Le nombre de places annoncé ne suffit pas à décider : deux spas de capacité identique peuvent offrir un confort très différent selon la disposition des assises. Notre article « Spa 2, 3, 5 ou 6 places : quelle taille choisir ? » détaille les différences format par format."
+          }
+        }
+      ]
+    }
+  </script>
+{%- endif -%}
