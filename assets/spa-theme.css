@@ -569,9 +569,11 @@ a.spa-marquee__item:hover {
     font-size: calc(var(--font-heading-scale) * 2.5rem);
   }
 
+  /* Quatre colonnes : avec sept pictos, la rangee se lit 4 puis 3, ce qui
+     laisse a chaque libelle assez de place dans la colonne de texte. */
   .spa-picto-grid,
   .rte .spa-picto-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .spa-criteres__cta {
@@ -587,13 +589,6 @@ a.spa-marquee__item:hover {
   .spa-criteres__gage + .spa-criteres__gage {
     border-left: 0.1rem solid rgba(var(--color-foreground), 0.12);
     padding-left: 1.6rem;
-  }
-}
-
-@media screen and (min-width: 990px) {
-  .spa-picto-grid,
-  .rte .spa-picto-grid {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 }
 
