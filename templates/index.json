@@ -68,10 +68,53 @@
         "padding_top": 44,
         "padding_bottom": 36
       }
+    },
+    "a_propos": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "SPAS9 by LINERS FRANCE, spécialiste du spa en Île-de-France",
+            "heading_size": "h1"
+          }
+        },
+        "texte": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Nous vendons et installons des spas pour particuliers depuis notre showroom de Fontenay-le-Vicomte, en Essonne. Notre métier n'est pas de vous vendre le modèle du mois : c'est de vous aider à choisir celui qui correspond vraiment à votre espace, à vos habitudes et au nombre de personnes qui l'utiliseront.</p><p>Un spa ne se choisit ni sur une photo ni sur un nombre de jets. Nombre d'utilisateurs, type d'assises, encombrement disponible, conditions d'accès, alimentation électrique, livraison : nous regardons l'ensemble du projet avant de vous orienter vers un modèle.</p><p>Nos spas de 2 à 6 places sont exposés au showroom, et vous pouvez vous asseoir dedans — c'est encore le meilleur moyen de comparer. Visites sur rendez-vous.</p>"
+          }
+        },
+        "boutons": {
+          "type": "button",
+          "settings": {
+            "button_label": "En savoir plus",
+            "button_link": "shopify://pages/a-propos",
+            "button_style_secondary": false,
+            "button_label_2": "Nous contacter",
+            "button_link_2": "shopify://pages/contact",
+            "button_style_secondary_2": true
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "texte",
+        "boutons"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 48,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
     "image_banner",
-    "featured_collection"
+    "featured_collection",
+    "a_propos"
   ]
 }
