@@ -158,7 +158,8 @@
         "pick_up_available_at_html": "Pickup available at <span class=\"color-foreground\">{{ location_name }}</span>",
         "pick_up_unavailable_at_html": "Pickup currently unavailable at <span class=\"color-foreground\">{{ location_name }}</span>",
         "unavailable": "Couldn't load pickup availability",
-        "refresh": "Refresh"
+        "refresh": "Refresh",
+        "store_photo_alt": "Our store"
       },
       "price": {
         "from_price_html": "From {{ price }}",
@@ -274,7 +275,6 @@
       "announcement": "Announcement",
       "announcement_bar": "Announcement bar"
     },
-
     "header": {
       "announcement": "Announcement",
       "menu": "Menu",

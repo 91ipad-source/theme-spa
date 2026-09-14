@@ -327,7 +327,28 @@ a.spa-marquee__item:hover {
 }
 
 /* --------------------------------------------------------------------------
-   9. MOUVEMENT RÉDUIT
+   9. PHOTO DU MAGASIN (tiroir « retrait en magasin »)
+   --------------------------------------------------------------------------
+   L'image vient du réglage de thème « Retrait en magasin > Photo du magasin ».
+   Le tiroir fait 37,5 rem avec 2 rem de marge intérieure, d'où une photo de
+   33,5 rem au plus : on impose un cadrage 3/2 pour que n'importe quelle photo
+   téléversée garde la même hauteur et ne déforme pas la mise en page.
+   -------------------------------------------------------------------------- */
+.pickup-availability-photo {
+  margin: 0 0 2rem;
+}
+
+.pickup-availability-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: var(--r-md);
+}
+
+/* --------------------------------------------------------------------------
+   10. MOUVEMENT RÉDUIT
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   .btn:hover,

@@ -145,7 +145,8 @@
         "pick_up_available_at_html": "Service de retrait disponible à <span class=\"color-foreground\">{{ location_name }}</span>",
         "pick_up_unavailable_at_html": "Service de retrait non disponible actuellement à <span class=\"color-foreground\">{{ location_name }}</span>",
         "unavailable": "Impossible de charger la disponibilité du service de retrait",
-        "refresh": "Actualiser"
+        "refresh": "Actualiser",
+        "store_photo_alt": "Notre magasin"
       },
       "media": {
         "open_media": "Ouvrir le média {{ index }} dans une fenêtre modale",

@@ -79,6 +79,26 @@
       </p>
     {%- endunless -%}
 
+    {%- if settings.pickup_store_image != blank -%}
+      {%- liquid
+        assign store_photo_alt = settings.pickup_store_image.alt
+        if store_photo_alt == blank
+          assign store_photo_alt = 'products.product.pickup_availability.store_photo_alt' | t
+        endif
+      -%}
+      <div class="pickup-availability-photo">
+        {{
+          settings.pickup_store_image
+          | image_url: width: 1100
+          | image_tag:
+            loading: 'lazy',
+            widths: '300, 400, 500, 600, 750, 1100',
+            sizes: '(min-width: 750px) 33.5rem, calc(100vw - 4rem)',
+            alt: store_photo_alt
+        }}
+      </div>
+    {%- endif -%}
+
     <ul class="pickup-availability-list list-unstyled" role="list" data-store-availability-drawer-content>
       {%- for availability in pick_up_availabilities -%}
         <li class="pickup-availability-list__item">

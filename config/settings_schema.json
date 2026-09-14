@@ -1466,5 +1466,19 @@
         "label": "t:settings_schema.customer_accounts.settings.customer_account_menu.label"
       }
     ]
+  },
+  {
+    "name": "Retrait en magasin",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Cette photo s'affiche dans la fenêtre « Voir les informations du magasin » ouverte depuis les fiches produits. Format conseillé : paysage, au moins 1000 px de large."
+      },
+      {
+        "type": "image_picker",
+        "id": "pickup_store_image",
+        "label": "Photo du magasin"
+      }
+    ]
   }
 ]
