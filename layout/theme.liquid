@@ -30,17 +30,32 @@
 
     {%- comment -%}
       Le nom affiche dans l'onglet est la signature de marque, plus complete que
-      le nom de la boutique dans Shopify. Le replace couvre la page d'accueil,
-      dont le titre vaut le nom de la boutique : sans lui, l'onglet afficherait
-      les deux a la suite.
+      le nom de la boutique dans Shopify.
+
+      La substitution ne vaut QUE pour la page d'accueil, dont le titre est
+      exactement le nom de la boutique. Un « replace » applique a tous les
+      titres attrapait aussi « SPAS9 » au milieu d'une phrase : le titre de la
+      page A propos, « SPAS9 by LINERS FRANCE : spas neufs... », ressortait en
+      « Spas9 By Liners France by LINERS FRANCE : spas neufs... ». La marque
+      etait annoncee deux fois de suite.
+
+      Le complement de marque est ajoute a la fin, sauf si le titre porte deja
+      « spas9 » sous une forme ou une autre — le test est fait en minuscules,
+      « contains » distinguant sinon SPAS9 de Spas9.
     {%- endcomment -%}
-    {%- assign site_name = 'Spas9 By Liners France' -%}
-    {%- assign head_title = page_title | replace: shop.name, site_name -%}
+    {%- liquid
+      assign site_name = 'Spas9 By Liners France'
+      assign head_title = page_title
+      if page_title == shop.name
+        assign head_title = site_name
+      endif
+      assign titre_teste = head_title | downcase
+    -%}
     <title>
       {{ head_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
       {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless head_title contains site_name %} &ndash; {{ site_name }}{% endunless -%}
+      {%- unless titre_teste contains 'spas9' %} &ndash; {{ site_name }}{% endunless -%}
     </title>
 
     {% if page_description %}
