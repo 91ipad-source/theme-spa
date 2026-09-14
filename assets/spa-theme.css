@@ -289,7 +289,25 @@ a.spa-marquee__item:hover {
 }
 
 /* --------------------------------------------------------------------------
-   8. MOUVEMENT RÉDUIT
+   8. BOUTON DE BANNIÈRE SUR MOBILE
+   --------------------------------------------------------------------------
+   La bannière d'accueil est en hauteur « adaptée » : sur téléphone, l'image
+   ne fait que ~56 % de la largeur d'écran en hauteur (ratio 16/9) et le
+   bouton, posé par-dessus et centré, en recouvrait une bonne partie.
+   On le resserre uniquement dans la bannière : les boutons d'achat gardent
+   leur taille confortable pour le pouce.
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 749px) {
+  .banner .banner__buttons .button {
+    min-width: 0;
+    min-height: 3.8rem;
+    padding: 0 1.8rem;
+    font-size: 1.3rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   9. MOUVEMENT RÉDUIT
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   .btn:hover,
