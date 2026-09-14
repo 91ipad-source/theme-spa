@@ -17,6 +17,53 @@
         "padding_bottom": 28
       }
     },
+    "portrait": {
+      "type": "image-with-text",
+      "blocks": {
+        "titre": {
+          "type": "heading",
+          "settings": {
+            "heading": "Qui est derrière SPAS9",
+            "heading_size": "h2"
+          }
+        },
+        "texte": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Cédric Mellet, gérant de LINERS FRANCE.</strong></p><p>Je travaille la piscine et le spa depuis 2007, et j'ai fini par me convaincre d'une chose : le bon spa n'est pas le mieux équipé, c'est celui qui entre chez vous, qui tient sur votre terrain et qui correspond à la façon dont vous allez vraiment vous en servir.</p><p>C'est pour ça que je commence toujours par quelques questions plutôt que par un catalogue. Et que je préfère vous voir vous asseoir dans les spas du showroom avant de vous laisser choisir.</p>",
+            "text_style": "body"
+          }
+        },
+        "bouton": {
+          "type": "button",
+          "settings": {
+            "button_label": "Prendre rendez-vous au showroom",
+            "button_link": "shopify://pages/contact",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "titre",
+        "texte",
+        "bouton"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/SPAS9_portrait_showroom.jpg",
+        "height": "adapt",
+        "desktop_image_width": "small",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "padding_top": 20,
+        "padding_bottom": 44
+      }
+    },
     "articles": {
       "type": "featured-blog",
       "settings": {
@@ -87,6 +134,7 @@
   "order": [
     "photo",
     "main",
+    "portrait",
     "articles",
     "criteres"
   ]
