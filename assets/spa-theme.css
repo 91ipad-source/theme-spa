@@ -469,10 +469,12 @@ a.spa-marquee__item:hover {
   line-height: 1.35;
 }
 
-/* Titre de la rangée quand elle est posée dans le corps d'une page. */
+/* Titre de la rangée quand elle est posée dans le corps d'une page :
+   aligné à gauche comme les autres titres du texte, la rangée restant
+   dans la colonne de lecture. */
 .rte .spa-picto-titre {
   margin: 4rem 0 3rem;
-  text-align: center;
+  text-align: left;
 }
 
 /* --- Encadré d'appel à l'action --- */
@@ -593,20 +595,6 @@ a.spa-marquee__item:hover {
   .spa-picto-grid,
   .rte .spa-picto-grid {
     grid-template-columns: repeat(6, minmax(0, 1fr));
-  }
-
-  /* Dans le corps d'une page, le texte est bride a 72,6 rem. La rangee de
-     pictos, elle, gagne a respirer : on la sort de cette colonne pour lui
-     donner la largeur du site. Le calcul plafonne a 120 rem — au-dela, six
-     pictos etales sur toute la fenetre se delitent — et retranche 10 rem a
-     100vw, qui compte la barre de defilement et provoquerait sinon un
-     debordement horizontal. */
-  .rte .spa-picto-titre,
-  .rte .spa-picto-grid {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(120rem, calc(100vw - 10rem));
   }
 }
 
