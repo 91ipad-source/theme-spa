@@ -70,6 +70,16 @@
         "padding_bottom": 52
       }
     },
+    "depot": {
+      "type": "spa-store-banner",
+      "settings": {
+        "image": "shopify://shop_images/SPAS9_depot_stock.png",
+        "full_width": true,
+        "show_on_mobile": true,
+        "image_alt": "Spas ROCA en stock sur palettes dans le dépôt SPAS9 by Liners France, à Fontenay-le-Vicomte",
+        "link": "shopify://collections/all"
+      }
+    },
     "portrait": {
       "type": "image-with-text",
       "blocks": {
@@ -158,6 +168,53 @@
         "desktop_content_position": "middle",
         "desktop_content_alignment": "left",
         "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-2",
+        "color_scheme": "scheme-2",
+        "padding_top": 20,
+        "padding_bottom": 44
+      }
+    },
+    "showroom": {
+      "type": "image-with-text",
+      "blocks": {
+        "titre": {
+          "type": "heading",
+          "settings": {
+            "heading": "Le showroom, à Fontenay-le-Vicomte",
+            "heading_size": "h2"
+          }
+        },
+        "texte": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Nos spas sont exposés au <strong>16 rue de l'Orme, 91540 Fontenay-le-Vicomte</strong>, à une trentaine de minutes du sud de Paris. Vous y trouverez aussi les produits de traitement, la filtration, les accessoires et les pièces détachées.</p><p>Ouvert du lundi au vendredi, de 9h à 12h30 et de 14h à 18h. Le week-end sur rendez-vous.</p>",
+            "text_style": "body"
+          }
+        },
+        "bouton": {
+          "type": "button",
+          "settings": {
+            "button_label": "Prendre rendez-vous",
+            "button_link": "shopify://pages/contact",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "titre",
+        "texte",
+        "bouton"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/SPAS9_showroom.jpg",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
         "section_color_scheme": "scheme-1",
         "color_scheme": "scheme-1",
         "padding_top": 20,
@@ -235,8 +292,10 @@
     "photo",
     "main",
     "parcours",
+    "depot",
     "portrait",
     "grutage",
+    "showroom",
     "articles",
     "criteres"
   ]
