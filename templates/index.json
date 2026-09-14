@@ -41,6 +41,37 @@
         "show_text_below": false
       }
     },
+    "titre_accueil": {
+      "type": "rich-text",
+      "blocks": {
+        "titre": {
+          "type": "heading",
+          "settings": {
+            "heading": "Spas neufs en Île-de-France",
+            "heading_size": "h1",
+            "use_h1": true
+          }
+        },
+        "accroche": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Showroom et conseil à Fontenay-le-Vicomte (91) — spas 2 à 6 places, livraison et installation dans toute la France.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "titre",
+        "accroche"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "padding_top": 40,
+        "padding_bottom": 12
+      }
+    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
@@ -114,6 +145,7 @@
   },
   "order": [
     "image_banner",
+    "titre_accueil",
     "featured_collection",
     "a_propos"
   ]

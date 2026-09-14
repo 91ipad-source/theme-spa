@@ -21,7 +21,19 @@
         {%- for block in section.blocks -%}
           {%- case block.type -%}
             {%- when 'heading' -%}
-              <h2
+              {%- comment -%}
+                Dawn rend toujours ce titre en h2. Or une page dont la section principale
+                n'expose pas de titre — la page d'accueil avec une banniere sans texte,
+                par exemple — se retrouve alors sans aucun h1. La case ci-dessous permet
+                de promouvoir ce bloc en h1. Par defaut rien ne change.
+              {%- endcomment -%}
+              {%- liquid
+                assign heading_tag = 'h2'
+                if block.settings.use_h1
+                  assign heading_tag = 'h1'
+                endif
+              -%}
+              <{{ heading_tag }}
                 class="rich-text__heading rte inline-richtext {{ block.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
                 {{ block.shopify_attributes }}
                 {% if settings.animations_reveal_on_scroll %}
@@ -30,7 +42,7 @@
                 {% endif %}
               >
                 {{ block.settings.heading }}
-              </h2>
+              </{{ heading_tag }}>
             {%- when 'caption' -%}
               <p
                 class="rich-text__caption {{ block.settings.text_style }} {{ block.settings.text_style }}--{{ block.settings.text_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
@@ -100,7 +112,10 @@
   "tag": "section",
   "class": "section",
   "disabled_on": {
-    "groups": ["header", "footer"]
+    "groups": [
+      "header",
+      "footer"
+    ]
   },
   "settings": [
     {
@@ -219,6 +234,13 @@
           ],
           "default": "h1",
           "label": "t:sections.all.heading_size.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "use_h1",
+          "label": "Utiliser un titre H1",
+          "info": "N'activer que sur une page qui n'a pas déjà de titre H1, et une seule fois par page.",
+          "default": false
         }
       ]
     },
@@ -290,9 +312,9 @@
       "limit": 2,
       "settings": [
         {
-         "type": "header",
-         "content": "t:sections.rich-text.blocks.buttons.settings.header_button1.content"
-        },        
+          "type": "header",
+          "content": "t:sections.rich-text.blocks.buttons.settings.header_button1.content"
+        },
         {
           "type": "text",
           "id": "button_label",
@@ -312,9 +334,9 @@
           "label": "t:sections.rich-text.blocks.buttons.settings.button_style_secondary_1.label"
         },
         {
-         "type": "header",
-         "content": "t:sections.rich-text.blocks.buttons.settings.header_button2.content"
-        },          
+          "type": "header",
+          "content": "t:sections.rich-text.blocks.buttons.settings.header_button2.content"
+        },
         {
           "type": "text",
           "id": "button_label_2",
