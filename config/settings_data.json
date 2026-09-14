@@ -198,7 +198,8 @@
         }
       }
     },
-    "logo": "shopify://shop_images/LOGO_SPAS9_LINERSFRANCE.png"
+    "logo": "shopify://shop_images/LOGO_SPAS9_LINERSFRANCE.png",
+    "favicon": "shopify://shop_images/LOGO_SPAS9_LINERSFRANCE.png"
   },
   "presets": {
     "Dawn": {
@@ -391,7 +392,8 @@
           }
         }
       },
-      "logo": "shopify://shop_images/LOGO_SPAS9_LINERSFRANCE.png"
+      "logo": "shopify://shop_images/LOGO_SPAS9_LINERSFRANCE.png",
+      "favicon": "shopify://shop_images/LOGO_SPAS9_LINERSFRANCE.png"
     }
   }
 }
