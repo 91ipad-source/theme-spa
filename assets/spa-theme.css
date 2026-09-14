@@ -459,9 +459,12 @@ a.spa-marquee__item:hover {
 }
 
 .spa-picto__icone svg,
-.spa-criteres__icone svg {
+.spa-criteres__icone svg,
+.spa-picto__icone img,
+.spa-criteres__icone img {
   width: 3rem;
   height: 3rem;
+  object-fit: contain;
 }
 
 .spa-picto__label {
@@ -552,7 +555,8 @@ a.spa-marquee__item:hover {
   background: transparent;
 }
 
-.spa-criteres__icone--petit svg {
+.spa-criteres__icone--petit svg,
+.spa-criteres__icone--petit img {
   width: 2.6rem;
   height: 2.6rem;
 }

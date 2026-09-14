@@ -23,28 +23,28 @@
         "r1": {
           "type": "reassurance",
           "settings": {
-            "icone": "conseil",
+            "icone_image": "shopify://shop_images/Conseil_personnalise.png",
             "label": "Conseil personnalisé"
           }
         },
         "r2": {
           "type": "reassurance",
           "settings": {
-            "icone": "expertise",
+            "icone_image": "shopify://shop_images/Expertise_technique.png",
             "label": "Expertise technique"
           }
         },
         "r3": {
           "type": "reassurance",
           "settings": {
-            "icone": "showroom",
+            "icone_image": "shopify://shop_images/Showroom.png",
             "label": "Showroom à Fontenay-le-Vicomte"
           }
         },
         "r4": {
           "type": "reassurance",
           "settings": {
-            "icone": "accompagnement",
+            "icone_image": "shopify://shop_images/Accompagnement_de_A_a_Z.png",
             "label": "Accompagnement de A à Z"
           }
         }

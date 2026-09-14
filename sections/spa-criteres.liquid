@@ -38,7 +38,11 @@
       <ul class="spa-picto-grid" role="list">
         {%- for block in criteres -%}
           <li class="spa-picto" {{ block.shopify_attributes }}>
-            <span class="spa-picto__icone">{% render 'spa-icone', nom: block.settings.icone %}</span>
+            <span class="spa-picto__icone">
+              {%- if block.settings.icone_image != blank -%}
+                {{ block.settings.icone_image | image_url: width: 96 | image_tag: loading: 'lazy', widths: '30, 60, 96', sizes: '30px', alt: '' }}
+              {%- endif -%}
+            </span>
             <span class="spa-picto__label">{{ block.settings.label | escape }}</span>
           </li>
         {%- endfor -%}
@@ -47,7 +51,7 @@
 
     {%- if section.settings.cta_heading != blank or section.settings.cta_text != blank -%}
       <div class="spa-criteres__cta">
-        <span class="spa-criteres__cta-icone">{% render 'spa-icone', nom: 'conseil' %}</span>
+        <span class="spa-criteres__cta-icone">{% render 'spa-icone', nom: 'bulle' %}</span>
 
         <div class="spa-criteres__cta-texte">
           {%- if section.settings.cta_heading != blank -%}
@@ -71,7 +75,9 @@
         {%- for block in reassurances -%}
           <li class="spa-criteres__gage" {{ block.shopify_attributes }}>
             <span class="spa-criteres__icone spa-criteres__icone--petit">
-              {% render 'spa-icone', nom: block.settings.icone %}
+              {%- if block.settings.icone_image != blank -%}
+                {{ block.settings.icone_image | image_url: width: 84 | image_tag: loading: 'lazy', widths: '26, 52, 84', sizes: '26px', alt: '' }}
+              {%- endif -%}
             </span>
             <span class="spa-criteres__gage-label">{{ block.settings.label | escape }}</span>
           </li>
@@ -157,64 +163,10 @@
       "limit": 8,
       "settings": [
         {
-          "type": "select",
-          "id": "icone",
+          "type": "image_picker",
+          "id": "icone_image",
           "label": "Pictogramme",
-          "options": [
-            {
-              "value": "utilisateurs",
-              "label": "Utilisateurs"
-            },
-            {
-              "value": "assises",
-              "label": "Assises"
-            },
-            {
-              "value": "maison",
-              "label": "Espace / maison"
-            },
-            {
-              "value": "acces",
-              "label": "Accès"
-            },
-            {
-              "value": "electricite",
-              "label": "Électricité"
-            },
-            {
-              "value": "livraison",
-              "label": "Livraison"
-            },
-            {
-              "value": "conseil",
-              "label": "Conseil"
-            },
-            {
-              "value": "expertise",
-              "label": "Expertise"
-            },
-            {
-              "value": "showroom",
-              "label": "Showroom"
-            },
-            {
-              "value": "accompagnement",
-              "label": "Accompagnement"
-            },
-            {
-              "value": "encombrement",
-              "label": "Encombrement"
-            },
-            {
-              "value": "passage",
-              "label": "Passage"
-            },
-            {
-              "value": "preparation",
-              "label": "Préparation de l'emplacement"
-            }
-          ],
-          "default": "utilisateurs"
+          "info": "PNG à fond transparent ou SVG."
         },
         {
           "type": "text",
@@ -230,36 +182,10 @@
       "limit": 6,
       "settings": [
         {
-          "type": "select",
-          "id": "icone",
+          "type": "image_picker",
+          "id": "icone_image",
           "label": "Pictogramme",
-          "options": [
-            {
-              "value": "conseil",
-              "label": "Conseil"
-            },
-            {
-              "value": "expertise",
-              "label": "Expertise"
-            },
-            {
-              "value": "showroom",
-              "label": "Showroom"
-            },
-            {
-              "value": "accompagnement",
-              "label": "Accompagnement"
-            },
-            {
-              "value": "utilisateurs",
-              "label": "Utilisateurs"
-            },
-            {
-              "value": "livraison",
-              "label": "Livraison"
-            }
-          ],
-          "default": "conseil"
+          "info": "PNG à fond transparent ou SVG."
         },
         {
           "type": "text",
