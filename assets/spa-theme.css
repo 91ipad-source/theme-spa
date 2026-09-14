@@ -293,16 +293,36 @@ a.spa-marquee__item:hover {
    --------------------------------------------------------------------------
    La bannière d'accueil est en hauteur « adaptée » : sur téléphone, l'image
    ne fait que ~56 % de la largeur d'écran en hauteur (ratio 16/9) et le
-   bouton, posé par-dessus et centré, en recouvrait une bonne partie.
-   On le resserre uniquement dans la bannière : les boutons d'achat gardent
-   leur taille confortable pour le pouce.
+   bouton, posé par-dessus, en recouvrait une bonne partie.
+
+   1. On le resserre — uniquement dans la bannière : les boutons d'achat
+      gardent leur taille confortable pour le pouce.
+   2. On le descend en bas de l'image. Dawn n'expose le placement vertical
+      qu'à partir de 750 px (réglage « position du contenu ») ; en dessous,
+      .banner__content centre ses enfants. On bascule donc l'alignement en
+      bas, pour rejoindre le bas-droite choisi sur ordinateur. Le calage
+      horizontal, lui, vient bien du réglage mobile de la section.
+
+   Le diaporama et le bandeau newsletter portent aussi la classe .banner :
+   on les écarte pour ne toucher qu'à la bannière image.
    -------------------------------------------------------------------------- */
 @media screen and (max-width: 749px) {
-  .banner .banner__buttons .button {
+  .banner:not(.slideshow):not(.email-signup-banner) .banner__buttons .button {
     min-width: 0;
     min-height: 3.8rem;
     padding: 0 1.8rem;
     font-size: 1.3rem;
+  }
+
+  /* Exclut la variante « texte sous l'image » : là, le contenu n'est pas
+     posé sur la photo et n'a aucune raison d'être plaqué en bas. */
+  .banner:not(.banner--mobile-bottom):not(.slideshow):not(.email-signup-banner) .banner__content {
+    align-items: flex-end;
+  }
+
+  /* 4rem d'origine : trop d'air sous le bouton sur une image de ~200 px. */
+  .banner:not(.banner--mobile-bottom):not(.slideshow):not(.email-signup-banner) .banner__box {
+    padding-bottom: 2rem;
   }
 }
 
