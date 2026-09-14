@@ -1,28 +1,69 @@
 {% comment %}
-  Pictogrammes trait fin de la section « Critères ».
+  Pictogrammes trait fin, redessinés d'après les visuels SPAS9.
 
-  Dessinés ici plutôt que téléversés en images : ils héritent ainsi de la
-  couleur du texte (currentColor), restent nets sur tous les écrans et ne
-  coûtent aucune requête réseau.
+  Dessinés ici plutôt que téléversés en images : ils héritent de la couleur
+  du texte (currentColor), restent nets sur tous les écrans, et n'ajoutent
+  aucune requête réseau — onze images de plus sur la page, ce serait onze
+  téléchargements.
 
   Accepte :
   - nom : {String} identifiant du picto (voir le case ci-dessous)
 {% endcomment %}
 
-{%- capture svg_ouvrant -%}
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-{%- endcapture -%}
-
-{{ svg_ouvrant }}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
 {%- case nom -%}
   {%- when 'utilisateurs' -%}
-    <circle cx="9" cy="8" r="3.2"/>
-    <path d="M2.8 20c0-3.4 2.8-5.4 6.2-5.4s6.2 2 6.2 5.4"/>
-    <path d="M16.6 6.4a2.9 2.9 0 0 1 0 5.6"/>
-    <path d="M18.2 14.8c1.9.7 3 2.3 3 4.6"/>
+    <circle cx="12" cy="6.8" r="2.9"/>
+    <path d="M6.6 19.9v-4.3a5.4 5.4 0 0 1 10.8 0v4.3a.8.8 0 0 1-.8.8H7.4a.8.8 0 0 1-.8-.8z"/>
+    <circle cx="5.2" cy="9.6" r="2"/>
+    <path d="M5.7 13.6H4.4A2.4 2.4 0 0 0 2 16v3.9a.8.8 0 0 0 .8.8h2.5"/>
+    <circle cx="18.8" cy="9.6" r="2"/>
+    <path d="M18.3 13.6h1.3A2.4 2.4 0 0 1 22 16v3.9a.8.8 0 0 1-.8.8h-2.5"/>
   {%- when 'assises' -%}
-    <path d="M2.8 19 8.4 12.2a2.2 2.2 0 0 1 1.7-.8h9.3a1.8 1.8 0 0 1 0 3.6H7.2"/>
-    <path d="M4.8 16.8 3.4 21.2M19.2 15l1.4 6.2"/>
+    <circle cx="7.1" cy="12.4" r="2"/>
+    <path d="M4.3 14.2h9.6a2 2 0 0 0 1.7-1l2.6-4.4a1.4 1.4 0 0 1 1.2-.7h1.5a1.1 1.1 0 0 1 .9 1.7l-4.7 7.4H4.3a1.7 1.7 0 0 1 0-3.4z"/>
+    <path d="M5.4 17.2 3.4 20.6M17.6 17.2l2 3.4"/>
+  {%- when 'encombrement' -%}
+    <path d="M12 3.2 20.4 7.7v8.6L12 20.8 3.6 16.3V7.7z"/>
+    <path d="M3.6 7.7 12 12.2l8.4-4.5"/>
+    <path d="M12 12.2v8.6"/>
+    <path d="M3.6 18.9 2.4 20.1l1.2 1.2M20.4 18.9l1.2 1.2-1.2 1.2"/>
+    <path d="M5.8 21.3h12.4" stroke-dasharray="2 2.6"/>
+  {%- when 'passage' -%}
+    <path d="M13.8 3.6h1.4M13.8 20.4h1.4"/>
+    <path d="M13.8 3.6v5M13.8 15.4v5"/>
+    <path d="M16.6 4.8 20.4 3.6v16.8l-3.8-1.2z"/>
+    <circle cx="17.8" cy="12" r="0.75"/>
+    <path d="M3.4 12h6.8M7.6 8.8 10.8 12l-3.2 3.2"/>
+  {%- when 'preparation' -%}
+    <path d="M3.2 6.1 5.1 4.2l2.7 1 9.1 9.1a2 2 0 0 1-2.8 2.8l-9.1-9.1z"/>
+    <path d="M20.4 4.4a3.8 3.8 0 0 0-4.8 4.8l-8.8 8.8a2 2 0 1 0 2.8 2.8l8.8-8.8a3.8 3.8 0 0 0 4.8-4.8l-2.6 2.6-2.8-2.8z"/>
+  {%- when 'electricite' -%}
+    <path d="M9 3.4v4.4M15 3.4v4.4"/>
+    <path d="M6.2 7.8h11.6v3.4a5.8 5.8 0 0 1-11.6 0z"/>
+    <path d="M12 17v3.6"/>
+  {%- when 'livraison' -%}
+    <path d="M2.6 6.4h11.2a.9.9 0 0 1 .9.9v9.4H2.6a.9.9 0 0 1-.9-.9V7.3a.9.9 0 0 1 .9-.9z"/>
+    <path d="M14.7 9.4h3.6a1.4 1.4 0 0 1 1.2.6l2.3 3.3v2.5a.9.9 0 0 1-.9.9h-1.1"/>
+    <path d="M16.2 10.8h2.6l1.6 2.4h-4.2z"/>
+    <circle cx="7" cy="16.8" r="2"/>
+    <circle cx="17.4" cy="16.8" r="2"/>
+    <path d="M9 16.7h6.4"/>
+  {%- when 'conseil' -%}
+    <path d="M2.4 9 5.8 6l2.9 2.6"/>
+    <path d="M21.6 9 18.2 6l-2.9 2.6"/>
+    <path d="M8.7 8.6c1.7-.9 3.4-.9 4.7.1l3.4 2.7a1.6 1.6 0 0 1-2 2.5l-1.9-1.5"/>
+    <path d="M12.9 12.4l1.9 1.5a1.5 1.5 0 0 1-1.8 2.4l-1.9-1.5"/>
+    <path d="M11.1 14.8l1.3 1a1.4 1.4 0 0 1-1.7 2.2l-4.2-3.2a2.1 2.1 0 0 1-.5-2.9l2.7-3.3"/>
+  {%- when 'expertise' -%}
+    <circle cx="12" cy="12" r="3.4"/>
+    <path d="M10.4 2.6h3.2v2.6l2.2.9 1.9-1.9 2.2 2.2-1.9 1.9.9 2.2h2.6v3.2h-2.6l-.9 2.2 1.9 1.9-2.2 2.2-1.9-1.9-2.2.9v2.6h-3.2v-2.6l-2.2-.9-1.9 1.9-2.2-2.2 1.9-1.9-.9-2.2H2.6v-3.2h2.6l.9-2.2-1.9-1.9 2.2-2.2 1.9 1.9 2.2-.9z"/>
+  {%- when 'showroom' -%}
+    <path d="M12 21.4c0-.1 7-7.4 7-11.9a7 7 0 1 0-14 0c0 4.5 7 11.8 7 11.9z"/>
+    <circle cx="12" cy="9.6" r="3"/>
+  {%- when 'accompagnement' -%}
+    <path d="M12 2.6 4.4 5.5v6.2c0 4.8 3.1 8.6 7.6 10.1 4.5-1.5 7.6-5.3 7.6-10.1V5.5z"/>
+    <path d="M8.6 12.2l2.6 2.6 4.4-4.6"/>
   {%- when 'maison' -%}
     <path d="M3 10.6 12 3.2l9 7.4"/>
     <path d="M5.2 9.4V20.4h13.6V9.4"/>
@@ -31,41 +72,5 @@
     <path d="M17.4 2.6a3.6 3.6 0 0 1 3.6 3.6c0 2.7-3.6 6.2-3.6 6.2s-3.6-3.5-3.6-6.2a3.6 3.6 0 0 1 3.6-3.6z"/>
     <circle cx="17.4" cy="6.2" r="1.2"/>
     <path d="M14.2 11.8c-2.9 1.7-5.3 2.2-7.2 4.2-1.6 1.7-1.9 3.3-2 4.6" stroke-dasharray="2 2.6"/>
-  {%- when 'electricite' -%}
-    <path d="M9 3.2v4.6M15 3.2v4.6"/>
-    <path d="M6 7.8h12v2.4a6 6 0 0 1-12 0V7.8z"/>
-    <path d="M12 16.2v4.6"/>
-  {%- when 'livraison' -%}
-    <path d="M2.4 5.6h10.8v10.2H2.4z"/>
-    <path d="M13.2 8.8h3.9l4.5 3.6v3.4h-8.4"/>
-    <circle cx="6.6" cy="18.2" r="2.2"/>
-    <circle cx="17.4" cy="18.2" r="2.2"/>
-    <path d="M8.8 18.2h6.4"/>
-  {%- when 'encombrement' -%}
-    <path d="M12 3.4 19.6 7.4v7.2L12 18.6 4.4 14.6V7.4z"/>
-    <path d="M4.4 7.4 12 11.4l7.6-4"/>
-    <path d="M12 11.4v7.2"/>
-    <path d="M3 21.4h18" stroke-dasharray="2 2.4"/>
-  {%- when 'passage' -%}
-    <path d="M14 3.4h5.6a.8.8 0 0 1 .8.8v15.6a.8.8 0 0 1-.8.8H14z"/>
-    <circle cx="16.2" cy="12" r="0.8"/>
-    <path d="M3.6 12h7.6"/>
-    <path d="M8.4 9 11.6 12l-3.2 3"/>
-  {%- when 'preparation' -%}
-    <rect x="2.6" y="8.6" width="18.8" height="6.8" rx="1.2"/>
-    <circle cx="12" cy="12" r="1.6"/>
-    <path d="M7 10.4v3.2M17 10.4v3.2"/>
-  {%- when 'conseil' -%}
-    <path d="M3.4 5.4h17.2v10.2H11.4l-5 3.9v-3.9H3.4z"/>
-    <path d="M8.2 10.4h7.6"/>
-  {%- when 'expertise' -%}
-    <circle cx="12" cy="12" r="3.2"/>
-    <path d="M12 2.6v2.4M12 19v2.4M4.6 7.2l2.1 1.2M17.3 15.6l2.1 1.2M4.6 16.8l2.1-1.2M17.3 8.4l2.1-1.2"/>
-  {%- when 'showroom' -%}
-    <path d="M12 21.2s7-6.4 7-11.2a7 7 0 1 0-14 0c0 4.8 7 11.2 7 11.2z"/>
-    <circle cx="12" cy="10" r="2.6"/>
-  {%- when 'accompagnement' -%}
-    <path d="M12 2.6 4.6 5.6v6c0 5 3.2 8.7 7.4 10.1 4.2-1.4 7.4-5.1 7.4-10.1v-6L12 2.6z"/>
-    <path d="M8.6 12.1l2.5 2.5 4.5-4.6"/>
 {%- endcase -%}
 </svg>
