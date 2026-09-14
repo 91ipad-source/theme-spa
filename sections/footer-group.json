@@ -22,16 +22,40 @@
     "footer": {
       "type": "footer",
       "blocks": {
+        "places": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Par nombre de places",
+            "menu": "footer-places"
+          }
+        },
+        "gammes": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Par gamme",
+            "menu": "footer-gammes"
+          }
+        },
         "liens_utiles": {
           "type": "link_list",
           "settings": {
             "heading": "Liens utiles",
             "menu": "footer"
           }
+        },
+        "contact": {
+          "type": "text",
+          "settings": {
+            "heading": "Nous contacter",
+            "subtext": "<p><strong>SPAS9 &ndash; LINERS FRANCE</strong><br/>16 rue de l'Orme<br/>91540 Fontenay-le-Vicomte</p><p><a href=\"tel:+33160773700\">01 60 77 37 00</a><br/><a href=\"mailto:iledefrance@linersfrance.fr\">iledefrance@linersfrance.fr</a></p><p><strong>Lundi au vendredi</strong><br/>9h &ndash; 12h30 et 14h &ndash; 18h<br/><strong>Week-end</strong> : sur rendez-vous</p>"
+          }
         }
       },
       "block_order": [
-        "liens_utiles"
+        "places",
+        "gammes",
+        "liens_utiles",
+        "contact"
       ],
       "settings": {
         "color_scheme": "scheme-1",
