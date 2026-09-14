@@ -36,7 +36,7 @@
       exactement le nom de la boutique. Un « replace » applique a tous les
       titres attrapait aussi « SPAS9 » au milieu d'une phrase : le titre de la
       page A propos, « SPAS9 by LINERS FRANCE : spas neufs... », ressortait en
-      « Spas9 By Liners France by LINERS FRANCE : spas neufs... ». La marque
+      « SPAS9 | LINERS FRANCE by LINERS FRANCE : spas neufs... ». La marque
       etait annoncee deux fois de suite.
 
       Le complement de marque est ajoute a la fin, sauf si le titre porte deja
@@ -44,7 +44,7 @@
       « contains » distinguant sinon SPAS9 de Spas9.
     {%- endcomment -%}
     {%- liquid
-      assign site_name = 'Spas9 By Liners France'
+      assign site_name = 'SPAS9 | LINERS FRANCE'
       assign head_title = page_title
       if page_title == shop.name
         assign head_title = site_name

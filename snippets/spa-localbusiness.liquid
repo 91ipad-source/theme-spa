@@ -1,5 +1,5 @@
 {%- comment -%}
-  Données structurées « Store » (schema.org) — SPAS9 by LINERS FRANCE.
+  Données structurées « Store » (schema.org) — SPAS9 | LINERS FRANCE.
 
   C'est ce qui permet à Google de relier le site à la fiche Google Business
   (pack local, Maps) et aux moteurs de réponse — ChatGPT, Perplexity, les
@@ -36,7 +36,7 @@
     "@context": "https://schema.org",
     "@type": "Store",
     "@id": {{ request.origin | append: '/#localbusiness' | json }},
-    "name": "SPAS9 by LINERS FRANCE",
+    "name": "SPAS9 | LINERS FRANCE",
     "alternateName": ["SPAS9", "Liners France"],
     "description": "Vente et installation de spas en Île-de-France. Showroom sur rendez-vous à Fontenay-le-Vicomte (91), spas de 2 à 6 places, conseil, livraison et mise en service.",
     "url": {{ request.origin | append: '/pages/contact' | json }},
