@@ -1,0 +1,75 @@
+{%- comment -%}
+  Données structurées « Store » (schema.org) — SPAS9 by LINERS FRANCE.
+
+  C'est ce qui permet à Google de relier le site à la fiche Google Business
+  (pack local, Maps) et aux moteurs de réponse — ChatGPT, Perplexity, les
+  AI Overviews — de citer l'entreprise avec son adresse et ses horaires.
+  Le thème déclarait déjà Organization et WebSite, mais rien de local.
+
+  RÈGLE : le nom, l'adresse et le téléphone (le « NAP ») doivent être
+  strictement identiques ici, sur la fiche Google Business et dans le pied
+  de page. La moindre variation — « Fontenay Le Vicomte » au lieu de
+  « Fontenay-le-Vicomte » — affaiblit le signal au lieu de le renforcer.
+  Si l'un des trois change, il faut le changer partout, ici compris.
+
+  Les horaires du week-end ne figurent pas volontairement : les visites
+  sont sur rendez-vous, et déclarer des heures d'ouverture qui n'en sont
+  pas serait faux — Google recoupe avec la fiche Business.
+{%- endcomment -%}
+
+{%- liquid
+  assign business_image = settings.pickup_store_image
+  if business_image == blank
+    assign business_image = settings.logo
+  endif
+-%}
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "@id": {{ request.origin | append: '/#localbusiness' | json }},
+    "name": "SPAS9 by LINERS FRANCE",
+    "alternateName": "SPAS9",
+    "description": "Vente et installation de spas en Île-de-France. Showroom sur rendez-vous à Fontenay-le-Vicomte (91), spas de 2 à 6 places, conseil, livraison et mise en service.",
+    "url": {{ request.origin | append: '/pages/contact' | json }},
+    {% if business_image %}
+      "image": {{ business_image | image_url: width: 1200 | prepend: "https:" | json }},
+    {% endif %}
+    {% if settings.logo %}
+      "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
+    {% endif %}
+    "telephone": "+33160773700",
+    "email": "iledefrance@linersfrance.fr",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "16 rue de l'Orme",
+      "addressLocality": "Fontenay-le-Vicomte",
+      "postalCode": "91540",
+      "addressRegion": "Île-de-France",
+      "addressCountry": "FR"
+    },
+    "areaServed": {
+      "@type": "AdministrativeArea",
+      "name": "Île-de-France"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "12:30"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "14:00",
+        "closes": "18:00"
+      }
+    ],
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "LINERS FRANCE"
+    }
+  }
+</script>

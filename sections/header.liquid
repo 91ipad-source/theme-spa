@@ -481,6 +481,13 @@
   }
 </script>
 
+{%- comment -%}
+  Le bloc Organization ci-dessus dit qui nous sommes ; celui-ci dit où nous
+  sommes. Les deux cohabitent sans se contredire : ils portent des @id
+  distincts.
+{%- endcomment -%}
+{% render 'spa-localbusiness' %}
+
 {%- if request.page_type == 'index' -%}
   {% assign potential_action_target = request.origin | append: routes.search_url | append: '?q={search_term_string}' %}
   <script type="application/ld+json">
