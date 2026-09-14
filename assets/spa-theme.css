@@ -371,7 +371,45 @@ a.spa-marquee__item:hover {
 }
 
 /* --------------------------------------------------------------------------
-   11. MOUVEMENT RÉDUIT
+   11. TITRES DE PAGE
+   --------------------------------------------------------------------------
+   Dawn affiche le titre des pages en .h0, sa plus grosse taille : 52 px sur
+   ordinateur. Sur des titres un peu longs — « Conditions générales de vente »,
+   « SPAS9 - Liners France » — cela donne trois ou quatre lignes. On descend
+   d'un cran, sur les valeurs de .h1, en gardant le calcul à partir de
+   --font-heading-scale pour que le réglage de thème continue de s'appliquer.
+
+   .page-subtitle : une deuxième ligne de titre, écrite dans le corps de la
+   page puisque le titre Shopify est échappé et n'accepte aucun retour à la
+   ligne. La marge haute négative rattrape l'espace laissé sous le titre pour
+   que les deux lignes se lisent comme un seul bloc.
+   -------------------------------------------------------------------------- */
+.main-page-title.page-title {
+  font-size: calc(var(--font-heading-scale) * 3rem);
+}
+
+.rte .page-subtitle {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: calc(var(--font-heading-scale) * 2rem);
+  line-height: 1.2;
+  color: var(--deep-soft);
+  margin: -2rem 0 3rem;
+}
+
+@media screen and (min-width: 750px) {
+  .main-page-title.page-title {
+    font-size: calc(var(--font-heading-scale) * 4rem);
+  }
+
+  .rte .page-subtitle {
+    font-size: calc(var(--font-heading-scale) * 2.6rem);
+    margin-top: -2.8rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   12. MOUVEMENT RÉDUIT
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   .btn:hover,
