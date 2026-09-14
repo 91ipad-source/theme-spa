@@ -11,24 +11,16 @@
    1. TOKENS
    -------------------------------------------------------------------------- */
 :root {
-  /* Palette */
-  --cream: #ffffff;
-  --ink: #1a1440;
-  --ink-soft: #4b4468;
-  --aqua: #00f0ff;
-  --aqua-deep: #00b4c9;
-  --blue: #3a1cff;
-  --coral: #ff2d95;
-  --sun: #f4ff29;
-  --lime: #5bff3a;
+  /* Palette relevée sur les fiches produits LINERS France : bleu marine du
+     logo, azur des bandeaux de gamme, bleu d'eau des bassins. Le fond de page
+     reste blanc, la couleur ne porte que le texte, les aplats et les accents. */
+  --navy: #0b2e63;
+  --navy-soft: #51688f;
+  --azure: #00aeef;
+  --azure-deep: #0072bc;
+  --water: #a8dff5;
+  --mist: #eef6fc;
   --white: #ffffff;
-
-  /* Fonds clairs dérivés (médias de cartes) */
-  --tint-neutral: #f3f0fa;
-  --tint-aqua: #ccfcff;
-  --tint-sun: #fbffc2;
-  --tint-coral: #ffd6ea;
-  --tint-lime: #d9ffd1;
 
   /* Typographie */
   --font-display: 'Unbounded', system-ui, sans-serif;
@@ -61,7 +53,7 @@
   --font-heading-weight: 700;
 
   /* Focus : anneau bleu de la maquette, branché sur le système de Dawn */
-  --focused-base-outline: 0.3rem solid var(--blue);
+  --focused-base-outline: 0.3rem solid var(--azure-deep);
   --focused-base-outline-offset: 0.3rem;
 }
 
@@ -72,7 +64,7 @@ body {
   font-size: 1.7rem;
   letter-spacing: normal;
   line-height: 1.55;
-  color: var(--ink);
+  color: var(--navy);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -110,7 +102,7 @@ h1,
 /* Chapô */
 .lead {
   font-size: clamp(1.7rem, 1.4vw, 2rem);
-  color: var(--ink-soft);
+  color: var(--navy-soft);
   max-width: 34em;
 }
 
@@ -132,7 +124,7 @@ h1,
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  background: var(--ink);
+  background: var(--navy);
   color: var(--white);
   transition: transform 0.15s ease, background 0.15s ease;
 }
@@ -146,37 +138,31 @@ h1,
   transform: translateY(0);
 }
 
-.btn.blue {
-  background: var(--blue);
+.btn.azure {
+  background: var(--azure);
+  color: var(--navy);
+}
+
+.btn.deep {
+  background: var(--azure-deep);
   color: var(--white);
 }
 
-.btn.coral {
-  background: var(--coral);
-  color: var(--ink);
-}
-
-.btn.sun {
-  background: var(--sun);
-  color: var(--ink);
-}
-
-.btn.aqua {
-  background: var(--aqua);
-  color: var(--ink);
+.btn.water {
+  background: var(--water);
+  color: var(--navy);
 }
 
 .btn.ghost {
   background: transparent;
-  color: var(--ink);
-  box-shadow: inset 0 0 0 2px var(--ink);
+  color: var(--navy);
+  box-shadow: inset 0 0 0 2px var(--navy);
 }
 
-.btn.coral:hover,
-.btn.sun:hover,
-.btn.aqua:hover,
+.btn.azure:hover,
+.btn.water:hover,
 .btn.ghost:hover {
-  color: var(--ink);
+  color: var(--navy);
 }
 
 .btn.small {
@@ -192,7 +178,7 @@ h1,
 .spa-link {
   font-weight: 600;
   text-decoration: none;
-  border-bottom: 2px solid var(--coral);
+  border-bottom: 2px solid var(--azure);
   padding-bottom: 2px;
 }
 
@@ -207,28 +193,18 @@ h1,
   font-size: 1.25rem;
   font-weight: 600;
   line-height: 1;
-  background: var(--sun);
-  color: var(--ink);
+  background: var(--azure);
+  color: var(--navy);
 }
 
-.tag.coral {
-  background: var(--coral);
-  color: var(--ink);
-}
-
-.tag.aqua {
-  background: var(--aqua);
-  color: var(--ink);
-}
-
-.tag.lime {
-  background: var(--lime);
-  color: var(--ink);
-}
-
-.tag.blue {
-  background: var(--blue);
+.tag.navy {
+  background: var(--navy);
   color: var(--white);
+}
+
+.tag.water {
+  background: var(--water);
+  color: var(--navy);
 }
 
 /* --------------------------------------------------------------------------
@@ -246,7 +222,7 @@ h1,
 .spa-marquee {
   --spa-marquee-gap: 56px;
 
-  background: var(--spa-marquee-bg, var(--blue));
+  background: var(--spa-marquee-bg, var(--azure-deep));
   color: var(--spa-marquee-fg, var(--white));
   overflow: hidden;
   padding-block: 1rem;
@@ -275,7 +251,7 @@ h1,
 .spa-marquee__item::before {
   content: '•';
   margin-right: var(--spa-marquee-gap);
-  color: var(--spa-marquee-dot, var(--sun));
+  color: var(--spa-marquee-dot, var(--azure));
 }
 
 a.spa-marquee__item:hover {
@@ -296,9 +272,9 @@ a.spa-marquee__item:hover {
    le stock est à zéro. On ne touche donc pas au Liquid — on remplace seulement
    le rectangle de Dawn par la pastille .tag de la maquette.
 
-   Dawn distingue les deux badges par leur jeu de couleurs (réglages du thème) :
-   scheme-4 pour la promo, scheme-3 pour la rupture. On s'appuie dessus plutôt
-   que d'ajouter une classe.
+   Les couleurs viennent des jeux de couleurs du thème (scheme-4 pour la promo,
+   scheme-3 pour la rupture), alignés sur la palette des fiches produits : on ne
+   fige donc rien ici, seule la forme de la pastille est reprise.
    -------------------------------------------------------------------------- */
 .badge {
   border: 0;
@@ -310,16 +286,6 @@ a.spa-marquee__item:hover {
   line-height: 1;
   letter-spacing: normal;
   text-transform: none;
-}
-
-.badge.color-scheme-4 {
-  background: var(--coral);
-  color: var(--ink);
-}
-
-.badge.color-scheme-3 {
-  background: var(--ink);
-  color: var(--white);
 }
 
 /* --------------------------------------------------------------------------
