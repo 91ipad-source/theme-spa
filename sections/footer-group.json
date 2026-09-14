@@ -11,6 +11,13 @@
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
+    "store_banner": {
+      "type": "spa-store-banner",
+      "settings": {
+        "show_on_mobile": true,
+        "image_alt": "Le magasin LINERS FRANCE à Fontenay-le-Vicomte : piscine, spa et bien-être"
+      }
+    },
     "footer": {
       "type": "footer",
       "settings": {
@@ -30,6 +37,7 @@
     }
   },
   "order": [
+    "store_banner",
     "footer"
   ]
 }

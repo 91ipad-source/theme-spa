@@ -1,0 +1,107 @@
+{% comment %}
+  Bandeau magasin — une image pleine largeur, prévue pour le bas de page.
+
+  Dawn ne sait pas faire ça tout seul : son bloc « Image » de pied de page est
+  plafonné à 550 px de large, et la section « Image avec texte superposé » est
+  explicitement interdite dans les groupes header/footer. D'où cette section.
+
+  Deux images distinctes : une panoramique pour les grands écrans, une plus
+  haute pour le téléphone. Sans la seconde, la première est réutilisée telle
+  quelle — utile à savoir, car un panorama 3/1 ne fait plus que ~130 px de haut
+  sur un écran de 400 px, et tout texte incrusté y devient illisible.
+{% endcomment %}
+
+{%- liquid
+  assign image = section.settings.image
+  assign image_mobile = section.settings.image_mobile
+  assign alt = section.settings.image_alt
+  if alt == blank
+    assign alt = image.alt
+  endif
+-%}
+
+{%- if image != blank -%}
+  <div class="spa-store-banner{% unless section.settings.show_on_mobile %} spa-store-banner--no-mobile{% endunless %}">
+    {%- if section.settings.link != blank -%}
+      <a class="spa-store-banner__link" href="{{ section.settings.link }}">
+    {%- endif -%}
+
+    <picture>
+      {%- if image_mobile != blank -%}
+        <source
+          media="(max-width: 749px)"
+          srcset="
+            {{ image_mobile | image_url: width: 400 }} 400w,
+            {{ image_mobile | image_url: width: 600 }} 600w,
+            {{ image_mobile | image_url: width: 800 }} 800w,
+            {{ image_mobile | image_url: width: 1100 }} 1100w
+          "
+          sizes="100vw"
+          width="{{ image_mobile.width }}"
+          height="{{ image_mobile.height }}"
+        >
+      {%- endif -%}
+      {{
+        image
+        | image_url: width: 3000
+        | image_tag:
+          loading: 'lazy',
+          widths: '750, 1100, 1500, 2000, 2600, 3000',
+          sizes: '100vw',
+          alt: alt,
+          class: 'spa-store-banner__image'
+      }}
+    </picture>
+
+    {%- if section.settings.link != blank -%}
+      </a>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Bandeau magasin",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Une image pleine largeur, à placer au-dessus du pied de page. Attention : les textes incrustés dans une image ne sont lus ni par Google ni par les lecteurs d'écran — renseignez le texte alternatif plus bas."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image (ordinateur et tablette)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image (téléphone)",
+      "info": "Facultatif mais recommandé pour une image panoramique : sur un écran de 400 px elle ne fait plus que ~130 px de haut et les textes deviennent illisibles. Prévoyez une version plus haute, recadrée sur l'essentiel. Sans cette image, celle du dessus est réutilisée."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_mobile",
+      "label": "Afficher sur téléphone",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Texte alternatif",
+      "info": "Décrit l'image pour Google et pour les personnes utilisant un lecteur d'écran.",
+      "default": "Le magasin LINERS FRANCE : piscine, spa et bien-être"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Lien (facultatif)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bandeau magasin"
+    }
+  ]
+}
+{% endschema %}

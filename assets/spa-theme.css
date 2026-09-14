@@ -348,7 +348,31 @@ a.spa-marquee__item:hover {
 }
 
 /* --------------------------------------------------------------------------
-   10. MOUVEMENT RÉDUIT
+   10. BANDEAU MAGASIN (section spa-store-banner)
+   --------------------------------------------------------------------------
+   Image pleine largeur, sans marge : c'est <picture> qui choisit la version
+   téléphone ou grand écran, le CSS ne fait que la laisser occuper la largeur.
+   -------------------------------------------------------------------------- */
+.spa-store-banner,
+.spa-store-banner picture,
+.spa-store-banner__link {
+  display: block;
+}
+
+.spa-store-banner__image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media screen and (max-width: 749px) {
+  .spa-store-banner--no-mobile {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   11. MOUVEMENT RÉDUIT
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   .btn:hover,
