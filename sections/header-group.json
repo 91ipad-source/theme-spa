@@ -14,13 +14,6 @@
     "spa-announcement-marquee": {
       "type": "spa-announcement-marquee",
       "blocks": {
-        "message-0": {
-          "type": "message",
-          "settings": {
-            "text": "Livraison et mise en eau offertes en Essonne",
-            "link": ""
-          }
-        },
         "message-1": {
           "type": "message",
           "settings": {
@@ -51,16 +44,15 @@
         }
       },
       "block_order": [
-        "message-0",
         "message-1",
         "message-2",
         "message-3",
         "message-4"
       ],
       "settings": {
-        "background_color": "#5FA8DC",
-        "text_color": "#0F3A5A",
-        "dot_color": "#FFFFFF"
+        "background_color": "#5fa8dc",
+        "text_color": "#0f3a5a",
+        "dot_color": "#ffffff"
       }
     },
     "header": {
