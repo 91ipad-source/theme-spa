@@ -55,7 +55,7 @@
         "accroche": {
           "type": "text",
           "settings": {
-            "text": "<p>Showroom et conseil à Fontenay-le-Vicomte (91) — spas 2 à 6 places, livraison et installation dans toute la France.</p>"
+            "text": "<p>Showroom et conseil à Fontenay-le-Vicomte (91) </p><p>Spas 2 à 6 places, livraison et installation dans toute la France.</p>"
           }
         }
       },
@@ -106,8 +106,9 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "SPAS9 by LINERS FRANCE, spécialiste du spa en Île-de-France",
-            "heading_size": "h1"
+            "heading": "SPAS9 - LINERS FRANCE, spécialiste du spa en Île-de-France",
+            "heading_size": "h1",
+            "use_h1": false
           }
         },
         "texte": {
