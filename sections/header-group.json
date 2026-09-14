@@ -50,9 +50,9 @@
         "message-4"
       ],
       "settings": {
-        "background_color": "#5fa8dc",
-        "text_color": "#0f3a5a",
-        "dot_color": "#ffffff"
+        "background_color": "#0F3A5A",
+        "text_color": "#FFFFFF",
+        "dot_color": "#2FB4E5"
       }
     },
     "header": {
