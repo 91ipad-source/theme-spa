@@ -21,6 +21,18 @@
     },
     "footer": {
       "type": "footer",
+      "blocks": {
+        "liens_utiles": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Liens utiles",
+            "menu": "footer"
+          }
+        }
+      },
+      "block_order": [
+        "liens_utiles"
+      ],
       "settings": {
         "color_scheme": "scheme-1",
         "newsletter_enable": true,
