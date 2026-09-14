@@ -40,7 +40,7 @@
           <li class="spa-picto" {{ block.shopify_attributes }}>
             <span class="spa-picto__icone">
               {%- if block.settings.icone_image != blank -%}
-                {{ block.settings.icone_image | image_url: width: 96 | image_tag: loading: 'lazy', widths: '30, 60, 96', sizes: '30px', alt: '' }}
+                {{ block.settings.icone_image | image_url: width: 192 | image_tag: loading: 'lazy', widths: '64, 128, 192', sizes: '64px', alt: '' }}
               {%- endif -%}
             </span>
             <span class="spa-picto__label">{{ block.settings.label | escape }}</span>
@@ -76,7 +76,7 @@
           <li class="spa-criteres__gage" {{ block.shopify_attributes }}>
             <span class="spa-criteres__icone spa-criteres__icone--petit">
               {%- if block.settings.icone_image != blank -%}
-                {{ block.settings.icone_image | image_url: width: 84 | image_tag: loading: 'lazy', widths: '26, 52, 84', sizes: '26px', alt: '' }}
+                {{ block.settings.icone_image | image_url: width: 132 | image_tag: loading: 'lazy', widths: '44, 88, 132', sizes: '44px', alt: '' }}
               {%- endif -%}
             </span>
             <span class="spa-criteres__gage-label">{{ block.settings.label | escape }}</span>

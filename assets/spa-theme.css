@@ -456,15 +456,27 @@ a.spa-marquee__item:hover {
   background: var(--mist);
   color: var(--deep);
   flex-shrink: 0;
+  overflow: hidden;
 }
 
+/* Les pictos dessinés en SVG restent petits au centre de la pastille : le
+   trait est fin, il a besoin de la marge qui l'entoure. */
 .spa-picto__icone svg,
-.spa-criteres__icone svg,
-.spa-picto__icone img,
-.spa-criteres__icone img {
+.spa-criteres__icone svg {
   width: 3rem;
   height: 3rem;
+}
+
+/* Les pictos fournis en PNG, eux, sont déjà cadrés avec leur propre marge :
+   les réduire une seconde fois les rendait minuscules. On les laisse donc
+   occuper toute la pastille. « contain » garantit qu'aucun dessin n'est
+   rogné, et le débord des coins du carré est coupé par le cercle. */
+.spa-picto__icone img,
+.spa-criteres__icone img {
+  width: 100%;
+  height: 100%;
   object-fit: contain;
+  border-radius: 50%;
 }
 
 .spa-picto__label {
@@ -555,8 +567,7 @@ a.spa-marquee__item:hover {
   background: transparent;
 }
 
-.spa-criteres__icone--petit svg,
-.spa-criteres__icone--petit img {
+.spa-criteres__icone--petit svg {
   width: 2.6rem;
   height: 2.6rem;
 }
