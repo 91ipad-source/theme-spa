@@ -1,0 +1,83 @@
+{
+  "sections": {
+    "photo": {
+      "type": "spa-store-banner",
+      "settings": {
+        "image": "shopify://shop_images/SPAS9_showroom.jpg",
+        "full_width": true,
+        "show_on_mobile": true,
+        "image_alt": "Le showroom SPAS9 | LINERS FRANCE à Fontenay-le-Vicomte : spas exposés, accessoires et produits de traitement"
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "text_alignment": "center",
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "criteres": {
+      "type": "spa-criteres",
+      "blocks": {
+        "r1": {
+          "type": "reassurance",
+          "settings": {
+            "icone_image": "shopify://shop_images/Conseil_personnalise.png",
+            "label": "Conseil personnalisé"
+          }
+        },
+        "r2": {
+          "type": "reassurance",
+          "settings": {
+            "icone_image": "shopify://shop_images/Expertise_technique.png",
+            "label": "Expertise technique"
+          }
+        },
+        "r3": {
+          "type": "reassurance",
+          "settings": {
+            "icone_image": "shopify://shop_images/Showroom.png",
+            "label": "Showroom à Fontenay-le-Vicomte"
+          }
+        },
+        "r4": {
+          "type": "reassurance",
+          "settings": {
+            "icone_image": "shopify://shop_images/Accompagnement_de_A_a_Z.png",
+            "label": "Accompagnement de A à Z"
+          }
+        },
+        "r5": {
+          "type": "reassurance",
+          "settings": {
+            "icone": "label",
+            "label": "Labellisée ProPiscine (FPP)"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5"
+      ],
+      "settings": {
+        "heading": "",
+        "color_scheme": "scheme-1",
+        "cta_heading": "Vous avez un projet ?",
+        "cta_text": "Parlez-nous de vos besoins et nous vous aiderons à comparer les modèles adaptés.",
+        "cta_button_label": "Nous contacter",
+        "cta_button_link": "shopify://pages/contact",
+        "padding_top": 16,
+        "padding_bottom": 56
+      }
+    }
+  },
+  "order": [
+    "photo",
+    "main",
+    "criteres"
+  ]
+}
