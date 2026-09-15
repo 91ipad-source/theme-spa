@@ -1104,3 +1104,51 @@ a.spa-marquee__item:hover {
     content: none;
   }
 }
+
+/* --------------------------------------------------------------------------
+   18. BANDEAUX DANS LE CORPS D'UNE PAGE
+   --------------------------------------------------------------------------
+   Les sections du thème alternent blanc et bleu clair, mais le corps d'une
+   page longue est un seul bloc blanc : quinze cents mots sans une seule
+   respiration. Ce bandeau rend l'alternance disponible à l'intérieur même
+   du texte.
+
+   Il déborde de la colonne de lecture plutôt que d'aller jusqu'aux bords de
+   l'écran. La pleine largeur depuis un conteneur centré impose « 100vw »,
+   qui compte la barre de défilement et provoque un débordement horizontal
+   sur les écrans qui en affichent une. Le débord fixe, lui, ne casse jamais
+   rien — et posé sur une colonne de 72 rem, il se lit tout autant comme un
+   bandeau.
+   -------------------------------------------------------------------------- */
+.spa-bande,
+.rte .spa-bande {
+  margin: 4.8rem -2rem;
+  padding: 3.2rem 2rem 3.6rem;
+  border-radius: var(--r-md);
+  background: var(--mist);
+}
+
+/* Le titre qui ouvre le bandeau porte deja la marge du bandeau : la sienne
+   ferait un vide en haut. Idem pour le dernier paragraphe. */
+.rte .spa-bande > :first-child {
+  margin-top: 0;
+}
+
+.rte .spa-bande > :last-child {
+  margin-bottom: 0;
+}
+
+/* Les pastilles des pictos sont bleu clair : sur un fond bleu clair, elles
+   disparaissent. Elles passent au blanc a l'interieur d'un bandeau. */
+.spa-bande .spa-picto__icone,
+.rte .spa-bande .spa-picto__icone {
+  background: var(--white);
+}
+
+@media screen and (min-width: 750px) {
+  .spa-bande,
+  .rte .spa-bande {
+    margin: 5.6rem -3.2rem;
+    padding: 4rem 3.2rem 4.4rem;
+  }
+}
