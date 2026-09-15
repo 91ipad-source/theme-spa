@@ -1,0 +1,75 @@
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": false,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 4,
+        "columns_mobile": "1",
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "enable_filtering": true,
+        "filter_type": "horizontal",
+        "enable_sorting": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "guide": {
+      "type": "rich-text",
+      "blocks": {
+        "titre": {
+          "type": "heading",
+          "settings": {
+            "heading": "Bien choisir un spa 2 places",
+            "heading_size": "h2",
+            "use_h1": false
+          }
+        },
+        "texte": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Le format 2 places est le plus sous-estimé de la gamme, et souvent le plus pertinent. Un couple qui utilise vraiment son spa deux à trois fois par semaine n'a pas besoin de cinq assises : il a besoin d'une eau toujours à température, d'un entretien qui prend quinze minutes et d'une facture qui ne pèse pas.</p><p><strong>Ce que ce format apporte.</strong> Un volume d'eau réduit chauffe plus vite et se maintient à moindre coût — et c'est le maintien en température, pas l'usage, qui représente l'essentiel de la consommation d'un spa. Le traitement de l'eau est plus simple à équilibrer sur un petit volume. L'emprise au sol reste compatible avec une terrasse ou un balcon porteur.</p><p><strong>Sa limite, dite franchement.</strong> À trois, on est serré. Si vous recevez régulièrement, ne forcez pas ce format : passez au 3 places, l'écart de prix et d'encombrement reste contenu.</p><p><strong>À vérifier avant de commander.</strong> Le point le plus étroit du chemin de livraison — portail, allée, angle de mur — décide de tout, bien plus que la place finale. Prévoyez 50 à 60 cm de dégagement sur au moins trois côtés pour l'accès aux trappes techniques. Le raccordement se fait sur une ligne dédiée protégée par un différentiel 30 mA, conformément à la norme NF C 15-100.</p>"
+          }
+        },
+        "liens": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pour aller plus loin : <a href=\"/blogs/conseils-spa/spa-quelle-taille-nombre-de-places\">quelle taille de spa choisir</a> · <a href=\"/blogs/conseils-spa/installer-un-spa-chez-soi\">préparer l'installation</a> · <a href=\"/collections/spa-3-places\">voir les spas 3 places</a> · <a href=\"/pages/contact\">demander conseil pour votre projet</a></p>"
+          }
+        }
+      },
+      "block_order": [
+        "titre",
+        "texte",
+        "liens"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "left",
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 48,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "product-grid",
+    "guide"
+  ]
+}

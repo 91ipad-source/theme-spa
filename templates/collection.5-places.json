@@ -1,0 +1,75 @@
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": false,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 4,
+        "columns_mobile": "1",
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "enable_filtering": true,
+        "filter_type": "horizontal",
+        "enable_sorting": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "guide": {
+      "type": "rich-text",
+      "blocks": {
+        "titre": {
+          "type": "heading",
+          "settings": {
+            "heading": "Bien choisir un spa 5 places",
+            "heading_size": "h2",
+            "use_h1": false
+          }
+        },
+        "texte": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Le 5 places est le cœur de gamme et le choix le plus courant pour une maison avec jardin. C'est à partir de ce format que l'hydromassage devient vraiment varié : places allongées et assises combinées, jets spécialisés par zone du corps — nuque, lombaires, mollets, voûte plantaire.</p><p><strong>Six modèles, six logiques.</strong> Le <a href=\"/products/spa-roca-proto-lighting-5-personnes\">Proto 2</a> reste Plug &amp; Play : cinq places dans 200 × 200 cm, sans travaux. L'<a href=\"/products/spa-roca-europe-infrared-5-personnes\">Europe Infrared</a> conserve ce format et équipe une assise de lampes infrarouges. Le <a href=\"/products/spa-roca-nemesis-5-personnes\">Némésis</a> passe à 220 × 220 cm avec une place semi-allongée et l'option Skimmer Bar. Le <a href=\"/products/spa-roca-pleuxaure-5-personnes\">Pleuxaure</a>, même encombrement, est le polyvalent de la gamme avec son système Volcano. Le <a href=\"/products/spa-roca-panope-5-personnes\">Panopé</a> monte à 230 × 230 cm et couvre le corps des pieds à la nuque. Le <a href=\"/products/spa-roca-panope-full-therapeutique-5-personnes\">Panopé Full</a> en est la version intégralement équipée.</p><p><strong>Ce que ce format implique.</strong> Un spa 5 places rempli et occupé dépasse facilement deux tonnes, réparties sur quelques mètres carrés. Une dalle béton ferraillée de 10 à 15 cm, parfaitement de niveau, est la solution de référence. Une terrasse en bois standard ne suffit généralement pas sans renfort : elle est dimensionnée pour une table et des chaises.</p><p><strong>Le conseil que nous donnons le plus souvent.</strong> Ne choisissez pas sur le nombre de jets. Quarante jets bien répartis sur deux pompes performantes valent mieux que quatre-vingts jets alimentés par une pompe sous-dimensionnée : la pression se divise et le massage devient un simple bouillonnement.</p>"
+          }
+        },
+        "liens": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pour aller plus loin : <a href=\"/blogs/conseils-spa/comment-choisir-son-spa\">les 7 critères qui comptent</a> · <a href=\"/blogs/conseils-spa/installer-un-spa-chez-soi\">dalle, électricité et accès</a> · <a href=\"/blogs/conseils-spa/consommation-electrique-spa-cout-par-mois\">combien consomme un spa</a> · <a href=\"/pages/livraison-et-retrait\">livraison et installation</a></p>"
+          }
+        }
+      },
+      "block_order": [
+        "titre",
+        "texte",
+        "liens"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "left",
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 48,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "product-grid",
+    "guide"
+  ]
+}
