@@ -1,0 +1,46 @@
+{%- comment -%}
+  Les trois repères portés par la vignette d'un spa au catalogue.
+
+  Places, encombrement, gamme — et volontairement pas le nombre de jets.
+  Un jet de plus ne fait jamais renoncer à un achat ; un spa qui ne passe
+  pas le portail, si. Ces trois-là sont ceux qui éliminent un modèle avant
+  même qu'on ouvre sa fiche, et c'est tout ce qu'une vignette doit servir
+  à faire.
+
+  Chaque valeur vient d'un métachamp editable depuis la fiche produit, donc
+  sans passer par le code. Un métachamp vide disparaît au lieu d'afficher
+  une ligne trouée, et si les trois sont vides le bloc entier ne sort pas —
+  un accessoire ajouté au catalogue ne se retrouvera pas avec une rangée
+  de tirets.
+
+  Paramètre : card_product (obligatoire).
+{%- endcomment -%}
+
+{%- liquid
+  assign places = card_product.metafields.custom.places.value
+  assign encombrement = card_product.metafields.custom.encombrement.value
+  assign gamme = card_product.metafields.custom.gamme.value
+-%}
+
+{%- if places != blank or encombrement != blank or gamme != blank -%}
+  <ul class="spa-card-specs" role="list">
+    {%- if places != blank -%}
+      <li class="spa-card-spec">
+        <span class="visually-hidden">Capacité :</span>
+        {{ places | escape }}
+      </li>
+    {%- endif -%}
+    {%- if encombrement != blank -%}
+      <li class="spa-card-spec">
+        <span class="visually-hidden">Encombrement au sol :</span>
+        {{ encombrement | escape }}
+      </li>
+    {%- endif -%}
+    {%- if gamme != blank -%}
+      <li class="spa-card-spec spa-card-spec--gamme">
+        <span class="visually-hidden">Gamme :</span>
+        {{ gamme | escape }}
+      </li>
+    {%- endif -%}
+  </ul>
+{%- endif -%}
