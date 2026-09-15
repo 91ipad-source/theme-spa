@@ -662,7 +662,7 @@ a.spa-marquee__item:hover {
 }
 
 /* --------------------------------------------------------------------------
-   14. CHIFFRES CLÉS
+   15. CHIFFRES CLÉS
    --------------------------------------------------------------------------
    Quatre nombres, posés haut dans la page. C'est le bloc qui répond en trois
    secondes à la seule question que se pose un visiteur qui ne nous connaît
@@ -723,7 +723,7 @@ a.spa-marquee__item:hover {
 }
 
 /* --------------------------------------------------------------------------
-   15. FOIRE AUX QUESTIONS
+   16. FOIRE AUX QUESTIONS
    --------------------------------------------------------------------------
    Replié par défaut : huit réponses ouvertes d'un coup, c'est un mur, et sur
    téléphone ça repousse tout ce qui suit hors de portée. Le repli s'appuie
@@ -804,7 +804,7 @@ a.spa-marquee__item:hover {
 }
 
 /* --------------------------------------------------------------------------
-   16. TABLEAU COMPARATIF
+   17. TABLEAU COMPARATIF
    --------------------------------------------------------------------------
    Le format le plus repris par les moteurs de réponse : une ligne par
    format de spa, des colonnes courtes, aucune phrase. Il remplace à lui
@@ -885,7 +885,7 @@ a.spa-marquee__item:hover {
 }
 
 /* --------------------------------------------------------------------------
-   17. PARCOURS EN ÉTAPES (section spa-parcours)
+   18. PARCOURS EN ÉTAPES (section spa-parcours)
    --------------------------------------------------------------------------
    Deux mises en page pour une même liste. Sur téléphone, une colonne avec
    un filet vertical qui relie les pastilles — on lit de haut en bas, comme
@@ -1014,7 +1014,7 @@ a.spa-marquee__item:hover {
 }
 
 /* --------------------------------------------------------------------------
-   16 bis. LE TABLEAU SUR TÉLÉPHONE
+   17 bis. LE TABLEAU SUR TÉLÉPHONE
    --------------------------------------------------------------------------
    Le défilement horizontal était la mauvaise réponse : rien à l'écran ne
    dit qu'on peut pousser le tableau vers la gauche, alors il a simplement
@@ -1106,7 +1106,7 @@ a.spa-marquee__item:hover {
 }
 
 /* --------------------------------------------------------------------------
-   18. BANDEAUX DANS LE CORPS D'UNE PAGE
+   19. BANDEAUX DANS LE CORPS D'UNE PAGE
    --------------------------------------------------------------------------
    Les sections du thème alternent blanc et bleu clair, mais le corps d'une
    page longue est un seul bloc blanc : quinze cents mots sans une seule
@@ -1150,5 +1150,121 @@ a.spa-marquee__item:hover {
   .rte .spa-bande {
     margin: 5.6rem -3.2rem;
     padding: 4rem 3.2rem 4.4rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   20. MODÈLES EXPOSÉS AU SHOWROOM
+
+   Une grille de vignettes produit posée dans le corps d'une page, pour dire
+   ce qu'on peut voir en vrai avant de se déplacer.
+
+   Les visuels ROCA sont des PNG détourés sur fond transparent : « contain »
+   sur une pastille claire, jamais « cover », sinon le spa est rogné. La
+   pastille donne au passage une assise visuelle à des images qui, sans
+   fond, flotteraient dans le vide.
+
+   Toute la vignette est cliquable, mais un seul lien l'enveloppe : deux
+   liens vers la même fiche (l'image puis le nom) obligeraient un lecteur
+   d'écran à annoncer la destination deux fois de suite.
+   -------------------------------------------------------------------------- */
+.spa-expo,
+.rte .spa-expo {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem 1.6rem;
+  margin: 3.2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rte .spa-expo li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.spa-expo__lien,
+.rte .spa-expo__lien {
+  display: block;
+  height: 100%;
+  padding: 1.2rem 1.2rem 1.6rem;
+  border-radius: var(--r-md);
+  background: var(--white);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.spa-expo__lien:hover,
+.spa-expo__lien:focus-visible {
+  transform: translateY(-0.3rem);
+  box-shadow: 0 1rem 2.4rem rgba(15, 58, 90, 0.12);
+  text-decoration: none;
+}
+
+.spa-expo__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  border-radius: calc(var(--r-md) - 0.6rem);
+  background: var(--mist);
+  padding: 0.8rem;
+  box-sizing: border-box;
+}
+
+.spa-expo__nom {
+  display: block;
+  margin-top: 1.2rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--deep);
+}
+
+.spa-expo__places {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 1.3rem;
+  color: var(--sky-deep);
+}
+
+.spa-expo__note {
+  display: block;
+  margin-top: 0.8rem;
+  font-size: 1.3rem;
+  line-height: 1.45;
+  opacity: 0.85;
+}
+
+/* Sur un bandeau bleuté, la vignette blanche ressort déjà : c'est la
+   pastille de l'image qui doit changer de camp, sinon elle se confond
+   avec le fond de la carte. */
+.spa-bande .spa-expo__lien,
+.rte .spa-bande .spa-expo__lien {
+  background: var(--white);
+}
+
+@media screen and (min-width: 750px) {
+  .spa-expo,
+  .rte .spa-expo {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.4rem 2rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .spa-expo,
+  .rte .spa-expo {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spa-expo__lien,
+  .spa-expo__lien:hover,
+  .spa-expo__lien:focus-visible {
+    transform: none;
+    transition: none;
   }
 }
