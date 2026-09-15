@@ -294,6 +294,46 @@
         "padding_top": 16,
         "padding_bottom": 56
       }
+    },
+    "liners": {
+      "type": "rich-text",
+      "blocks": {
+        "titre": {
+          "type": "heading",
+          "settings": {
+            "heading": "LINERS FRANCE, le métier d'origine",
+            "heading_size": "h2",
+            "use_h1": false
+          }
+        },
+        "texte": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Avant les spas, il y a eu les piscines. <strong>LINERS FRANCE</strong> pose des revêtements de piscine en Essonne depuis 2007 : liners 75 et 85/100e, PVC armé 150 et 200/100e soudé sur place, toutes marques et toutes formes de bassin. S'y ajoutent la rénovation complète, la maçonnerie associée, le local technique, l'hivernage et la remise en route.</p><p>C'est de ce métier que vient notre connaissance de l'eau, de son traitement et des contraintes de chantier. Et c'est elle qui sert aujourd'hui quand il faut faire passer un spa de deux tonnes par-dessus une clôture.</p>"
+          }
+        },
+        "bouton": {
+          "type": "button",
+          "settings": {
+            "button_label": "Découvrir linersfrance.pro",
+            "button_link": "https://linersfrance.pro",
+            "button_style_secondary": true
+          }
+        }
+      },
+      "block_order": [
+        "titre",
+        "texte",
+        "bouton"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "left",
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 48,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
@@ -305,6 +345,7 @@
     "grutage",
     "showroom",
     "articles",
-    "criteres"
+    "criteres",
+    "liners"
   ]
 }
