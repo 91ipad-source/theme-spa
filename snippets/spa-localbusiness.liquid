@@ -39,7 +39,12 @@
     "name": "SPAS9 | LINERS FRANCE",
     "alternateName": ["SPAS9", "Liners France"],
     "description": "Vente et installation de spas en Île-de-France. Showroom sur rendez-vous à Fontenay-le-Vicomte (91), spas de 2 à 6 places, conseil, livraison et mise en service.",
-    "url": {{ request.origin | append: '/pages/contact' | json }},
+    {%- comment -%}
+      L'URL de l'entite est la racine du site, pas la page contact : c'est
+      l'adresse stable qui identifie l'entreprise. La page contact reste
+      atteignable, mais comme une page parmi d'autres.
+    {%- endcomment -%}
+    "url": {{ request.origin | append: '/' | json }},
     {% if business_image %}
       "image": {{ business_image | image_url: width: 1200 | prepend: "https:" | json }},
     {% endif %}
@@ -55,11 +60,6 @@
       "postalCode": "91540",
       "addressRegion": "Île-de-France",
       "addressCountry": "FR"
-    },
-    "foundingDate": "2007-10-08",
-    "brand": {
-      "@type": "Brand",
-      "name": "ROCA SPA"
     },
     "areaServed": [
       {
@@ -85,9 +85,21 @@
         "closes": "18:00"
       }
     ],
+    {%- comment -%}
+      La date de creation et la marque distribuee ne sont volontairement plus
+      portees par le Store :
+
+      - 2007 est la date de LINERS FRANCE, pas de l'enseigne SPAS9 ; elle est
+        donc rattachee a la societe mere ;
+      - « brand: ROCA SPA » laissait entendre que ROCA est la marque du
+        magasin. ROCA est la marque des produits : sa place est dans le
+        balisage Product de chaque fiche, pas dans l'identite du point de
+        vente.
+    {%- endcomment -%}
     "parentOrganization": {
       "@type": "Organization",
-      "name": "LINERS FRANCE"
+      "name": "LINERS FRANCE",
+      "foundingDate": "2007-10-08"
     }
   }
 </script>

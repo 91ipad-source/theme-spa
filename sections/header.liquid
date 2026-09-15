@@ -180,9 +180,16 @@
       endif
     -%}
 
+    {%- comment -%}
+      Dawn enveloppe le logo dans un <h1> sur la page d'accueil. Un H1 qui ne
+      contient qu'une image ne decrit pas la page, et il entre en concurrence
+      avec le vrai titre « Spas neufs en Ile-de-France » : deux H1, dont un
+      qui ne dit rien. On garde la balise neutre, le titre editorial reste le
+      seul H1 de l'accueil.
+    {%- endcomment -%}
     {%- if section.settings.logo_position != 'middle-center' -%}
       {%- if request.page_type == 'index' -%}
-        <h1 class="header__heading">
+        <div class="header__heading">
       {%- endif -%}
       <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
         {%- if settings.logo != blank -%}
@@ -209,7 +216,7 @@
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
-        </h1>
+        </div>
       {%- endif -%}
     {%- endif -%}
 
@@ -223,9 +230,13 @@
       endif
     %}
 
+    {%- comment -%}
+      Meme raison que plus haut : le logo centre ne doit pas non plus porter
+      le H1 de l'accueil.
+    {%- endcomment -%}
     {%- if section.settings.logo_position == 'middle-center' -%}
       {%- if request.page_type == 'index' -%}
-        <h1 class="header__heading">
+        <div class="header__heading">
       {%- endif -%}
       <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
         {%- if settings.logo != blank -%}
@@ -252,7 +263,7 @@
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
-        </h1>
+        </div>
       {%- endif -%}
     {%- endif -%}
 
@@ -466,17 +477,25 @@
     {% if settings.logo %}
       "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
     {% endif %}
-    "sameAs": [
-      {{ settings.social_twitter_link | json }},
-      {{ settings.social_facebook_link | json }},
-      {{ settings.social_pinterest_link | json }},
-      {{ settings.social_instagram_link | json }},
-      {{ settings.social_tiktok_link | json }},
-      {{ settings.social_tumblr_link | json }},
-      {{ settings.social_snapchat_link | json }},
-      {{ settings.social_youtube_link | json }},
-      {{ settings.social_vimeo_link | json }}
-    ],
+    {%- comment -%}
+      Dawn listait les neuf reseaux sans verifier qu'ils etaient renseignes :
+      aucun ne l'etant, le balisage annoncait « sameAs: ["", "", "", ...] ».
+      Neuf chaines vides ne valent pas zero profil pour un moteur, elles
+      valent neuf profils invalides. On ne garde que ce qui existe, et on
+      n'ecrit la propriete que s'il reste quelque chose a dire.
+    {%- endcomment -%}
+    {%- liquid
+      assign reseaux = ''
+      assign liens = settings.social_twitter_link | append: ',' | append: settings.social_facebook_link | append: ',' | append: settings.social_pinterest_link | append: ',' | append: settings.social_instagram_link | append: ',' | append: settings.social_tiktok_link | append: ',' | append: settings.social_tumblr_link | append: ',' | append: settings.social_snapchat_link | append: ',' | append: settings.social_youtube_link | append: ',' | append: settings.social_vimeo_link
+      assign liens = liens | split: ','
+    -%}
+    {%- if liens.size > 0 -%}
+      "sameAs": [
+        {%- for lien in liens -%}
+          {{ lien | json }}{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ],
+    {%- endif -%}
     "url": {{ request.origin | append: page.url | json }}
   }
 </script>
