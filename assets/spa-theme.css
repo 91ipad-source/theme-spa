@@ -1534,7 +1534,10 @@ a.spa-marquee__item:hover {
   line-height: 1.3;
 }
 
+/* Seul sur sa ligne, le prix peut porter un corps un peu plus fort : c'est
+   lui qu'on lit en second, juste apres l'intitule. */
 .spa-prestation__prix {
+  font-size: 1.6rem;
   font-weight: 600;
   color: var(--sky-deep);
   white-space: nowrap;
