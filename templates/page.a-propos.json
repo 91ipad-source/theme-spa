@@ -187,7 +187,7 @@
         "texte": {
           "type": "text",
           "settings": {
-            "text": "<p>Nos spas sont exposés au <strong>16 rue de l'Orme, 91540 Fontenay-le-Vicomte</strong>, à une trentaine de minutes du sud de Paris. Vous y trouverez aussi les produits de traitement, la filtration, les accessoires et les pièces détachées.</p><p>Ouvert du lundi au vendredi, de 9h à 12h30 et de 14h à 18h. Le week-end sur rendez-vous.</p>",
+            "text": "<p>Nos spas sont exposés au <strong>16 rue de l'Orme, 91540 Fontenay-le-Vicomte</strong>, à une trentaine de minutes du sud de Paris. Vous y trouverez aussi les produits de traitement, la filtration, les accessoires et les pièces détachées.</p><p>Ouvert du lundi au vendredi, de 9h30 à 12h30 et de 14h à 17h. En dehors de ces horaires et le week-end, sur rendez-vous.</p>",
             "text_style": "body"
           }
         },
