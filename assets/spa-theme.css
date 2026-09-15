@@ -1178,19 +1178,28 @@ a.spa-marquee__item:hover {
   list-style: none;
 }
 
+/* La case est une colonne flex : la vignette en haut, la legende collee en
+   bas par « margin-top: auto ». Sans ca, une vignette dont le nom passe sur
+   deux lignes decale sa legende et la rangee se desaligne. */
+.spa-expo li,
 .rte .spa-expo li {
+  display: flex;
+  flex-direction: column;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+/* Surtout pas « height: 100% » ici. La case etant etiree a la hauteur de la
+   rangee, la vignette prendrait toute cette hauteur — legende comprise — et
+   rejetterait la legende hors de la case, par-dessus la rangee suivante. */
 .spa-expo__lien,
 .rte .spa-expo__lien {
   display: block;
-  height: 100%;
+  flex: 0 0 auto;
   padding: 1.2rem 1.2rem 1.6rem;
   border-radius: var(--r-md);
-  background: var(--white);
+  background: var(--mist);
   text-decoration: none;
   color: inherit;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -1209,7 +1218,7 @@ a.spa-marquee__item:hover {
   aspect-ratio: 1 / 1;
   object-fit: contain;
   border-radius: calc(var(--r-md) - 0.6rem);
-  background: var(--mist);
+  background: var(--white);
   padding: 0.8rem;
   box-sizing: border-box;
 }
@@ -1231,7 +1240,8 @@ a.spa-marquee__item:hover {
 
 .spa-expo__note {
   display: block;
-  margin-top: 0.8rem;
+  margin-top: auto;
+  padding-top: 1rem;
   font-size: 1.3rem;
   line-height: 1.45;
   opacity: 0.85;
@@ -1240,9 +1250,16 @@ a.spa-marquee__item:hover {
 /* Sur un bandeau bleuté, la vignette blanche ressort déjà : c'est la
    pastille de l'image qui doit changer de camp, sinon elle se confond
    avec le fond de la carte. */
+/* Sur un bandeau bleute, les deux fonds s'inversent : carte blanche,
+   pastille bleutee. Sinon la carte disparait dans le bandeau. */
 .spa-bande .spa-expo__lien,
 .rte .spa-bande .spa-expo__lien {
   background: var(--white);
+}
+
+.spa-bande .spa-expo__image,
+.rte .spa-bande .spa-expo__image {
+  background: var(--mist);
 }
 
 @media screen and (min-width: 750px) {
