@@ -22,7 +22,20 @@
   assign presta_pack = all_products['prestation-pack-livraison-installation-91']
 -%}
 
-{%- if presta_livraison.id and presta_service.id and presta_pack.id -%}
+{%- comment -%}
+  Le test porte sur la VARIANTE, pas sur le produit. Une prestation non
+  publiee sur la boutique en ligne remonte quand meme un produit cote Liquid,
+  mais sans variante : le bloc s'affichait alors avec des prix vides et des
+  cases qui n'ajoutaient rien au panier. Mieux vaut ne rien montrer que
+  montrer une option qui ne fonctionne pas.
+{%- endcomment -%}
+{%- liquid
+  assign v_livraison = presta_livraison.selected_or_first_available_variant.id
+  assign v_service = presta_service.selected_or_first_available_variant.id
+  assign v_pack = presta_pack.selected_or_first_available_variant.id
+-%}
+
+{%- if v_livraison and v_service and v_pack -%}
   <script src="{{ 'spa-prestations.js' | asset_url }}" defer="defer"></script>
 
   <spa-prestations class="spa-prestations">
@@ -93,6 +106,8 @@
             <strong>Le spa est déposé à l'emplacement prévu</strong>, manutention comprise,
             puis raccordé, rempli et réglé. L'accès est étudié avec vous avant de confirmer
             la date. C'est la différence avec la livraison seule, qui s'arrête au seuil.
+            <strong>Hors grutage</strong> : si l'accès impose une grue, elle fait l'objet
+            d'un devis séparé.
           </span>
         </span>
       </label>
