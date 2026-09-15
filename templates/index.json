@@ -55,7 +55,7 @@
         "accroche": {
           "type": "text",
           "settings": {
-            "text": "<p>Showroom et conseil à Fontenay-le-Vicomte (91) </p><p>Spas 2 à 6 places, livraison et installation dans toute la France.</p>"
+            "text": "<p>Showroom et conseil à Fontenay-le-Vicomte (91)</p><p>Spas 2 à 6 places, livrés et installés en Île-de-France et dans le Loiret.</p>"
           }
         }
       },
@@ -69,7 +69,16 @@
         "color_scheme": "scheme-1",
         "full_width": false,
         "padding_top": 40,
-        "padding_bottom": 12
+        "padding_bottom": 8
+      }
+    },
+    "chiffres": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"page-width\">\n<ul class=\"spa-chiffres\" role=\"list\">\n<li class=\"spa-chiffre\"><span class=\"spa-chiffre__valeur\">2007</span><span class=\"spa-chiffre__label\">Année de création</span></li>\n<li class=\"spa-chiffre\"><span class=\"spa-chiffre__valeur\">4,8/5</span><span class=\"spa-chiffre__label\">18 avis Google</span></li>\n<li class=\"spa-chiffre\"><span class=\"spa-chiffre__valeur\">12 jours</span><span class=\"spa-chiffre__label\">Délai moyen d'installation</span></li>\n<li class=\"spa-chiffre\"><span class=\"spa-chiffre__valeur\">10 ans</span><span class=\"spa-chiffre__label\">Garantie sur la structure</span></li>\n</ul>\n</div>",
+        "color_scheme": "scheme-1",
+        "padding_top": 8,
+        "padding_bottom": 28
       }
     },
     "featured_collection": {
@@ -96,8 +105,182 @@
         "quick_add": "none",
         "columns_mobile": "1",
         "swipe_on_mobile": false,
-        "padding_top": 44,
+        "padding_top": 36,
         "padding_bottom": 36
+      }
+    },
+    "criteres": {
+      "type": "spa-criteres",
+      "blocks": {
+        "r1": {
+          "type": "reassurance",
+          "settings": {
+            "icone_image": "shopify://shop_images/Conseil_personnalise.png",
+            "label": "Conseil personnalisé"
+          }
+        },
+        "r2": {
+          "type": "reassurance",
+          "settings": {
+            "icone_image": "shopify://shop_images/Expertise_technique.png",
+            "label": "Expertise technique"
+          }
+        },
+        "r3": {
+          "type": "reassurance",
+          "settings": {
+            "icone_image": "shopify://shop_images/Showroom.png",
+            "label": "Showroom à Fontenay-le-Vicomte"
+          }
+        },
+        "r4": {
+          "type": "reassurance",
+          "settings": {
+            "icone_image": "shopify://shop_images/Accompagnement_de_A_a_Z.png",
+            "label": "Accompagnement de A à Z"
+          }
+        },
+        "r5": {
+          "type": "reassurance",
+          "settings": {
+            "icone": "label",
+            "label": "Labellisée ProPiscine (FPP)"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5"
+      ],
+      "settings": {
+        "heading": "",
+        "color_scheme": "scheme-2",
+        "cta_heading": "Vous avez un projet ?",
+        "cta_text": "Parlez-nous de vos besoins et nous vous aiderons à comparer les modèles adaptés.",
+        "cta_button_label": "Nous contacter",
+        "cta_button_link": "shopify://pages/contact",
+        "padding_top": 40,
+        "padding_bottom": 48
+      }
+    },
+    "parcours": {
+      "type": "spa-parcours",
+      "blocks": {
+        "e1": {
+          "type": "etape",
+          "settings": {
+            "titre": "Le rendez-vous",
+            "texte": "Au showroom ou par téléphone : vous décrivez votre projet, on cerne le format qui vous convient."
+          }
+        },
+        "e2": {
+          "type": "etape",
+          "settings": {
+            "titre": "L'étude de l'accès",
+            "texte": "Photos ou visite sur place : on vérifie le passage, le support et l'alimentation électrique."
+          }
+        },
+        "e3": {
+          "type": "etape",
+          "settings": {
+            "titre": "Le devis",
+            "texte": "Le spa, la livraison, la manutention et la mise en service, chiffrés avant que vous décidiez."
+          }
+        },
+        "e4": {
+          "type": "etape",
+          "settings": {
+            "titre": "La livraison",
+            "texte": "Douze jours en moyenne après la commande, partout en Île-de-France et dans le Loiret."
+          }
+        },
+        "e5": {
+          "type": "etape",
+          "settings": {
+            "titre": "La mise en service",
+            "texte": "Raccordement, remplissage, réglages, et les premières explications d'entretien."
+          }
+        }
+      },
+      "block_order": [
+        "e1",
+        "e2",
+        "e3",
+        "e4",
+        "e5"
+      ],
+      "settings": {
+        "heading": "De votre premier appel à la mise en service",
+        "color_scheme": "scheme-1",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "showroom": {
+      "type": "image-with-text",
+      "blocks": {
+        "titre": {
+          "type": "heading",
+          "settings": {
+            "heading": "Venez vous asseoir dedans",
+            "heading_size": "h2"
+          }
+        },
+        "texte": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Une dimension sur une fiche ne dit rien de la profondeur d'assise ni du maintien de la nuque. Plusieurs modèles de la gamme sont exposés au <strong>16 rue de l'Orme, 91540 Fontenay-le-Vicomte</strong>, à une trentaine de minutes du sud de Paris.</p><p>Ouvert du <strong>lundi au vendredi, de 9h30 à 12h30 et de 14h à 17h</strong> : entrée libre, sans rendez-vous, et un parking devant le magasin. En dehors de ces horaires et le week-end, les visites sont possibles sur rendez-vous.</p>",
+            "text_style": "body"
+          }
+        },
+        "bouton": {
+          "type": "button",
+          "settings": {
+            "button_label": "Le showroom et les modèles exposés",
+            "button_link": "shopify://pages/showroom-spa-essonne",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "titre",
+        "texte",
+        "bouton"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/SPAS9_showroom.jpg",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-2",
+        "color_scheme": "scheme-2",
+        "padding_top": 40,
+        "padding_bottom": 44
+      }
+    },
+    "articles": {
+      "type": "featured-blog",
+      "settings": {
+        "blog": "conseils-spa",
+        "post_limit": 3,
+        "heading": "Avant de choisir",
+        "heading_size": "h2",
+        "columns_desktop": 3,
+        "show_view_all": true,
+        "show_image": true,
+        "show_date": false,
+        "show_author": false,
+        "color_scheme": "scheme-1",
+        "padding_top": 48,
+        "padding_bottom": 44
       }
     },
     "a_propos": {
@@ -106,7 +289,7 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "SPAS9 - LINERS FRANCE, spécialiste du spa en Île-de-France",
+            "heading": "SPAS9 | LINERS FRANCE, spécialiste du spa en Île-de-France",
             "heading_size": "h2",
             "use_h1": false
           }
@@ -114,7 +297,7 @@
         "texte": {
           "type": "text",
           "settings": {
-            "text": "<p>Nous vendons et installons des spas pour particuliers depuis notre showroom de Fontenay-le-Vicomte, en Essonne. Notre métier n'est pas de vous vendre le modèle du mois : c'est de vous aider à choisir celui qui correspond vraiment à votre espace, à vos habitudes et au nombre de personnes qui l'utiliseront.</p><p>Un spa ne se choisit ni sur une photo ni sur un nombre de jets. Nombre d'utilisateurs, type d'assises, encombrement disponible, conditions d'accès, alimentation électrique, livraison : nous regardons l'ensemble du projet avant de vous orienter vers un modèle.</p><p>Nos spas de 2 à 6 places sont exposés au showroom, et vous pouvez vous asseoir dedans — c'est encore le meilleur moyen de comparer. Visites sur rendez-vous.</p>"
+            "text": "<p>Nous vendons et installons des spas pour particuliers depuis notre showroom de Fontenay-le-Vicomte, en Essonne. Notre métier n'est pas de vous vendre le modèle du mois : c'est de vous aider à choisir celui qui correspond vraiment à votre espace, à vos habitudes et au nombre de personnes qui l'utiliseront.</p><p>Un spa ne se choisit ni sur une photo ni sur un nombre de jets. Nombre d'utilisateurs, type d'assises, encombrement disponible, conditions d'accès, alimentation électrique, livraison : nous regardons l'ensemble du projet avant de vous orienter vers un modèle.</p><p>SPAS9 est la marque spécialisée dans l'univers du spa de LINERS FRANCE, pisciniste en Essonne depuis 2007.</p>"
           }
         },
         "boutons": {
@@ -147,7 +330,12 @@
   "order": [
     "image_banner",
     "titre_accueil",
+    "chiffres",
     "featured_collection",
+    "criteres",
+    "parcours",
+    "showroom",
+    "articles",
     "a_propos"
   ]
 }
