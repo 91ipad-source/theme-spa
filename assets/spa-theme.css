@@ -596,8 +596,11 @@ a.spa-marquee__item:hover {
     padding: 2.8rem 3.2rem;
   }
 
+  /* La bande suit le nombre de gages reellement poses : quatre hier, cinq
+     depuis l'ajout du label ProPiscine. Sans cela, le cinquieme se
+     retrouvait seul sur une deuxieme ligne. */
   .spa-criteres__reassurance {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(var(--spa-gages-colonnes, 4), minmax(0, 1fr));
   }
 
   /* Les séparateurs n'apparaissent qu'une fois la bande sur une seule ligne. */

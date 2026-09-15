@@ -268,13 +268,21 @@
             "icone_image": "shopify://shop_images/Accompagnement_de_A_a_Z.png",
             "label": "Accompagnement de A à Z"
           }
+        },
+        "r5": {
+          "type": "reassurance",
+          "settings": {
+            "icone": "label",
+            "label": "Labellisée ProPiscine (FPP)"
+          }
         }
       },
       "block_order": [
         "r1",
         "r2",
         "r3",
-        "r4"
+        "r4",
+        "r5"
       ],
       "settings": {
         "heading": "",

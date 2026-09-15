@@ -71,12 +71,20 @@
     {%- endif -%}
 
     {%- if reassurances.size > 0 -%}
-      <ul class="spa-criteres__reassurance list-unstyled" role="list">
+      <ul class="spa-criteres__reassurance list-unstyled" role="list" style="--spa-gages-colonnes: {{ reassurances.size }};">
         {%- for block in reassurances -%}
           <li class="spa-criteres__gage" {{ block.shopify_attributes }}>
             <span class="spa-criteres__icone spa-criteres__icone--petit">
+              {%- comment -%}
+                Les gages existants utilisent les pictos fournis par SPAS9. Pour
+                un gage ajoute plus tard sans visuel correspondant, on retombe
+                sur un picto dessine plutot que de laisser un rond vide qui
+                desalignerait la bande.
+              {%- endcomment -%}
               {%- if block.settings.icone_image != blank -%}
                 {{ block.settings.icone_image | image_url: width: 132 | image_tag: loading: 'lazy', widths: '44, 88, 132', sizes: '44px', alt: '' }}
+              {%- elsif block.settings.icone != blank -%}
+                {% render 'spa-icone', nom: block.settings.icone %}
               {%- endif -%}
             </span>
             <span class="spa-criteres__gage-label">{{ block.settings.label | escape }}</span>
@@ -181,6 +189,12 @@
       "name": "Gage de confiance",
       "limit": 6,
       "settings": [
+        {
+          "type": "text",
+          "id": "icone",
+          "label": "Picto dessiné (si aucune image)",
+          "info": "label, conseil, expertise, showroom, accompagnement"
+        },
         {
           "type": "image_picker",
           "id": "icone_image",
