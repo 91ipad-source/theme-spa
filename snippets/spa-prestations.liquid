@@ -35,6 +35,16 @@
   assign v_pack = presta_pack.selected_or_first_available_variant.id
 -%}
 
+{%- comment -%}
+  Ce bloc ne concerne que les spas. Les accessoires ont leur propre gabarit,
+  mais on verrouille aussi ici : une livraison a 650 EUR proposee sous un
+  escalier a 175 EUR est absurde, et une erreur de gabarit ne doit pas
+  suffire a la faire apparaitre.
+{%- endcomment -%}
+{%- if product.type != 'Spa' -%}
+  {%- assign v_livraison = nil -%}
+{%- endif -%}
+
 {%- if v_livraison and v_service and v_pack -%}
   <script src="{{ 'spa-prestations.js' | asset_url }}" defer="defer"></script>
 

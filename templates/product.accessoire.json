@@ -1,0 +1,139 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true
+          }
+        },
+        "reassurance": {
+          "type": "icon-with-text",
+          "settings": {
+            "layout": "horizontal",
+            "icon_1": "box",
+            "heading_1": "Retrait gratuit au showroom de Fontenay-le-Vicomte (91)",
+            "icon_2": "chat_bubble",
+            "heading_2": "Un doute sur la compatibilité ? 01 60 77 37 00",
+            "icon_3": "check_mark",
+            "heading_3": "Garantie légale de conformité de 2 ans"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "tab_retrait": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Retrait et livraison",
+            "icon": "box",
+            "content": "<p>Le <strong>retrait est gratuit</strong> au showroom, 16 rue de l'Orme à Fontenay-le-Vicomte (91), du lundi au vendredi de 9h30 à 12h30 et de 14h à 17h.</p><p>Pour une livraison, <a href=\"/pages/contact\">contactez-nous</a> : les accessoires ne suivent pas le même circuit que les spas, et le tarif dépend du volume et de votre adresse.</p><p>Si vous commandez un accessoire <strong>en même temps qu'un spa</strong>, il part avec lui, sans supplément.</p>"
+          }
+        },
+        "tab_garantie": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Garantie",
+            "icon": "check_mark",
+            "content": "<p>Cet article bénéficie de la <strong>garantie légale de conformité</strong> prévue aux articles L.217-3 et suivants du Code de la consommation, pendant deux ans à compter de la délivrance, et de la <strong>garantie des vices cachés</strong> prévue aux articles 1641 et suivants du Code civil.</p><p><a href=\"/pages/conditions-generales-de-vente\">Nos conditions générales de vente</a></p>"
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Partager"
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "reassurance",
+        "description",
+        "tab_retrait",
+        "tab_garantie",
+        "share"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "stacked",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "Nos autres accessoires",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "1",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related-products"
+  ]
+}
