@@ -1419,3 +1419,29 @@ a.spa-marquee__item:hover {
   width: 1.6rem;
   height: 1.6rem;
 }
+
+/* --------------------------------------------------------------------------
+   23. RECADRAGE DU LOGO — MESURE PROVISOIRE
+
+   Le fichier du logo porte encore, sous la signature, la mention
+   « By Liners France ». Le reste du site dit « SPAS9 | LINERS FRANCE » :
+   l'en-tete contredit donc les CGV, le pied de page et le balisage envoye
+   a Google.
+
+   Ce recadrage masque la ligne fautive en coupant le bas de l'image. Ce
+   n'est pas une correction, c'est un cache-misere : le fichier reste faux
+   partout ailleurs — favicon, apercus de partage, documents imprimes.
+
+   LA VRAIE CORRECTION est de regenerer le PNG avec la bonne mention et de
+   le deposer dans Personnaliser > En-tete > Logo. Ce bloc devra alors etre
+   supprime, sinon il coupera le bas du nouveau logo.
+
+   --spa-logo-garde : la part de la hauteur d'origine que l'on conserve.
+   Un seul chiffre a ajuster si la coupe tombe a cote.
+   -------------------------------------------------------------------------- */
+.header__heading-logo {
+  --spa-logo-garde: 0.71;
+  aspect-ratio: 1672 / calc(941 * var(--spa-logo-garde));
+  object-fit: cover;
+  object-position: top center;
+}
