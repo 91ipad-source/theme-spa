@@ -27,6 +27,13 @@
           "type": "price",
           "settings": {}
         },
+        "paiement": {
+          "type": "text",
+          "settings": {
+            "text": "Payable en <strong>3 ou 4 chèques sans frais</strong>, à raison d'un par mois.",
+            "text_style": "body"
+          }
+        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -45,9 +52,53 @@
             "show_gift_card_recipient": true
           }
         },
+        "reassurance": {
+          "type": "icon-with-text",
+          "settings": {
+            "layout": "horizontal",
+            "icon_1": "truck",
+            "heading_1": "Livré et installé en Île-de-France et dans le Loiret",
+            "icon_2": "price_tag",
+            "heading_2": "Carte bancaire, ou 3 à 4 chèques sans frais",
+            "icon_3": "map_pin",
+            "heading_3": "Showroom à Fontenay-le-Vicomte (91)"
+          }
+        },
         "description": {
           "type": "description",
           "settings": {}
+        },
+        "tab_livraison": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Livraison et installation",
+            "icon": "truck",
+            "content": "<p>Nous livrons et installons dans toute l'Île-de-France et dans le Loiret. Comptez <strong>douze jours en moyenne</strong> entre la commande et l'installation.</p><p>Chaque accès est étudié au cas par cas avant la livraison : passage étroit, escalier, franchissement d'un mur ou d'une clôture, et si nécessaire recours à un grutage. C'est pour cette raison que nous demandons des photos ou une visite avant de confirmer une date. <a href=\"/pages/livraison-et-retrait\">Voir les modalités complètes</a>.</p><p>Le <strong>retrait au dépôt est gratuit</strong> pour les spas en stock, sur rendez-vous.</p>"
+          }
+        },
+        "tab_garantie": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Garantie",
+            "icon": "check_mark",
+            "content": "<p><strong>10 ans</strong> sur la structure, <strong>5 ans</strong> sur l'acrylique de la cuve, <strong>2 ans</strong> sur l'électronique et les pompes.</p><p>S'y ajoutent la garantie légale de conformité et la garantie des vices cachés, qui s'appliquent indépendamment de toute garantie commerciale. 100 % des pièces détachées sont disponibles.</p><p><a href=\"/pages/conditions-generales-de-vente\">Conditions et exclusions de garantie</a></p>"
+          }
+        },
+        "tab_paiement": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Paiement en 3 ou 4 fois sans frais",
+            "icon": "price_tag",
+            "content": "<p>Vous pouvez régler par <strong>carte bancaire</strong>, ou en <strong>trois ou quatre chèques d'égal montant</strong> remis ensemble au moment de la commande. Le premier chèque est encaissé à la commande, les suivants au rythme d'un par mois.</p><p>Cette facilité est accordée <strong>sans frais ni intérêts</strong> : le montant total réglé est strictement égal au prix affiché. Aucun frais de dossier, aucune majoration.</p><p><a href=\"/pages/contact\">Contactez-nous</a> pour un règlement par chèque.</p>"
+          }
+        },
+        "tab_showroom": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Le voir avant d'acheter",
+            "icon": "map_pin",
+            "content": "<p>Une dimension sur une fiche ne dit rien de la profondeur d'assise ni du maintien de la nuque. Plusieurs modèles de la gamme sont exposés au <strong>16 rue de l'Orme, 91540 Fontenay-le-Vicomte</strong> : du lundi au vendredi, de 9h30 à 12h30 et de 14h à 17h, entrée libre et parking sur place.</p><p>Pour vous assurer que ce modèle-ci sera visible le jour de votre visite, <a href=\"/pages/contact\">prévenez-nous avant de venir</a>.</p><p><a href=\"/pages/showroom-spa-essonne\">Tout savoir sur le showroom</a></p>"
+          }
         },
         "share": {
           "type": "share",
@@ -60,10 +111,16 @@
         "vendor",
         "title",
         "price",
+        "paiement",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
+        "reassurance",
         "description",
+        "tab_livraison",
+        "tab_garantie",
+        "tab_paiement",
+        "tab_showroom",
         "share"
       ],
       "settings": {
@@ -92,7 +149,7 @@
     "related-products": {
       "type": "related-products",
       "settings": {
-        "heading": "Vous aimerez aussi",
+        "heading": "Comparez avec d'autres modèles",
         "heading_size": "h2",
         "products_to_show": 4,
         "columns_desktop": 4,
