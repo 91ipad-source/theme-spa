@@ -1517,14 +1517,16 @@ a.spa-marquee__item:hover {
   flex: 1 1 auto;
 }
 
-/* Le prix est pousse a droite, aligne avec celui des autres lignes : c'est
-   ce que l'oeil compare en premier. */
+/* Le prix passe systematiquement sous l'intitule. Pose a cote, il ne tenait
+   sur la meme ligne que pour les intitules courts : « Livraison du spa »
+   gardait son prix a droite quand les deux autres le renvoyaient dessous,
+   et les trois montants ne s'alignaient plus. Or c'est la colonne des prix
+   que l'oeil parcourt pour comparer. */
 .spa-prestation__entete {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.4rem 1.2rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
 }
 
 .spa-prestation__nom {
