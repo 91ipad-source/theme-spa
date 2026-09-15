@@ -52,6 +52,12 @@
             "show_gift_card_recipient": true
           }
         },
+        "prestations": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'spa-prestations' %}"
+          }
+        },
         "reassurance": {
           "type": "icon-with-text",
           "settings": {
@@ -115,6 +121,7 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
+        "prestations",
         "reassurance",
         "description",
         "tab_livraison",

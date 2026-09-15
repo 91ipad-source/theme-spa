@@ -1,0 +1,103 @@
+{%- comment -%}
+  Les prestations de livraison et d'installation, proposées à la commande.
+
+  Shopify ne sait pas ajouter une option payante à un produit sans passer par
+  une application. Les trois prestations sont donc de vrais produits, masqués
+  du catalogue (statut « non répertorié »), cochés ici et ajoutés au panier
+  en même temps que le spa. Le client voit son total exact avant de payer, et
+  le detail se retrouve dans la commande.
+
+  Le pack est exclusif des deux autres : il les contient. Sans cette
+  exclusion, on encaisserait deux fois la même prestation — c'est gere dans
+  spa-prestations.js, et repete ici en « data-exclusif » pour que la regle
+  soit lisible dans le HTML plutot que cachee dans le script.
+
+  Les prix ne sont pas ecrits en dur : ils viennent des fiches prestation.
+  Changer un tarif dans l'admin suffit, le bloc suit.
+{%- endcomment -%}
+
+{%- liquid
+  assign presta_livraison = all_products['prestation-livraison-91']
+  assign presta_service = all_products['prestation-mise-en-service-91']
+  assign presta_pack = all_products['prestation-pack-livraison-installation-91']
+-%}
+
+{%- if presta_livraison.id and presta_service.id and presta_pack.id -%}
+  <script src="{{ 'spa-prestations.js' | asset_url }}" defer="defer"></script>
+
+  <spa-prestations class="spa-prestations">
+    <fieldset class="spa-prestations__groupe">
+      <legend class="spa-prestations__titre">Livraison et installation</legend>
+      <p class="spa-prestations__zone">
+        Tarifs pour l'Essonne (91).
+        <a href="{{ pages.contact.url | default: '/pages/contact' }}">Autres départements : nous consulter</a>.
+      </p>
+
+      <label class="spa-prestation">
+        <input
+          type="checkbox"
+          class="spa-prestation__case"
+          data-variant-id="{{ presta_livraison.selected_or_first_available_variant.id }}"
+          data-exclusif="simple"
+        >
+        <span class="spa-prestation__corps">
+          <span class="spa-prestation__entete">
+            <span class="spa-prestation__nom">Livraison du spa</span>
+            <span class="spa-prestation__prix">
+              + {{ presta_livraison.selected_or_first_available_variant.price | money }}
+            </span>
+          </span>
+          <span class="spa-prestation__detail">
+            Transport jusqu'à devant chez vous. Le spa reste à déplacer jusqu'à son
+            emplacement par vos soins.
+          </span>
+        </span>
+      </label>
+
+      <label class="spa-prestation">
+        <input
+          type="checkbox"
+          class="spa-prestation__case"
+          data-variant-id="{{ presta_service.selected_or_first_available_variant.id }}"
+          data-exclusif="simple"
+        >
+        <span class="spa-prestation__corps">
+          <span class="spa-prestation__entete">
+            <span class="spa-prestation__nom">Mise en service du spa</span>
+            <span class="spa-prestation__prix">
+              + {{ presta_service.selected_or_first_available_variant.price | money }}
+            </span>
+          </span>
+          <span class="spa-prestation__detail">
+            Remplissage, réglages et premières explications d'entretien. Suppose le spa
+            déjà en place et raccordé.
+          </span>
+        </span>
+      </label>
+
+      <label class="spa-prestation spa-prestation--pack">
+        <input
+          type="checkbox"
+          class="spa-prestation__case"
+          data-variant-id="{{ presta_pack.selected_or_first_available_variant.id }}"
+          data-exclusif="pack"
+        >
+        <span class="spa-prestation__corps">
+          <span class="spa-prestation__entete">
+            <span class="spa-prestation__nom">Pack livraison et installation</span>
+            <span class="spa-prestation__prix">
+              + {{ presta_pack.selected_or_first_available_variant.price | money }}
+            </span>
+          </span>
+          <span class="spa-prestation__detail">
+            <strong>Le spa est déposé à l'emplacement prévu</strong>, manutention comprise,
+            puis raccordé, rempli et réglé. L'accès est étudié avec vous avant de confirmer
+            la date. C'est la différence avec la livraison seule, qui s'arrête au seuil.
+          </span>
+        </span>
+      </label>
+
+      <p class="spa-prestations__note" data-spa-prestations-erreur hidden></p>
+    </fieldset>
+  </spa-prestations>
+{%- endif -%}

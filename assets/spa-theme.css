@@ -1445,3 +1445,110 @@ a.spa-marquee__item:hover {
   object-fit: cover;
   object-position: top center;
 }
+
+/* --------------------------------------------------------------------------
+   24. PRESTATIONS DE LIVRAISON SUR LA FICHE SPA
+
+   Trois cases a cocher sous le bouton d'achat. Le detail est affiche sous
+   chaque intitule plutot que masque derriere une infobulle : l'ecart entre
+   « devant chez vous » et « a l'emplacement prevu » vaut huit cents euros,
+   et c'est le genre de nuance qui se decouvre mal apres la commande.
+
+   La case native est conservee, simplement agrandie. Une case redessinee en
+   pseudo-element se comporte mal avec le remplissage automatique et les
+   lecteurs d'ecran, pour un gain purement decoratif.
+   -------------------------------------------------------------------------- */
+.spa-prestations {
+  display: block;
+  margin: 2.4rem 0 0;
+}
+
+.spa-prestations__groupe {
+  margin: 0;
+  padding: 2rem;
+  border: 0.1rem solid rgba(var(--color-foreground), 0.12);
+  border-radius: var(--r-md);
+  background: var(--mist);
+}
+
+.spa-prestations__titre {
+  padding: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--deep);
+}
+
+.spa-prestations__zone {
+  margin: 0.4rem 0 1.6rem;
+  font-size: 1.3rem;
+  line-height: 1.4;
+  opacity: 0.85;
+}
+
+.spa-prestation {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  padding: 1.2rem;
+  border-radius: calc(var(--r-md) - 0.6rem);
+  background: var(--white);
+  cursor: pointer;
+}
+
+.spa-prestation + .spa-prestation {
+  margin-top: 0.8rem;
+}
+
+.spa-prestation:hover {
+  box-shadow: 0 0.2rem 0.8rem rgba(15, 58, 90, 0.08);
+}
+
+.spa-prestation__case {
+  flex: 0 0 auto;
+  width: 1.8rem;
+  height: 1.8rem;
+  margin: 0.2rem 0 0;
+  accent-color: var(--sky-deep);
+  cursor: pointer;
+}
+
+.spa-prestation__corps {
+  display: block;
+  flex: 1 1 auto;
+}
+
+/* Le prix est pousse a droite, aligne avec celui des autres lignes : c'est
+   ce que l'oeil compare en premier. */
+.spa-prestation__entete {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.4rem 1.2rem;
+}
+
+.spa-prestation__nom {
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.spa-prestation__prix {
+  font-weight: 600;
+  color: var(--sky-deep);
+  white-space: nowrap;
+}
+
+.spa-prestation__detail {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 1.3rem;
+  line-height: 1.45;
+  opacity: 0.85;
+}
+
+.spa-prestations__note {
+  margin: 1.2rem 0 0;
+  font-size: 1.3rem;
+  line-height: 1.4;
+  color: rgb(var(--color-error, 200 30 30));
+}
