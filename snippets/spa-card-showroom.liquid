@@ -1,0 +1,26 @@
+{%- comment -%}
+  Le lien « Le voir au showroom » sur la vignette d'un spa.
+
+  Il ne s'affiche que si le métachamp « Exposé au showroom » est coché sur
+  la fiche. C'est la seule facon honnête de le poser : envoyer quelqu'un
+  faire quarante-cinq minutes de route pour un modèle absent du magasin
+  coûte plus cher qu'une vignette un peu plus vide.
+
+  Quand l'exposition change, on coche ou décoche la case sur la fiche
+  produit, dans l'admin Shopify. Aucune intervention sur le code.
+
+  Le lien est remonté au-dessus de la zone cliquable que Dawn étend sur
+  toute la carte (z-index 1), sans quoi il serait recouvert par elle et
+  ne mènerait jamais nulle part.
+
+  Paramètre : card_product (obligatoire).
+{%- endcomment -%}
+
+{%- if card_product.metafields.custom.expose_showroom.value -%}
+  <a class="spa-card-showroom" href="{{ pages['showroom-spa-essonne'].url | default: '/pages/showroom-spa-essonne' }}">
+    <span class="spa-card-showroom__icone" aria-hidden="true">
+      {% render 'spa-icone', nom: 'showroom' %}
+    </span>
+    Le voir au showroom
+  </a>
+{%- endif -%}

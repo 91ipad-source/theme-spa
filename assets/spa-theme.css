@@ -1374,3 +1374,48 @@ a.spa-marquee__item:hover {
 .card-information--center .spa-card-specs {
   justify-content: center;
 }
+
+/* --------------------------------------------------------------------------
+   22. « LE VOIR AU SHOWROOM » SUR LA VIGNETTE
+
+   Un second chemin, a cote du « voir la fiche » : a six mille euros, presque
+   personne n'achete sans s'etre assis dedans. Autant l'assumer et l'offrir
+   des la grille, plutot que de laisser le visiteur chercher ou est le
+   magasin.
+
+   Traite en lien souligne et non en bouton : la carte a deja une action
+   principale, un deuxieme bouton de meme poids les mettrait en concurrence
+   et n'aiderait a choisir ni l'une ni l'autre.
+   -------------------------------------------------------------------------- */
+.spa-card-showroom {
+  /* Dawn etend la zone cliquable de la carte en pseudo-element au z-index 1.
+     Sans ce rehaussement, ce lien serait recouvert et ne mènerait nulle part. */
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+  font-size: 1.3rem;
+  line-height: 1.3;
+  color: var(--sky-deep);
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+  text-decoration-thickness: 0.1rem;
+}
+
+.spa-card-showroom:hover,
+.spa-card-showroom:focus-visible {
+  color: var(--deep);
+  text-decoration-thickness: 0.2rem;
+}
+
+.spa-card-showroom__icone {
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+
+.spa-card-showroom__icone svg {
+  width: 1.6rem;
+  height: 1.6rem;
+}

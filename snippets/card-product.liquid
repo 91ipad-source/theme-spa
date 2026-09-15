@@ -290,6 +290,8 @@
                   </quantity-popover>
                 {% endif %}
               {%- endif -%}
+
+              {% render 'spa-card-showroom', card_product: card_product %}
             </div>
           </div>
           {% assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id %}
