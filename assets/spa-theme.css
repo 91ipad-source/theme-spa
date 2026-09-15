@@ -1168,11 +1168,18 @@ a.spa-marquee__item:hover {
    liens vers la même fiche (l'image puis le nom) obligeraient un lecteur
    d'écran à annoncer la destination deux fois de suite.
    -------------------------------------------------------------------------- */
+/* Flex et non grid, pour une seule raison : la grille CSS ne sait pas
+   centrer une derniere rangee incomplete. Avec sept modeles sur quatre
+   colonnes, les trois du bas restaient colles a gauche. En flex, la
+   largeur des cases est calculee a la main mais « justify-content:
+   center » centre chaque ligne, y compris la derniere. */
 .spa-expo,
 .rte .spa-expo {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 2rem 1.6rem;
+  --spa-expo-gouttiere: 1.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem var(--spa-expo-gouttiere);
   margin: 3.2rem 0 0;
   padding: 0;
   list-style: none;
@@ -1183,8 +1190,15 @@ a.spa-marquee__item:hover {
    deux lignes decale sa legende et la rangee se desaligne. */
 .spa-expo li,
 .rte .spa-expo li {
+  --spa-expo-colonnes: 2;
   display: flex;
   flex-direction: column;
+  flex: 0 1 calc(
+    (100% - (var(--spa-expo-colonnes) - 1) * var(--spa-expo-gouttiere)) / var(--spa-expo-colonnes)
+  );
+  max-width: calc(
+    (100% - (var(--spa-expo-colonnes) - 1) * var(--spa-expo-gouttiere)) / var(--spa-expo-colonnes)
+  );
   margin: 0;
   padding: 0;
   list-style: none;
@@ -1247,9 +1261,6 @@ a.spa-marquee__item:hover {
   opacity: 0.85;
 }
 
-/* Sur un bandeau bleuté, la vignette blanche ressort déjà : c'est la
-   pastille de l'image qui doit changer de camp, sinon elle se confond
-   avec le fond de la carte. */
 /* Sur un bandeau bleute, les deux fonds s'inversent : carte blanche,
    pastille bleutee. Sinon la carte disparait dans le bandeau. */
 .spa-bande .spa-expo__lien,
@@ -1265,15 +1276,20 @@ a.spa-marquee__item:hover {
 @media screen and (min-width: 750px) {
   .spa-expo,
   .rte .spa-expo {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 2.4rem 2rem;
+    --spa-expo-gouttiere: 2rem;
+    gap: 2.4rem var(--spa-expo-gouttiere);
+  }
+
+  .spa-expo li,
+  .rte .spa-expo li {
+    --spa-expo-colonnes: 3;
   }
 }
 
 @media screen and (min-width: 990px) {
-  .spa-expo,
-  .rte .spa-expo {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  .spa-expo li,
+  .rte .spa-expo li {
+    --spa-expo-colonnes: 4;
   }
 }
 
