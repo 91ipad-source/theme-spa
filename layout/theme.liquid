@@ -43,11 +43,24 @@
       « spas9 » sous une forme ou une autre — le test est fait en minuscules,
       « contains » distinguant sinon SPAS9 de Spas9.
     {%- endcomment -%}
+    {%- comment -%}
+      La page d'accueil est le cas particulier. Faute de titre SEO saisi dans
+      Boutique en ligne > Preferences, Shopify y renvoie le nom de la boutique :
+      elle ressortait dans Google sous « SPAS9 | LINERS FRANCE », qui ne contient
+      aucun des mots que les gens tapent. On lui donne donc un titre porteur.
+
+      Le repli ne s'applique que si rien n'a ete saisi cote admin : le jour ou un
+      titre est renseigne dans les preferences, page_title cesse d'egaler
+      shop.name et c'est ce titre-la qui passe. Rien a defaire ici.
+    {%- endcomment -%}
     {%- liquid
       assign site_name = 'SPAS9 | LINERS FRANCE'
       assign head_title = page_title
       if page_title == shop.name
         assign head_title = site_name
+        if request.page_type == 'index'
+          assign head_title = 'Spas neufs en Essonne et Île-de-France | SPAS9'
+        endif
       endif
       assign titre_teste = head_title | downcase
     -%}
@@ -58,9 +71,35 @@
       {%- unless titre_teste contains 'spas9' %} &ndash; {{ site_name }}{% endunless -%}
     </title>
 
-    {% if page_description %}
-      <meta name="description" content="{{ page_description | escape }}">
+    {%- comment -%}
+      Meme logique pour la description : sans meta description, Google en
+      fabrique une avec le premier texte venu de la page. Sur l'accueil, il
+      prenait le paragraphe « A propos » du bas de page.
+    {%- endcomment -%}
+    {%- liquid
+      assign head_description = page_description
+      if head_description == blank and request.page_type == 'index'
+        assign head_description = "Vente et installation de spas neufs en Île-de-France. Showroom à Fontenay-le-Vicomte (91), livraison et mise en service. Garantie 10 ans sur la structure."
+      endif
+    -%}
+    {% if head_description != blank %}
+      <meta name="description" content="{{ head_description | escape }}">
     {% endif %}
+
+    {%- comment -%}
+      La page de resultats de recherche n'a rien a faire dans Google. Elle y
+      ressortait sous « Recherche – SPAS9 », avec le texte du bandeau d'annonce
+      en guise de description : une page vide qui occupe une place dans l'index
+      et decoit le visiteur qui clique dessus.
+
+      Le blocage passe par une balise et non par robots.txt, volontairement :
+      une URL interdite de crawl ne peut plus etre desindexee, faute pour Google
+      de pouvoir lire la consigne. Le « follow » laisse les liens de la page
+      transmettre leur valeur aux fiches produit.
+    {%- endcomment -%}
+    {%- if request.page_type == 'search' -%}
+      <meta name="robots" content="noindex,follow">
+    {%- endif -%}
 
     {% render 'meta-tags' %}
 
