@@ -1557,3 +1557,91 @@ a.spa-marquee__item:hover {
   line-height: 1.4;
   color: rgb(var(--color-error, 200 30 30));
 }
+
+/* --------------------------------------------------------------------------
+   25. LE PRODUIT QUI VA AVEC (snippet spa-complement)
+
+   Une seule carte, horizontale, posee entre la description et les onglets.
+   Elle ne cherche pas a ressembler a une vignette de collection : c'est un
+   renvoi argumente, pas une suggestion de plus. La phrase qui dit pourquoi
+   les deux produits vont ensemble pese autant que l'image, elle a donc sa
+   place dans la carte et non en legende.
+
+   Pas de deplacement au survol : le theme respecte prefers-reduced-motion
+   ailleurs, et une ombre suffit a signaler que l'ensemble est cliquable.
+   -------------------------------------------------------------------------- */
+.spa-complement {
+  margin: 3.2rem 0 0;
+}
+
+.spa-complement__titre {
+  margin: 0 0 1.2rem;
+  font-size: 1.7rem;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+}
+
+.spa-complement__carte {
+  display: flex;
+  gap: 1.6rem;
+  align-items: center;
+  padding: 1.4rem;
+  border-radius: var(--r-md);
+  background: var(--mist);
+  color: inherit;
+  text-decoration: none;
+  transition: box-shadow 0.15s ease;
+}
+
+.spa-complement__carte:hover,
+.spa-complement__carte:focus-visible {
+  box-shadow: 0 0.6rem 1.6rem rgba(15, 58, 90, 0.14);
+}
+
+/* Fond blanc sous l'image : les visuels fournisseur sont detoures sur un
+   ciel clair, qui se confondrait avec le fond de la carte. */
+.spa-complement__image {
+  flex: 0 0 11rem;
+  overflow: hidden;
+  border-radius: calc(var(--r-md) - 0.6rem);
+  background: var(--white);
+}
+
+.spa-complement__image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.spa-complement__corps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.spa-complement__nom {
+  font-weight: 600;
+  line-height: 1.3;
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+.spa-complement__prix {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--sky-deep);
+}
+
+.spa-complement__raison {
+  margin-top: 0.4rem;
+  font-size: 1.3rem;
+  line-height: 1.45;
+  opacity: 0.85;
+}
+
+@media screen and (max-width: 480px) {
+  .spa-complement__image {
+    flex-basis: 8rem;
+  }
+}

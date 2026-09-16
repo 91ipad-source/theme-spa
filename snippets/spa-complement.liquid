@@ -1,0 +1,69 @@
+{%- comment -%}
+  Le produit qui va avec celui-ci, quand le lien entre les deux est un fait
+  technique et non une suggestion.
+
+  Dawn affiche deja un bandeau « Nos autres accessoires », mais il est
+  algorithmique : il rapproche des articles sans jamais dire POURQUOI ils
+  vont ensemble. C'est pourtant la seule chose qui decide l'achat du second.
+  L'escalier lumineux a un logement dimensionne pour la CLIM8ZONE : ecrite
+  noir sur blanc, la raison se comprend en une ligne ; laissee a un
+  carrousel, elle passe pour une reclame de plus.
+
+  Les paires sont declarees ici, en clair, dans les deux sens. Pour en
+  ajouter une, on ajoute deux entrees au case ci-dessous, et rien d'autre :
+  le bloc reste muet sur toutes les fiches qui n'y figurent pas.
+{%- endcomment -%}
+
+{%- liquid
+  case product.handle
+    when 'escalier-spa-lumineux-pompe-a-chaleur'
+      assign complement_handle = 'pompe-a-chaleur-balboa-clim8zone'
+      assign complement_titre = 'La pompe à chaleur qu’il peut loger'
+      assign complement_raison = 'Cet escalier a été conçu pour la recevoir : elle se glisse sous les marches, derrière des flancs ajourés qui laissent circuler l’air dont elle a besoin.'
+    when 'pompe-a-chaleur-balboa-clim8zone'
+      assign complement_handle = 'escalier-spa-lumineux-pompe-a-chaleur'
+      assign complement_titre = 'Pour ne pas la voir'
+      assign complement_raison = 'Son logement est dimensionné pour la CLIM8ZONE. La pompe disparaît sous les marches, et vous gagnez au passage un accès au spa.'
+  endcase
+-%}
+
+{%- if complement_handle -%}
+  {%- liquid
+    assign complement = all_products[complement_handle]
+    assign complement_variante = complement.selected_or_first_available_variant.id
+  -%}
+
+  {%- comment -%}
+    Le test porte sur la VARIANTE, pas sur le produit — meme lecon que dans
+    spa-prestations. Un produit non publie sur la boutique en ligne remonte
+    quand meme un objet cote Liquid, mais vide : on afficherait une carte
+    sans prix menant a une page introuvable. Mieux vaut ne rien montrer.
+  {%- endcomment -%}
+  {%- if complement_variante -%}
+    <aside class="spa-complement">
+      <h2 class="spa-complement__titre">{{ complement_titre }}</h2>
+
+      <a class="spa-complement__carte" href="{{ complement.url }}">
+        {%- if complement.featured_image -%}
+          <span class="spa-complement__image">
+            {{
+              complement.featured_image
+              | image_url: width: 400
+              | image_tag:
+                loading: 'lazy',
+                widths: '200, 300, 400',
+                sizes: '110px',
+                alt: complement.featured_image.alt | default: complement.title
+            }}
+          </span>
+        {%- endif -%}
+
+        <span class="spa-complement__corps">
+          <span class="spa-complement__nom">{{ complement.title }}</span>
+          <span class="spa-complement__prix">{{ complement.price | money }}</span>
+          <span class="spa-complement__raison">{{ complement_raison }}</span>
+        </span>
+      </a>
+    </aside>
+  {%- endif -%}
+{%- endif -%}

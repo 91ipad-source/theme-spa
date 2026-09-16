@@ -61,6 +61,12 @@
           "type": "description",
           "settings": {}
         },
+        "complement": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'spa-complement' %}"
+          }
+        },
         "tab_retrait": {
           "type": "collapsible_tab",
           "settings": {
@@ -93,6 +99,7 @@
         "buy_buttons",
         "reassurance",
         "description",
+        "complement",
         "tab_retrait",
         "tab_garantie",
         "share"
