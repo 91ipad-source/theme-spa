@@ -682,16 +682,30 @@ a.spa-marquee__item:hover {
   text-align: center;
 }
 
+/* Les quatre cases d'une meme rangee font la meme hauteur (comportement par
+   defaut de la grille). En colonne flex avec le libelle pousse en bas, les
+   libelles restent alignes entre eux meme quand une valeur prend deux lignes
+   et pas sa voisine. C'est ce decalage-la qui se voit, bien plus que la
+   hauteur des cases. */
 .spa-chiffre,
 .rte .spa-chiffre {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   margin: 0;
   list-style: none;
 }
 
-/* Le nombre tient sur une seule ligne, toujours : dès que « 12 jours »
-   passe à la ligne, son libellé descend et les quatre colonnes ne sont
-   plus alignées entre elles. C'est ce décalage qui se voit, bien plus que
-   la taille du chiffre. */
+/* La valeur porte son unite — « 15-30 jours », pas « 15-30 » — parce que
+   l'oeil lit le gros caractere en premier : un intervalle sans unite n'est
+   pas une quantite, la ou « 2007 », « 4,8/5 » et « 10 ans » en sont.
+
+   Elle n'est donc plus en « nowrap ». En Unbounded, « 15-30 jours » demande
+   166 px a 2.4rem alors qu'une colonne de la grille mobile n'en offre que
+   136 sur un ecran de 360 px : la forcer sur une ligne voudrait dire la
+   descendre a 18 px, a peine plus que son propre libelle. Elle se plie donc
+   en deux lignes sur les ecrans etroits, et reste sur une seule des qu'il y
+   a la place. « balance » evite la coupe batarde qui laisse un mot seul. */
 .spa-chiffre__valeur {
   display: block;
   font-family: var(--font-display);
@@ -699,12 +713,16 @@ a.spa-marquee__item:hover {
   font-size: calc(var(--font-heading-scale) * 2.4rem);
   line-height: 1.1;
   color: var(--deep);
-  white-space: nowrap;
+  text-wrap: balance;
 }
 
 .spa-chiffre__label {
   display: block;
-  margin-top: 0.6rem;
+  /* « auto » : le libelle est colle au bas de sa case, donc aligne avec
+     celui de la case voisine meme si l'une des deux valeurs a pris une
+     ligne de plus. Le retrait passe en padding, qu'une marge auto ecrase. */
+  margin-top: auto;
+  padding-top: 0.6rem;
   font-size: 1.4rem;
   line-height: 1.35;
   color: var(--deep-soft);
@@ -717,8 +735,13 @@ a.spa-marquee__item:hover {
     padding: 3.6rem 2.4rem;
   }
 
+  /* Le passage à quatre colonnes est le point le plus serré de tout le
+     bloc : à 750 px une colonne ne fait que 156 px, moins large que sur
+     bien des téléphones. Le corps y redescend donc pour que « 15-30
+     jours » y tienne encore sur une ligne, avant de retrouver ses 2.8rem
+     sur un vrai écran d'ordinateur. */
   .spa-chiffre__valeur {
-    font-size: calc(var(--font-heading-scale) * 2.8rem);
+    font-size: clamp(2rem, 2.6vw, calc(var(--font-heading-scale) * 2.8rem));
   }
 }
 
