@@ -1,0 +1,198 @@
+{%- comment -%}
+  « Continuer la lecture » — bas de fiche article.
+
+  Une fiche article était un cul-de-sac : image, titre, partage, texte, et
+  plus rien. Le lecteur qui arrive au bout n'a d'autre issue que le menu,
+  alors que c'est exactement le moment où il est le plus disposé à lire un
+  deuxième article.
+
+  Le choix des trois articles se fait en deux passes :
+
+  1. ceux qui partagent un thème (un tag) avec l'article en cours — c'est
+     la suggestion la plus pertinente, et elle se met à jour toute seule
+     quand on étiquette un nouvel article ;
+  2. si le compte n'y est pas, on complète avec les plus récents.
+
+  « vus » mémorise les articles déjà proposés. Les poignées y sont
+  entourées de barres verticales pour qu'un test d'inclusion ne confonde
+  pas « entretien-spa » avec « entretien-spa-routine-eau-filtre ».
+{%- endcomment -%}
+
+{%- if blog.articles_count > 1 -%}
+  {{ 'component-article-card.css' | asset_url | stylesheet_tag }}
+  {{ 'component-card.css' | asset_url | stylesheet_tag }}
+
+  {%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+  {%- endstyle -%}
+
+  <div class="color-{{ section.settings.color_scheme }} gradient">
+    <div class="spa-lies page-width section-{{ section.id }}-padding">
+      <h2 class="spa-lies__titre">{{ section.settings.heading }}</h2>
+
+      <ul class="spa-lies__grille" role="list">
+        {%- liquid
+          assign actuel = article.handle
+          assign vus = '|'
+          assign restants = section.settings.articles_a_montrer
+        -%}
+
+        {%- for suggestion in blog.articles -%}
+          {%- if restants == 0 -%}
+            {%- break -%}
+          {%- endif -%}
+          {%- if suggestion.handle == actuel -%}
+            {%- continue -%}
+          {%- endif -%}
+
+          {%- comment -%}
+            Seuls les tags « theme: » comptent pour la parenté. Les tags
+            libres ne peuvent pas servir ici : « conseils » est porté par
+            tous les articles, donc n'importe quelle paire d'articles
+            serait déclarée parente et la première passe se contenterait
+            des trois premiers venus.
+          {%- endcomment -%}
+          {%- liquid
+            assign partage_un_theme = false
+            for etiquette in article.tags
+              unless etiquette contains 'theme:'
+                continue
+              endunless
+              if suggestion.tags contains etiquette
+                assign partage_un_theme = true
+                break
+              endif
+            endfor
+          -%}
+
+          {%- if partage_un_theme -%}
+            <li class="spa-lies__item">
+              {%- render 'article-card',
+                article: suggestion,
+                media_height: 'adapt',
+                media_aspect_ratio: suggestion.image.aspect_ratio,
+                show_image: true,
+                show_date: false,
+                show_author: false,
+                show_excerpt: false
+              -%}
+            </li>
+            {%- liquid
+              assign vus = vus | append: suggestion.handle | append: '|'
+              assign restants = restants | minus: 1
+            -%}
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- comment -%}
+          Deuxième passe : compléter avec les plus récents. Elle ne tourne
+          que si la première n'a pas rempli les trois places — sur un
+          article sans tag, c'est elle qui fait tout le travail.
+        {%- endcomment -%}
+        {%- for suggestion in blog.articles -%}
+          {%- if restants == 0 -%}
+            {%- break -%}
+          {%- endif -%}
+          {%- if suggestion.handle == actuel -%}
+            {%- continue -%}
+          {%- endif -%}
+
+          {%- assign cle = '|' | append: suggestion.handle | append: '|' -%}
+          {%- unless vus contains cle -%}
+            <li class="spa-lies__item">
+              {%- render 'article-card',
+                article: suggestion,
+                media_height: 'adapt',
+                media_aspect_ratio: suggestion.image.aspect_ratio,
+                show_image: true,
+                show_date: false,
+                show_author: false,
+                show_excerpt: false
+              -%}
+            </li>
+            {%- liquid
+              assign vus = vus | append: suggestion.handle | append: '|'
+              assign restants = restants | minus: 1
+            -%}
+          {%- endunless -%}
+        {%- endfor -%}
+      </ul>
+
+      <p class="spa-lies__retour">
+        <a href="{{ blog.url }}">{{ section.settings.lien_retour }}</a>
+      </p>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Articles liés",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titre",
+      "default": "Continuer la lecture"
+    },
+    {
+      "type": "range",
+      "id": "articles_a_montrer",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Nombre d'articles",
+      "default": 3
+    },
+    {
+      "type": "text",
+      "id": "lien_retour",
+      "label": "Libellé du lien de retour",
+      "default": "Voir tous nos conseils"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-2"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 52
+    }
+  ],
+  "presets": [
+    {
+      "name": "Articles liés"
+    }
+  ]
+}
+{% endschema %}

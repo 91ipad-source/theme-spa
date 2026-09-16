@@ -1695,3 +1695,113 @@ img {
   user-select: none;
   -webkit-user-select: none;
 }
+
+/* --------------------------------------------------------------------------
+   27. BLOG : BARRE DE THEMES ET ARTICLES LIES
+
+   Deux manques de navigation, corriges ensemble :
+
+   - la liste du blog n'offrait aucun classement. Huit articles melanges,
+     et rien pour dire au visiteur venu pour l'entretien qu'il y a deux
+     articles sur le sujet. La barre de themes s'appuie sur les tags ;
+   - une fiche article se terminait sur le texte, sans aucune sortie. Le
+     lecteur arrive au bout au moment ou il est le plus disponible pour un
+     deuxieme article, et on ne lui en proposait aucun.
+   -------------------------------------------------------------------------- */
+
+.spa-blog-themes {
+  margin: 0 0 3.2rem;
+}
+
+/* La barre defile horizontalement plutot que de se replier sur trois
+   lignes : sur telephone, cinq themes ne tiennent pas de front, et un
+   paquet de pastilles empilees repousse les articles sous la ligne de
+   flottaison. Les marges negatives laissent le defilement filer jusqu'aux
+   bords de l'ecran, pour qu'aucune pastille ne semble coupee net. */
+.spa-blog-themes__liste {
+  display: flex;
+  gap: 0.8rem;
+  margin: 0 -1.6rem;
+  padding: 0 1.6rem 0.4rem;
+  overflow-x: auto;
+  list-style: none;
+  scrollbar-width: none;
+}
+
+.spa-blog-themes__liste::-webkit-scrollbar {
+  display: none;
+}
+
+.spa-blog-theme {
+  display: block;
+  padding: 0.8rem 1.6rem;
+  border: 1px solid rgba(15, 58, 90, 0.18);
+  border-radius: var(--r-pill);
+  font-size: 1.4rem;
+  line-height: 1.2;
+  color: var(--deep);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.spa-blog-theme:hover {
+  border-color: var(--deep);
+  background: var(--mist);
+}
+
+.spa-blog-theme--actif {
+  border-color: var(--deep);
+  background: var(--deep);
+  color: #fff;
+}
+
+.spa-blog-theme--actif:hover {
+  background: var(--deep);
+  color: #fff;
+}
+
+.spa-lies__titre {
+  margin: 0 0 2.8rem;
+  font-size: calc(var(--font-heading-scale) * 2.4rem);
+}
+
+.spa-lies__grille {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.spa-lies__item {
+  margin: 0;
+}
+
+.spa-lies__retour {
+  margin: 2.8rem 0 0;
+  font-size: 1.5rem;
+}
+
+@media screen and (min-width: 750px) {
+  .spa-blog-themes {
+    margin-bottom: 4rem;
+  }
+
+  .spa-blog-themes__liste {
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    overflow-x: visible;
+  }
+
+  .spa-lies__titre {
+    font-size: calc(var(--font-heading-scale) * 2.8rem);
+  }
+
+  .spa-lies__grille {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 3.2rem;
+  }
+}

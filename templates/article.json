@@ -43,9 +43,21 @@
         "content"
       ],
       "settings": {}
+    },
+    "articles-lies": {
+      "type": "spa-articles-lies",
+      "settings": {
+        "heading": "Continuer la lecture",
+        "articles_a_montrer": 3,
+        "lien_retour": "Voir tous nos conseils",
+        "color_scheme": "scheme-2",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "articles-lies"
   ]
 }

@@ -16,11 +16,77 @@
   }
 {%- endstyle -%}
 
-{%- paginate blog.articles by 6 -%}
+{%- comment -%}
+  Dawn paginait par 6. Avec huit articles, cela en reléguait deux sur une
+  deuxième page que presque personne n'ouvre — pour rien, puisque la grille
+  tient sans peine douze vignettes. La pagination reste en place et
+  reprendra son rôle quand le blog aura vraiment grossi.
+{%- endcomment -%}
+{%- paginate blog.articles by 12 -%}
   <div class="main-blog page-width section-{{ section.id }}-padding">
     <h1 class="title--primary{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
       {{ blog.title | escape }}
     </h1>
+
+    {%- comment -%}
+      Barre de thèmes, alimentée par les tags des articles. Shopify sert
+      déjà ces filtres sur /blogs/<blog>/tagged/<tag> : il n'y a donc rien
+      à construire, seulement à donner l'entrée.
+
+      SEULS LES TAGS PRÉFIXÉS « theme: » apparaissent ici, et le préfixe
+      est retiré à l'affichage. C'est ce qui permet de garder par ailleurs
+      des tags libres et descriptifs — « hivernage », « spa gonflable »,
+      « traitement de l'eau » — sans que la barre devienne un mur de
+      pastilles. Sans ce tri, les huit articles en afficheraient quinze,
+      dont une (« conseils ») portée par tous, qui ne filtre rien.
+
+      POUR AJOUTER UN THÈME : il suffit d'étiqueter un article
+      « theme:Mon thème » dans Shopify. Il apparaît ici tout seul.
+    {%- endcomment -%}
+    {%- liquid
+      assign prefixe = 'theme:'
+      assign themes_presents = false
+      for tag in blog.all_tags
+        if tag contains prefixe
+          assign themes_presents = true
+          break
+        endif
+      endfor
+    -%}
+    {%- if themes_presents -%}
+      <nav class="spa-blog-themes" aria-label="Thèmes des conseils">
+        <ul class="spa-blog-themes__liste" role="list">
+          <li>
+            <a
+              class="spa-blog-theme{% if current_tags == empty %} spa-blog-theme--actif{% endif %}"
+              href="{{ blog.url }}"
+              {% if current_tags == empty %}
+                aria-current="page"
+              {% endif %}
+            >
+              Tous les conseils
+            </a>
+          </li>
+          {%- for tag in blog.all_tags -%}
+            {%- unless tag contains prefixe -%}
+              {%- continue -%}
+            {%- endunless -%}
+            {%- assign libelle = tag | remove_first: prefixe | strip -%}
+            <li>
+              <a
+                class="spa-blog-theme{% if current_tags contains tag %} spa-blog-theme--actif{% endif %}"
+                href="{{ blog.url }}/tagged/{{ tag | handleize }}"
+                {% if current_tags contains tag %}
+                  aria-current="page"
+                {% endif %}
+              >
+                {{ libelle }}
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
 
     <div class="blog-articles {% if section.settings.layout == 'collage' %}blog-articles--collage{% endif %}">
       {%- for article in blog.articles -%}
