@@ -1645,3 +1645,30 @@ a.spa-marquee__item:hover {
     flex-basis: 8rem;
   }
 }
+
+/* --------------------------------------------------------------------------
+   26. PHOTOS : GENER LA COPIE (snippet spa-protection-images)
+
+   Mise au point honnete : on ne verrouille pas une image sur le web. Pour
+   l'afficher, le navigateur doit d'abord la telecharger ; elle est donc
+   deja sur la machine du visiteur avant meme qu'il ait pense a la copier.
+   Et aucune regle CSS n'empeche une capture d'ecran.
+
+   Ce qui suit n'est donc pas une serrure, c'est un ralentisseur : il retire
+   le geste evident — le clic droit « Enregistrer l'image », l'appui long sur
+   telephone, le glisser-deposer vers le bureau. Cela arrete le visiteur
+   presse, pas celui qui est determine.
+
+   La seule protection qui tienne commercialement est la marque incrustee
+   dans le fichier lui-meme, et la loi : une photo est protegee des sa
+   creation, sans depot.
+   -------------------------------------------------------------------------- */
+
+img {
+  /* iOS : supprime le menu « Enregistrer dans Photos » de l'appui long. */
+  -webkit-touch-callout: none;
+  /* Empeche de faire glisser la photo hors de la page vers le bureau. */
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+}

@@ -1,0 +1,57 @@
+{%- comment -%}
+  Gene la copie des photos du site.
+
+  A LIRE AVANT DE COMPTER DESSUS. Ceci n'est pas une protection : pour
+  afficher une image, le navigateur doit la telecharger. Elle est donc deja
+  sur l'ordinateur du visiteur. Le code ci-dessous retire seulement les
+  gestes evidents — clic droit, appui long, glisser-deposer. Restent
+  ouverts, et le resteront toujours : la capture d'ecran, le code source de
+  la page, l'onglet « Reseau » du navigateur, et l'URL directe du CDN
+  Shopify. Aucun site au monde n'y echappe, y compris ceux qui le pretendent.
+
+  Ce qui protege vraiment une photo :
+  1. la marque incrustee dans le fichier avant envoi (« spas9.fr » en bas
+     d'image) — elle suit la copie et fait de la copie une publicite ;
+  2. le droit d'auteur, acquis des la prise de vue, sans formalite.
+
+  CE QUE CA COUTE. Sur telephone, l'appui long sur une photo qui est aussi
+  un lien sert normalement a « Ouvrir dans un nouvel onglet ». Ce geste
+  disparait ici aussi. C'est le prix a payer, et il est volontairement
+  limite au menu contextuel : ni le clic, ni le zoom plein ecran, ni la
+  navigation au clavier ne sont touches.
+
+  Les raccourcis clavier et la console ne sont PAS bloques : ces astuces se
+  contournent en trois secondes, cassent des fonctions d'accessibilite et
+  donnent une fausse impression de securite.
+
+  Pour tout retirer : supprimer la ligne « render 'spa-protection-images' »
+  dans layout/theme.liquid et le paragraphe 26 de spa-theme.css.
+{%- endcomment -%}
+
+<script>
+  (function () {
+    // Le menu contextuel n'est bloque que sur une image. Ailleurs — un texte
+    // a copier, un lien a ouvrir dans un onglet — il fonctionne normalement.
+    document.addEventListener(
+      'contextmenu',
+      function (evenement) {
+        if (evenement.target && evenement.target.closest('img, picture, svg')) {
+          evenement.preventDefault();
+        }
+      },
+      false
+    );
+
+    // Sans ceci, sur ordinateur, une photo se glisse hors de la fenetre
+    // jusqu'au bureau : le clic droit ne sert alors meme pas.
+    document.addEventListener(
+      'dragstart',
+      function (evenement) {
+        if (evenement.target && evenement.target.closest('img, picture')) {
+          evenement.preventDefault();
+        }
+      },
+      false
+    );
+  })();
+</script>
