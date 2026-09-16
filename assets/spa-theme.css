@@ -1805,3 +1805,33 @@ img {
     gap: 3.2rem;
   }
 }
+
+/* --------------------------------------------------------------------------
+   28. BOUTON PARTAGER : LE PANNEAU DEVIENT OPAQUE
+
+   Dawn pose le panneau du lien en « position: absolute » sans lui donner
+   de fond. Sur une fiche produit il tombe dans une zone vide et personne
+   ne le remarque ; sur un article, il tombe en plein sur le premier
+   paragraphe, dont le texte se lit alors A TRAVERS le champ. C'est ce que
+   montrait la capture : deux lignes superposees, illisibles toutes les
+   deux.
+
+   On lui donne donc ce qui manque pour qu'il se lise comme une bulle
+   posee par-dessus : un fond opaque, une ombre portee et un retrait.
+
+   On ne touche PAS a sa largeur. Elle vaut celle de la colonne d'article,
+   ce qui laisse l'adresse s'afficher en entier, et un essai a 500, 750 et
+   900 px a confirme qu'elle ne deborde jamais de la fenetre.
+   -------------------------------------------------------------------------- */
+.share-button__fallback {
+  top: 3.4rem;
+  padding: 0.4rem;
+  border-radius: var(--r-md);
+  background: rgb(var(--color-background));
+  box-shadow: 0 0.8rem 2.4rem rgba(15, 58, 90, 0.18);
+}
+
+/* Le trait de Dawn ferait doublon avec l'ombre. */
+.share-button__fallback:after {
+  box-shadow: none;
+}
