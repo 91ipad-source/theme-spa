@@ -129,10 +129,24 @@
         balisage Product de chaque fiche, pas dans l'identite du point de
         vente.
     {%- endcomment -%}
+    {%- comment -%}
+      Le compte Instagram de la societe mere est ecrit ici en dur, et non
+      dans les reglages du theme : ceux-ci ne portent qu'un jeu de profils,
+      celui de la boutique, qui alimente aussi les icones du pied de page.
+      Y mettre le compte de LINERS FRANCE afficherait dans le pied de page
+      de SPAS9 un lien vers un autre compte, et surtout rattacherait au
+      magasin un profil qui appartient a la maison mere.
+
+      Les deux comptes existent bien separement : « spas9.linersfrance »
+      pour l'enseigne, « linersfrance.paris » pour la societe. Chacun est
+      donc declare sur l'entite a laquelle il appartient, ce qui est
+      exactement ce que schema.org attend.
+    {%- endcomment -%}
     "parentOrganization": {
       "@type": "Organization",
       "name": "LINERS FRANCE",
       "url": "https://linersfrance.pro",
+      "sameAs": ["https://www.instagram.com/linersfrance.paris/"],
       "foundingDate": "2007-10-08"
     }
   }
