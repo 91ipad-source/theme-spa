@@ -86,6 +86,39 @@
       }
     ],
     {%- comment -%}
+      « sameAs » : les profils qui designent la MEME entreprise ailleurs sur
+      le web. C'est ce qui permet a Google de relier spas9.fr a la page
+      Facebook plutot que de les traiter comme deux entites sans rapport, et
+      aux moteurs de reponse de recouper qui nous sommes.
+
+      La liste est construite a partir des reglages sociaux du theme, ceux-la
+      memes qui alimentent les icones du pied de page. Consequence : on ne
+      declare jamais un profil qu'on n'affiche pas, et renseigner un reseau
+      dans l'administration suffit — il n'y a rien a modifier ici.
+
+      Si aucun reseau n'est renseigne, la cle disparait entierement : un
+      « sameAs » vide vaut moins que pas de « sameAs » du tout.
+    {%- endcomment -%}
+    {%- liquid
+      assign sources = settings.social_facebook_link
+      assign sources = sources | append: '|' | append: settings.social_instagram_link
+      assign sources = sources | append: '|' | append: settings.social_youtube_link
+      assign sources = sources | append: '|' | append: settings.social_tiktok_link
+      assign sources = sources | append: '|' | append: settings.social_pinterest_link
+      assign profils = sources | split: '|'
+    -%}
+    {%- capture profils_json -%}
+      {%- for profil in profils -%}
+        {%- assign adresse = profil | strip -%}
+        {%- if adresse != blank -%},{{ adresse | json }}{%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- assign profils_json = profils_json | strip | remove_first: ',' -%}
+    {%- if profils_json != blank %}
+      "sameAs": [{{ profils_json }}],
+    {% endif -%}
+
+    {%- comment -%}
       La date de creation et la marque distribuee ne sont volontairement plus
       portees par le Store :
 
