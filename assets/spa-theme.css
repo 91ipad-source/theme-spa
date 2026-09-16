@@ -1823,8 +1823,30 @@ img {
    ce qui laisse l'adresse s'afficher en entier, et un essai a 500, 750 et
    900 px a confirme qu'elle ne deborde jamais de la fenetre.
    -------------------------------------------------------------------------- */
+/* Le panneau ne flotte plus par-dessus le texte : il s'insere dans le flux
+   et pousse la suite vers le bas. Un fond opaque suffisait a le rendre
+   lisible, mais il recouvrait encore la premiere ligne de l'article — sur
+   une fiche produit c'est sans consequence, sur un article on masque la
+   phrase que le lecteur vient d'ouvrir. Ouvrir « Partager » decale donc le
+   texte de quelques lignes, et c'est preferable a le cacher.
+
+   « details » est en « fit-content » chez Dawn, soit la largeur du mot
+   « Partager » : il faut l'elargir, sinon le panneau, une fois dans le
+   flux, s'y retrouve comprime. Le libelle, lui, garde sa largeur propre
+   pour que la zone cliquable ne s'etende pas sur toute la ligne. */
+.share-button details {
+  width: 100%;
+}
+
+.share-button__button {
+  width: fit-content;
+}
+
 .share-button__fallback {
-  top: 3.4rem;
+  position: static;
+  width: 100%;
+  min-width: 0;
+  margin-top: 0.8rem;
   padding: 0.4rem;
   border-radius: var(--r-md);
   /* La valeur de repli n'est pas une precaution de style, c'est ce qui
