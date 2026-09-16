@@ -75,7 +75,7 @@
     "chiffres": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<div class=\"page-width\">\n<ul class=\"spa-chiffres\" role=\"list\">\n<li class=\"spa-chiffre\"><span class=\"spa-chiffre__valeur\">2007</span><span class=\"spa-chiffre__label\">Année de création</span></li>\n<li class=\"spa-chiffre\"><span class=\"spa-chiffre__valeur\">4,8/5</span><span class=\"spa-chiffre__label\">18 avis Google</span></li>\n<li class=\"spa-chiffre\"><span class=\"spa-chiffre__valeur\">15-30 jours</span><span class=\"spa-chiffre__label\">Après la commande</span></li>\n<li class=\"spa-chiffre\"><span class=\"spa-chiffre__valeur\">10 ans</span><span class=\"spa-chiffre__label\">Garantie sur la structure</span></li>\n</ul>\n</div>",
+        "custom_liquid": "<div class=\"page-width\">\n<ul class=\"spa-chiffres\" role=\"list\">\n<li class=\"spa-chiffre\"><span class=\"spa-chiffre__valeur\">2007</span><span class=\"spa-chiffre__label\">Année de création</span></li>\n<li class=\"spa-chiffre\"><span class=\"spa-chiffre__valeur\">4,8/5</span><span class=\"spa-chiffre__label\">18 avis Google</span></li>\n<li class=\"spa-chiffre\"><span class=\"spa-chiffre__valeur\">15-30 jours</span><span class=\"spa-chiffre__label\">Délai moyen d'installation</span></li>\n<li class=\"spa-chiffre\"><span class=\"spa-chiffre__valeur\">10 ans</span><span class=\"spa-chiffre__label\">Garantie sur la structure</span></li>\n</ul>\n</div>",
         "color_scheme": "scheme-1",
         "padding_top": 8,
         "padding_bottom": 28
