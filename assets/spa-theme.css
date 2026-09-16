@@ -1159,7 +1159,7 @@ a.spa-marquee__item:hover {
    Une grille de vignettes produit posée dans le corps d'une page, pour dire
    ce qu'on peut voir en vrai avant de se déplacer.
 
-   Les visuels ROCA sont des PNG détourés sur fond transparent : « contain »
+   Les visuels ROCA Spa sont des PNG détourés sur fond transparent : « contain »
    sur une pastille claire, jamais « cover », sinon le spa est rogné. La
    pastille donne au passage une assise visuelle à des images qui, sans
    fond, flotteraient dans le vide.
