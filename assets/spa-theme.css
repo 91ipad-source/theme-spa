@@ -1827,7 +1827,14 @@ img {
   top: 3.4rem;
   padding: 0.4rem;
   border-radius: var(--r-md);
-  background: rgb(var(--color-background));
+  /* La valeur de repli n'est pas une precaution de style, c'est ce qui
+     fait tenir la regle. Ecrit « rgb(var(--color-background)) » sans
+     repli, le fond disparait purement et simplement partout ou la
+     variable n'est pas resolue : la declaration devient invalide et le
+     navigateur la jette, laissant le panneau transparent — le defaut
+     meme qu'on corrige ici. Avec le repli, le panneau prend la couleur
+     du jeu de couleurs quand elle existe, et du blanc sinon. */
+  background: rgb(var(--color-background, 255, 255, 255));
   box-shadow: 0 0.8rem 2.4rem rgba(15, 58, 90, 0.18);
 }
 
