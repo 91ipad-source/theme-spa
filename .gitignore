@@ -10,3 +10,14 @@ Thumbs.db
 .shopify
 node_modules
 *.zip
+# Outils internes — jamais dans le depot
+######################################
+# Le depot 91ipad-source/theme-spa est PUBLIC, et c'est un fork : GitHub ne
+# permet pas de le basculer en prive. Tout ce qui est commite ici est donc
+# lisible par n'importe qui, et le rester : retirer un fichier plus tard
+# n'efface pas l'historique.
+#
+# Les outils de gestion (generateur de devis, suivi client, tarifs d'achat)
+# vivent sur le poste de travail, pas ici. Cette ligne empeche de les y
+# remettre par inadvertance.
+outils/
