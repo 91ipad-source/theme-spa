@@ -1,0 +1,228 @@
+{%- comment -%}
+  Un modèle mis en avant, au-dessus de la grille d'une collection.
+
+  POURQUOI CETTE SECTION EXISTE. Le tri « Meilleures ventes » d'une
+  collection n'est pas un réglage : Shopify le calcule lui-même à partir des
+  commandes passées en ligne, et il n'existe aucun moyen de lui imposer un
+  ordre. Sur une boutique dont les ventes se font au showroom, ce classement
+  ne reflète donc pas la réalité du magasin, et le modèle le plus demandé
+  peut très bien se retrouver en neuvième position.
+
+  Plutôt que de lutter contre le tri, on le double : l'encart se place AVANT
+  la grille et montre le modèle choisi, quel que soit le tri en cours et même
+  si le visiteur le change. La grille, elle, garde son comportement normal.
+
+  La section est volontairement générique — le spa, l'étiquette, les
+  arguments et le libellé du bouton sont tous des réglages — pour pouvoir
+  servir sur n'importe quelle collection sans toucher au code.
+
+  Ce qu'elle n'affiche PAS, et c'est délibéré : le prix barré. Un prix de
+  référence affiché en permanence sur un modèle mis en avant n'est plus une
+  promotion, c'est un argument de vitrine, et la boutique a fait le choix de
+  s'en passer.
+{%- endcomment -%}
+
+{%- liquid
+  assign produit = section.settings.produit
+
+  comment
+    Le test porte sur la VARIANTE, pas sur le produit — même leçon que dans
+    spa-complement : un produit dépublié de la boutique en ligne remonte
+    quand même un objet côté Liquid, mais vide. On afficherait alors un
+    encart sans prix menant à une page introuvable. Mieux vaut ne rien
+    montrer.
+  endcomment
+  assign variante = produit.selected_or_first_available_variant.id
+
+  assign titre = section.settings.titre
+  if titre == blank
+    assign titre = produit.title
+  endif
+
+  assign image = produit.featured_image
+-%}
+
+{%- if variante -%}
+  {%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+  {%- endstyle -%}
+
+  <div class="color-{{ section.settings.color_scheme }} gradient">
+    <div class="spa-avant page-width section-{{ section.id }}-padding">
+      <div class="spa-avant__carte">
+        {%- if image != blank -%}
+          {%- comment -%}
+            L'image mène à la même page que le titre. Pour un lecteur
+            d'écran ou une navigation au clavier, deux liens vers la même
+            destination ne sont qu'une gêne : celui-ci est donc retiré du
+            parcours et reste cliquable à la souris.
+          {%- endcomment -%}
+          <a
+            class="spa-avant__media"
+            href="{{ produit.url }}"
+            tabindex="-1"
+            aria-hidden="true"
+          >
+            {{
+              image
+              | image_url: width: 1400
+              | image_tag:
+                loading: 'lazy',
+                widths: '400, 600, 800, 1000, 1400',
+                sizes: '(min-width: 990px) 46rem, (min-width: 750px) 42vw, calc(100vw - 6rem)',
+                alt: image.alt | default: produit.title
+            }}
+          </a>
+        {%- endif -%}
+
+        <div class="spa-avant__corps">
+          {%- if section.settings.etiquette != blank -%}
+            <p class="spa-avant__etiquette">{{ section.settings.etiquette }}</p>
+          {%- endif -%}
+
+          <h2 class="spa-avant__titre">
+            <a href="{{ produit.url }}">{{ titre }}</a>
+          </h2>
+
+          {%- if section.settings.accroche != blank -%}
+            <p class="spa-avant__accroche">{{ section.settings.accroche }}</p>
+          {%- endif -%}
+
+          {%- if section.blocks.size > 0 -%}
+            <ul class="spa-avant__points" role="list">
+              {%- for block in section.blocks -%}
+                {%- if block.settings.texte != blank -%}
+                  <li class="spa-avant__point" {{ block.shopify_attributes }}>
+                    {{ block.settings.texte }}
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+
+          <p class="spa-avant__prix">
+            {%- if produit.price_varies -%}
+              À partir de {{ produit.price | money }}
+            {%- else -%}
+              {{ produit.price | money }}
+            {%- endif -%}
+          </p>
+
+          <a class="btn deep spa-avant__cta" href="{{ produit.url }}">
+            {{- section.settings.libelle_bouton -}}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Spa mis en avant",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "À placer au-dessus de la grille d'une collection. Le modèle choisi reste visible quel que soit le tri sélectionné par le visiteur."
+    },
+    {
+      "type": "product",
+      "id": "produit",
+      "label": "Le spa à mettre en avant"
+    },
+    {
+      "type": "text",
+      "id": "etiquette",
+      "label": "Étiquette",
+      "info": "La petite pastille au-dessus du nom. Laissez vide pour ne pas en afficher.",
+      "default": "Notre best-seller"
+    },
+    {
+      "type": "text",
+      "id": "titre",
+      "label": "Titre",
+      "info": "Vide : le nom du produit est repris tel quel."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "accroche",
+      "label": "Phrase d'accroche"
+    },
+    {
+      "type": "text",
+      "id": "libelle_bouton",
+      "label": "Libellé du bouton",
+      "default": "Voir ce spa"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 8
+    }
+  ],
+  "blocks": [
+    {
+      "type": "argument",
+      "name": "Argument",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "texte",
+          "label": "Texte",
+          "info": "Une ligne, un fait vérifiable."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Spa mis en avant",
+      "blocks": [
+        {
+          "type": "argument"
+        },
+        {
+          "type": "argument"
+        },
+        {
+          "type": "argument"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

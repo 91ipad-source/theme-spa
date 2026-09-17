@@ -1901,3 +1901,145 @@ img {
 .share-button__fallback:after {
   box-shadow: none;
 }
+
+/* --------------------------------------------------------------------------
+   29. LE SPA MIS EN AVANT (section spa-mise-en-avant)
+
+   Un encart posé entre la banniere de collection et la grille. Il doit
+   gagner contre onze vignettes alignees juste en dessous, donc il ne peut
+   pas leur ressembler : il est horizontal quand elles sont verticales, son
+   image est deux fois plus grande, et il porte du texte argumente la ou
+   elles ne portent qu'un nom et un prix.
+
+   Le fond « mist » fait le detourage : la banniere et la grille sont sur
+   fond blanc, l'encart est le seul aplat de la page.
+
+   Pas de deplacement au survol, meme regle que partout ailleurs dans ce
+   fichier — le theme respecte prefers-reduced-motion.
+   -------------------------------------------------------------------------- */
+.spa-avant__carte {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+  padding: 2rem;
+  border-radius: var(--r-lg);
+  background: var(--mist);
+}
+
+/* Deux colonnes des la tablette. L'image prend un peu moins que le texte :
+   les visuels fournisseur sont larges et vides sur les bords, les etirer
+   davantage ne montrerait pas plus de spa. */
+@media screen and (min-width: 750px) {
+  .spa-avant__carte {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 3.2rem;
+    padding: 2.8rem;
+  }
+}
+
+/* Fond blanc sous l'image : les visuels fournisseur sont detoures sur un
+   ciel tres clair, qui se confondrait avec l'aplat de la carte. */
+.spa-avant__media {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--r-md);
+  background: var(--white);
+}
+
+.spa-avant__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.spa-avant__corps {
+  min-width: 0;
+}
+
+.spa-avant__etiquette {
+  display: inline-block;
+  margin: 0 0 1.2rem;
+  padding: 0.6rem 1.4rem;
+  border-radius: var(--r-pill);
+  background: var(--deep);
+  color: var(--white);
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.spa-avant__titre {
+  margin: 0;
+  font-size: clamp(2.2rem, 3vw, calc(var(--font-heading-scale) * 3.2rem));
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+
+.spa-avant__titre a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.spa-avant__titre a:hover,
+.spa-avant__titre a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.4rem;
+}
+
+.spa-avant__accroche {
+  margin: 1.2rem 0 0;
+  font-size: 1.6rem;
+  line-height: 1.5;
+}
+
+.spa-avant__points {
+  display: grid;
+  gap: 0.8rem;
+  margin: 1.6rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.spa-avant__point {
+  position: relative;
+  padding-left: 2.4rem;
+  font-size: 1.5rem;
+  line-height: 1.45;
+}
+
+/* Une pastille plutot qu'une puce : la puce par defaut se cale sur la
+   police d'affichage, qui est large, et decale le texte de facon inegale
+   d'une ligne a l'autre. */
+.spa-avant__point::before {
+  content: '';
+  position: absolute;
+  top: 0.45em;
+  left: 0;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 50%;
+  background: var(--sky);
+}
+
+.spa-avant__prix {
+  margin: 2rem 0 0;
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--deep);
+}
+
+.spa-avant__cta {
+  margin-top: 1.6rem;
+}
+
+/* Sur un tres petit ecran, le bouton prend toute la largeur : c'est l'action
+   principale de l'encart et la cible doit etre facile a atteindre au pouce. */
+@media screen and (max-width: 480px) {
+  .spa-avant__cta {
+    width: 100%;
+  }
+}
