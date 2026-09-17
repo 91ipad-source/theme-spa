@@ -8,6 +8,44 @@
         "color_scheme": "scheme-1"
       }
     },
+    "mise-en-avant": {
+      "type": "spa-mise-en-avant",
+      "blocks": {
+        "places": {
+          "type": "argument",
+          "settings": {
+            "texte": "<strong>Le seul de la gamme à offrir cinq places</strong> — le Duo en a deux, le Doto trois, le Doro Plus six mais uniquement assises."
+          }
+        },
+        "format": {
+          "type": "argument",
+          "settings": {
+            "texte": "<strong>Deux bains allongés</strong> et trois assises ergonomiques, dans 200 × 200 cm."
+          }
+        },
+        "serie": {
+          "type": "argument",
+          "settings": {
+            "texte": "Comme toute la gamme : prise 16 A, double filtration et ozonateur de série."
+          }
+        }
+      },
+      "block_order": [
+        "places",
+        "format",
+        "serie"
+      ],
+      "settings": {
+        "produit": "spa-roca-proto-lighting-5-personnes",
+        "etiquette": "Notre best-seller",
+        "titre": "",
+        "accroche": "Des quatre modèles Plug & Play, c'est celui qui réunit le plus de places et des bains allongés : cinq personnes, dont deux couchées.",
+        "libelle_bouton": "Voir le Proto 2",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 8
+      }
+    },
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
@@ -69,6 +107,7 @@
   },
   "order": [
     "banner",
+    "mise-en-avant",
     "product-grid",
     "guide"
   ]

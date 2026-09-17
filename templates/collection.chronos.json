@@ -8,6 +8,44 @@
         "color_scheme": "scheme-1"
       }
     },
+    "mise-en-avant": {
+      "type": "spa-mise-en-avant",
+      "blocks": {
+        "taille": {
+          "type": "argument",
+          "settings": {
+            "texte": "<strong>230 × 230 cm</strong>, cinq places — le plus grand encombrement de la gamme Chronos."
+          }
+        },
+        "jets": {
+          "type": "argument",
+          "settings": {
+            "texte": "<strong>Des jets placés par zone</strong> : double jets aux mollets, jets inversés à la nuque et aux bras, jets latéraux aux cuisses, voûte plantaire."
+          }
+        },
+        "equipement": {
+          "type": "argument",
+          "settings": {
+            "texte": "Audio ROCASound 2.0, pilotage par application WiFi, bac à boissons avec évacuation."
+          }
+        }
+      },
+      "block_order": [
+        "taille",
+        "jets",
+        "equipement"
+      ],
+      "settings": {
+        "produit": "spa-roca-panope-5-personnes",
+        "etiquette": "Le plus grand de la gamme",
+        "titre": "",
+        "accroche": "230 × 230 cm et un massage qui va des pieds à la nuque : le Panopé est le format le plus généreux de la gamme Chronos.",
+        "libelle_bouton": "Voir le Panopé",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 8
+      }
+    },
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
@@ -69,6 +107,7 @@
   },
   "order": [
     "banner",
+    "mise-en-avant",
     "product-grid",
     "guide"
   ]

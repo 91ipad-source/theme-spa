@@ -8,6 +8,44 @@
         "color_scheme": "scheme-1"
       }
     },
+    "mise-en-avant": {
+      "type": "spa-mise-en-avant",
+      "blocks": {
+        "hauteur": {
+          "type": "argument",
+          "settings": {
+            "texte": "<strong>210 × 158 × 77 cm</strong> : il franchit une porte d'entrée standard de 80 cm."
+          }
+        },
+        "assises": {
+          "type": "argument",
+          "settings": {
+            "texte": "<strong>Deux bains allongés côte à côte</strong> et un siège — une configuration rare sur le marché européen."
+          }
+        },
+        "jets": {
+          "type": "argument",
+          "settings": {
+            "texte": "<strong>60 jets, deux pompes de 3 HP</strong> : double jet sur les mollets, voûte plantaire, dos."
+          }
+        }
+      },
+      "block_order": [
+        "hauteur",
+        "assises",
+        "jets"
+      ],
+      "settings": {
+        "produit": "spa-roca-calypso-3-personnes",
+        "etiquette": "Il passe par une porte",
+        "titre": "",
+        "accroche": "77 cm de haut : le Calypso franchit une porte d'entrée standard de 80 cm. Véranda, pièce dédiée, sous-sol — l'installation en intérieur redevient possible.",
+        "libelle_bouton": "Voir le Calypso",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 8
+      }
+    },
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
@@ -69,6 +107,7 @@
   },
   "order": [
     "banner",
+    "mise-en-avant",
     "product-grid",
     "guide"
   ]

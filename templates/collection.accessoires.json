@@ -8,6 +8,44 @@
         "color_scheme": "scheme-1"
       }
     },
+    "mise-en-avant": {
+      "type": "spa-mise-en-avant",
+      "blocks": {
+        "facture": {
+          "type": "argument",
+          "settings": {
+            "texte": "<strong>On s'en aperçoit sur la facture</strong>, six mois plus tard — jamais sur le spa."
+          }
+        },
+        "dimensions": {
+          "type": "argument",
+          "settings": {
+            "texte": "<strong>Quatre dimensions seulement</strong> : 160 × 210, 200 × 200, 220 × 220 et 230 × 230 cm. Le Duo, le Doto et le Doro Plus n'en font pas partie."
+          }
+        },
+        "matiere": {
+          "type": "argument",
+          "settings": {
+            "texte": "Structure multicouche haute densité, tissu résistant au gel, à l'humidité et aux UV. Se pose et se retire seul."
+          }
+        }
+      },
+      "block_order": [
+        "facture",
+        "dimensions",
+        "matiere"
+      ],
+      "settings": {
+        "produit": "couverture-isothermique-spa",
+        "etiquette": "À prévoir en premier",
+        "titre": "",
+        "accroche": "C'est la pièce qui s'use le plus vite, et la seule dont la panne ne se voit pas : la mousse prend l'humidité, la couverture s'alourdit, et la résistance se met à tourner en continu sans rien signaler.",
+        "libelle_bouton": "Voir la couverture",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 8
+      }
+    },
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
@@ -69,6 +107,7 @@
   },
   "order": [
     "banner",
+    "mise-en-avant",
     "product-grid",
     "guide"
   ]
