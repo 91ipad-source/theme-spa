@@ -225,13 +225,9 @@ h1,
   background: var(--spa-marquee-bg, var(--sky-deep));
   color: var(--spa-marquee-fg, var(--white));
   overflow: hidden;
-  /* La barre etait haute de 33 px, texte compris : elle se lisait comme une
-     bordure du logo plutot que comme un bandeau d'annonces. Le retrait est
-     calcule pour qu'elle atteigne 50 px avec une pastille de mise en avant
-     et 40 px sans : au-dela elle vole sa place a l'en-tete. */
-  padding-block: 0.9rem;
+  padding-block: 1rem;
   font-family: var(--font-body);
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 600;
   line-height: 1.4;
   letter-spacing: normal;
@@ -261,33 +257,6 @@ h1,
 a.spa-marquee__item:hover {
   text-decoration: underline;
   text-underline-offset: 3px;
-}
-
-/* Message mis en avant : la pastille inverse les couleurs du bandeau, donc
-   elle ressort sans rien introduire qui ne soit deja dans la palette. Sans
-   elle, une offre commerciale defile avec le meme poids qu'une adresse de
-   showroom, et se perd. Reservee a un seul message a la fois : trois
-   pastilles sur quatre messages ne mettent plus rien en avant. */
-.spa-marquee__item--fort {
-  padding: 0.5rem 1.6rem;
-  border-radius: var(--r-pill);
-  background: var(--spa-marquee-dot, var(--sky));
-  color: var(--spa-marquee-bg, var(--deep));
-  font-weight: 700;
-}
-
-/* Le point de separation est un ::before, donc INTERIEUR a l'element : sur
-   une pastille il se retrouverait dans le fond colore, de la couleur du
-   fond, invisible et occupant la place. On le retire ; l'ecart entre
-   messages reste assure par le « gap » de la piste, et la pastille se
-   detache assez d'elle-meme pour ne pas avoir besoin d'un separateur. */
-.spa-marquee__item--fort::before {
-  content: none;
-}
-
-a.spa-marquee__item--fort:hover {
-  text-decoration: none;
-  filter: brightness(1.08);
 }
 
 /* Pause au survol et au focus clavier */
