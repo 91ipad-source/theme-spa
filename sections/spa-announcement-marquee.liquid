@@ -39,7 +39,7 @@
           {%- if block.settings.text != blank -%}
             {%- if block.settings.link != blank -%}
               <a
-                class="spa-marquee__item"
+                class="spa-marquee__item{% if block.settings.highlight %} spa-marquee__item--fort{% endif %}"
                 href="{{ block.settings.link }}"
                 {% if is_clone %}
                   aria-hidden="true"
@@ -52,7 +52,7 @@
               </a>
             {%- else -%}
               <span
-                class="spa-marquee__item"
+                class="spa-marquee__item{% if block.settings.highlight %} spa-marquee__item--fort{% endif %}"
                 {% if is_clone %}
                   aria-hidden="true"
                 {% else %}
@@ -116,6 +116,13 @@
           "type": "url",
           "id": "link",
           "label": "Lien"
+        },
+        {
+          "type": "checkbox",
+          "id": "highlight",
+          "label": "Mettre ce message en avant",
+          "info": "Le message s'affiche dans une pastille de couleur. À réserver à une offre : si tout est mis en avant, plus rien ne l'est.",
+          "default": false
         }
       ]
     }
