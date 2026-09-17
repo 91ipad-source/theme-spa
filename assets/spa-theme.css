@@ -276,6 +276,29 @@ a.spa-marquee__item:hover {
    scheme-3 pour la rupture), alignés sur la palette des fiches produits : on ne
    fige donc rien ici, seule la forme de la pastille est reprise.
    -------------------------------------------------------------------------- */
+/* Jaune fluo sur les deux badges, a la demande du client.
+
+   La couleur passe par les variables de Dawn plutot que par un fond en dur :
+   c'est ce qui fait que la forme, le rayon et la bordure continuent de suivre
+   les reglages du theme. Les classes visees sont celles que Dawn pose a
+   partir de deux reglages — « sale_badge_color_scheme » (scheme-4) et
+   « sold_out_badge_color_scheme » (scheme-3). Si l'un des deux est change
+   dans l'editeur de theme, la regle correspondante ne s'applique plus : il
+   faudra changer le numero ici aussi.
+
+   On ne modifie pas les jeux de couleurs eux-memes : scheme-3 habille aussi
+   une section de la page d'accueil, qui n'a rien a faire en jaune.
+
+   Contraste mesure : 10,6:1 avec le texte marine, soit le niveau AAA. Le
+   badge bleu precedent plafonnait a 5,0:1. */
+.badge.color-scheme-3,
+.badge.color-scheme-4 {
+  --color-badge-background: 233, 255, 61;
+  --color-badge-foreground: 15, 58, 90;
+  --color-badge-border: 15, 58, 90;
+  font-weight: 700;
+}
+
 .badge {
   border: 0;
   border-radius: var(--r-pill);
