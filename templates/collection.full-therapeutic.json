@@ -1,0 +1,75 @@
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": false,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 4,
+        "columns_mobile": "1",
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "enable_filtering": true,
+        "filter_type": "horizontal",
+        "enable_sorting": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "guide": {
+      "type": "rich-text",
+      "blocks": {
+        "titre": {
+          "type": "heading",
+          "settings": {
+            "heading": "Full Therapeutic : ce que contient la collection TRITON Exclusive",
+            "heading_size": "h2",
+            "use_h1": false
+          }
+        },
+        "texte": {
+          "type": "text",
+          "settings": {
+            "text": "<p>C'est le haut de la gamme ROCA Spa : la version où rien n'est en option. Tout ce que la marque sait faire est monté de série.</p><p><strong>Le blower chauffant.</strong> C'est l'équipement qui justifie le nom. Il souffle de l'air réchauffé sur les cuisses et les mollets, en massage lymphatique — une sensation différente de celle des jets d'eau, et le seul dispositif de la gamme qui travaille le retour veineux.</p><p><strong>L'isolation, poussée partout.</strong> Cuve, parois, base et tuyauteries. Ce n'est pas un détail de confort : le chauffage représente plus de 70 % de la consommation d'un spa, et c'est l'isolation qui décide de votre facture pendant dix ans. Le spa est aussi <em>Heating Pump Ready</em>, avec by-pass intégré : une <a href=\"/products/pompe-a-chaleur-balboa-clim8zone\">pompe à chaleur</a> s'y raccorde sans modification.</p><p><strong>Et le reste.</strong> Son spatial 4.1 avec caisson de basses, panneau tactile Spa Touch, ozone par lampe UV, LED dans les jets de massage, WiFi de série. Le <a href=\"/products/spa-roca-panope-full-therapeutique-5-personnes\">Panopé FULL</a> reprend les 230 × 230 cm et les cinq places du <a href=\"/products/spa-roca-panope-5-personnes\">Panopé</a> : c'est le même volume, entièrement équipé.</p>"
+          }
+        },
+        "liens": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pour aller plus loin : <a href=\"/collections/gamme-chronos\">comparer avec la gamme Chronos</a> · <a href=\"/blogs/conseils-spa/consommation-electrique-spa-cout-par-mois\">ce que coûte un spa au mois</a> · <a href=\"/blogs/conseils-spa/installer-un-spa-chez-soi\">préparer l'installation</a> · <a href=\"/pages/showroom-spa-essonne\">le voir au showroom</a> · <a href=\"/pages/contact\">nous contacter</a></p>"
+          }
+        }
+      },
+      "block_order": [
+        "titre",
+        "texte",
+        "liens"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "left",
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 48,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "product-grid",
+    "guide"
+  ]
+}

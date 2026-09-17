@@ -1,0 +1,75 @@
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": false,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 4,
+        "columns_mobile": "1",
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "enable_filtering": true,
+        "filter_type": "horizontal",
+        "enable_sorting": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "guide": {
+      "type": "rich-text",
+      "blocks": {
+        "titre": {
+          "type": "heading",
+          "settings": {
+            "heading": "Choisir le bon accessoire pour votre spa",
+            "heading_size": "h2",
+            "use_h1": false
+          }
+        },
+        "texte": {
+          "type": "text",
+          "settings": {
+            "text": "<p>La plupart des erreurs d'achat se jouent sur une cote. Voici les trois qui comptent.</p><p><strong>L'escalier : c'est la hauteur qui décide, pas la couleur.</strong> La marche haute doit arriver un peu en dessous du bord du spa. Trop bas, la dernière enjambée est pénible ; trop haut, l'escalier dépasse et devient un piège. Nous avons trois hauteurs : <a href=\"/products/escalier-spa-2-marches-larges-anthracite\">40 cm</a> et <a href=\"/products/escalier-spa-2-marches-composite-anthracite\">42 cm</a> pour les spas de 77 à 81 cm, <a href=\"/products/escalier-spa-2-marches-composite-noir\">50 cm</a> pour ceux de 90 cm.</p><p><strong>La couverture : mesurez le rebord extérieur</strong>, pas la surface d'eau. C'est là-dessus qu'elle repose, et quelques centimètres d'écart suffisent à laisser passer le froid. C'est aussi la pièce qui décide de votre facture : un spa perd sa chaleur par le haut, vingt-trois heures sur vingt-quatre.</p><p><strong>Le lève-couverture : la place derrière le spa.</strong> Le modèle <a href=\"/products/leve-couverture-hydraulique-rogue\">hydraulique Rogue</a> réclame 70 cm libres à l'arrière ; celui en <a href=\"/products/leve-couverture-07-aluminium\">aluminium</a> se contente de 23 à 38 cm mais se visse sur la jupe. Aucun des deux ne se monte sur un spa rond : si vous avez un Doro Plus, appelez-nous avant de commander.</p><p>Le <strong>retrait est gratuit</strong> au showroom de Fontenay-le-Vicomte. Un accessoire commandé en même temps qu'un spa part avec lui, sans supplément de livraison.</p>"
+          }
+        },
+        "liens": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pour aller plus loin : <a href=\"/blogs/conseils-spa/entretien-spa-routine-eau-filtre\">la routine d'entretien</a> · <a href=\"/blogs/conseils-spa/consommation-electrique-spa-cout-par-mois\">faire baisser la facture</a> · <a href=\"/collections/tous-nos-spas\">voir les spas</a> · <a href=\"/pages/livraison-et-retrait\">retrait et livraison</a> · <a href=\"/pages/contact\">un doute sur la compatibilité ?</a></p>"
+          }
+        }
+      },
+      "block_order": [
+        "titre",
+        "texte",
+        "liens"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "left",
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 48,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "product-grid",
+    "guide"
+  ]
+}

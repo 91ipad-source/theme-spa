@@ -1,0 +1,75 @@
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": false,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 4,
+        "columns_mobile": "1",
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "enable_filtering": true,
+        "filter_type": "horizontal",
+        "enable_sorting": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "guide": {
+      "type": "rich-text",
+      "blocks": {
+        "titre": {
+          "type": "heading",
+          "settings": {
+            "heading": "Ce que veut dire Plug & Play",
+            "heading_size": "h2",
+            "use_h1": false
+          }
+        },
+        "texte": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Un spa Plug &amp; Play se raccorde sur une <strong>prise domestique de 16 A</strong>. Pas de tranchée, pas d'électricien, pas de ligne à tirer depuis le tableau : c'est ce qui permet de le mettre en service le jour de la livraison.</p><p><strong>La contrepartie, et elle est réelle.</strong> La puissance disponible étant limitée, la montée en température est plus lente qu'avec une ligne dédiée : comptez de l'ordre d'une journée pour la première chauffe. En revanche, une fois l'eau à 37 °C, elle s'y maintient sans difficulté — et c'est le maintien, pas la chauffe initiale, qui fait votre facture annuelle.</p><p><strong>Trois conditions tout de même.</strong> La prise doit être en bon état, protégée par un <strong>dispositif différentiel 30 mA</strong> conformément à la norme NF C 15-100, et de préférence dédiée au spa. Les rallonges et les multiprises sont à proscrire, sans exception.</p><p><strong>Ce qui est monté de série.</strong> Double filtration et ozonateur pour le traitement de l'eau, audio Bluetooth ROCASound 2.0, luminothérapie LED et compatibilité WiFi. La gamme couvre <a href=\"/collections/spa-2-places\">2</a>, <a href=\"/collections/spa-3-places\">3</a>, <a href=\"/collections/spa-5-places\">5</a> et <a href=\"/collections/spa-6-places\">6 places</a> — le format ne se choisit donc pas au détriment de la simplicité d'installation.</p>"
+          }
+        },
+        "liens": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pour aller plus loin : <a href=\"/blogs/conseils-spa/installer-un-spa-chez-soi\">dalle, électricité et accès</a> · <a href=\"/blogs/conseils-spa/consommation-electrique-spa-cout-par-mois\">combien consomme un spa</a> · <a href=\"/collections/gamme-chronos\">la gamme Chronos</a> · <a href=\"/pages/showroom-spa-essonne\">les essayer au showroom</a> · <a href=\"/pages/contact\">demander conseil</a></p>"
+          }
+        }
+      },
+      "block_order": [
+        "titre",
+        "texte",
+        "liens"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "left",
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 48,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "product-grid",
+    "guide"
+  ]
+}

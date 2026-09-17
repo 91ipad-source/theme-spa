@@ -1,0 +1,75 @@
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": false,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 4,
+        "columns_mobile": "1",
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "enable_filtering": true,
+        "filter_type": "horizontal",
+        "enable_sorting": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "guide": {
+      "type": "rich-text",
+      "blocks": {
+        "titre": {
+          "type": "heading",
+          "settings": {
+            "heading": "Ce que la gamme Chronos apporte de plus",
+            "heading_size": "h2",
+            "use_h1": false
+          }
+        },
+        "texte": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Chronos est la gamme du milieu : on y passe quand l'hydromassage devient la raison d'acheter, et non plus seulement le bain chaud.</p><p><strong>Des jets placés, pas comptés.</strong> C'est la différence concrète avec l'entrée de gamme. Sur le <a href=\"/products/spa-roca-calypso-3-personnes\">Calypso</a>, 60 jets alimentés par deux pompes de 3 HP travaillent les mollets en double jet et la voûte plantaire. Le <a href=\"/products/spa-roca-panope-5-personnes\">Panopé</a> ajoute des jets inversés à la nuque et aux bras, des jets latéraux aux cuisses. Un jet n'a d'intérêt que s'il y a la pression pour l'alimenter : c'est le nombre de pompes qu'il faut regarder, pas le nombre de buses.</p><p><strong>Des modèles à spécialité.</strong> L'<a href=\"/products/spa-roca-europe-infrared-5-personnes\">Europe Infrared</a> intègre des lampes infrarouges sur une assise, en complément de l'hydromassage. Le <a href=\"/products/spa-roca-pleuxaure-5-personnes\">Pleuxaure</a> reçoit le système VOLCANO. Le <a href=\"/products/spa-roca-calypso-3-personnes\">Calypso</a> ne mesure que 77 cm de haut : il franchit une porte d'entrée standard, ce qui ouvre l'installation en véranda ou en intérieur.</p><p><strong>La même base pour tous.</strong> Structure en acier inoxydable, acrylique Aristech anti-osmose, électronique Balboa Water Group, 100 % des pièces détachées disponibles. Garantie 10 ans sur la structure, 5 ans sur l'acrylique, 2 ans sur l'électronique et les pompes.</p>"
+          }
+        },
+        "liens": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pour aller plus loin : <a href=\"/blogs/conseils-spa/comment-choisir-son-spa\">les 7 critères qui comptent</a> · <a href=\"/blogs/conseils-spa/bienfaits-du-spa-hydrotherapie\">ce que fait l'hydrothérapie</a> · <a href=\"/collections/gamme-full-therapeutic\">la gamme Full Therapeutic</a> · <a href=\"/pages/showroom-spa-essonne\">s'asseoir dedans au showroom</a> · <a href=\"/pages/contact\">nous décrire votre projet</a></p>"
+          }
+        }
+      },
+      "block_order": [
+        "titre",
+        "texte",
+        "liens"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "left",
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 48,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "product-grid",
+    "guide"
+  ]
+}
