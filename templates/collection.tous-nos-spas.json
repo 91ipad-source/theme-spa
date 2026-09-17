@@ -8,6 +8,44 @@
         "color_scheme": "scheme-1"
       }
     },
+    "mise-en-avant": {
+      "type": "spa-mise-en-avant",
+      "blocks": {
+        "places": {
+          "type": "argument",
+          "settings": {
+            "texte": "<strong>Cinq places dans 200 × 200 cm</strong> — deux bains allongés et trois assises ergonomiques."
+          }
+        },
+        "branchement": {
+          "type": "argument",
+          "settings": {
+            "texte": "<strong>Plug &amp; Play</strong> : il se branche sur une prise 16 A, sans ligne dédiée à tirer depuis le tableau."
+          }
+        },
+        "eau": {
+          "type": "argument",
+          "settings": {
+            "texte": "Double filtration et ozonateur de série, pour une eau qui demande moins de produits."
+          }
+        }
+      },
+      "block_order": [
+        "places",
+        "branchement",
+        "eau"
+      ],
+      "settings": {
+        "produit": "spa-roca-proto-lighting-5-personnes",
+        "etiquette": "Notre best-seller",
+        "titre": "",
+        "accroche": "Cinq vraies places sans faire venir d'électricien : c'est la combinaison qu'on nous demande le plus souvent, et c'est tout l'intérêt du Proto 2.",
+        "libelle_bouton": "Voir le Proto 2",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 8
+      }
+    },
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
@@ -69,6 +107,7 @@
   },
   "order": [
     "banner",
+    "mise-en-avant",
     "product-grid",
     "guide"
   ]
