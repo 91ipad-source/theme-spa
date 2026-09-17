@@ -8,6 +8,44 @@
         "color_scheme": "scheme-1"
       }
     },
+    "mise-en-avant": {
+      "type": "spa-mise-en-avant",
+      "blocks": {
+        "mesures": {
+          "type": "argument",
+          "settings": {
+            "texte": "<strong>Diamètre 200 cm, hauteur 81 cm</strong> — 800 litres, 290 kg à vide."
+          }
+        },
+        "massage": {
+          "type": "argument",
+          "settings": {
+            "texte": "<strong>31 jets</strong> alimentés par une pompe 3 CV à deux vitesses, ozonateur avec jet de sortie dédié."
+          }
+        },
+        "limite": {
+          "type": "argument",
+          "settings": {
+            "texte": "<strong>Six assises, aucune place allongée</strong> — le format rond ne le permet pas. À savoir si votre priorité est le dos."
+          }
+        }
+      },
+      "block_order": [
+        "mesures",
+        "massage",
+        "limite"
+      ],
+      "settings": {
+        "produit": "spa-roca-doro-plus-6-personnes",
+        "etiquette": "Notre seul spa rond",
+        "titre": "",
+        "accroche": "Six assises sur deux mètres de diamètre, 800 litres d'eau, et une mise en service sans travaux.",
+        "libelle_bouton": "Voir le Doro Plus",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 8
+      }
+    },
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
@@ -69,6 +107,7 @@
   },
   "order": [
     "banner",
+    "mise-en-avant",
     "product-grid",
     "guide"
   ]

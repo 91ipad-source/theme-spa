@@ -8,6 +8,44 @@
         "color_scheme": "scheme-1"
       }
     },
+    "mise-en-avant": {
+      "type": "spa-mise-en-avant",
+      "blocks": {
+        "blower": {
+          "type": "argument",
+          "settings": {
+            "texte": "<strong>Blower chauffant</strong> : de l'air réchauffé soufflé sur les cuisses et les mollets, un massage lymphatique que les jets d'eau ne produisent pas."
+          }
+        },
+        "isolation": {
+          "type": "argument",
+          "settings": {
+            "texte": "<strong>Isolation renforcée</strong> sur la cuve, les parois, la base et les tuyauteries. Heating Pump Ready, by-pass intégré."
+          }
+        },
+        "confort": {
+          "type": "argument",
+          "settings": {
+            "texte": "Son spatial 4.1 avec caisson de basses, panneau tactile Spa Touch, ozone par lampe UV, LED dans les jets, WiFi de série."
+          }
+        }
+      },
+      "block_order": [
+        "blower",
+        "isolation",
+        "confort"
+      ],
+      "settings": {
+        "produit": "spa-roca-panope-full-therapeutique-5-personnes",
+        "etiquette": "Rien n'est en option",
+        "titre": "Spa Panopé FULL Thérapeutique",
+        "accroche": "C'est le Panopé avec la totalité du catalogue technique ROCA Spa installé d'usine : même cuve, mêmes 230 × 230 cm, mêmes cinq places.",
+        "libelle_bouton": "Voir le Panopé FULL",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 8
+      }
+    },
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
@@ -69,6 +107,7 @@
   },
   "order": [
     "banner",
+    "mise-en-avant",
     "product-grid",
     "guide"
   ]
