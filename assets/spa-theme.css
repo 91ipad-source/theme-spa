@@ -289,13 +289,27 @@ a.spa-marquee__item:hover {
    On ne modifie pas les jeux de couleurs eux-memes : scheme-3 habille aussi
    une section de la page d'accueil, qui n'a rien a faire en jaune.
 
-   Contraste mesure : 10,6:1 avec le texte marine, soit le niveau AAA. Le
-   badge bleu precedent plafonnait a 5,0:1. */
-.badge.color-scheme-3,
+   Contraste mesure : 10,6:1 avec le texte marine pour la promo, soit le
+   niveau AAA ; 5,5:1 pour l'epuise, soit AA. Le badge bleu precedent
+   plafonnait a 5,0:1. */
+
+/* Promotion : le jaune appelle, et c'est bien ce qu'on lui demande. */
 .badge.color-scheme-4 {
   --color-badge-background: 233, 255, 61;
   --color-badge-foreground: 15, 58, 90;
   --color-badge-border: 15, 58, 90;
+  font-weight: 700;
+}
+
+/* Epuise : gris. Les deux badges disent l'inverse l'un de l'autre — l'un
+   attire vers un produit, l'autre previent qu'il n'y en a plus — et les
+   habiller pareil menait le client vers ce qu'on ne peut pas lui vendre.
+   Le gris reste parfaitement lisible, mais il n'appelle pas : sur une
+   grille parcourue en deux secondes, seule la promo doit sauter aux yeux. */
+.badge.color-scheme-3 {
+  --color-badge-background: 91, 107, 119;
+  --color-badge-foreground: 255, 255, 255;
+  --color-badge-border: 255, 255, 255;
   font-weight: 700;
 }
 
