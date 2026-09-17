@@ -24,7 +24,7 @@
         "message-2": {
           "type": "message",
           "settings": {
-            "text": "Paiement en 3 ou 4 fois sans frais",
+            "text": "Paiement en 3 ou 4 chèques sans frais",
             "link": ""
           }
         },
