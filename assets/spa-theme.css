@@ -1496,14 +1496,30 @@ a.spa-marquee__item:hover {
    le deposer dans Personnaliser > En-tete > Logo. Ce bloc devra alors etre
    supprime, sinon il coupera le bas du nouveau logo.
 
-   --spa-logo-garde : la part de la hauteur d'origine que l'on conserve.
-   Un seul chiffre a ajuster si la coupe tombe a cote.
+   DEUX COUPES, ET NON UNE. La premiere version ne coupait que par le bas.
+   Consequence mesuree sur une capture du site : le fichier portant plus de
+   blanc au-dessus de la signature qu'en dessous, tout ce blanc du haut
+   restait dans le cadre. La marque se retrouvait avec 18 px de vide
+   au-dessus et 4 px en dessous, soit 11 px plus bas que le menu voisin —
+   alors que le cadre, lui, etait parfaitement centre.
+
+   On coupe donc aussi par le haut, de quoi egaliser les deux marges :
+
+     haut  : 14 % de la hauteur du fichier
+     bas   : 29 % (la signature, inchange)
+     garde : 57 %, d'ou aspect-ratio 1672 / 536 (941 x 0.57)
+
+   « object-position » indique ou placer la fenetre dans le debordement :
+   14 / (14 + 29) = 33 %. Si l'un des deux chiffres bouge, celui-ci doit
+   etre recalcule avec la meme formule.
+
+   Ces valeurs sont calibrees sur une capture d'ecran, pas sur le fichier
+   source — raison de plus pour regenerer le PNG et supprimer ce bloc.
    -------------------------------------------------------------------------- */
 .header__heading-logo {
-  --spa-logo-garde: 0.71;
-  aspect-ratio: 1672 / calc(941 * var(--spa-logo-garde));
+  aspect-ratio: 1672 / 536;
   object-fit: cover;
-  object-position: top center;
+  object-position: center 33%;
 }
 
 /* --------------------------------------------------------------------------
