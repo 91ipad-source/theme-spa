@@ -2043,3 +2043,35 @@ img {
     width: 100%;
   }
 }
+
+/* --------------------------------------------------------------------------
+   30. LE MENU AU MILIEU DE LA BARRE (logo a gauche)
+
+   Dawn, en disposition « milieu-gauche », donne au menu une colonne
+   « auto » et reporte tout l'espace disponible sur la troisieme colonne :
+   le menu se colle donc au logo et le vide s'accumule d'un seul cote,
+   entre la derniere entree et les icones. Avec huit entrees et un logo de
+   180 px, ce desequilibre se voit.
+
+   On redistribue : le menu prend la colonne souple et se centre dedans,
+   le logo reste cale a gauche et les icones a droite. Le vide se partage
+   des deux cotes au lieu de s'accumuler a droite.
+
+   La regle est volontairement plus specifique que celle de Dawn pour ne
+   viser QUE ce cas. Les deux autres variantes de « milieu-gauche » gardent
+   leur grille d'origine :
+   - « .drawer-menu », ou le menu est un tiroir et non une barre ;
+   - « :not(.header--has-menu) », ou il n'y a pas de menu du tout.
+
+   Sous 990 px, Dawn masque le menu en ligne au profit du tiroir : rien a
+   faire, la media query reprend le seuil du theme.
+   -------------------------------------------------------------------------- */
+@media screen and (min-width: 990px) {
+  .header--middle-left.header--has-menu:not(.drawer-menu) {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .header--middle-left.header--has-menu:not(.drawer-menu) .header__inline-menu {
+    justify-self: center;
+  }
+}
