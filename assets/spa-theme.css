@@ -1481,60 +1481,24 @@ a.spa-marquee__item:hover {
 }
 
 /* --------------------------------------------------------------------------
-   23. RECADRAGE DU LOGO — MESURE PROVISOIRE
+   23. LE LOGO — PLUS RIEN A CORRIGER
 
-   Le fichier du logo porte encore, sous la signature, la mention
-   « By Liners France ». Le reste du site dit « SPAS9 | LINERS FRANCE » :
-   l'en-tete contredit donc les CGV, le pied de page et le balisage envoye
-   a Google.
+   Il y avait ici trois rustines empilees : une coupe du bas pour masquer
+   la mention « By Liners France » que portait le fichier, une coupe du
+   haut pour rattraper le desequilibre que la premiere creait, et un
+   decalage pour les 3,5 px qui restaient.
 
-   Ce recadrage masque la ligne fautive en coupant le bas de l'image. Ce
-   n'est pas une correction, c'est un cache-misere : le fichier reste faux
-   partout ailleurs — favicon, apercus de partage, documents imprimes.
+   Le fichier a ete refait proprement — la marque seule, sans signature,
+   sans blanc inutile, fond transparent — et depose dans Personnaliser >
+   En-tete > Logo. Les trois rustines sont donc devenues inutiles et ont
+   ete retirees : mesure sur le CSS reel du theme, l'ecart entre le logo
+   et le menu est de 0,0 px sans aucune regle.
 
-   LA VRAIE CORRECTION est de regenerer le PNG avec la bonne mention et de
-   le deposer dans Personnaliser > En-tete > Logo. Ce bloc devra alors etre
-   supprime, sinon il coupera le bas du nouveau logo.
-
-   DEUX COUPES, ET NON UNE. La premiere version ne coupait que par le bas.
-   Consequence mesuree sur une capture du site : le fichier portant plus de
-   blanc au-dessus de la signature qu'en dessous, tout ce blanc du haut
-   restait dans le cadre. La marque se retrouvait avec 18 px de vide
-   au-dessus et 4 px en dessous, soit 11 px plus bas que le menu voisin —
-   alors que le cadre, lui, etait parfaitement centre.
-
-   On coupe donc aussi par le haut, de quoi egaliser les deux marges :
-
-     haut  : 14 % de la hauteur du fichier
-     bas   : 29 % (la signature, inchange)
-     garde : 57 %, d'ou aspect-ratio 1672 / 536 (941 x 0.57)
-
-   « object-position » indique ou placer la fenetre dans le debordement :
-   14 / (14 + 29) = 33 %. Si l'un des deux chiffres bouge, celui-ci doit
-   etre recalcule avec la meme formule.
-
-   Ces valeurs sont calibrees sur une capture d'ecran, pas sur le fichier
-   source — raison de plus pour regenerer le PNG et supprimer ce bloc.
+   Si le logo redevient un jour mal cadre, la cause est dans le fichier,
+   pas ici. On ne remet pas de recadrage CSS : il ne protege que
+   l'en-tete, et laisse le favicon et les apercus de partage afficher
+   l'image d'origine.
    -------------------------------------------------------------------------- */
-.header__heading-logo {
-  aspect-ratio: 1672 / 536;
-  object-fit: cover;
-  object-position: center 33%;
-
-  /* Les 3,5 px restants.
-
-     Apres la coupe du haut, l'ecart au menu est tombe de 11 px a 3,5 px
-     (mesure sur deux captures du site). Il reste donc 3,5 px, et ils ne
-     peuvent plus venir du recadrage : la marque remplit desormais presque
-     toute la fenetre — 69 px de marge au total dans le fichier d'origine —
-     et rogner plus par le haut mordrait dans le « NEUF » au-dessus du 9.
-
-     On decale donc l'image elle-meme. « transform » ne touche ni au cadre
-     ni a la hauteur de l'en-tete : rien ne bouge autour, seule l'image
-     remonte. Sans effet au defilement non plus, l'en-tete etant regle sur
-     « masquer/afficher » et non sur « reduire le logo ». */
-  transform: translateY(-0.35rem);
-}
 
 /* --------------------------------------------------------------------------
    24. PRESTATIONS DE LIVRAISON SUR LA FICHE SPA
