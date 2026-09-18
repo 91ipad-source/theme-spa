@@ -1520,6 +1520,20 @@ a.spa-marquee__item:hover {
   aspect-ratio: 1672 / 536;
   object-fit: cover;
   object-position: center 33%;
+
+  /* Les 3,5 px restants.
+
+     Apres la coupe du haut, l'ecart au menu est tombe de 11 px a 3,5 px
+     (mesure sur deux captures du site). Il reste donc 3,5 px, et ils ne
+     peuvent plus venir du recadrage : la marque remplit desormais presque
+     toute la fenetre — 69 px de marge au total dans le fichier d'origine —
+     et rogner plus par le haut mordrait dans le « NEUF » au-dessus du 9.
+
+     On decale donc l'image elle-meme. « transform » ne touche ni au cadre
+     ni a la hauteur de l'en-tete : rien ne bouge autour, seule l'image
+     remonte. Sans effet au defilement non plus, l'en-tete etant regle sur
+     « masquer/afficher » et non sur « reduire le logo ». */
+  transform: translateY(-0.35rem);
 }
 
 /* --------------------------------------------------------------------------
