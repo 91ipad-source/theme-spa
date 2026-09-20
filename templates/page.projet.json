@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 0
+      }
+    },
+    "projet": {
+      "type": "spa-projet",
+      "settings": {
+        "titre": "Parlez-nous de votre projet",
+        "intro": "<p>Quelques questions précises valent mieux que trois échanges de courriels. Répondez-y et nous établissons un devis complet, livraison et installation comprises.</p>",
+        "color_scheme": "scheme-1",
+        "padding_top": 16,
+        "padding_bottom": 48
+      }
+    }
+  },
+  "order": [
+    "main",
+    "projet"
+  ]
+}

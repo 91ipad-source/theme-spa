@@ -1,0 +1,300 @@
+{%- comment -%}
+  « Mon projet spa » : le formulaire de demande de devis.
+
+  POURQUOI CETTE SECTION EXISTE. Un message libre « bonjour, je voudrais un
+  devis pour un spa » oblige à trois allers-retours avant de pouvoir chiffrer
+  quoi que ce soit : quel modèle, où, par où passe-t-il, pour quel budget.
+  Chaque aller-retour perd des clients. Le formulaire pose ces questions
+  d'emblée, dans l'ordre où elles se posent sur le terrain.
+
+  CE QU'IL DEMANDE, ET POURQUOI. La largeur du passage le plus étroit et
+  l'emplacement décident du prix de la livraison, parfois d'un grutage ; le
+  code postal décide de la zone ; le budget évite de proposer un modèle hors
+  de portée. Ce sont les quatre informations qui transforment « nous vous
+  recontactons » en devis.
+
+  DEUX MODES, ET C'EST VOULU.
+
+  1. Sans application : le formulaire natif de Shopify ci-dessous. Il part
+     par e-mail comme n'importe quel message de la page Contact. Il ne sait
+     pas recevoir de fichiers — c'est une limite de la plateforme, pas du
+     thème — donc l'écran de confirmation demande les photos en réponse.
+
+  2. Avec l'application Shopify Forms : on dépose son bloc dans cette
+     section depuis l'éditeur de thème, et il remplace le formulaire natif.
+     Les photos sont alors jointes directement. La section accepte les blocs
+     d'application pour cela (« @app » dans le schéma).
+
+  Le reste de la page — ce qu'il faut préparer, les délais, la réassurance —
+  est identique dans les deux cas.
+{%- endcomment -%}
+
+{%- liquid
+  assign spas = collections['tous-nos-spas'].products
+  assign bloc_app = false
+  for block in section.blocks
+    if block.type == '@app'
+      assign bloc_app = true
+    endif
+  endfor
+-%}
+
+<div
+  class="spa-projet color-{{ section.settings.color_scheme }} gradient"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width">
+    <div class="spa-projet__grille">
+      <div class="spa-projet__aside">
+        <h2 class="spa-projet__titre">{{ section.settings.titre | escape }}</h2>
+
+        {%- if section.settings.intro != blank -%}
+          <div class="spa-projet__intro rte">{{ section.settings.intro }}</div>
+        {%- endif -%}
+
+        <h3 class="spa-projet__sous-titre">Ce qu'il faut préparer</h3>
+        <ol class="spa-projet__preparer">
+          <li>
+            <strong>La largeur du passage le plus étroit</strong> — portail, allée, angle de mur,
+            escalier. C'est ce chiffre qui décide de tout, pas la place finale.
+          </li>
+          <li>
+            <strong>Deux ou trois photos</strong> : l'emplacement prévu, et le chemin depuis la rue.
+            Elles nous évitent une visite et vous évitent une mauvaise surprise le jour de la livraison.
+          </li>
+          <li>
+            <strong>Le support</strong> — dalle béton existante, terrasse bois, gravier, pelouse.
+            Un spa rempli et occupé pèse une à deux tonnes.
+          </li>
+        </ol>
+
+        <h3 class="spa-projet__sous-titre">Ce que vous recevez</h3>
+        <p class="spa-projet__reponse">
+          Un devis détaillé, poste par poste : le spa, les équipements inclus, la livraison,
+          l'installation, et le grutage s'il est nécessaire. Ce qui ne peut pas être chiffré à
+          distance est indiqué « sur devis » plutôt qu'estimé au hasard.
+        </p>
+        <p class="spa-projet__reponse">
+          <strong>Réponse sous 48 heures ouvrées.</strong> Pour une question urgente, appelez-nous
+          au <a href="tel:+33160773700">01 60 77 37 00</a>.
+        </p>
+      </div>
+
+      <div class="spa-projet__panneau">
+        {%- if bloc_app -%}
+          {%- comment -%}
+            Le bloc de l'application prend toute la place : il porte ses propres
+            champs, son envoi et sa gestion des fichiers.
+          {%- endcomment -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == '@app' -%}
+              {% render block %}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- else -%}
+          {%- form 'contact', id: 'projet-spa', class: 'spa-projet__form' -%}
+            {%- if form.posted_successfully? -%}
+              <div class="spa-projet__ok" role="status">
+                <h3>Merci, c'est bien reçu.</h3>
+                <p>
+                  Nous revenons vers vous sous 48 heures ouvrées avec un devis détaillé, ou avec les
+                  deux ou trois questions qui manquent pour l'établir.
+                </p>
+                <p>
+                  <strong>Il nous manque vos photos.</strong> Répondez simplement à l'e-mail de
+                  confirmation en y joignant une photo de l'emplacement prévu et une du chemin
+                  d'accès depuis la rue — ou envoyez-les à
+                  <a href="mailto:iledefrance@linersfrance.fr?subject=Photos%20de%20mon%20projet%20spa">iledefrance@linersfrance.fr</a>.
+                </p>
+              </div>
+            {%- else -%}
+              {%- if form.errors -%}
+                <div class="spa-projet__erreur" role="alert">
+                  <p>{{ form.errors | default_errors }}</p>
+                </div>
+              {%- endif -%}
+
+              <fieldset class="spa-projet__bloc">
+                <legend>Vous</legend>
+                <div class="spa-projet__paire">
+                  <div class="field">
+                    <label class="field__label" for="projet-nom">Nom et prénom</label>
+                    <input class="field__input" type="text" id="projet-nom" name="contact[name]" autocomplete="name" required>
+                  </div>
+                  <div class="field">
+                    <label class="field__label" for="projet-tel">Téléphone</label>
+                    <input class="field__input" type="tel" id="projet-tel" name="contact[Téléphone]" autocomplete="tel" required>
+                  </div>
+                </div>
+                <div class="spa-projet__paire">
+                  <div class="field">
+                    <label class="field__label" for="projet-mail">E-mail</label>
+                    <input class="field__input" type="email" id="projet-mail" name="contact[email]" autocomplete="email" required>
+                  </div>
+                  <div class="field">
+                    <label class="field__label" for="projet-cp">Code postal</label>
+                    <input
+                      class="field__input"
+                      type="text"
+                      id="projet-cp"
+                      name="contact[Code postal]"
+                      inputmode="numeric"
+                      pattern="[0-9]{5}"
+                      maxlength="5"
+                      autocomplete="postal-code"
+                      required
+                    >
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="spa-projet__bloc">
+                <legend>Votre projet</legend>
+                <div class="spa-projet__paire">
+                  <div class="field">
+                    <label class="field__label" for="projet-modele">Modèle souhaité</label>
+                    <select class="field__input" id="projet-modele" name="contact[Modèle souhaité]">
+                      <option value="Je ne sais pas encore">Je ne sais pas encore</option>
+                      {%- for spa in spas -%}
+                        {%- assign nom = spa.title | remove: 'Spa ' | split: ' - ' | first -%}
+                        <option value="{{ nom | escape }}">{{ nom }}</option>
+                      {%- endfor -%}
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field__label" for="projet-budget">Budget envisagé</label>
+                    <select class="field__input" id="projet-budget" name="contact[Budget]">
+                      <option value="Non précisé">Je préfère en parler</option>
+                      <option value="Moins de 5 000 €">Moins de 5 000 €</option>
+                      <option value="5 000 à 7 000 €">5 000 à 7 000 €</option>
+                      <option value="7 000 à 9 000 €">7 000 à 9 000 €</option>
+                      <option value="9 000 à 12 000 €">9 000 à 12 000 €</option>
+                      <option value="Plus de 12 000 €">Plus de 12 000 €</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="spa-projet__paire">
+                  <div class="field">
+                    <label class="field__label" for="projet-emplacement">Emplacement prévu</label>
+                    <select class="field__input" id="projet-emplacement" name="contact[Emplacement prévu]">
+                      <option value="Jardin, sur dalle béton">Jardin, sur dalle béton</option>
+                      <option value="Jardin, dalle à créer">Jardin, dalle à créer</option>
+                      <option value="Terrasse bois">Terrasse bois</option>
+                      <option value="Terrasse carrelée">Terrasse carrelée</option>
+                      <option value="Véranda ou intérieur">Véranda ou intérieur</option>
+                      <option value="Toit-terrasse ou balcon">Toit-terrasse ou balcon</option>
+                      <option value="À définir">À définir</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="field__label" for="projet-passage">
+                      Largeur du passage le plus étroit
+                    </label>
+                    <input
+                      class="field__input"
+                      type="number"
+                      id="projet-passage"
+                      name="contact[Largeur du passage (cm)]"
+                      min="40"
+                      max="500"
+                      step="1"
+                      inputmode="numeric"
+                      placeholder="en cm"
+                    >
+                    <span class="spa-projet__aide">Portail, allée, angle de mur : mesurez le point le plus serré.</span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="field__label" for="projet-delai">Quand souhaitez-vous l'installer ?</label>
+                  <select class="field__input" id="projet-delai" name="contact[Délai souhaité]">
+                    <option value="Dès que possible">Dès que possible</option>
+                    <option value="Dans 1 à 3 mois">Dans 1 à 3 mois</option>
+                    <option value="Dans 3 à 6 mois">Dans 3 à 6 mois</option>
+                    <option value="Je me renseigne">Je me renseigne pour l'instant</option>
+                  </select>
+                </div>
+              </fieldset>
+
+              <fieldset class="spa-projet__bloc">
+                <legend>Précisions</legend>
+                <div class="field">
+                  <label class="field__label" for="projet-message">
+                    Ce qu'il faut savoir sur votre accès ou votre projet
+                  </label>
+                  <textarea
+                    class="field__input"
+                    id="projet-message"
+                    name="contact[body]"
+                    rows="5"
+                    placeholder="Escalier, terrain en pente, mur à franchir, étage, questions sur l'électricité…"
+                  ></textarea>
+                </div>
+                <p class="spa-projet__photos">
+                  <strong>Les photos :</strong> répondez à l'e-mail de confirmation en joignant une vue
+                  de l'emplacement et une du chemin d'accès depuis la rue. C'est ce qui nous permet de
+                  chiffrer la livraison sans nous déplacer.
+                </p>
+              </fieldset>
+
+              <button type="submit" class="button spa-projet__envoyer">Envoyer ma demande</button>
+              <p class="spa-projet__rgpd">
+                Vos informations servent uniquement à préparer votre devis. Elles ne sont ni revendues,
+                ni utilisées pour de la prospection.
+              </p>
+            {%- endif -%}
+          {%- endform -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Mon projet spa",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "titre",
+      "label": "Titre",
+      "default": "Parlez-nous de votre projet"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Introduction",
+      "default": "<p>Quelques questions précises valent mieux que trois échanges de courriels. Répondez-y et nous établissons un devis complet, livraison et installation comprises.</p>"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Jeu de couleurs",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 48
+    }
+  ],
+  "blocks": [{ "type": "@app" }],
+  "presets": [{ "name": "Mon projet spa" }]
+}
+{% endschema %}

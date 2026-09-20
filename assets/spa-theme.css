@@ -2674,3 +2674,203 @@ a, span, label, summary, button, blockquote, figcaption,
   font-size: 1.3rem;
   line-height: 1.5;
 }
+
+/* --------------------------------------------------------------------------
+   33. MON PROJET SPA — le formulaire de demande de devis
+
+   Deux colonnes sur grand ecran : a gauche ce qu'il faut preparer, a droite
+   le formulaire. La colonne de gauche n'est pas decorative — c'est elle qui
+   fait mesurer le passage avant de remplir, donc elle passe AU-DESSUS du
+   formulaire sur mobile, pas en dessous.
+   -------------------------------------------------------------------------- */
+.spa-projet {
+  padding-top: var(--pt, 24px);
+  padding-bottom: var(--pb, 48px);
+}
+
+.spa-projet__grille {
+  display: grid;
+  gap: 3.2rem;
+}
+
+@media screen and (min-width: 990px) {
+  .spa-projet__grille {
+    align-items: start;
+    gap: 4.8rem;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  }
+}
+
+.spa-projet__titre {
+  margin: 0 0 1.2rem;
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  line-height: 1.15;
+}
+
+.spa-projet__intro {
+  margin-bottom: 2.4rem;
+  color: var(--deep-soft);
+}
+
+.spa-projet__sous-titre {
+  margin: 2.4rem 0 1.2rem;
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+}
+
+.spa-projet__preparer {
+  margin: 0;
+  padding-left: 2rem;
+  font-size: 1.5rem;
+  line-height: 1.6;
+}
+
+.spa-projet__preparer li + li {
+  margin-top: 1rem;
+}
+
+.spa-projet__reponse {
+  margin: 0 0 1.2rem;
+  font-size: 1.5rem;
+  line-height: 1.6;
+}
+
+/* Le panneau du formulaire : un aplat clair qui le detache de la page et
+   signale « ici, on remplit ». */
+.spa-projet__panneau {
+  padding: 2.4rem;
+  border-radius: var(--r-lg);
+  background: var(--mist);
+}
+
+@media screen and (max-width: 749px) {
+  .spa-projet__panneau {
+    padding: 1.8rem 1.4rem;
+  }
+}
+
+.spa-projet__bloc {
+  margin: 0 0 2.4rem;
+  padding: 0;
+  border: 0;
+}
+
+.spa-projet__bloc legend {
+  padding: 0 0 1.2rem;
+  color: var(--deep-soft);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.spa-projet__paire {
+  display: grid;
+  gap: 0 1.6rem;
+}
+
+@media screen and (min-width: 600px) {
+  .spa-projet__paire {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Champs : on reprend la forme des champs de Dawn (.field) mais sur fond
+   blanc, puisque le panneau est deja colore. */
+.spa-projet .field {
+  margin-bottom: 1.6rem;
+}
+
+.spa-projet .field__label {
+  display: block;
+  margin-bottom: 0.6rem;
+  color: var(--deep);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.spa-projet .field__input {
+  width: 100%;
+  padding: 1.1rem 1.4rem;
+  border: 1px solid rgba(15, 58, 90, 0.18);
+  border-radius: var(--r-md);
+  background: var(--white);
+  color: var(--deep);
+  font-family: var(--font-body);
+  font-size: 1.6rem;
+}
+
+.spa-projet .field__input:focus-visible {
+  outline: var(--focused-base-outline, 0.3rem solid var(--sky-deep));
+  outline-offset: 0.2rem;
+}
+
+.spa-projet select.field__input {
+  appearance: none;
+  padding-right: 3.6rem;
+  background-image: linear-gradient(45deg, transparent 50%, var(--deep) 50%),
+    linear-gradient(135deg, var(--deep) 50%, transparent 50%);
+  background-position: calc(100% - 20px) 55%, calc(100% - 14px) 55%;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}
+
+.spa-projet textarea.field__input {
+  resize: vertical;
+}
+
+.spa-projet__aide {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--deep-soft);
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
+
+.spa-projet__photos {
+  margin: 0;
+  padding: 1.4rem 1.6rem;
+  border-radius: var(--r-md);
+  background: var(--white);
+  font-size: 1.4rem;
+  line-height: 1.55;
+}
+
+.spa-projet__envoyer {
+  width: 100%;
+}
+
+.spa-projet__rgpd {
+  margin: 1.2rem 0 0;
+  color: var(--deep-soft);
+  font-size: 1.3rem;
+  line-height: 1.5;
+}
+
+.spa-projet__ok {
+  padding: 2rem;
+  border-radius: var(--r-md);
+  background: var(--white);
+}
+
+.spa-projet__ok h3 {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-size: 2rem;
+}
+
+.spa-projet__ok p {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+  line-height: 1.6;
+}
+
+.spa-projet__erreur {
+  margin-bottom: 2rem;
+  padding: 1.4rem 1.6rem;
+  border-left: 4px solid #b3261e;
+  border-radius: var(--r-md);
+  background: var(--white);
+  font-size: 1.4rem;
+}
