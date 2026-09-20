@@ -2362,12 +2362,18 @@ a, span, label, summary, button, blockquote, figcaption,
   min-width: 0;
 }
 
+/* « ENCOMBREMENT » est le plus long des quatre libelles : a 1,1 rem et
+   0,06 em d'interlettrage il depassait la demi-colonne et se coupait en
+   deux lignes, ce qui decalait la valeur d'en dessous d'une carte a
+   l'autre. Reduit et resserre, il tient sur une ligne ; « nowrap »
+   garantit qu'il y reste quoi qu'il arrive. */
 .spa-comparo__specs dt {
   color: var(--deep-soft);
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .spa-comparo__specs dd {
