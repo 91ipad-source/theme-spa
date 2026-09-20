@@ -3,7 +3,7 @@
 
   C'est ce qui permet à Google de relier le site à la fiche Google Business
   (pack local, Maps) et aux moteurs de réponse — ChatGPT, Perplexity, les
-  AI Overviews — de citer l'entreprise avec son adresse et ses horaires.
+  AI Overviews — de citer l'entreprise avec son adresse et son téléphone.
   Le thème déclarait déjà Organization et WebSite, mais rien de local.
 
   RÈGLE : le nom, l'adresse et le téléphone (le « NAP ») doivent être
@@ -12,9 +12,9 @@
   « Fontenay-le-Vicomte » — affaiblit le signal au lieu de le renforcer.
   Si l'un des trois change, il faut le changer partout, ici compris.
 
-  Les horaires du week-end ne figurent pas volontairement : les visites
-  sont sur rendez-vous, et déclarer des heures d'ouverture qui n'en sont
-  pas serait faux — Google recoupe avec la fiche Business.
+  Aucun horaire n'est déclaré : le showroom se visite uniquement sur
+  rendez-vous. Déclarer des heures d'ouverture qui n'en sont pas serait
+  faux — Google recoupe avec la fiche Business.
 
   PAS d'aggregateRating ici, et c'est délibéré : la note 4,8/5 vient des
   avis Google, pas d'avis collectés sur ce site. Déclarer en données
@@ -71,20 +71,17 @@
         "name": "Loiret"
       }
     ],
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "opens": "09:30",
-        "closes": "12:30"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "opens": "14:00",
-        "closes": "17:00"
-      }
-    ],
+    {%- comment -%}
+      AUCUN horaire n'est declare, et c'est volontaire : le showroom se
+      visite uniquement sur rendez-vous. Publier des heures d'ouverture
+      qui n'en sont pas ferait venir des visiteurs devant une porte close,
+      et Google recoupe de toute facon avec la fiche Business — une
+      contradiction entre les deux affaiblit les deux.
+
+      « publicAccess: false » dit exactement cela dans le vocabulaire de
+      schema.org : le lieu n'est pas librement accessible au public.
+    {%- endcomment -%}
+    "publicAccess": false,
     {%- comment -%}
       « sameAs » : les profils qui designent la MEME entreprise ailleurs sur
       le web. C'est ce qui permet a Google de relier spas9.fr a la page
