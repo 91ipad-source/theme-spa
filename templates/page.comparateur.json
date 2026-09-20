@@ -1,0 +1,74 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 8
+      }
+    },
+    "comparateur": {
+      "type": "spa-comparateur",
+      "settings": {
+        "collection": "tous-nos-spas",
+        "titre": "",
+        "intro": "",
+        "color_scheme": "scheme-1",
+        "padding_top": 8,
+        "padding_bottom": 40
+      }
+    },
+    "reperes": {
+      "type": "multicolumn",
+      "blocks": {
+        "places": {
+          "type": "column",
+          "settings": {
+            "title": "Le nombre de places ne suffit pas",
+            "text": "<p>Deux spas de capacité identique n'offrent pas le même confort : regardez la colonne « Configuration », qui distingue les places allongées des assises.</p>"
+          }
+        },
+        "acces": {
+          "type": "column",
+          "settings": {
+            "title": "L'encombrement décide avant le reste",
+            "text": "<p>Comparez la hauteur autant que les dimensions au sol : à 77 cm, un spa franchit une porte d'entrée standard. Et mesurez le point le plus étroit du chemin de livraison.</p>"
+          }
+        },
+        "donnees": {
+          "type": "column",
+          "settings": {
+            "title": "Ce qui n'est pas précisé est dit",
+            "text": "<p>Quand une donnée n'est pas confirmée par le fabricant, la case indique « non précisé » plutôt qu'un chiffre approximatif. Demandez-la nous : nous la vérifions.</p>",
+            "link_label": "Poser une question",
+            "link": "/pages/contact"
+          }
+        }
+      },
+      "block_order": [
+        "places",
+        "acces",
+        "donnees"
+      ],
+      "settings": {
+        "title": "Le choix commence par les bons repères",
+        "heading_size": "h2",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "none",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "main",
+    "comparateur",
+    "reperes"
+  ]
+}

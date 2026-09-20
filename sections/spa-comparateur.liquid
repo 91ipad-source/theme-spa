@@ -1,0 +1,589 @@
+{%- comment -%}
+  Comparateur de spas : la gamme filtrable en cartes ou en tableau, et un
+  face-à-face de deux modèles.
+
+  POURQUOI CETTE SECTION EXISTE. Un visiteur qui hésite entre trois spas n'a
+  aujourd'hui qu'une solution : ouvrir trois onglets et faire l'aller-retour.
+  Les chiffres qui décident — encombrement, hauteur, nombre de jets, volume
+  d'eau — sont pourtant les mêmes d'une fiche à l'autre ; il n'y a aucune
+  raison de les faire chercher.
+
+  D'OÙ VIENNENT LES DONNÉES. Uniquement des métachamps produit : places,
+  configuration, encombrement, hauteur, jets, volume d'eau, poids, pompes et
+  gamme. Rien n'est écrit en dur ici. Une valeur corrigée dans la fiche
+  produit se répercute donc sur le comparateur sans toucher au code, et un
+  spa ajouté à la collection y apparaît tout seul.
+
+  CE QUI N'EST PAS RENSEIGNÉ EST DIT COMME TEL. La cellule affiche « non
+  précisé » plutôt qu'un chiffre plausible : sur une fiche technique, une
+  donnée fausse se paie en retour client.
+
+  DEUX VUES POUR DEUX FAÇONS DE CHERCHER. Les cartes pour parcourir, le
+  tableau pour tout embrasser d'un coup d'œil. Les deux affichent les mêmes
+  produits et obéissent aux mêmes filtres ; seule la mise en forme change.
+
+  CE QU'ELLE N'AFFICHE PAS. Le prix barré, comme partout sur la boutique.
+
+  SANS JAVASCRIPT. Les cartes s'affichent toutes, avec leurs caractéristiques
+  et leurs liens : filtres, bascule et face-à-face sont des ajouts, pas des
+  conditions d'accès à l'information.
+{%- endcomment -%}
+
+{%- liquid
+  assign produits = section.settings.collection.products
+  assign uid = section.id
+-%}
+
+<div
+  class="spa-comparo color-{{ section.settings.color_scheme }} gradient"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+  data-comparo
+>
+  <div class="page-width">
+    {%- if section.settings.titre != blank -%}
+      <h2 class="spa-comparo__titre">{{ section.settings.titre | escape }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.intro != blank -%}
+      <div class="spa-comparo__intro rte">{{ section.settings.intro }}</div>
+    {%- endif -%}
+
+    {%- if produits.size == 0 -%}
+      <p class="spa-comparo__vide">
+        Aucun spa dans la collection choisie. Sélectionnez-en une dans les réglages de la section.
+      </p>
+    {%- else -%}
+
+      <form class="spa-comparo__filtres" data-comparo-filtres>
+        <fieldset class="spa-comparo__groupe">
+          <legend class="spa-comparo__legende">Places</legend>
+          <div class="spa-comparo__choix">
+            <label class="spa-comparo__puce">
+              <input type="radio" name="places-{{ uid }}" value="" checked>
+              <span>Toutes</span>
+            </label>
+            {%- assign places_vues = '' -%}
+            {%- for produit in produits -%}
+              {%- assign nb = produit.metafields.custom.places.value | split: ' ' | first -%}
+              {%- if nb != blank -%}
+                {%- assign marqueur = '|' | append: nb | append: '|' -%}
+                {%- unless places_vues contains marqueur -%}
+                  {%- assign places_vues = places_vues | append: marqueur -%}
+                  <label class="spa-comparo__puce">
+                    <input type="radio" name="places-{{ uid }}" value="{{ nb }}">
+                    <span>{{ nb }}</span>
+                  </label>
+                {%- endunless -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </fieldset>
+
+        <fieldset class="spa-comparo__groupe">
+          <legend class="spa-comparo__legende">Gamme</legend>
+          <div class="spa-comparo__choix">
+            <label class="spa-comparo__puce">
+              <input type="radio" name="gamme-{{ uid }}" value="" checked>
+              <span>Toutes</span>
+            </label>
+            {%- assign gammes_vues = '' -%}
+            {%- for produit in produits -%}
+              {%- assign gamme = produit.metafields.custom.gamme.value -%}
+              {%- if gamme != blank -%}
+                {%- assign marqueur = '|' | append: gamme | append: '|' -%}
+                {%- unless gammes_vues contains marqueur -%}
+                  {%- assign gammes_vues = gammes_vues | append: marqueur -%}
+                  <label class="spa-comparo__puce">
+                    <input type="radio" name="gamme-{{ uid }}" value="{{ gamme | escape }}">
+                    <span>{{ gamme | escape }}</span>
+                  </label>
+                {%- endunless -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </fieldset>
+
+        <fieldset class="spa-comparo__groupe">
+          <legend class="spa-comparo__legende">Contraintes</legend>
+          <div class="spa-comparo__choix">
+            <label class="spa-comparo__puce">
+              <input type="checkbox" data-comparo-porte>
+              <span>Passe une porte</span>
+            </label>
+            <label class="spa-comparo__puce">
+              <input type="checkbox" data-comparo-dispo>
+              <span>Disponible</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="spa-comparo__barre">
+          <p class="spa-comparo__compte" data-comparo-compte aria-live="polite">
+            {{ produits.size }} spas
+          </p>
+          <div class="spa-comparo__vues" role="group" aria-label="Affichage">
+            <button type="button" class="spa-comparo__vue" data-comparo-vue="cartes" aria-pressed="true">Cartes</button>
+            <button type="button" class="spa-comparo__vue" data-comparo-vue="tableau" aria-pressed="false">Tableau</button>
+          </div>
+        </div>
+      </form>
+
+      {%- comment -%} Vue 1 : les cartes {%- endcomment -%}
+      <ul class="spa-comparo__grille" data-comparo-grille role="list">
+        {%- for produit in produits -%}
+          {%- liquid
+            assign mf = produit.metafields.custom
+            assign nb_places = mf.places.value | split: ' ' | first
+            assign nom = produit.title | remove: 'Spa ' | split: ' - ' | first
+          -%}
+          <li
+            class="spa-comparo__carte"
+            data-comparo-item
+            data-id="{{ produit.id }}"
+            data-places="{{ nb_places }}"
+            data-gamme="{{ mf.gamme.value | escape }}"
+            data-hauteur="{{ mf.hauteur.value }}"
+            data-jets="{{ mf.jets.value }}"
+            data-volume="{{ mf.volume_eau.value }}"
+            data-prix="{{ produit.price }}"
+            data-dispo="{% if produit.available %}1{% else %}0{% endif %}"
+          >
+            {%- if mf.gamme.value != blank -%}
+              <span class="spa-comparo__badge">{{ mf.gamme.value | escape }}</span>
+            {%- endif -%}
+            {%- unless produit.available -%}
+              <span class="spa-comparo__badge spa-comparo__badge--epuise">Épuisé</span>
+            {%- endunless -%}
+
+            <a class="spa-comparo__media" href="{{ produit.url }}" tabindex="-1" aria-hidden="true">
+              {%- if produit.featured_image -%}
+                <img
+                  src="{{ produit.featured_image | image_url: width: 600 }}"
+                  alt=""
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                >
+              {%- endif -%}
+            </a>
+
+            <div class="spa-comparo__corps">
+              <h3 class="spa-comparo__nom">
+                <a href="{{ produit.url }}">{{ nom }}</a>
+              </h3>
+              <p class="spa-comparo__prix">{{ produit.price | money }}</p>
+
+              <dl class="spa-comparo__specs">
+                <div><dt>Places</dt><dd>{{ nb_places | default: 'non précisé' }}</dd></div>
+                <div><dt>Encombrement</dt><dd>{{ mf.encombrement.value | default: 'non précisé' }}</dd></div>
+                <div>
+                  <dt>Hauteur</dt>
+                  <dd>{% if mf.hauteur.value %}{{ mf.hauteur.value }} cm{% else %}non précisé{% endif %}</dd>
+                </div>
+                <div><dt>Jets</dt><dd>{{ mf.jets.value | default: 'non précisé' }}</dd></div>
+              </dl>
+
+              {%- if mf.configuration.value != blank -%}
+                <p class="spa-comparo__config">{{ mf.configuration.value }}</p>
+              {%- endif -%}
+
+              <div class="spa-comparo__actions">
+                <a class="spa-comparo__lien" href="{{ produit.url }}">
+                  Voir la fiche<span class="visually-hidden"> du {{ nom }}</span>
+                </a>
+                <label class="spa-comparo__comparer">
+                  <input type="checkbox" data-comparo-case value="{{ produit.id }}">
+                  <span>Comparer</span>
+                </label>
+              </div>
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+
+      {%- comment -%} Vue 2 : le tableau {%- endcomment -%}
+      <div class="spa-comparo__defilement" data-comparo-tableau hidden tabindex="0" role="region" aria-label="Tableau comparatif">
+        <table class="spa-comparo__table">
+          <thead>
+            <tr>
+              <th scope="col">Modèle</th>
+              <th scope="col"><button type="button" class="spa-comparo__tri" data-comparo-tri="places">Places</button></th>
+              <th scope="col">Configuration</th>
+              <th scope="col">Encombrement</th>
+              <th scope="col"><button type="button" class="spa-comparo__tri" data-comparo-tri="hauteur">Hauteur</button></th>
+              <th scope="col"><button type="button" class="spa-comparo__tri" data-comparo-tri="jets">Jets</button></th>
+              <th scope="col"><button type="button" class="spa-comparo__tri" data-comparo-tri="volume">Volume</button></th>
+              <th scope="col">Gamme</th>
+              <th scope="col"><button type="button" class="spa-comparo__tri" data-comparo-tri="prix">Prix</button></th>
+              <th scope="col">Comparer</th>
+            </tr>
+          </thead>
+          <tbody data-comparo-corps>
+            {%- for produit in produits -%}
+              {%- liquid
+                assign mf = produit.metafields.custom
+                assign nb_places = mf.places.value | split: ' ' | first
+                assign nom = produit.title | remove: 'Spa ' | split: ' - ' | first
+              -%}
+              <tr
+                data-comparo-item
+                data-id="{{ produit.id }}"
+                data-places="{{ nb_places }}"
+                data-gamme="{{ mf.gamme.value | escape }}"
+                data-hauteur="{{ mf.hauteur.value }}"
+                data-jets="{{ mf.jets.value }}"
+                data-volume="{{ mf.volume_eau.value }}"
+                data-prix="{{ produit.price }}"
+                data-dispo="{% if produit.available %}1{% else %}0{% endif %}"
+              >
+                <th scope="row" class="spa-comparo__col-modele">
+                  <a href="{{ produit.url }}">{{ nom }}</a>
+                  {%- unless produit.available -%}
+                    <span class="spa-comparo__epuise">Épuisé</span>
+                  {%- endunless -%}
+                </th>
+                <td>{{ nb_places | default: '—' }}</td>
+                <td>{{ mf.configuration.value | default: '—' }}</td>
+                <td>{{ mf.encombrement.value | default: '—' }}</td>
+                <td>{% if mf.hauteur.value %}{{ mf.hauteur.value }} cm{% else %}—{% endif %}</td>
+                <td>{{ mf.jets.value | default: '—' }}</td>
+                <td>{% if mf.volume_eau.value %}{{ mf.volume_eau.value }} L{% else %}—{% endif %}</td>
+                <td>{{ mf.gamme.value | default: '—' }}</td>
+                <td class="spa-comparo__prix-cell">{{ produit.price | money }}</td>
+                <td>
+                  <label class="spa-comparo__comparer">
+                    <input type="checkbox" data-comparo-case value="{{ produit.id }}">
+                    <span class="visually-hidden">Comparer le {{ nom }}</span>
+                  </label>
+                </td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
+
+      <p class="spa-comparo__aide" data-comparo-aide>Cochez deux modèles pour les voir côte à côte.</p>
+
+      <section class="spa-comparo__duel" data-comparo-duel hidden aria-live="polite">
+        <div class="spa-comparo__duel-entete">
+          <h3 class="spa-comparo__duel-titre">Face à face</h3>
+          <label class="spa-comparo__bascule">
+            <input type="checkbox" data-comparo-differences>
+            <span>Afficher uniquement les différences</span>
+          </label>
+        </div>
+        <div class="spa-comparo__duel-corps" data-comparo-duel-corps></div>
+        <p class="spa-comparo__note">
+          « Non précisé » signifie que le fabricant ne communique pas la donnée, pas que l'équipement
+          est absent. Demandez-la nous : nous la vérifions auprès de ROCA Spa avant de vous répondre.
+        </p>
+      </section>
+
+      <script type="application/json" data-comparo-donnees>
+        [
+          {%- for produit in produits -%}
+            {%- liquid
+              assign mf = produit.metafields.custom
+              assign nom = produit.title | remove: 'Spa ' | split: ' - ' | first
+            -%}
+            {
+              "id": {{ produit.id | json }},
+              "nom": {{ nom | json }},
+              "url": {{ produit.url | json }},
+              "image": {{ produit.featured_image | image_url: width: 400 | json }},
+              "prix": {{ produit.price | money | json }},
+              "places": {{ mf.places.value | json }},
+              "configuration": {{ mf.configuration.value | json }},
+              "encombrement": {{ mf.encombrement.value | json }},
+              "hauteur": {{ mf.hauteur.value | json }},
+              "jets": {{ mf.jets.value | json }},
+              "volume": {{ mf.volume_eau.value | json }},
+              "poids": {{ mf.poids.value | json }},
+              "pompes": {{ mf.pompes.value | json }},
+              "electronique": {{ mf.electronique.value | json }},
+              "isolation": {{ mf.isolation.value | json }},
+              "equipements": {{ mf.equipements.value | json }},
+              "coloris": {{ mf.coloris.value | json }},
+              "gamme": {{ mf.gamme.value | json }}
+            }{%- unless forloop.last -%},{%- endunless -%}
+          {%- endfor -%}
+        ]
+      </script>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+  (function () {
+    var racine = document.currentScript.previousElementSibling;
+    if (!racine || !racine.hasAttribute('data-comparo')) return;
+
+    var donnees = racine.querySelector('[data-comparo-donnees]');
+    if (!donnees) return;
+
+    var items = Array.prototype.slice.call(racine.querySelectorAll('[data-comparo-item]'));
+    var corpsTable = racine.querySelector('[data-comparo-corps]');
+    var grille = racine.querySelector('[data-comparo-grille]');
+    var tableau = racine.querySelector('[data-comparo-tableau]');
+    var compte = racine.querySelector('[data-comparo-compte]');
+    var duel = racine.querySelector('[data-comparo-duel]');
+    var duelCorps = racine.querySelector('[data-comparo-duel-corps]');
+    var aide = racine.querySelector('[data-comparo-aide]');
+    var spas = {};
+
+    try {
+      JSON.parse(donnees.textContent).forEach(function (spa) { spas[spa.id] = spa; });
+    } catch (e) { return; }
+
+    /* ---- Filtres : ils s'appliquent aux deux vues à la fois ------------ */
+
+    function coche(nom) {
+      var champ = racine.querySelector('input[name^="' + nom + '-"]:checked');
+      return champ ? champ.value : '';
+    }
+
+    function filtrer() {
+      var places = coche('places');
+      var gamme = coche('gamme');
+      var porte = racine.querySelector('[data-comparo-porte]');
+      var dispo = racine.querySelector('[data-comparo-dispo]');
+      var visibles = 0;
+
+      items.forEach(function (item) {
+        var ok = true;
+        if (places && item.dataset.places !== places) ok = false;
+        if (gamme && item.dataset.gamme !== gamme) ok = false;
+        if (porte && porte.checked) {
+          var h = parseInt(item.dataset.hauteur, 10);
+          if (!h || h >= 80) ok = false;
+        }
+        if (dispo && dispo.checked && item.dataset.dispo !== '1') ok = false;
+        item.hidden = !ok;
+        if (ok) visibles++;
+      });
+
+      /* Chaque spa est présent deux fois : une carte et une ligne. */
+      visibles = Math.round(visibles / 2);
+
+      if (compte) {
+        compte.textContent = visibles === 0
+          ? 'Aucun spa ne correspond'
+          : visibles + (visibles > 1 ? ' spas' : ' spa');
+      }
+    }
+
+    racine.querySelectorAll('[data-comparo-filtres] input').forEach(function (champ) {
+      champ.addEventListener('change', filtrer);
+    });
+
+    /* ---- Bascule cartes / tableau -------------------------------------- */
+
+    racine.querySelectorAll('[data-comparo-vue]').forEach(function (bouton) {
+      bouton.addEventListener('click', function () {
+        var cartes = bouton.dataset.comparoVue === 'cartes';
+        if (grille) grille.hidden = !cartes;
+        if (tableau) tableau.hidden = cartes;
+        racine.querySelectorAll('[data-comparo-vue]').forEach(function (autre) {
+          autre.setAttribute('aria-pressed', autre === bouton ? 'true' : 'false');
+        });
+      });
+    });
+
+    /* ---- Tri du tableau ------------------------------------------------ */
+
+    var sens = {};
+
+    racine.querySelectorAll('[data-comparo-tri]').forEach(function (bouton) {
+      bouton.addEventListener('click', function () {
+        var cle = bouton.dataset.comparoTri;
+        var croissant = sens[cle] !== 'asc';
+        sens = {};
+        sens[cle] = croissant ? 'asc' : 'desc';
+
+        var lignes = Array.prototype.slice.call(corpsTable.querySelectorAll('[data-comparo-item]'));
+        lignes.sort(function (a, b) {
+          var va = parseFloat(a.dataset[cle]);
+          var vb = parseFloat(b.dataset[cle]);
+          if (isNaN(va) && isNaN(vb)) return 0;
+          if (isNaN(va)) return 1;
+          if (isNaN(vb)) return -1;
+          return croissant ? va - vb : vb - va;
+        }).forEach(function (ligne) { corpsTable.appendChild(ligne); });
+
+        racine.querySelectorAll('[data-comparo-tri]').forEach(function (autre) {
+          autre.removeAttribute('data-sens');
+        });
+        bouton.setAttribute('data-sens', croissant ? 'asc' : 'desc');
+      });
+    });
+
+    /* ---- Face à face --------------------------------------------------- */
+
+    var choisis = [];
+
+    var criteres = [
+      { cle: 'prix', libelle: 'Prix' },
+      { cle: 'places', libelle: 'Places' },
+      { cle: 'configuration', libelle: 'Configuration' },
+      { cle: 'encombrement', libelle: 'Encombrement' },
+      { cle: 'hauteur', libelle: 'Hauteur', unite: ' cm' },
+      { cle: 'jets', libelle: 'Jets' },
+      { cle: 'volume', libelle: 'Volume d’eau', unite: ' L' },
+      { cle: 'poids', libelle: 'Poids à vide', unite: ' kg' },
+      { cle: 'pompes', libelle: 'Pompes' },
+      { cle: 'electronique', libelle: 'Électronique' },
+      { cle: 'isolation', libelle: 'Isolation' },
+      { cle: 'equipements', libelle: 'Équipements' },
+      { cle: 'coloris', libelle: 'Coloris' },
+      { cle: 'gamme', libelle: 'Gamme' }
+    ];
+
+    function valeur(spa, critere) {
+      var v = spa[critere.cle];
+      if (v === null || v === undefined || v === '') return 'non précisé';
+      return String(v) + (critere.unite || '');
+    }
+
+    function echapper(texte) {
+      return String(texte).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function synchroniserCases() {
+      racine.querySelectorAll('[data-comparo-case]').forEach(function (champ) {
+        champ.checked = choisis.indexOf(champ.value) !== -1;
+      });
+    }
+
+    function dessiner() {
+      synchroniserCases();
+
+      if (choisis.length < 2) {
+        duel.hidden = true;
+        duelCorps.innerHTML = '';
+        if (aide) {
+          aide.textContent = choisis.length === 1
+            ? 'Cochez un second modèle pour lancer la comparaison.'
+            : 'Cochez deux modèles pour les voir côte à côte.';
+        }
+        return;
+      }
+
+      var a = spas[choisis[0]];
+      var b = spas[choisis[1]];
+      if (!a || !b) return;
+      if (aide) aide.textContent = 'Cochez un autre modèle : il remplacera le premier des deux.';
+
+      var html = '<table class="spa-comparo__duel-table"><thead><tr><td></td>';
+      [a, b].forEach(function (spa) {
+        html += '<th scope="col"><a href="' + echapper(spa.url) + '">';
+        if (spa.image) {
+          html += '<img src="' + echapper(spa.image) + '" alt="" width="120" height="120" loading="lazy">';
+        }
+        html += '<span>' + echapper(spa.nom) + '</span></a></th>';
+      });
+      html += '</tr></thead><tbody>';
+
+      var differencesSeules = racine.querySelector('[data-comparo-differences]');
+      var seulementDifferences = differencesSeules && differencesSeules.checked;
+      var identiques = 0;
+
+      criteres.forEach(function (critere) {
+        var va = valeur(a, critere);
+        var vb = valeur(b, critere);
+        var differe = va !== vb;
+        if (!differe) {
+          identiques++;
+          if (seulementDifferences) return;
+        }
+        var classe = differe ? ' class="spa-comparo__differe"' : '';
+        html += '<tr' + classe + '><th scope="row">' + critere.libelle + '</th>';
+        html += '<td>' + echapper(va) + '</td><td>' + echapper(vb) + '</td></tr>';
+      });
+
+      if (seulementDifferences && identiques === criteres.length) {
+        html += '<tr><td colspan="3">Ces deux modèles annoncent exactement les mêmes caractéristiques.</td></tr>';
+      }
+
+      html += '</tbody><tfoot><tr><td></td>';
+      [a, b].forEach(function (spa) {
+        html += '<td><a class="button" href="' + echapper(spa.url) + '">Voir la fiche</a></td>';
+      });
+      html += '</tr></tfoot></table>';
+
+      duelCorps.innerHTML = html;
+      duel.hidden = false;
+      duel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    var bascule = racine.querySelector('[data-comparo-differences]');
+    if (bascule) bascule.addEventListener('change', dessiner);
+
+    racine.querySelectorAll('[data-comparo-case]').forEach(function (champ) {
+      champ.addEventListener('change', function () {
+        var id = champ.value;
+        if (champ.checked) {
+          if (choisis.indexOf(id) === -1) choisis.push(id);
+          while (choisis.length > 2) choisis.shift();
+        } else {
+          choisis = choisis.filter(function (autre) { return autre !== id; });
+        }
+        dessiner();
+      });
+    });
+
+    filtrer();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Comparateur de spas",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection à comparer"
+    },
+    {
+      "type": "text",
+      "id": "titre",
+      "label": "Titre",
+      "default": "Comparer les spas"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Introduction"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Jeu de couleurs",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 48
+    }
+  ],
+  "presets": [{ "name": "Comparateur de spas" }]
+}
+{% endschema %}
