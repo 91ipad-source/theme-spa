@@ -14,7 +14,7 @@
         "places": {
           "type": "argument",
           "settings": {
-            "texte": "<strong>Le seul de la gamme à offrir cinq places</strong> — le Duo en a deux, le Doto trois, le Doro Plus six mais uniquement assises."
+            "texte": "<strong>Le seul de la gamme à offrir cinq places</strong> — le Duo en a deux, le Doto trois, le Doro Plus sept, mais uniquement assises."
           }
         },
         "format": {
@@ -80,7 +80,7 @@
         "texte": {
           "type": "text",
           "settings": {
-            "text": "<p>Un spa Plug &amp; Play se raccorde sur une <strong>prise domestique de 16 A</strong>. Pas de tranchée, pas d'électricien, pas de ligne à tirer depuis le tableau : c'est ce qui permet de le mettre en service le jour de la livraison.</p><p><strong>La contrepartie, et elle est réelle.</strong> La puissance disponible étant limitée, la montée en température est plus lente qu'avec une ligne dédiée : comptez de l'ordre d'une journée pour la première chauffe. En revanche, une fois l'eau à 37 °C, elle s'y maintient sans difficulté — et c'est le maintien, pas la chauffe initiale, qui fait votre facture annuelle.</p><p><strong>Trois conditions tout de même.</strong> La prise doit être en bon état, protégée par un <strong>dispositif différentiel 30 mA</strong> conformément à la norme NF C 15-100, et de préférence dédiée au spa. Les rallonges et les multiprises sont à proscrire, sans exception.</p><p><strong>Ce qui est monté de série.</strong> Double filtration et ozonateur pour le traitement de l'eau, audio Bluetooth ROCASound 2.0, luminothérapie LED et compatibilité WiFi. La gamme couvre <a href=\"/collections/spa-2-places\">2</a>, <a href=\"/collections/spa-3-places\">3</a>, <a href=\"/collections/spa-5-places\">5</a> et <a href=\"/collections/spa-6-places\">6 places</a> — le format ne se choisit donc pas au détriment de la simplicité d'installation.</p>"
+            "text": "<p>Un spa Plug &amp; Play se raccorde sur une <strong>prise domestique de 16 A</strong>. Pas de tranchée, pas d'électricien, pas de ligne à tirer depuis le tableau : c'est ce qui permet de le mettre en service le jour de la livraison.</p><p><strong>La contrepartie, et elle est réelle.</strong> La puissance disponible étant limitée, la montée en température est plus lente qu'avec une ligne dédiée : comptez de l'ordre d'une journée pour la première chauffe. En revanche, une fois l'eau à 37 °C, elle s'y maintient sans difficulté — et c'est le maintien, pas la chauffe initiale, qui fait votre facture annuelle.</p><p><strong>Trois conditions tout de même.</strong> La prise doit être en bon état, protégée par un <strong>dispositif différentiel 30 mA</strong> conformément à la norme NF C 15-100, et de préférence dédiée au spa. Les rallonges et les multiprises sont à proscrire, sans exception.</p><p><strong>Ce qui est monté de série.</strong> Double filtration et ozonateur pour le traitement de l'eau, audio Bluetooth ROCASound 2.0, luminothérapie LED et compatibilité WiFi. La gamme couvre <a href=\"/collections/spa-2-places\">2</a>, <a href=\"/collections/spa-3-places\">3</a>, <a href=\"/collections/spa-5-places\">5</a> et <a href=\"/collections/spa-7-places\">7 places</a> — le format ne se choisit donc pas au détriment de la simplicité d'installation.</p>"
           }
         },
         "liens": {
