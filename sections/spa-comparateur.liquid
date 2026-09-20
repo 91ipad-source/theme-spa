@@ -173,14 +173,25 @@
               </h3>
               <p class="spa-comparo__prix">{{ produit.price | money }}</p>
 
+              {%- comment -%}
+                Une caractéristique non renseignée n'apparaît pas : afficher
+                « non précisé » remplirait la carte d'une information qui n'en
+                est pas une. Ce qui manque est dit dans le face-à-face, où la
+                comparaison en dépend.
+              {%- endcomment -%}
               <dl class="spa-comparo__specs">
-                <div><dt>Places</dt><dd>{{ nb_places | default: 'non précisé' }}</dd></div>
-                <div><dt>Encombrement</dt><dd>{{ mf.encombrement.value | default: 'non précisé' }}</dd></div>
-                <div>
-                  <dt>Hauteur</dt>
-                  <dd>{% if mf.hauteur.value %}{{ mf.hauteur.value }} cm{% else %}non précisé{% endif %}</dd>
-                </div>
-                <div><dt>Jets</dt><dd>{{ mf.jets.value | default: 'non précisé' }}</dd></div>
+                {%- if nb_places != blank -%}
+                  <div><dt>Places</dt><dd>{{ nb_places }}</dd></div>
+                {%- endif -%}
+                {%- if mf.encombrement.value != blank -%}
+                  <div><dt>Encombrement</dt><dd>{{ mf.encombrement.value }}</dd></div>
+                {%- endif -%}
+                {%- if mf.hauteur.value != blank -%}
+                  <div><dt>Hauteur</dt><dd>{{ mf.hauteur.value }} cm</dd></div>
+                {%- endif -%}
+                {%- if mf.jets.value != blank -%}
+                  <div><dt>Jets</dt><dd>{{ mf.jets.value }}</dd></div>
+                {%- endif -%}
               </dl>
 
               {%- if mf.configuration.value != blank -%}
@@ -273,10 +284,7 @@
           </label>
         </div>
         <div class="spa-comparo__duel-corps" data-comparo-duel-corps></div>
-        <p class="spa-comparo__note">
-          « Non précisé » signifie que le fabricant ne communique pas la donnée, pas que l'équipement
-          est absent. Demandez-la nous : nous la vérifions auprès de ROCA Spa avant de vous répondre.
-        </p>
+        <p class="spa-comparo__note" data-comparo-note></p>
       </section>
 
       <script type="application/json" data-comparo-donnees>
@@ -438,10 +446,13 @@
       { cle: 'gamme', libelle: 'Gamme' }
     ];
 
-    function valeur(spa, critere) {
+    function renseigne(spa, critere) {
       var v = spa[critere.cle];
-      if (v === null || v === undefined || v === '') return 'non précisé';
-      return String(v) + (critere.unite || '');
+      return v !== null && v !== undefined && v !== '';
+    }
+
+    function valeur(spa, critere) {
+      return String(spa[critere.cle]) + (critere.unite || '');
     }
 
     function echapper(texte) {
@@ -485,24 +496,37 @@
 
       var differencesSeules = racine.querySelector('[data-comparo-differences]');
       var seulementDifferences = differencesSeules && differencesSeules.checked;
-      var identiques = 0;
 
-      criteres.forEach(function (critere) {
+      /* Un critère que le fabricant ne renseigne pas pour l'un des deux
+         modèles ne se compare pas : la ligne disparaît plutôt que d'afficher
+         « non précisé » en face d'un chiffre, ce qui ferait passer le modèle
+         documenté pour le mieux équipé. */
+      var comparables = criteres.filter(function (critere) {
+        return renseigne(a, critere) && renseigne(b, critere);
+      });
+
+      var lignes = 0;
+
+      comparables.forEach(function (critere) {
         var va = valeur(a, critere);
         var vb = valeur(b, critere);
         var differe = va !== vb;
-        if (!differe) {
-          identiques++;
-          if (seulementDifferences) return;
-        }
+        if (!differe && seulementDifferences) return;
+        lignes++;
         var classe = differe ? ' class="spa-comparo__differe"' : '';
         html += '<tr' + classe + '><th scope="row">' + critere.libelle + '</th>';
         html += '<td>' + echapper(va) + '</td><td>' + echapper(vb) + '</td></tr>';
       });
 
-      if (seulementDifferences && identiques === criteres.length) {
-        html += '<tr><td colspan="3">Ces deux modèles annoncent exactement les mêmes caractéristiques.</td></tr>';
+      if (lignes === 0) {
+        html += '<tr><td colspan="3">'
+          + (comparables.length === 0
+            ? 'Ces deux modèles n’ont aucune caractéristique documentée en commun. Demandez-nous le détail, nous le vérifions auprès de ROCA Spa.'
+            : 'Ces deux modèles annoncent exactement les mêmes caractéristiques.')
+          + '</td></tr>';
       }
+
+      var masques = criteres.length - comparables.length;
 
       html += '</tbody><tfoot><tr><td></td>';
       [a, b].forEach(function (spa) {
@@ -511,6 +535,22 @@
       html += '</tr></tfoot></table>';
 
       duelCorps.innerHTML = html;
+
+      /* La note dit ce qui manque plutôt que de le taire : un tableau qui
+         cache des lignes sans le dire laisse croire que tout a été comparé. */
+      var note = racine.querySelector('[data-comparo-note]');
+      if (note) {
+        if (masques === 0) {
+          note.textContent = 'Toutes les caractéristiques annoncées par le fabricant pour ces deux modèles sont affichées.';
+        } else if (masques === 1) {
+          note.textContent = 'Une caractéristique n’est pas affichée : le fabricant ne la communique pas pour '
+            + 'l’un des deux modèles. Demandez-la nous, nous la vérifions auprès de ROCA Spa.';
+        } else {
+          note.textContent = masques + ' caractéristiques ne sont pas affichées : le fabricant ne les communique '
+            + 'pas pour l’un des deux modèles. Demandez-les nous, nous les vérifions auprès de ROCA Spa.';
+        }
+      }
+
       duel.hidden = false;
       duel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
