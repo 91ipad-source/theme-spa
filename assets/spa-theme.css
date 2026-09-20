@@ -2069,3 +2069,52 @@ img {
     justify-self: center;
   }
 }
+
+/* --------------------------------------------------------------------------
+   31. AUCUN MOT COUPE EN DEUX
+
+   Dawn pose « word-break: break-word » sur les titres, les cartes, les
+   accordeons et les facettes. Sur un navigateur moderne cette valeur
+   equivaut a « overflow-wrap: anywhere » : le mot est coupe des que la
+   colonne est un peu juste, sans trait d'union, ce qui donne des
+   « Therapeutiq / ue ».
+
+   On revient au comportement normal : un mot ne se coupe que s'il est, a
+   lui seul, plus large que sa colonne — sinon il passe entier a la ligne
+   suivante. « hyphens: none » interdit en plus la cesure automatique.
+   -------------------------------------------------------------------------- */
+body,
+h1, h2, h3, h4, h5, h6,
+p, li, dt, dd, td, th,
+a, span, label, summary, button, blockquote, figcaption,
+.h0, .h1, .h2, .h3, .h4, .h5,
+.rte,
+.product__title,
+.product__text,
+.card__heading,
+.card__information,
+.collapsible-content__heading,
+.accordion__title,
+.facets__label,
+.cart-item__name,
+.article-card__title,
+.banner__heading,
+.rich-text__heading {
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: none;
+  -webkit-hyphens: none;
+}
+
+/* Le titre produit est le seul endroit ou un mot long depasse vraiment la
+   colonne : « Therapeutique » mesure 370 px a la taille d'origine (40 px)
+   pour une colonne d'environ 315 px. On le fait suivre la largeur de la
+   fenetre, borne entre 24 et 32 px, taille a laquelle le mot le plus long
+   du catalogue tient dans la colonne la plus etroite. */
+@media screen and (min-width: 990px) {
+  .product__info-wrapper .product__title h1,
+  .product__info-wrapper .product__title .h1 {
+    font-size: clamp(2.4rem, 2.2vw, 3.2rem);
+    line-height: 1.15;
+  }
+}
