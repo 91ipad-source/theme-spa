@@ -1,0 +1,60 @@
+{%- comment -%}
+  Une rangée de cinq étoiles pour une note sur 5.
+
+  Paramètres :
+    note     — la note, en chiffres. Accepte « 4,8 » comme « 4.8 » comme « 5 ».
+    libelle  — ce que lit une synthèse vocale, par exemple « 4,8 sur 5 ».
+
+  POURQUOI DEUX COUCHES SUPERPOSÉES. Une note de 4,8 ne se dessine pas avec
+  cinq étoiles entières : il faut pouvoir en remplir une aux quatre
+  cinquièmes. La rangée vide sert de fond, la rangée pleine est posée
+  par-dessus et rognée à la largeur voulue. Aucun calcul en JavaScript, une
+  seule variable CSS.
+
+  POURQUOI DU SVG ET PAS LE CARACTÈRE « ★ ». DM Sans n'a pas de glyphe
+  d'étoile : le navigateur irait le chercher dans une police de secours,
+  différente d'une machine à l'autre, et la rangée changerait de taille et
+  d'alignement selon l'ordinateur du visiteur. Un tracé SVG est identique
+  partout.
+
+  ACCESSIBILITÉ. Les deux rangées sont décoratives et masquées aux lecteurs
+  d'écran ; c'est le conteneur qui porte le rôle « img » et le libellé. Sans
+  cela, une synthèse vocale annoncerait dix images sans rien en dire.
+{%- endcomment -%}
+
+{%- liquid
+  assign taux = note | replace: ',', '.' | times: 20
+  if taux > 100
+    assign taux = 100
+  endif
+-%}
+
+{%- if taux > 0 -%}
+  <span
+    class="spa-etoiles"
+    style="--spa-etoiles-taux: {{ taux }}%;"
+    role="img"
+    aria-label="{{ libelle | default: 'Note' | escape }}"
+  >
+    <span class="spa-etoiles__rangee spa-etoiles__rangee--fond" aria-hidden="true">
+      {%- for i in (1..5) -%}
+        <svg class="spa-etoiles__astre" viewBox="0 0 20 19" focusable="false">
+          <path
+            d="M10 0l2.9 6.2 6.6.9-4.8 4.8 1.2 6.8L10 15.5 4.1 18.7l1.2-6.8L.5 7.1l6.6-.9z"
+            fill="currentColor"
+          />
+        </svg>
+      {%- endfor -%}
+    </span>
+    <span class="spa-etoiles__rangee spa-etoiles__rangee--plein" aria-hidden="true">
+      {%- for i in (1..5) -%}
+        <svg class="spa-etoiles__astre" viewBox="0 0 20 19" focusable="false">
+          <path
+            d="M10 0l2.9 6.2 6.6.9-4.8 4.8 1.2 6.8L10 15.5 4.1 18.7l1.2-6.8L.5 7.1l6.6-.9z"
+            fill="currentColor"
+          />
+        </svg>
+      {%- endfor -%}
+    </span>
+  </span>
+{%- endif -%}

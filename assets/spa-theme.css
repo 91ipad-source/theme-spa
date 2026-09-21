@@ -3519,3 +3519,195 @@ a, span, label, summary, button, blockquote, figcaption,
   margin: 3.2rem 0 0;
   text-align: center;
 }
+
+/* --------------------------------------------------------------------------
+   36. ETOILES (snippet spa-etoiles)
+
+   Deux rangees superposees : la rangee vide en fond, la rangee pleine
+   par-dessus, rognee a la largeur que vaut la note. C'est ce qui permet de
+   dessiner 4,8/5 sans tricher en arrondissant a 5.
+   -------------------------------------------------------------------------- */
+.spa-etoiles {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+}
+
+.spa-etoiles__rangee {
+  display: block;
+  white-space: nowrap;
+}
+
+.spa-etoiles__rangee--fond {
+  color: var(--water);
+}
+
+/* La couche pleine est posee exactement sur la vide et rognee. « overflow:
+   hidden » sur une largeur en pourcentage suffit : pas de masque, pas de
+   degrade, rien a recalculer si la taille des etoiles change. */
+.spa-etoiles__rangee--plein {
+  position: absolute;
+  inset: 0;
+  width: var(--spa-etoiles-taux, 0%);
+  overflow: hidden;
+  color: var(--sky-deep);
+}
+
+.spa-etoiles__astre {
+  width: 1.8rem;
+  height: 1.8rem;
+  margin-right: 0.2rem;
+}
+
+.spa-etoiles__astre:last-child {
+  margin-right: 0;
+}
+
+/* --------------------------------------------------------------------------
+   37. AVIS CLIENTS (section spa-avis)
+
+   Le bandeau de note d'abord, les avis ensuite. Cet ordre n'est pas
+   decoratif : la note et le nombre se verifient d'un clic, les temoignages
+   non. On montre donc d'abord ce qui est verifiable, puis ce qui est
+   racontable.
+   -------------------------------------------------------------------------- */
+.spa-avis {
+  padding-top: var(--pt, 40px);
+  padding-bottom: var(--pb, 48px);
+}
+
+.spa-avis__titre {
+  margin: 0 0 1.2rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 3vw, 3.2rem);
+  line-height: 1.15;
+}
+
+.spa-avis__intro {
+  max-width: 68rem;
+  margin-bottom: 2.8rem;
+  color: var(--deep-soft);
+}
+
+/* Le bandeau : la note en gros, les etoiles et le compte au milieu, le lien
+   a droite. Sur telephone il passe en colonne et se centre — une note de
+   4,8 calee a gauche au-dessus d'un bouton pleine largeur pendait dans le
+   vide. */
+.spa-avis__bandeau {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.6rem 2.4rem;
+  padding: 2.4rem 3.2rem;
+  border-radius: var(--r-lg);
+  background: var(--mist);
+}
+
+@media screen and (max-width: 749px) {
+  .spa-avis__bandeau {
+    flex-direction: column;
+    padding: 2.4rem 2rem;
+    text-align: center;
+  }
+}
+
+.spa-avis__chiffre {
+  margin: 0;
+  font-family: var(--font-display);
+  line-height: 1;
+}
+
+.spa-avis__chiffre strong {
+  font-size: clamp(3.6rem, 4.5vw, 4.8rem);
+  font-weight: 700;
+}
+
+.spa-avis__chiffre span {
+  font-size: 1.8rem;
+  color: var(--deep-soft);
+}
+
+.spa-avis__mesure {
+  margin-right: auto;
+}
+
+@media screen and (max-width: 749px) {
+  .spa-avis__mesure {
+    margin-right: 0;
+  }
+}
+
+.spa-avis__compte {
+  margin: 0.6rem 0 0;
+  color: var(--deep-soft);
+  font-size: 1.5rem;
+}
+
+.spa-avis__lien {
+  flex-shrink: 0;
+}
+
+/* Les avis. Trois colonnes sur grand ecran, une seule des que la place
+   manque : un temoignage en colonne de 20 caracteres ne se lit plus. */
+.spa-avis__liste {
+  display: grid;
+  gap: 2rem;
+  margin: 3.2rem 0 0;
+  padding: 0;
+  list-style: none;
+  grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+}
+
+/* « auto-fit » plutot que « auto-fill » : avec trois avis, les trois cartes
+   occupent toute la largeur au lieu de se serrer a gauche en laissant une
+   colonne vide. La largeur maximale evite l'exces inverse — un avis seul
+   s'etirerait sur 1 200 px, soit une ligne de texte deux fois trop longue
+   pour etre suivie sans se perdre. */
+.spa-avis__carte {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  max-width: 52rem;
+  padding: 2.4rem;
+  border: 1px solid rgba(15, 58, 90, 0.1);
+  border-radius: var(--r-lg);
+  background: var(--white);
+}
+
+/* Le texte de l'avis est une citation : il garde ses guillemets et sa
+   ponctuation d'origine, et on ne lui met pas de retrait — un blockquote
+   indente au milieu d'une carte ressemble a une erreur de mise en page. */
+/* Le navigateur met les citations en italique. Sur une phrase c'est une
+   elegance, sur cinq lignes c'est une gene : les italiques se lisent plus
+   lentement. Ce qui signale un temoignage ici, ce sont les etoiles au-dessus
+   et la signature en dessous, pas l'inclinaison des lettres. */
+.spa-avis__texte {
+  margin: 0;
+  font-style: normal;
+  font-size: 1.6rem;
+  line-height: 1.6;
+}
+
+.spa-avis__signature {
+  margin: auto 0 0;
+  padding-top: 0.4rem;
+  color: var(--deep-soft);
+  font-size: 1.4rem;
+}
+
+.spa-avis__auteur {
+  font-weight: 600;
+  color: var(--deep);
+}
+
+.spa-avis__provenance {
+  max-width: 72rem;
+  margin: 2.4rem 0 0;
+  color: var(--deep-soft);
+  font-size: 1.35rem;
+  line-height: 1.55;
+}
+
+.spa-avis__provenance p {
+  margin: 0;
+}

@@ -1,0 +1,293 @@
+{%- comment -%}
+  « Ce qu'en disent nos clients » — les avis, et d'où ils viennent.
+
+  POURQUOI CETTE SECTION EXISTE. Un spa se paie plusieurs milliers d'euros à
+  une entreprise qu'on ne connaît pas. Le visiteur va chercher des avis ; la
+  question est seulement de savoir s'il les trouve ici, ou s'il quitte le
+  site pour les chercher ailleurs — et ne revient pas toujours.
+
+  LA PROVENANCE EST DITE, PAS SUGGÉRÉE. Les avis affichés ici sont ceux
+  publiés sur la fiche Google de LINERS FRANCE, la société qui exploite
+  SPAS9. Ce n'est pas un détail juridique : présenter des avis recueillis
+  ailleurs sans dire d'où ils viennent, ou sans permettre de les vérifier,
+  tombe sous le coup des règles sur les pratiques commerciales trompeuses.
+  D'où le lien vers la fiche, affiché aussi haut que la note elle-même, et
+  la mention de provenance en bas de section.
+
+  AUCUN AVIS N'EST ÉCRIT EN DUR. Chaque avis est un bloc, saisi depuis
+  l'éditeur de thème, et un bloc dont le texte est vide ne s'affiche pas.
+  Tant qu'aucun avis n'a été recopié, la section affiche la note, le nombre
+  d'avis et le lien : elle est utile dès le premier jour, meilleure ensuite.
+
+  PAS DE BALISAGE aggregateRating — voir snippets/spa-localbusiness.liquid,
+  qui explique la règle en détail. Résumé : déclarer en données structurées
+  une note qu'on ne recueille pas soi-même est contraire aux consignes de
+  Google et expose à une action manuelle. La note peut être affichée en
+  clair, elle est vraie et vérifiable ; elle ne doit pas être balisée.
+{%- endcomment -%}
+
+{%- liquid
+  assign note = section.settings.note | strip
+  assign nombre = section.settings.nombre
+  assign lien = section.settings.lien_google | strip
+
+  comment
+    On compte les avis réellement affichables avant de decider quoi que ce
+    soit : un bloc dont le texte est vide n'est pas un avis, c'est un bloc
+    qu'on a ajoute et pas encore rempli.
+  endcomment
+  assign avis_remplis = 0
+  for block in section.blocks
+    assign texte = block.settings.texte | strip
+    if texte != blank
+      assign avis_remplis = avis_remplis | plus: 1
+    endif
+  endfor
+
+  comment
+    Les libelles des etoiles sont prepares ici : les arguments d'un « render »
+    n'acceptent pas de filtres, seulement des variables deja constituees.
+  endcomment
+  assign libelle_note = note | append: ' sur 5'
+
+  comment
+    La mention de provenance s'affiche des qu'il y a quelque chose a
+    attribuer — une note, ou des avis recopies. La condition est calculee
+    ici plutot qu'ecrite dans le « if » : Liquid n'a pas de parentheses et
+    evalue « and » et « or » de droite a gauche, ce qui rend une condition
+    mixte difficile a relire et facile a casser.
+  endcomment
+  assign montrer_provenance = false
+  if section.settings.provenance != blank
+    if note != blank or avis_remplis > 0
+      assign montrer_provenance = true
+    endif
+  endif
+-%}
+
+<div
+  class="spa-avis color-{{ section.settings.color_scheme }} gradient"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width">
+    {%- if section.settings.titre != blank -%}
+      <h2 class="spa-avis__titre">{{ section.settings.titre | escape }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.intro != blank -%}
+      <div class="spa-avis__intro rte">{{ section.settings.intro }}</div>
+    {%- endif -%}
+
+    {%- comment -%}
+      LE BANDEAU DE NOTE. Il tient debout tout seul, sans aucun avis recopie :
+      la note et le nombre sont des faits verifiables d'un clic. C'est ce qui
+      permet a la section d'etre publiee avant d'etre remplie.
+    {%- endcomment -%}
+    {%- if note != blank or lien != blank -%}
+      <div class="spa-avis__bandeau">
+        {%- if note != blank -%}
+          <p class="spa-avis__chiffre">
+            <strong>{{ note }}</strong><span>/5</span>
+          </p>
+
+          <div class="spa-avis__mesure">
+            {%- render 'spa-etoiles', note: note, libelle: libelle_note -%}
+            {%- if nombre > 0 -%}
+              <p class="spa-avis__compte">
+                {{ nombre }} avis Google
+              </p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- if lien != blank -%}
+          <a class="btn spa-avis__lien" href="{{ lien }}" target="_blank" rel="noopener">
+            Lire les avis sur Google
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if avis_remplis > 0 -%}
+      <ul class="spa-avis__liste" role="list">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign texte = block.settings.texte | strip
+            assign auteur = block.settings.auteur | strip
+            assign lieu = block.settings.lieu | strip
+            assign date = block.settings.date | strip
+            assign note_bloc = block.settings.note
+            assign libelle_bloc = note_bloc | append: ' sur 5'
+          -%}
+          {%- if texte != blank -%}
+            <li class="spa-avis__carte" {{ block.shopify_attributes }}>
+              {%- if note_bloc > 0 -%}
+                {%- render 'spa-etoiles', note: note_bloc, libelle: libelle_bloc -%}
+              {%- endif -%}
+
+              <blockquote class="spa-avis__texte">{{ texte }}</blockquote>
+
+              {%- comment -%}
+                La signature est une seule ligne : qui, d'ou, quand. Les
+                morceaux absents disparaissent avec leur separateur — un avis
+                signe « Sophie —  » se lit comme une donnee qu'on a perdue.
+              {%- endcomment -%}
+              {%- if auteur != blank or lieu != blank or date != blank -%}
+                <p class="spa-avis__signature">
+                  {%- if auteur != blank -%}
+                    <span class="spa-avis__auteur">{{ auteur }}</span>
+                  {%- endif -%}
+                  {%- if lieu != blank -%}
+                    {%- if auteur != blank %} · {% endif -%}{{ lieu }}
+                  {%- endif -%}
+                  {%- if date != blank -%}
+                    {%- if auteur != blank or lieu != blank %} · {% endif -%}{{ date }}
+                  {%- endif -%}
+                </p>
+              {%- endif -%}
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- comment -%}
+      LA MENTION DE PROVENANCE. Elle reste affichee meme sans avis recopie :
+      la note du bandeau vient de la meme source et doit etre attribuee de la
+      meme facon.
+    {%- endcomment -%}
+    {%- comment -%}
+      Un « div » et non un « p » : le reglage est un texte enrichi, donc son
+      contenu arrive deja enveloppe dans un paragraphe. Un « p » dans un « p »
+      est invalide — le navigateur referme le premier avant d'ouvrir le
+      second, et la classe qui bride la largeur se retrouve sur un element
+      vide pendant que le texte s'etale sur toute la page.
+    {%- endcomment -%}
+    {%- if montrer_provenance -%}
+      <div class="spa-avis__provenance rte">{{ section.settings.provenance }}</div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Avis clients",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "titre",
+      "label": "Titre",
+      "default": "Ce qu'en disent nos clients"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Introduction"
+    },
+    {
+      "type": "header",
+      "content": "La note"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Note moyenne sur 5",
+      "info": "Telle qu'elle s'affiche, par exemple 4,8. Laisser vide pour masquer tout le bandeau de note.",
+      "default": "4,8"
+    },
+    {
+      "type": "number",
+      "id": "nombre",
+      "label": "Nombre d'avis",
+      "default": 18
+    },
+    {
+      "type": "url",
+      "id": "lien_google",
+      "label": "Lien vers les avis Google",
+      "info": "À récupérer dans votre fiche d'établissement Google : « Demander des avis » donne un lien court qui ouvre directement la liste."
+    },
+    {
+      "type": "richtext",
+      "id": "provenance",
+      "label": "Mention de provenance",
+      "info": "Dire d'où viennent les avis n'est pas une formalité : présenter des avis recueillis ailleurs sans l'indiquer est une pratique commerciale trompeuse.",
+      "default": "<p>Ces avis sont publiés sur la fiche Google de LINERS FRANCE, la société qui exploite SPAS9. Nous les reprenons ici sans les modifier ; le lien ci-dessus ouvre la liste complète, y compris les avis moins favorables.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Mise en page"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Jeu de couleurs",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "avis",
+      "name": "Avis",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "texte",
+          "label": "Texte de l'avis",
+          "info": "À recopier mot pour mot depuis Google, sans le réécrire ni le raccourcir. Un bloc au texte vide ne s'affiche pas."
+        },
+        {
+          "type": "range",
+          "id": "note",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Note donnée",
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "auteur",
+          "label": "Auteur",
+          "info": "Le nom tel qu'il apparaît sur Google."
+        },
+        {
+          "type": "text",
+          "id": "lieu",
+          "label": "Commune",
+          "info": "Facultatif, et seulement si le client l'a lui-même indiqué."
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Date",
+          "info": "Par exemple « juin 2026 »."
+        }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Avis clients" }]
+}
+{% endschema %}
