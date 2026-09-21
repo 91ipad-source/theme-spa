@@ -43,27 +43,18 @@
             "titre": "Escalier",
             "precision": "À partir de ce modèle 2 marches. Les autres hauteurs vont jusqu'à 390 €."
           }
-        },
-        "pompe": {
-          "type": "option",
-          "settings": {
-            "produit": "pompe-a-chaleur-balboa-clim8zone",
-            "titre": "Pompe à chaleur réversible CLIM8ZONE",
-            "precision": "Chauffe plus vite en hiver, rafraîchit l'eau en été, et allège la facture d'électricité."
-          }
         }
       },
       "block_order": [
         "couverture",
         "leve_couverture",
-        "escalier",
-        "pompe"
+        "escalier"
       ],
       "settings": {
         "titre": "Le budget, poste par poste",
         "intro": "<p>Un spa n'est pas qu'un prix de catalogue. Voici les quatre postes qui composent la dépense réelle, avec les tarifs que nous pratiquons et, pour ce qui ne peut pas être chiffré d'avance, la raison pour laquelle cela varie.</p>",
         "collection": "tous-nos-spas",
-        "offre": "Offre en cours : couverture isolante offerte sur tout spa rigide, jusqu'au 31 octobre.",
+        "offre": "Offre en cours : couverture isolante offerte sur tout spa rigide, jusqu'au 31 octobre.",
         "offre_fin": "2026-10-31",
         "lien_accessoires": "/collections/accessoires",
         "exemple_titre": "Un exemple, du début à la fin",
@@ -81,49 +72,49 @@
         "q1": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Combien coûte un spa installé ?",
+            "heading": "Combien coûte un spa installé ?",
             "icon": "none",
-            "row_content": "<p>Chez SPAS9, un spa complet démarre à 4 290 € TTC. En Essonne, le pack livraison et installation revient à 1 450 € : le spa est déposé à son emplacement, raccordé, rempli et réglé. Un Spa Doro Plus 7 places installé revient donc à 6 940 € TTC, hors options et hors grutage.</p>"
+            "row_content": "<p>Chez SPAS9, un spa complet démarre à 4 290 € TTC. En Essonne, le pack livraison et installation revient à 1 450 € : le spa est déposé à son emplacement, raccordé, rempli et réglé. Un Spa Doro Plus 7 places installé revient donc à 6 940 € TTC, hors options et hors grutage.</p>"
           }
         },
         "q2": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "La livraison est-elle comprise dans le prix du spa ?",
+            "heading": "La livraison est-elle comprise dans le prix du spa ?",
             "icon": "none",
-            "row_content": "<p>Non. Le prix affiché sur la fiche est celui du spa seul, complet et prêt à fonctionner. La livraison se choisit à part : gratuite en retrait au showroom sur rendez-vous, 650 € en livraison seule en Essonne, ou 1 450 € avec le pack livraison et installation, qui dépose le spa à son emplacement et le met en eau.</p>"
+            "row_content": "<p>Non. Le prix affiché sur la fiche est celui du spa seul, complet et prêt à fonctionner. La livraison se choisit à part : gratuite en retrait au showroom sur rendez-vous, 650 € en livraison seule en Essonne, ou 1 450 € avec le pack livraison et installation, qui dépose le spa à son emplacement et le met en eau.</p>"
           }
         },
         "q3": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Qu'est-ce qui est compris dans le prix d'un spa ?",
+            "heading": "Qu'est-ce qui est compris dans le prix d'un spa ?",
             "icon": "none",
-            "row_content": "<p>La cuve acrylique, sa structure et sa jupe dans le coloris de votre choix, l'hydromassage complet, la filtration et l'ozonateur avec un filtre déjà monté, l'éclairage LED et l'audio Bluetooth selon le modèle, l'électronique Balboa et son panneau de commande, ainsi que la garantie 10 ans sur la structure, 5 ans sur l'acrylique et 2 ans sur l'électronique et les pompes. Tous nos prix sont TTC, TVA à 20 % comprise.</p>"
+            "row_content": "<p>La cuve acrylique, sa structure et sa jupe dans le coloris de votre choix, l'hydromassage complet, la filtration et l'ozonateur avec le ou les filtres déjà montés, l'éclairage LED et l'audio Bluetooth selon le modèle, l'électronique Balboa et son panneau de commande, ainsi que la garantie 10 ans sur la structure, 5 ans sur l'acrylique et 2 ans sur l'électronique et les pompes. Tous nos prix sont TTC, TVA à 20 % comprise.</p>"
           }
         },
         "q4": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Le grutage est-il facturé en plus ?",
+            "heading": "Le grutage est-il facturé en plus ?",
             "icon": "none",
-            "row_content": "<p>Oui, et il ne peut pas être chiffré d'avance. Le grutage n'est pas compris dans le pack livraison et installation : lorsque l'accès impose de passer le spa par-dessus un mur, une clôture ou un bâtiment, cette opération fait l'objet d'un devis séparé, établi après l'étude de l'accès et avant toute confirmation de date.</p>"
+            "row_content": "<p>Oui. Le grutage n'est jamais compris dans le pack livraison et installation. En Essonne, c'est un forfait de 1 500 € : lorsque l'accès impose de passer le spa par-dessus un mur, une clôture ou un bâtiment, ce montant s'ajoute au devis. Ailleurs, il se chiffre au cas par cas.</p><p>Ce n'est pas une option que vous cochez à la commande : personne ne peut savoir depuis chez soi si sa livraison imposera une grue. Nous le constatons à l'étude de l'accès, à partir de vos photos ou d'une visite, avant toute confirmation de date.</p>"
           }
         },
         "q5": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Quelles options faut-il prévoir en plus du spa ?",
+            "heading": "Quelles options faut-il prévoir en plus du spa ?",
             "icon": "none",
-            "row_content": "<p>Aucune n'est nécessaire pour se baigner. Les plus demandées sont la couverture isothermique (460 €), un escalier (à partir de 120 €), un lève-couverture (à partir de 140 €) et la pompe à chaleur réversible Balboa CLIM8ZONE (1 990 €), qui chauffe plus vite en hiver et rafraîchit l'eau en été. Elles se commandent avec le spa ou plus tard, au même prix.</p>"
+            "row_content": "<p>Aucune n'est nécessaire pour se baigner. Les plus demandées sont la couverture isothermique (460 €), qui garde la chaleur entre deux bains et se rentabilise vite, un escalier (à partir de 120 €) et un lève-couverture (à partir de 140 €), pour ouvrir le spa seul. Elles se commandent avec le spa ou plus tard, au même prix.</p>"
           }
         },
         "q6": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Faut-il prévoir des travaux avant l'installation ?",
+            "heading": "Faut-il prévoir des travaux avant l'installation ?",
             "icon": "none",
-            "row_content": "<p>Deux points sont à votre charge et ne nous sont pas facturés. Le support d'abord : une surface plane, stable et capable de porter le spa rempli et occupé. L'alimentation électrique ensuite, pour les modèles qui ne sont pas Plug & Play : une ligne dédiée doit être tirée du tableau électrique jusqu'à l'emplacement par un électricien habilité. Le raccordement final du câble au spa, lui, est réalisé par nos soins.</p>"
+            "row_content": "<p>Deux points sont à votre charge et ne nous sont pas facturés. Le support d'abord : une surface plane, stable et capable de porter le spa rempli et occupé. L'alimentation électrique ensuite, pour les modèles qui ne sont pas Plug & Play : une ligne dédiée doit être tirée du tableau électrique jusqu'à l'emplacement par un électricien habilité. Le raccordement final du câble au spa, lui, est réalisé par nos soins.</p>"
           }
         }
       },
