@@ -46,6 +46,36 @@
   if exemple != blank and v_pack
     assign exemple_total = exemple.price | plus: v_pack.price
   endif
+
+  comment
+    L'OFFRE EN COURS S'EFFACE TOUTE SEULE. Une promotion encore annoncee le
+    lendemain de sa date de fin n'est pas un detail d'affichage : c'est une
+    offre que la page promet et que la boutique ne tient plus. Personne ne
+    pense a vider un champ le 1er novembre au matin — la date le fait.
+
+    Le jour indique, l'offre est encore valable : la comparaison est stricte,
+    on ne masque qu'a partir du lendemain. Une date vide, ou ecrite dans un
+    format que le theme ne reconnait pas, vaut « pas de limite » : un champ
+    mal saisi ne doit pas faire disparaitre l'offre en silence.
+
+    Meme mecanique, meme format que le champ « Dernier jour » du bandeau
+    defilant, pour qu'une seule regle soit a retenir.
+  endcomment
+  assign offre = section.settings.offre | strip
+  assign offre_fin_txt = section.settings.offre_fin | strip | remove: '-' | remove: '/' | remove: '.' | remove: ' '
+  assign offre_fin_jour = 0
+  if offre_fin_txt.size == 8
+    assign siecle = offre_fin_txt | slice: 0, 2
+    if siecle == '20'
+      assign offre_fin_jour = offre_fin_txt | plus: 0
+    endif
+  endif
+  if offre_fin_jour > 0
+    assign aujourdhui = 'now' | date: '%Y%m%d' | plus: 0
+    if aujourdhui > offre_fin_jour
+      assign offre = ''
+    endif
+  endif
 -%}
 
 <div
@@ -129,8 +159,8 @@
               {%- endfor -%}
             </ul>
 
-            {%- if section.settings.offre != blank -%}
-              <p class="spa-budget__offre">{{ section.settings.offre | escape }}</p>
+            {%- if offre != blank -%}
+              <p class="spa-budget__offre">{{ offre | escape }}</p>
             {%- endif -%}
 
             <p class="spa-budget__note">
@@ -349,8 +379,15 @@
       "type": "text",
       "id": "offre",
       "label": "Offre en cours sur une option",
-      "info": "Laisser vide quand l'offre est terminée.",
+      "info": "Laisser vide s'il n'y a pas d'offre.",
       "default": "Offre en cours : couverture isolante offerte sur tout spa rigide, jusqu'au 31 octobre."
+    },
+    {
+      "type": "text",
+      "id": "offre_fin",
+      "label": "Dernier jour de l'offre",
+      "info": "Format AAAA-MM-JJ, par exemple 2026-10-31. L'offre disparaît de la page le lendemain, sans rien avoir à modifier. Laisser vide pour une offre permanente.",
+      "default": "2026-10-31"
     },
     {
       "type": "url",

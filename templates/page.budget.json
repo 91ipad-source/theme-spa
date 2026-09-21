@@ -64,6 +64,7 @@
         "intro": "<p>Un spa n'est pas qu'un prix de catalogue. Voici les quatre postes qui composent la dépense réelle, avec les tarifs que nous pratiquons et, pour ce qui ne peut pas être chiffré d'avance, la raison pour laquelle cela varie.</p>",
         "collection": "tous-nos-spas",
         "offre": "Offre en cours : couverture isolante offerte sur tout spa rigide, jusqu'au 31 octobre.",
+        "offre_fin": "2026-10-31",
         "lien_accessoires": "/collections/accessoires",
         "exemple_titre": "Un exemple, du début à la fin",
         "exemple_spa": "spa-roca-doro-plus-7-personnes",

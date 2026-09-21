@@ -6,16 +6,61 @@
   de sa largeur, donc la seconde copie arrive exactement là où était la
   première et la boucle est continue. La copie est masquée aux lecteurs
   d'écran et retirée du parcours clavier.
+
+  UN MESSAGE PEUT AVOIR UNE DATE DE FIN. Une promotion annoncée ici après sa
+  date d'expiration n'est pas une maladresse d'affichage : c'est une offre
+  que le site continue de promettre et que la boutique ne tient plus. Or
+  personne ne pense à retirer un bandeau le 1er novembre au matin. Le champ
+  « Dernier jour » ferme le message tout seul, le lendemain de la date
+  indiquée — le jour indiqué, l'offre est encore valable.
+
+  Une date vide, ou écrite dans un format que le thème ne reconnaît pas,
+  vaut « pas de limite » : un champ mal saisi ne doit pas faire disparaître
+  un message en silence. Le format attendu est rappelé sous le champ.
 {%- endcomment -%}
 
 {%- liquid
-  assign duration = section.blocks.size | times: 7
+  comment
+    Un seul passage decide quels messages sont affichables, et le resultat
+    est retenu dans une chaine d'index — « |0|2|3| ». Les deux boucles de
+    rendu s'y referent au lieu de refaire le calcul, et le compte sert a
+    regler la duree de l'animation. Ecrire la regle deux fois, c'est se
+    garantir qu'un jour l'une des deux sera oubliee.
+  endcomment
+  assign aujourdhui = 'now' | date: '%Y%m%d' | plus: 0
+  assign gardes = '|'
+  assign nb_visibles = 0
+
+  for block in section.blocks
+    assign texte = block.settings.text | strip
+    if texte == blank
+      continue
+    endif
+
+    assign fin_txt = block.settings.fin | strip | remove: '-' | remove: '/' | remove: '.' | remove: ' '
+    assign fin_jour = 0
+    if fin_txt.size == 8
+      assign siecle = fin_txt | slice: 0, 2
+      if siecle == '20'
+        assign fin_jour = fin_txt | plus: 0
+      endif
+    endif
+
+    if fin_jour > 0 and aujourdhui > fin_jour
+      continue
+    endif
+
+    assign gardes = gardes | append: forloop.index0 | append: '|'
+    assign nb_visibles = nb_visibles | plus: 1
+  endfor
+
+  assign duration = nb_visibles | times: 7
   if duration < 14
     assign duration = 14
   endif
 -%}
 
-{%- if section.blocks.size > 0 -%}
+{%- if nb_visibles > 0 -%}
   <div
     class="spa-marquee"
     role="region"
@@ -36,7 +81,8 @@
           endif
         -%}
         {%- for block in section.blocks -%}
-          {%- if block.settings.text != blank -%}
+          {%- assign cle = '|' | append: forloop.index0 | append: '|' -%}
+          {%- if gardes contains cle -%}
             {%- if block.settings.link != blank -%}
               <a
                 class="spa-marquee__item"
@@ -116,6 +162,12 @@
           "type": "url",
           "id": "link",
           "label": "Lien"
+        },
+        {
+          "type": "text",
+          "id": "fin",
+          "label": "Dernier jour",
+          "info": "Format AAAA-MM-JJ, par exemple 2026-10-31. Le message disparaît du bandeau le lendemain. Laisser vide pour un message permanent."
         }
       ]
     }
