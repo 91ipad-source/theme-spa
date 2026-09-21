@@ -1480,5 +1480,39 @@
         "label": "Photo du magasin"
       }
     ]
+  },
+  {
+    "name": "Contact rapide (mobile)",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Barre fixe en bas de l'écran sur téléphone : Appeler, WhatsApp et Rendez-vous. Elle n'apparaît pas sur ordinateur, où le numéro est déjà dans l'en-tête et le pied de page."
+      },
+      {
+        "type": "checkbox",
+        "id": "spa_contact_rapide",
+        "label": "Afficher la barre de contact sur mobile",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "spa_telephone",
+        "label": "Numéro de téléphone",
+        "default": "+33160773700",
+        "info": "Au format international, sans espaces : +33160773700"
+      },
+      {
+        "type": "text",
+        "id": "spa_whatsapp",
+        "label": "Numéro WhatsApp",
+        "info": "Au format international. Laisser vide si vous n'utilisez pas WhatsApp : le bouton disparaît."
+      },
+      {
+        "type": "url",
+        "id": "spa_lien_rdv",
+        "label": "Lien du bouton Rendez-vous",
+        "info": "Par défaut, la page Contact."
+      }
+    ]
   }
 ]

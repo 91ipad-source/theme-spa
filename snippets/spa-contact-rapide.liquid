@@ -1,0 +1,72 @@
+{%- comment -%}
+  Barre de contact fixe, en bas de l'écran, sur mobile uniquement.
+
+  POURQUOI CETTE BARRE EXISTE. Un visiteur sur téléphone qui veut appeler
+  doit aujourd'hui remonter jusqu'à l'en-tête, ouvrir le menu, aller sur
+  Contact, puis trouver le numéro. À chacune de ces étapes, il en reste
+  moins. Un spa se décide rarement en ligne : l'appel ou le message est la
+  vraie conversion de ce site, et il doit être à un pouce du doigt.
+
+  POURQUOI MOBILE SEULEMENT. Sur ordinateur, le numéro est déjà visible dans
+  l'en-tête et dans le pied de page, et une barre flottante y mangerait de la
+  hauteur utile sans rien apporter. La media query reprend le seuil de Dawn.
+
+  CE QU'ELLE N'AFFICHE PAS. Un bouton dont le réglage est vide. Sans numéro
+  WhatsApp renseigné, la barre passe à deux boutons au lieu d'en afficher un
+  qui ne mène nulle part.
+
+  ACCESSIBILITÉ. Les libellés sont lisibles sous l'icône, pas seulement
+  suggérés par un pictogramme. Le contenu de la page reçoit une marge basse
+  égale à la hauteur de la barre pour que rien ne reste caché dessous, et la
+  zone sûre des iPhone (« safe-area ») est respectée.
+{%- endcomment -%}
+
+{%- liquid
+  assign tel = settings.spa_telephone | strip
+  assign whatsapp = settings.spa_whatsapp | strip | remove: ' ' | remove: '+' | remove: '.' | remove: '-'
+  assign lien_rdv = settings.spa_lien_rdv
+  if lien_rdv == blank
+    assign lien_rdv = '/pages/contact'
+  endif
+-%}
+
+{%- if settings.spa_contact_rapide and tel != blank -%}
+  <div class="spa-rapide" role="group" aria-label="Nous contacter">
+    <a class="spa-rapide__lien" href="tel:{{ tel | remove: ' ' }}">
+      <svg class="spa-rapide__icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path
+          d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.2 2.2z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>Appeler</span>
+    </a>
+
+    {%- if whatsapp != blank -%}
+      <a
+        class="spa-rapide__lien"
+        href="https://wa.me/{{ whatsapp }}"
+        target="_blank"
+        rel="noopener"
+      >
+        <svg class="spa-rapide__icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path
+            d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm5.2 14c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.5-.6a11 11 0 0 1-4.3-3.9c-.3-.4-.9-1.3-.9-2.4s.6-1.7.8-2c.2-.2.4-.3.6-.3h.4c.2 0 .4 0 .6.4l.8 1.9c.1.2 0 .4-.1.5l-.3.4-.3.3c-.1.1-.2.3 0 .5.2.3.7 1.1 1.4 1.7.9.8 1.6 1.1 1.9 1.2.2.1.4.1.5-.1l.7-.8c.2-.2.3-.2.5-.1l1.8.9c.2.1.4.2.4.3.1.2.1.6-.1 1z"
+            fill="currentColor"
+          />
+        </svg>
+        <span>WhatsApp</span>
+      </a>
+    {%- endif -%}
+
+    <a class="spa-rapide__lien spa-rapide__lien--fort" href="{{ lien_rdv }}">
+      <svg class="spa-rapide__icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path
+          d="M7 2v2h10V2h2v2h2a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h2V2h2zm13 8H4v10h16V10zM8 12v2H6v-2h2zm5 0v2h-2v-2h2zm5 0v2h-2v-2h2z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>Rendez-vous</span>
+    </a>
+  </div>
+{%- endif -%}

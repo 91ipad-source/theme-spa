@@ -2968,3 +2968,78 @@ a, span, label, summary, button, blockquote, figcaption,
   background: var(--mist);
   font-size: 1.4rem;
 }
+
+/* --------------------------------------------------------------------------
+   34. BARRE DE CONTACT RAPIDE (mobile)
+
+   Trois boutons colles en bas de l'ecran sur telephone. Le seuil est celui
+   de Dawn : au-dessus de 750 px, la barre disparait et le pied de page
+   reprend son role.
+
+   Le corps de page recoit une marge basse egale a la hauteur de la barre.
+   Sans elle, la barre recouvrirait les derniers liens du pied de page —
+   c'est le defaut classique de ce genre de barre, et il est invisible
+   depuis un ordinateur.
+   -------------------------------------------------------------------------- */
+.spa-rapide {
+  position: fixed;
+  z-index: 10;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: none;
+  border-top: 1px solid rgba(15, 58, 90, 0.1);
+  background: var(--white);
+  box-shadow: 0 -2px 16px rgba(15, 58, 90, 0.1);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+@media screen and (max-width: 749px) {
+  .spa-rapide {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+  }
+
+  /* La hauteur de la barre, plus la zone sure des iPhone. */
+  body {
+    padding-bottom: calc(6.4rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+.spa-rapide__lien {
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.9rem 0.4rem 1rem;
+  color: var(--deep);
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.1;
+  text-align: center;
+  text-decoration: none;
+  justify-items: center;
+}
+
+.spa-rapide__lien + .spa-rapide__lien {
+  border-left: 1px solid rgba(15, 58, 90, 0.1);
+}
+
+/* Le rendez-vous est l'action que la boutique veut vraiment : le showroom
+   ne se visite que sur rendez-vous. Il porte donc l'aplat. */
+.spa-rapide__lien--fort {
+  background: var(--deep);
+  color: var(--white);
+}
+
+.spa-rapide__icone {
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.spa-rapide__lien:active {
+  background: var(--mist);
+}
+
+.spa-rapide__lien--fort:active {
+  background: var(--sky-deep);
+}
