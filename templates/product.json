@@ -74,6 +74,14 @@
           "type": "description",
           "settings": {}
         },
+        "tab_prix": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Ce que le prix comprend",
+            "icon": "price_tag",
+            "content": "<p>Le prix affiché est celui du <strong>spa complet, prêt à fonctionner</strong> : la cuve, sa structure et sa jupe dans le coloris de votre choix, l'hydromassage, la filtration et l'ozonateur avec un filtre déjà monté, l'électronique Balboa et son panneau de commande, l'éclairage et l'audio selon le modèle. <strong>TVA de 20 % comprise</strong> : tous nos prix sont TTC.</p><p>La livraison et l'installation se choisissent à part, juste au-dessus du bouton d'ajout au panier. Le <strong>retrait au showroom est gratuit</strong>, sur rendez-vous. Le <strong>grutage n'est jamais compris</strong> : lorsque l'accès impose une grue, il fait l'objet d'un devis séparé, établi après l'étude de l'accès.</p><p>Les accessoires — couverture, escalier, lève-couverture, pompe à chaleur — sont des options. Aucun n'est nécessaire pour se baigner.</p><p><a href=\"/pages/combien-coute-un-spa\">Le budget, poste par poste</a></p>"
+          }
+        },
         "tab_livraison": {
           "type": "collapsible_tab",
           "settings": {
@@ -124,6 +132,7 @@
         "prestations",
         "reassurance",
         "description",
+        "tab_prix",
         "tab_livraison",
         "tab_garantie",
         "tab_paiement",

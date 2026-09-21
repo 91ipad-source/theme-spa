@@ -1,0 +1,438 @@
+{%- comment -%}
+  « Le budget, poste par poste » : ce que coûte un spa une fois installé.
+
+  POURQUOI CETTE SECTION EXISTE. Le prix affiché sur une fiche spa est vrai,
+  mais il ne répond pas à la question que le client se pose vraiment : combien
+  vais-je payer en tout. Tant que cette question reste sans réponse, il la
+  pose au téléphone — ou il ne la pose pas et s'en va. Les quatre postes
+  ci-dessous répondent dans l'ordre : ce qui est compris, ce qui s'ajoute si
+  on le veut, ce qui s'ajoute selon la prestation choisie, et ce qui ne peut
+  pas être chiffré d'avance.
+
+  AUCUN PRIX N'EST ÉCRIT EN DUR. Tous viennent des fiches produit — les spas,
+  les accessoires, les trois prestations. Changer un tarif dans l'admin suffit,
+  la page suit. Un chiffre recopié dans un texte finit toujours par mentir.
+
+  LES POSTES QUI NE SE CHIFFRENT PAS SONT DITS QUAND MÊME. Le grutage, la
+  livraison hors Essonne, la ligne électrique : on ne les cache pas en
+  attendant le devis, on les annonce avec la raison pour laquelle ils varient.
+  C'est la seule façon qu'un devis n'arrive pas comme une mauvaise surprise.
+{%- endcomment -%}
+
+{%- liquid
+  assign presta_livraison = all_products['prestation-livraison-91']
+  assign presta_service = all_products['prestation-mise-en-service-91']
+  assign presta_pack = all_products['prestation-pack-livraison-installation-91']
+
+  assign v_livraison = presta_livraison.selected_or_first_available_variant
+  assign v_service = presta_service.selected_or_first_available_variant
+  assign v_pack = presta_pack.selected_or_first_available_variant
+
+  comment
+    Le prix d'appel est calculé, pas recopié : on parcourt la collection et on
+    garde le plus bas. Une baisse de tarif ou un nouveau modèle d'entrée de
+    gamme se répercute ici sans que personne ait à y penser.
+  endcomment
+  assign gamme = section.settings.collection
+  assign prix_mini = 0
+  for spa in gamme.products
+    if prix_mini == 0 or spa.price < prix_mini
+      assign prix_mini = spa.price
+    endif
+  endfor
+
+  assign exemple = section.settings.exemple_spa
+  assign exemple_total = 0
+  if exemple != blank and v_pack
+    assign exemple_total = exemple.price | plus: v_pack.price
+  endif
+-%}
+
+<div
+  class="spa-budget color-{{ section.settings.color_scheme }} gradient"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width">
+    {%- if section.settings.titre != blank -%}
+      <h2 class="spa-budget__titre">{{ section.settings.titre | escape }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.intro != blank -%}
+      <div class="spa-budget__intro rte">{{ section.settings.intro }}</div>
+    {%- endif -%}
+
+    <div class="spa-budget__postes">
+      {%- comment -%}
+        POSTE 1 — le spa lui-même. La liste n'aligne pas de prix : tout y est
+        compris, et c'est précisément ce que la colonne de droite doit dire.
+      {%- endcomment -%}
+      <section class="spa-budget__poste">
+        <p class="spa-budget__rang" aria-hidden="true">1</p>
+        <div class="spa-budget__corps">
+          <p class="spa-budget__etiquette spa-budget__etiquette--inclus">Compris dans le prix affiché</p>
+          <h3 class="spa-budget__nom">Le spa</h3>
+          {%- if prix_mini > 0 -%}
+            <p class="spa-budget__montant">
+              à partir de <strong>{{ prix_mini | money }}</strong>
+            </p>
+          {%- endif -%}
+          <p class="spa-budget__phrase">
+            Le prix d'une fiche spa est le prix du spa complet, prêt à fonctionner. Rien n'y est
+            démonté pour être revendu ensuite.
+          </p>
+
+          <ul class="spa-budget__inclus">
+            <li>La cuve acrylique, sa structure et sa jupe, dans le coloris de votre choix</li>
+            <li>L'hydromassage complet : jets, pompes et chauffage</li>
+            <li>La filtration et l'ozonateur, avec un filtre déjà monté</li>
+            <li>L'éclairage LED et l'audio Bluetooth, selon le modèle</li>
+            <li>L'électronique Balboa et son panneau de commande</li>
+            <li>La garantie : 10 ans sur la structure, 5 ans sur l'acrylique, 2 ans sur l'électronique et les pompes</li>
+            <li>La TVA à 20 % : tous les prix affichés sur ce site sont TTC</li>
+          </ul>
+        </div>
+      </section>
+
+      {%- comment -%}
+        POSTE 2 — les options. Elles viennent des fiches accessoires choisies
+        dans l'éditeur, avec leur vrai prix. Un bloc dont le produit a été
+        dépublié disparaît de lui-même : on teste la variante, pas le produit.
+      {%- endcomment -%}
+      {%- if section.blocks.size > 0 -%}
+        <section class="spa-budget__poste">
+          <p class="spa-budget__rang" aria-hidden="true">2</p>
+          <div class="spa-budget__corps">
+            <p class="spa-budget__etiquette spa-budget__etiquette--option">À ajouter, ou pas</p>
+            <h3 class="spa-budget__nom">Les équipements en option</h3>
+            <p class="spa-budget__phrase">
+              Aucun n'est nécessaire pour se baigner. Ils se commandent avec le spa ou plus tard,
+              au même prix.
+            </p>
+
+            <ul class="spa-budget__lignes">
+              {%- for block in section.blocks -%}
+                {%- liquid
+                  assign article = block.settings.produit
+                  assign variante = article.selected_or_first_available_variant
+                -%}
+                {%- if variante -%}
+                  <li class="spa-budget__ligne" {{ block.shopify_attributes }}>
+                    <span class="spa-budget__libelle">
+                      <a href="{{ article.url }}">{{ block.settings.titre | default: article.title }}</a>
+                      {%- if block.settings.precision != blank -%}
+                        <span class="spa-budget__precision">{{ block.settings.precision | escape }}</span>
+                      {%- endif -%}
+                    </span>
+                    <span class="spa-budget__prix">{{ variante.price | money }}</span>
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+
+            {%- if section.settings.offre != blank -%}
+              <p class="spa-budget__offre">{{ section.settings.offre | escape }}</p>
+            {%- endif -%}
+
+            <p class="spa-budget__note">
+              <a href="{{ section.settings.lien_accessoires | default: '/collections/accessoires' }}">
+                Voir tous les accessoires
+              </a>
+            </p>
+          </div>
+        </section>
+      {%- endif -%}
+
+      {%- comment -%}
+        POSTE 3 — la livraison. Même source que le sélecteur de la fiche spa :
+        si les trois prestations ne sont pas commandables, le poste entier
+        disparaît plutôt que d'afficher des tarifs qu'on ne peut pas tenir.
+      {%- endcomment -%}
+      {%- if v_livraison and v_service and v_pack -%}
+        <section class="spa-budget__poste">
+          <p class="spa-budget__rang" aria-hidden="true">3</p>
+          <div class="spa-budget__corps">
+            <p class="spa-budget__etiquette spa-budget__etiquette--presta">Tarif fixe en Essonne (91)</p>
+            <h3 class="spa-budget__nom">La livraison et l'installation</h3>
+            <p class="spa-budget__phrase">
+              Vous choisissez : venir le chercher, le faire livrer, ou nous laisser le poser et le
+              mettre en eau. Ces trois lignes se cochent sur la fiche du spa, avant de payer.
+            </p>
+
+            <ul class="spa-budget__lignes">
+              <li class="spa-budget__ligne">
+                <span class="spa-budget__libelle">
+                  Retrait au showroom
+                  <span class="spa-budget__precision">Sur rendez-vous, pour les spas en stock</span>
+                </span>
+                <span class="spa-budget__prix spa-budget__prix--nul">Gratuit</span>
+              </li>
+              <li class="spa-budget__ligne">
+                <span class="spa-budget__libelle">
+                  <a href="{{ presta_livraison.url }}">Livraison seule</a>
+                  <span class="spa-budget__precision">S'arrête au seuil : le spa reste à déplacer</span>
+                </span>
+                <span class="spa-budget__prix">{{ v_livraison.price | money }}</span>
+              </li>
+              <li class="spa-budget__ligne">
+                <span class="spa-budget__libelle">
+                  <a href="{{ presta_service.url }}">Mise en service seule</a>
+                  <span class="spa-budget__precision">Suppose le spa déjà en place et raccordé</span>
+                </span>
+                <span class="spa-budget__prix">{{ v_service.price | money }}</span>
+              </li>
+              <li class="spa-budget__ligne spa-budget__ligne--fort">
+                <span class="spa-budget__libelle">
+                  <a href="{{ presta_pack.url }}">Pack livraison et installation</a>
+                  <span class="spa-budget__precision">
+                    Déposé à l'emplacement, raccordé, rempli et réglé
+                  </span>
+                </span>
+                <span class="spa-budget__prix">{{ v_pack.price | money }}</span>
+              </li>
+            </ul>
+
+            <p class="spa-budget__note">
+              Ces tarifs valent pour l'Essonne. Ailleurs en Île-de-France et dans le Loiret,
+              <a href="{{ section.settings.lien_devis | default: '/pages/mon-projet-spa' }}">
+                le chiffrage se fait sur devis
+              </a>.
+            </p>
+          </div>
+        </section>
+      {%- endif -%}
+
+      {%- comment -%}
+        POSTE 4 — ce qu'aucun tarif ne peut couvrir. Chaque ligne porte sa
+        raison : un « sur devis » sans explication ressemble à une réponse
+        évasive, alors que c'est ici une contrainte physique.
+      {%- endcomment -%}
+      <section class="spa-budget__poste">
+        <p class="spa-budget__rang" aria-hidden="true">4</p>
+        <div class="spa-budget__corps">
+          <p class="spa-budget__etiquette spa-budget__etiquette--devis">Sur devis</p>
+          <h3 class="spa-budget__nom">Ce qui dépend de chez vous</h3>
+          <p class="spa-budget__phrase">
+            Ces postes n'ont pas de tarif affiché parce qu'ils dépendent de votre terrain, pas du
+            spa. Nous les chiffrons après l'étude de l'accès, avant de confirmer une date.
+          </p>
+
+          <ul class="spa-budget__lignes">
+            <li class="spa-budget__ligne">
+              <span class="spa-budget__libelle">
+                Le grutage
+                <span class="spa-budget__precision">
+                  Quand le spa doit passer par-dessus un mur, une clôture ou un bâtiment
+                </span>
+              </span>
+              <span class="spa-budget__prix spa-budget__prix--devis">Sur devis</span>
+            </li>
+            <li class="spa-budget__ligne">
+              <span class="spa-budget__libelle">
+                La livraison hors Essonne
+                <span class="spa-budget__precision">
+                  Selon la distance, le modèle et les moyens de manutention nécessaires
+                </span>
+              </span>
+              <span class="spa-budget__prix spa-budget__prix--devis">Sur devis</span>
+            </li>
+            <li class="spa-budget__ligne">
+              <span class="spa-budget__libelle">
+                Le portage sur une longue distance ou un accès très contraint
+                <span class="spa-budget__precision">
+                  Personnel et matériel supplémentaires
+                </span>
+              </span>
+              <span class="spa-budget__prix spa-budget__prix--devis">Sur devis</span>
+            </li>
+          </ul>
+
+          <h4 class="spa-budget__sous-titre">Et ce que nous ne facturons pas, parce que ce n'est pas nous qui le faisons</h4>
+          <ul class="spa-budget__inclus spa-budget__inclus--tiers">
+            <li>
+              <strong>La ligne électrique dédiée</strong>, pour les spas qui ne sont pas
+              Plug &amp; Play : elle est réalisée par un électricien habilité, du tableau
+              jusqu'à l'emplacement. Nous effectuons le raccordement final au spa.
+            </li>
+            <li>
+              <strong>Le support</strong> : une surface plane, stable et capable de porter le spa
+              rempli et occupé. Dalle, terrasse ou plots, selon votre terrain.
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    {%- comment -%}
+      L'exemple chiffré. Un total additionné devant le client vaut mieux que
+      quatre listes séparées : c'est le chiffre qu'il va retenir, autant qu'il
+      soit juste. Il est calculé, jamais recopié.
+    {%- endcomment -%}
+    {%- if exemple_total > 0 -%}
+      <aside class="spa-budget__exemple">
+        <h3 class="spa-budget__exemple-titre">
+          {{ section.settings.exemple_titre | default: 'Un exemple, du début à la fin' }}
+        </h3>
+
+        <ul class="spa-budget__lignes spa-budget__lignes--exemple">
+          <li class="spa-budget__ligne">
+            <span class="spa-budget__libelle">
+              <a href="{{ exemple.url }}">{{ exemple.title }}</a>
+            </span>
+            <span class="spa-budget__prix">{{ exemple.price | money }}</span>
+          </li>
+          <li class="spa-budget__ligne">
+            <span class="spa-budget__libelle">Pack livraison et installation, en Essonne</span>
+            <span class="spa-budget__prix">{{ v_pack.price | money }}</span>
+          </li>
+          <li class="spa-budget__ligne spa-budget__ligne--total">
+            <span class="spa-budget__libelle">Total, spa en eau et prêt à l'usage</span>
+            <span class="spa-budget__prix">{{ exemple_total | money }}</span>
+          </li>
+        </ul>
+
+        <p class="spa-budget__note">
+          Accès sans difficulté particulière, emplacement déjà prêt, aucune option. C'est le
+          montant réglé, TVA comprise&nbsp;: il n'y a pas de frais de dossier ni de supplément à
+          la livraison. Payable en une fois ou en 3 à 4 chèques sans frais.
+        </p>
+      </aside>
+    {%- endif -%}
+
+    {%- if section.settings.lien_devis_libelle != blank -%}
+      <p class="spa-budget__action">
+        <a
+          class="btn"
+          href="{{ section.settings.lien_devis | default: '/pages/mon-projet-spa' }}"
+        >
+          {{- section.settings.lien_devis_libelle | escape -}}
+        </a>
+      </p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Budget, poste par poste",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "titre",
+      "label": "Titre",
+      "default": "Le budget, poste par poste"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Introduction",
+      "default": "<p>Un spa n'est pas qu'un prix de catalogue. Voici les quatre postes qui composent la dépense réelle, avec les tarifs que nous pratiquons et, pour ce qui ne peut pas être chiffré d'avance, la raison pour laquelle cela varie.</p>"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection servant au prix d'appel",
+      "info": "Le « à partir de » du poste 1 est calculé sur cette collection."
+    },
+    {
+      "type": "text",
+      "id": "offre",
+      "label": "Offre en cours sur une option",
+      "info": "Laisser vide quand l'offre est terminée.",
+      "default": "Offre en cours : couverture isolante offerte sur tout spa rigide, jusqu'au 31 octobre."
+    },
+    {
+      "type": "url",
+      "id": "lien_accessoires",
+      "label": "Lien « Voir tous les accessoires »"
+    },
+    {
+      "type": "header",
+      "content": "L'exemple chiffré"
+    },
+    {
+      "type": "text",
+      "id": "exemple_titre",
+      "label": "Titre de l'exemple",
+      "default": "Un exemple, du début à la fin"
+    },
+    {
+      "type": "product",
+      "id": "exemple_spa",
+      "label": "Spa servant d'exemple",
+      "info": "Le total est additionné automatiquement avec le pack livraison et installation."
+    },
+    {
+      "type": "header",
+      "content": "Bouton"
+    },
+    {
+      "type": "text",
+      "id": "lien_devis_libelle",
+      "label": "Libellé du bouton",
+      "default": "Demander un devis pour mon projet"
+    },
+    {
+      "type": "url",
+      "id": "lien_devis",
+      "label": "Lien du bouton"
+    },
+    {
+      "type": "header",
+      "content": "Mise en page"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Jeu de couleurs",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "option",
+      "name": "Option chiffrée",
+      "settings": [
+        {
+          "type": "product",
+          "id": "produit",
+          "label": "Accessoire"
+        },
+        {
+          "type": "text",
+          "id": "titre",
+          "label": "Nom affiché",
+          "info": "Laisser vide pour reprendre le titre de la fiche."
+        },
+        {
+          "type": "text",
+          "id": "precision",
+          "label": "Précision"
+        }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Budget, poste par poste" }]
+}
+{% endschema %}

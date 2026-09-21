@@ -1,5 +1,5 @@
 {%- comment -%}
-  Balisage FAQPage de la page « À propos ».
+  Balisage FAQPage des pages « À propos » et « Combien coûte un spa ».
 
   ATTENTION — RÈGLE ABSOLUE : chaque question et chaque réponse ci-dessous
   doivent exister mot pour mot dans le corps de la page, et rester visibles
@@ -8,9 +8,18 @@
   astuce. Le repli en accordéon est autorisé parce que le texte reste dans
   le HTML et s'ouvre au clic.
 
-  Donc : si vous modifiez une réponse dans l'admin Shopify, il faut la
-  modifier ici aussi. C'est le prix du balisage — Dawn ne sait pas générer
-  ce bloc depuis le contenu d'une page.
+  Donc : si vous modifiez une réponse dans l'admin Shopify ou dans le
+  gabarit de la page, il faut la modifier ici aussi. C'est le prix du
+  balisage — Dawn ne sait pas générer ce bloc depuis le contenu d'une page.
+
+  ATTENTION PARTICULIÈRE AUX PRIX de la page « Combien coûte un spa ». Les
+  réponses ci-dessous en citent quatre : le prix d'appel de la gamme, la
+  livraison seule, le pack livraison et installation, et le total de
+  l'exemple. Ces chiffres sont recopiés — ils ne suivent PAS les fiches
+  produit, contrairement à la section affichée sur la page. Toute
+  modification d'un de ces tarifs dans l'admin doit être répercutée ici,
+  dans templates/page.budget.json, sans quoi le site annoncera dans ses
+  données structurées un prix qu'il ne pratique plus.
 {%- endcomment -%}
 
 {%- if page.handle == 'a-propos' -%}
@@ -82,6 +91,66 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Nous proposons des modèles de 2 à 7 places. Le nombre de places annoncé ne suffit pas à décider : deux spas de capacité identique peuvent offrir un confort très différent selon la disposition des assises. Notre article « Spa 2, 3, 5 ou 7 places : quelle taille choisir ? » détaille les différences format par format."
+          }
+        }
+      ]
+    }
+  </script>
+{%- endif -%}
+
+{%- if page.handle == 'combien-coute-un-spa' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": {{ request.origin | append: '/pages/combien-coute-un-spa#faq' | json }},
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Combien coûte un spa installé ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Chez SPAS9, un spa complet démarre à 4 290 € TTC. En Essonne, le pack livraison et installation revient à 1 450 € : le spa est déposé à son emplacement, raccordé, rempli et réglé. Un Spa Doro Plus 7 places installé revient donc à 6 940 € TTC, hors options et hors grutage."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "La livraison est-elle comprise dans le prix du spa ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non. Le prix affiché sur la fiche est celui du spa seul, complet et prêt à fonctionner. La livraison se choisit à part : gratuite en retrait au showroom sur rendez-vous, 650 € en livraison seule en Essonne, ou 1 450 € avec le pack livraison et installation, qui dépose le spa à son emplacement et le met en eau."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Qu'est-ce qui est compris dans le prix d'un spa ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La cuve acrylique, sa structure et sa jupe dans le coloris de votre choix, l'hydromassage complet, la filtration et l'ozonateur avec un filtre déjà monté, l'éclairage LED et l'audio Bluetooth selon le modèle, l'électronique Balboa et son panneau de commande, ainsi que la garantie 10 ans sur la structure, 5 ans sur l'acrylique et 2 ans sur l'électronique et les pompes. Tous nos prix sont TTC, TVA à 20 % comprise."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Le grutage est-il facturé en plus ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui, et il ne peut pas être chiffré d'avance. Le grutage n'est pas compris dans le pack livraison et installation : lorsque l'accès impose de passer le spa par-dessus un mur, une clôture ou un bâtiment, cette opération fait l'objet d'un devis séparé, établi après l'étude de l'accès et avant toute confirmation de date."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quelles options faut-il prévoir en plus du spa ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Aucune n'est nécessaire pour se baigner. Les plus demandées sont la couverture isothermique (460 €), un escalier (à partir de 120 €), un lève-couverture (à partir de 140 €) et la pompe à chaleur réversible Balboa CLIM8ZONE (1 990 €), qui chauffe plus vite en hiver et rafraîchit l'eau en été. Elles se commandent avec le spa ou plus tard, au même prix."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Faut-il prévoir des travaux avant l'installation ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Deux points sont à votre charge et ne nous sont pas facturés. Le support d'abord : une surface plane, stable et capable de porter le spa rempli et occupé. L'alimentation électrique ensuite, pour les modèles qui ne sont pas Plug & Play : une ligne dédiée doit être tirée du tableau électrique jusqu'à l'emplacement par un électricien habilité. Le raccordement final du câble au spa, lui, est réalisé par nos soins."
           }
         }
       ]
