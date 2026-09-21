@@ -24,6 +24,7 @@
 {%- liquid
   assign tel = settings.spa_telephone | strip
   assign whatsapp = settings.spa_whatsapp | strip | remove: ' ' | remove: '+' | remove: '.' | remove: '-'
+  assign message = settings.spa_whatsapp_message | strip | url_encode
   assign lien_rdv = settings.spa_lien_rdv
   if lien_rdv == blank
     assign lien_rdv = '/pages/contact'
@@ -45,7 +46,7 @@
     {%- if whatsapp != blank -%}
       <a
         class="spa-rapide__lien"
-        href="https://wa.me/{{ whatsapp }}"
+        href="https://wa.me/{{ whatsapp }}{% if message != blank %}?text={{ message }}{% endif %}"
         target="_blank"
         rel="noopener"
       >

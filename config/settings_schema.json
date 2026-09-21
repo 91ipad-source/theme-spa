@@ -1505,13 +1505,21 @@
         "type": "text",
         "id": "spa_whatsapp",
         "label": "Numéro WhatsApp",
-        "info": "Au format international. Laisser vide si vous n'utilisez pas WhatsApp : le bouton disparaît."
+        "info": "Au format international. Laisser vide si vous n'utilisez pas WhatsApp : le bouton disparaît.",
+        "default": "+33674394832"
       },
       {
         "type": "url",
         "id": "spa_lien_rdv",
         "label": "Lien du bouton Rendez-vous",
         "info": "Par défaut, la page Contact."
+      },
+      {
+        "type": "text",
+        "id": "spa_whatsapp_message",
+        "label": "Message pré-rempli WhatsApp",
+        "default": "Bonjour, je vous écris depuis spas9.fr au sujet d'un projet de spa.",
+        "info": "S'affiche déjà tapé dans la conversation. Laisser vide pour ouvrir une conversation vierge."
       }
     ]
   }
