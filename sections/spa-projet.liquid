@@ -269,22 +269,28 @@
       var secours = document.querySelector('[data-projet-secours]');
       if (!app || !secours) return;
 
-      /* L'application injecte son formulaire après le chargement de la page :
-         on lui laisse quelques secondes avant de conclure qu'elle n'affichera
-         rien. Dès qu'un formulaire apparaît, on s'arrête là. */
-      var fin = Date.now() + 6000;
+      /* L'application injecte son formulaire après le chargement de la page,
+         parfois dans un composant web dont le contenu est inaccessible depuis
+         ici. On ne cherche donc PAS une balise précise — on regarde seulement
+         si le bloc occupe de la hauteur. S'il affiche quoi que ce soit, on le
+         laisse tranquille ; c'est le seul critère qui ne risque pas de masquer
+         par erreur un formulaire qui fonctionne.
+
+         Dix secondes de patience : mieux vaut un formulaire qui apparaît tard
+         qu'un doublon affiché trop tôt. */
+      var fin = Date.now() + 10000;
 
       function verifier() {
-        if (app.querySelector('form, iframe')) return;
+        if (app.offsetHeight > 40) return;
         if (Date.now() < fin) {
-          window.setTimeout(verifier, 400);
+          window.setTimeout(verifier, 500);
           return;
         }
         app.hidden = true;
         secours.hidden = false;
       }
 
-      window.setTimeout(verifier, 1200);
+      window.setTimeout(verifier, 1500);
     })();
   </script>
 {%- endif -%}

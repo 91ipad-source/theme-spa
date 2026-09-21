@@ -2776,22 +2776,46 @@ a, span, label, summary, button, blockquote, figcaption,
   }
 }
 
-/* Champs : on reprend la forme des champs de Dawn (.field) mais sur fond
-   blanc, puisque le panneau est deja colore. */
+/* Champs.
+
+   ATTENTION, PIEGE DE DAWN : « .field » est un conteneur flex en position
+   relative, et « .field__label » y est une etiquette FLOTTANTE, posee en
+   absolu par-dessus le champ. Deux consequences si on ne fait rien :
+   l'etiquette disparait derriere le champ, et tout autre enfant — ici le
+   texte d'aide — se range a cote du champ au lieu de passer dessous.
+
+   On demonte donc le mecanisme au lieu de lutter avec : conteneur en bloc,
+   etiquette en flux normal au-dessus du champ, et les deux pseudo-elements
+   qui dessinent l'anneau de bordure de Dawn neutralises — sans quoi, le
+   conteneur n'etant plus positionne, ils se caleraient sur le panneau. */
 .spa-projet .field {
+  position: static;
+  display: block;
   margin-bottom: 1.6rem;
 }
 
+.spa-projet .field::before,
+.spa-projet .field::after {
+  content: none;
+}
+
 .spa-projet .field__label {
+  position: static;
   display: block;
   margin-bottom: 0.6rem;
   color: var(--deep);
   font-size: 1.4rem;
   font-weight: 700;
+  letter-spacing: 0;
+  pointer-events: auto;
+  transition: none;
 }
 
 .spa-projet .field__input {
   width: 100%;
+  height: auto;
+  min-height: 0;
+  flex-grow: 0;
   padding: 1.1rem 1.4rem;
   border: 1px solid rgba(15, 58, 90, 0.18);
   border-radius: var(--r-md);
