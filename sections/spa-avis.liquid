@@ -212,6 +212,7 @@
       <div class="spa-avis__widget spa-avis__widget--cadre">
         <iframe
           class="spa-avis__cadre"
+          id="SpaAvisCadre-{{ section.id }}"
           src="https://cdn.trustindex.io/amp-widget.html#{{ widget }}"
           title="Avis de nos clients publiés sur Google et Facebook"
           loading="lazy"
@@ -219,6 +220,59 @@
           style="height: {{ section.settings.widget_hauteur | default: 390 }}px;"
         ></iframe>
       </div>
+
+      {%- comment -%}
+        LE CADRE SE REGLE TOUT SEUL.
+
+        La page AMP de Trustindex annonce sa hauteur a son parent, par
+        message, des qu'elle a fini de se dessiner — c'est ce que veut dire
+        « resizable » dans la balise qu'ils fournissent. On ecoute ce
+        message et on redimensionne le cadre en consequence.
+
+        Sans cela, chaque modification du widget obligeait a relever un
+        nombre chez Trustindex et a le recopier dans les reglages du theme.
+        Le nombre des reglages reste, mais comme point de depart et comme
+        filet : si le message n'arrive jamais — page bloquee, script tiers
+        refuse, navigateur ancien — le cadre garde cette hauteur-la et rien
+        n'est casse.
+
+        TROIS VERROUS avant d'accepter une hauteur, parce qu'un site peut
+        recevoir des messages de n'importe quelle fenetre :
+        1. l'origine doit etre exactement celle de Trustindex ;
+        2. l'emetteur doit etre CE cadre-ci, pas une autre fenetre ;
+        3. la valeur doit etre un nombre plausible — entre 120 et 2000 px.
+        Faute de quoi le message est ignore.
+      {%- endcomment -%}
+      <script>
+        (function () {
+          var cadre = document.getElementById('SpaAvisCadre-{{ section.id }}');
+          if (!cadre) return;
+
+          window.addEventListener(
+            'message',
+            function (evenement) {
+              if (evenement.origin !== 'https://cdn.trustindex.io') return;
+              if (evenement.source !== cadre.contentWindow) return;
+
+              var donnees = evenement.data;
+              if (typeof donnees === 'string') {
+                try {
+                  donnees = JSON.parse(donnees);
+                } catch (erreur) {
+                  return;
+                }
+              }
+              if (!donnees || typeof donnees !== 'object') return;
+
+              var hauteur = Number(donnees.height || (donnees.data && donnees.data.height));
+              if (!isFinite(hauteur) || hauteur < 120 || hauteur > 2000) return;
+
+              cadre.style.height = Math.round(hauteur) + 'px';
+            },
+            false
+          );
+        })();
+      </script>
     {%- elsif widget != blank and format_widget == 'large' -%}
       <div class="spa-avis__widget spa-avis__widget--large">
         <script defer async src="https://cdn.trustindex.io/loader.js?{{ widget }}"></script>
@@ -327,8 +381,8 @@
       "type": "number",
       "id": "widget_hauteur",
       "label": "Hauteur du cadre, en pixels",
-      "info": "Utilisé par le format « Cadre » seulement. Trustindex indique une hauteur conseillée dans la balise amp-iframe qu'il fournit. Au-delà, le contenu défile dans le cadre au lieu d'allonger la page.",
-      "default": 390
+      "info": "Format « Cadre » seulement. Le cadre s'ajuste ensuite tout seul à la hauteur que le widget annonce : cette valeur ne sert qu'avant l'ajustement, et de secours si le widget ne répond pas. Inutile d'y revenir à chaque modification dans Trustindex.",
+      "default": 400
     },
     {
       "type": "checkbox",
