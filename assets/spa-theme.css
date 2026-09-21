@@ -22,9 +22,16 @@
   --mist: #e9f5fb;
   --white: #ffffff;
 
-  /* Typographie */
-  --font-display: 'Unbounded', system-ui, sans-serif;
-  --font-body: 'Instrument Sans', system-ui, sans-serif;
+  /* Typographie : DM Sans partout, titres comme texte courant.
+
+     Les deux variables sont conservees bien qu'elles pointent sur la meme
+     famille. Elles disent l'INTENTION — « ceci est un titre », « ceci est
+     du texte » — et une cinquantaine de regles s'y referent deja. Les
+     fusionner obligerait a relire tout le fichier pour retrouver, le jour
+     ou l'on voudra redonner une police propre aux titres, lesquelles
+     etaient lesquelles. */
+  --font-display: 'DM Sans', system-ui, sans-serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
 
   /* Rayons */
   --r-pill: 999px;
@@ -737,12 +744,14 @@ a.spa-marquee__item:hover {
    l'oeil lit le gros caractere en premier : un intervalle sans unite n'est
    pas une quantite, la ou « 2007 », « 4,8/5 » et « 10 ans » en sont.
 
-   Elle n'est donc plus en « nowrap ». En Unbounded, « 15-30 jours » demande
-   166 px a 2.4rem alors qu'une colonne de la grille mobile n'en offre que
-   136 sur un ecran de 360 px : la forcer sur une ligne voudrait dire la
-   descendre a 18 px, a peine plus que son propre libelle. Elle se plie donc
-   en deux lignes sur les ecrans etroits, et reste sur une seule des qu'il y
-   a la place. « balance » evite la coupe batarde qui laisse un mot seul. */
+   Elle n'est donc plus en « nowrap ». La mesure d'origine avait ete faite
+   en Unbounded, ou « 15-30 jours » demandait 166 px a 2.4rem alors qu'une
+   colonne de la grille mobile n'en offre que 136 sur un ecran de 360 px :
+   la forcer sur une ligne voulait dire la descendre a 18 px, a peine plus
+   que son propre libelle. DM Sans est plus etroit et tiendra plus souvent,
+   mais la regle reste la bonne : la valeur se plie en deux lignes sur les
+   ecrans etroits et reste sur une seule des qu'il y a la place.
+   « balance » evite la coupe batarde qui laisse un mot seul. */
 .spa-chiffre__valeur {
   display: block;
   font-family: var(--font-display);
@@ -2106,18 +2115,22 @@ a, span, label, summary, button, blockquote, figcaption,
   -webkit-hyphens: none;
 }
 
-/* Le titre produit est le seul endroit ou un mot long depasse vraiment la
-   colonne : « Therapeutique » mesure 370 px a la taille d'origine (40 px)
-   pour une colonne d'environ 315 px. On le fait suivre la largeur de la
-   fenetre, borne entre 24 et 32 px, taille a laquelle le mot le plus long
-   du catalogue tient dans la colonne la plus etroite. */
-@media screen and (min-width: 990px) {
-  .product__info-wrapper .product__title h1,
-  .product__info-wrapper .product__title .h1 {
-    font-size: clamp(2.4rem, 2.2vw, 3.2rem);
-    line-height: 1.15;
-  }
-}
+/* LE TITRE PRODUIT N'A PLUS BESOIN D'ETRE RAPETISSE — et c'est le passage
+   a DM Sans qui le permet.
+
+   La regle precedente bornait ce titre entre 24 et 32 px parce qu'en
+   Unbounded, « Therapeutique » — le mot le plus long du catalogue —
+   mesurait 370 px a la taille d'origine de 40 px, pour une colonne
+   d'environ 315 px. En DM Sans a 40 px et en graisse 900, le meme mot
+   mesure 268 px : il rentre, avec 47 px de marge. La contrainte n'avait
+   d'autre raison d'etre que la largeur de l'ancienne police ; la
+   maintenir reviendrait a garder les fiches produit volontairement
+   sous-titrees sans plus aucun motif.
+
+   La regle generale ci-dessus suffit desormais : « word-break: normal »
+   fait passer un mot trop large a la ligne suivante entier plutot que de
+   le couper. Si un futur modele portait un nom plus long que 315 px,
+   c'est ici qu'il faudrait revenir. */
 
 /* --------------------------------------------------------------------------
    32. COMPARATEUR DE SPAS
