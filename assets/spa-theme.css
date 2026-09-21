@@ -2683,9 +2683,14 @@ a, span, label, summary, button, blockquote, figcaption,
    fait mesurer le passage avant de remplir, donc elle passe AU-DESSUS du
    formulaire sur mobile, pas en dessous.
    -------------------------------------------------------------------------- */
+/* La bande entiere prend le bleu tres clair, et le formulaire ressort en
+   blanc au milieu. C'est l'inverse de l'arrangement precedent — champs
+   blancs dans un caisson bleu — qui empilait les cadres : un formulaire
+   est une zone de saisie, l'oeil attend du blanc a cet endroit. */
 .spa-projet {
   padding-top: var(--pt, 24px);
   padding-bottom: var(--pb, 48px);
+  background: var(--mist);
 }
 
 .spa-projet__grille {
@@ -2733,15 +2738,52 @@ a, span, label, summary, button, blockquote, figcaption,
   font-size: 1.7rem;
 }
 
-.spa-projet__preparer {
+/* Les trois reperes : une pastille numerotee en marge, le titre du repere
+   sur sa propre ligne. Trois lignes chacun, pas davantage — c'est le mur de
+   texte a gauche qui desequilibrait la page. */
+.spa-projet__etapes {
   margin: 0;
-  padding-left: 2rem;
-  font-size: 1.5rem;
-  line-height: 1.6;
+  padding: 0;
+  list-style: none;
 }
 
-.spa-projet__preparer li + li {
-  margin-top: 1rem;
+.spa-projet__etapes li {
+  position: relative;
+  margin-bottom: 1.6rem;
+  padding-left: 3.6rem;
+  font-size: 1.5rem;
+  line-height: 1.55;
+  color: var(--deep-soft);
+}
+
+.spa-projet__etapes strong {
+  display: block;
+  color: var(--deep);
+}
+
+.spa-projet__num {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: var(--r-pill);
+  background: var(--deep);
+  color: var(--white);
+  font-size: 1.3rem;
+  font-weight: 700;
+  place-items: center;
+}
+
+/* L'encart de rappel : blanc sur la bande teintee, comme le formulaire. */
+.spa-projet__contact {
+  margin: 2.4rem 0 0;
+  padding: 1.6rem 1.8rem;
+  border-radius: var(--r-md);
+  background: var(--white);
+  font-size: 1.5rem;
+  line-height: 1.6;
 }
 
 .spa-projet__reponse {
@@ -2754,9 +2796,10 @@ a, span, label, summary, button, blockquote, figcaption,
    signale « ici, on remplit ». */
 .spa-projet__panneau {
   max-width: 56rem;
-  padding: 2.4rem;
+  padding: 3.2rem;
   border-radius: var(--r-lg);
-  background: var(--mist);
+  background: var(--white);
+  box-shadow: 0 2px 18px rgba(15, 58, 90, 0.07);
 }
 
 /* Le bloc de l'application occupe toute la largeur du panneau. Ces regles
@@ -2773,7 +2816,7 @@ a, span, label, summary, button, blockquote, figcaption,
 
 @media screen and (max-width: 749px) {
   .spa-projet__panneau {
-    padding: 1.8rem 1.4rem;
+    padding: 2rem 1.6rem;
   }
 }
 
@@ -2883,7 +2926,7 @@ a, span, label, summary, button, blockquote, figcaption,
   margin: 0;
   padding: 1.4rem 1.6rem;
   border-radius: var(--r-md);
-  background: var(--white);
+  background: var(--mist);
   font-size: 1.4rem;
   line-height: 1.55;
 }
@@ -2902,7 +2945,7 @@ a, span, label, summary, button, blockquote, figcaption,
 .spa-projet__ok {
   padding: 2rem;
   border-radius: var(--r-md);
-  background: var(--white);
+  background: var(--mist);
 }
 
 .spa-projet__ok h3 {
@@ -2922,6 +2965,6 @@ a, span, label, summary, button, blockquote, figcaption,
   padding: 1.4rem 1.6rem;
   border-left: 4px solid #b3261e;
   border-radius: var(--r-md);
-  background: var(--white);
+  background: var(--mist);
   font-size: 1.4rem;
 }
