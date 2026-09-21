@@ -3710,7 +3710,7 @@ a, span, label, summary, button, blockquote, figcaption,
    cents pixels sous un timbre-poste. Mieux vaut un leger decalage au
    chargement qu'un vide permanent. */
 .spa-avis__widget--large {
-  margin-top: 2.4rem;
+  margin-top: 1.6rem;
 }
 
 /* La pastille est dans la rangee du bandeau : elle ne prend que sa largeur
