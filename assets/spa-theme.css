@@ -4089,15 +4089,21 @@ a, span, label, summary, button, blockquote, figcaption,
   text-align: center;
 }
 
-.spa-cout__saisons-total {
+/* Le selecteur porte « li » en plus de la classe, et ce n'est pas une
+   coquette. Sans lui, « .spa-cout__saisons-total » (0,1,0) perdait contre
+   « .spa-cout__saisons li » (0,1,1) : le fond restait bleu tres clair
+   pendant que le texte, lui, passait bien en blanc — le total devenait
+   illisible, blanc sur presque blanc. Les deux regles doivent etre au moins
+   aussi specifiques l'une que l'autre. */
+.spa-cout__saisons li.spa-cout__saisons-total {
   background: var(--deep);
 }
 
-.spa-cout__saisons-total .spa-cout__montant {
+.spa-cout__saisons li.spa-cout__saisons-total .spa-cout__montant {
   color: var(--white);
 }
 
-.spa-cout__saisons-total .spa-cout__quand {
+.spa-cout__saisons li.spa-cout__saisons-total .spa-cout__quand {
   color: var(--water);
 }
 
