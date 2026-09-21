@@ -75,7 +75,7 @@
     "chiffres": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<div class=\"page-width\">\n<ul class=\"spa-chiffres\" role=\"list\">\n<li class=\"spa-chiffre\"><span class=\"spa-chiffre__valeur\">2007</span><span class=\"spa-chiffre__label\">Année de création</span></li>\n<li class=\"spa-chiffre\"><span class=\"spa-chiffre__valeur\">4,8/5</span><span class=\"spa-chiffre__label\">18 avis Google</span></li>\n<li class=\"spa-chiffre\"><span class=\"spa-chiffre__valeur\">15-30 jours</span><span class=\"spa-chiffre__label\">Délai moyen d'installation</span></li>\n<li class=\"spa-chiffre\"><span class=\"spa-chiffre__valeur\">10 ans</span><span class=\"spa-chiffre__label\">Garantie sur la structure</span></li>\n</ul>\n</div>",
+        "custom_liquid": "<div class=\"page-width\">\n<ul class=\"spa-chiffres\" role=\"list\">\n<li class=\"spa-chiffre\"><span class=\"spa-chiffre__valeur\">2007</span><span class=\"spa-chiffre__label\">Année de création</span></li>\n<li class=\"spa-chiffre\"><span class=\"spa-chiffre__valeur\">4,9/5</span><span class=\"spa-chiffre__label\">24 avis clients</span></li>\n<li class=\"spa-chiffre\"><span class=\"spa-chiffre__valeur\">15-30 jours</span><span class=\"spa-chiffre__label\">Délai moyen d'installation</span></li>\n<li class=\"spa-chiffre\"><span class=\"spa-chiffre__valeur\">10 ans</span><span class=\"spa-chiffre__label\">Garantie sur la structure</span></li>\n</ul>\n</div>",
         "color_scheme": "scheme-1",
         "padding_top": 8,
         "padding_bottom": 28
@@ -274,8 +274,8 @@
         "trustindex_id": "80f39ae8145a949737968934c58",
         "widget_format": "large",
         "bandeau": false,
-        "note": "4,8",
-        "nombre": 18,
+        "note": "4,9",
+        "nombre": 24,
         "lien_google": "https://www.google.com/maps/search/?api=1&query=Liners%20France%2C%2016%20rue%20de%20l%27Orme%2C%2091540%20Fontenay-le-Vicomte",
         "provenance": "<p>Ces avis sont publiés sur les fiches Google et Facebook de LINERS FRANCE, la société qui exploite SPAS9. Ils sont repris ici tels quels, sans tri ni modification : les listes complètes, y compris les avis les moins favorables, restent consultables sur Google et sur Facebook.</p>",
         "color_scheme": "scheme-1",
