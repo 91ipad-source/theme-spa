@@ -23,17 +23,11 @@
         "proto2": {
           "type": "realisation",
           "settings": {
-            "produit": "spa-roca-proto-lighting-5-personnes",
-            "titre": "",
-            "commune": "",
-            "annee": "",
-            "difficulte": ""
+            "produit": "spa-roca-proto-lighting-5-personnes"
           }
         }
       },
-      "block_order": [
-        "proto2"
-      ],
+      "block_order": ["proto2"],
       "settings": {
         "titre": "Des spas installés près de chez vous",
         "intro": "<p>Ce ne sont pas des photos de catalogue : chacune de ces installations a été livrée et mise en service par notre équipe. Nous indiquons à chaque fois ce qui était compliqué — c'est ce qui vous dira si votre propre accès est faisable.</p>",
@@ -46,8 +40,5 @@
       }
     }
   },
-  "order": [
-    "main",
-    "realisations"
-  ]
+  "order": ["main", "realisations"]
 }
