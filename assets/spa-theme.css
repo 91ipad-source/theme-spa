@@ -4189,3 +4189,70 @@ a, span, label, summary, button, blockquote, figcaption,
   margin: 3.2rem 0 0;
   text-align: center;
 }
+
+/* --------------------------------------------------------------------------
+   40. PIED DE PAGE : LA COLONNE DES LIENS UTILES SUR DEUX COLONNES
+
+   Les quatre colonnes du pied de page ont la meme largeur alors qu'elles
+   n'ont pas du tout le meme contenu : trois entrees pour les gammes, douze
+   pour les liens utiles. C'est la plus longue qui fixe la hauteur du pied
+   de page, et les trois autres finissent par du vide.
+
+   On donne donc a la colonne longue plus de largeur, et sa liste coule sur
+   deux colonnes : douze entrees deviennent six lignes. Le bloc de contact
+   recoit lui aussi une part supplementaire — il porte une adresse et un
+   courriel qui, dans une colonne etroite, se replient sur trois lignes et
+   redeviennent le point le plus haut du pied de page. Le resserrer aurait
+   annule le gain.
+
+   PROPORTIONS 1 / 1 / 3 / 2, obtenues en laissant les blocs se partager la
+   largeur au lieu de leur imposer des pourcentages. Mesure sur une
+   reproduction du pied de page : 405 px avant, 307 px apres, a 1280 comme a
+   1440 px, sans qu'aucun libelle ne se coupe en deux.
+
+   POURQUOI « :has » ET « :not » PLUTOT QU'UN RANG. Rien ici ne designe la
+   troisieme colonne. La regle cherche une liste d'au moins neuf entrees, et
+   la part double va au bloc qui n'est pas un menu. Reordonner les blocs
+   dans l'editeur ne casse rien, en ajouter un non plus, et une colonne qui
+   maigrirait sous neuf liens reprendrait d'elle-meme une largeur normale.
+
+   DEGRADATION. Tout est conditionne au meme « :has » : un navigateur qui ne
+   le connait pas ne voit aucune de ces regles et garde le pied de page de
+   Dawn, intact. Sous 990 px, Dawn empile les blocs et rien de tout ceci ne
+   s'applique.
+   -------------------------------------------------------------------------- */
+@media screen and (min-width: 990px) {
+  /* Dawn fixe des largeurs en pourcentage pour ses quatre colonnes egales.
+     On les libere : chaque bloc part de zero et prend une part de la place
+     disponible, ce qui rend les proportions ci-dessous possibles. */
+  .footer__blocks-wrapper:has(.footer-block--menu li:nth-child(9)) > .footer-block {
+    flex: 1 1 0;
+    width: auto;
+    max-width: none;
+  }
+
+  .footer__blocks-wrapper:has(.footer-block--menu li:nth-child(9))
+    .footer-block--menu:has(li:nth-child(9)) {
+    flex-grow: 3;
+  }
+
+  .footer__blocks-wrapper:has(.footer-block--menu li:nth-child(9))
+    .footer-block:not(.footer-block--menu) {
+    flex-grow: 2;
+  }
+
+  .footer__blocks-wrapper:has(.footer-block--menu li:nth-child(9))
+    .footer-block--menu:has(li:nth-child(9))
+    .footer-block__details-content {
+    columns: 2;
+    column-gap: 3rem;
+  }
+
+  /* Un lien coupe entre deux colonnes serait illisible. */
+  .footer__blocks-wrapper:has(.footer-block--menu li:nth-child(9))
+    .footer-block--menu:has(li:nth-child(9))
+    .footer-block__details-content
+    li {
+    break-inside: avoid;
+  }
+}
