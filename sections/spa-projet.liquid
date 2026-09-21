@@ -86,12 +86,25 @@
             Le bloc de l'application prend toute la place : il porte ses propres
             champs, son envoi et sa gestion des fichiers.
           {%- endcomment -%}
-          {%- for block in section.blocks -%}
-            {%- if block.type == '@app' -%}
-              {% render block %}
-            {%- endif -%}
-          {%- endfor -%}
-        {%- else -%}
+          <div data-projet-app>
+            {%- for block in section.blocks -%}
+              {%- if block.type == '@app' -%}
+                {% render block %}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- comment -%}
+          FILET DE SÉCURITÉ. Le formulaire natif est toujours rendu, simplement
+          masqué quand un bloc d'application est présent. Raison : un bloc
+          d'application posé mais mal configuré — pas de formulaire choisi —
+          n'affiche rien du tout, et la page se retrouve avec un panneau vide
+          sans que personne ne s'en aperçoive. Le script en fin de section
+          vérifie qu'un formulaire est bien apparu ; sinon il redonne la main
+          à celui-ci. Mieux vaut un formulaire sans photos qu'aucun formulaire.
+        {%- endcomment -%}
+        <div data-projet-secours{% if bloc_app %} hidden{% endif %}>
           {%- form 'contact', id: 'projet-spa', class: 'spa-projet__form' -%}
             {%- if form.posted_successfully? -%}
               <div class="spa-projet__ok" role="status">
@@ -243,11 +256,38 @@
               </p>
             {%- endif -%}
           {%- endform -%}
-        {%- endif -%}
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+{%- if bloc_app -%}
+  <script>
+    (function () {
+      var app = document.querySelector('[data-projet-app]');
+      var secours = document.querySelector('[data-projet-secours]');
+      if (!app || !secours) return;
+
+      /* L'application injecte son formulaire après le chargement de la page :
+         on lui laisse quelques secondes avant de conclure qu'elle n'affichera
+         rien. Dès qu'un formulaire apparaît, on s'arrête là. */
+      var fin = Date.now() + 6000;
+
+      function verifier() {
+        if (app.querySelector('form, iframe')) return;
+        if (Date.now() < fin) {
+          window.setTimeout(verifier, 400);
+          return;
+        }
+        app.hidden = true;
+        secours.hidden = false;
+      }
+
+      window.setTimeout(verifier, 1200);
+    })();
+  </script>
+{%- endif -%}
 
 {% schema %}
 {
