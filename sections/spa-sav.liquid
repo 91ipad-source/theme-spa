@@ -1,0 +1,306 @@
+{%- comment -%}
+  Le service après-vente : ce qui se passe quand quelque chose ne va pas.
+
+  POURQUOI CETTE PAGE EXISTE. Un spa est un appareil qui chauffe, filtre et
+  pompe toute l'année. Il tombera en panne un jour — c'est une machine. La
+  question que se pose l'acheteur n'est donc pas « est-ce que ça casse »,
+  mais « qui je vais avoir au téléphone, et est-ce qu'il aura la pièce ».
+  Une page qui répond à ça vend autant qu'une fiche technique.
+
+  TOUT CE QUI EST AFFIRMÉ ICI EST OPPOSABLE. Les durées de garantie, les
+  exclusions et les conditions viennent mot pour mot de l'article 9 des
+  conditions générales de vente. Ce n'est pas une facilité de rédaction :
+  une page SAV qui promet plus que les CGV crée une obligation que
+  l'entreprise n'a pas prévue, et une page qui promet moins décrédibilise
+  les CGV. Les deux doivent dire la même chose, et le lien vers les CGV
+  permet au client de vérifier.
+
+  LES EXCLUSIONS SONT ÉCRITES, PAS CACHÉES. C'est contre-intuitif pour une
+  page commerciale, mais un client qui découvre l'exclusion le jour de la
+  panne se sent trompé ; celui qui l'a lue avant sait qu'on ne lui a rien
+  caché. Et la liste est instructive : elle dit en creux comment ne pas
+  casser son spa.
+
+  CE QUI N'EST PAS ÉCRIT ICI. Trois informations — le délai d'intervention,
+  le tarif d'un déplacement hors garantie, l'existence d'un contrat
+  d'entretien — sont des réglages laissés vides. Elles n'apparaissent que
+  si on les renseigne. Aucune ne doit être inventée : un délai annoncé est
+  un engagement.
+{%- endcomment -%}
+
+{%- liquid
+  assign tel = settings.spa_telephone | default: '+33160773700' | strip
+  assign tel_lisible = section.settings.telephone_affiche | default: '01 60 77 37 00'
+  assign courriel = section.settings.courriel | default: 'iledefrance@linersfrance.fr'
+  assign whatsapp = settings.spa_whatsapp | strip | remove: ' ' | remove: '+' | remove: '.' | remove: '-'
+-%}
+
+<div
+  class="spa-sav color-{{ section.settings.color_scheme }} gradient"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width">
+    {%- comment -%}
+      LA MARCHE À SUIVRE D'ABORD. Quelqu'un qui arrive sur cette page a
+      souvent déjà un problème : il cherche quoi faire, pas la liste des
+      durées de garantie. Celles-ci viennent après.
+    {%- endcomment -%}
+    <section class="spa-sav__bloc">
+      <h2 class="spa-sav__titre">{{ section.settings.titre_panne | escape }}</h2>
+
+      <ol class="spa-sav__etapes">
+        <li>
+          <span class="spa-sav__num" aria-hidden="true">1</span>
+          <strong>Appelez-nous</strong>
+          Dites ce que vous constatez : un code affiché sur le panneau de commande, un bruit
+          nouveau, une eau qui ne chauffe plus, une fuite. Le code d'erreur Balboa nous en
+          apprend souvent plus qu'une longue description.
+        </li>
+        <li>
+          <span class="spa-sav__num" aria-hidden="true">2</span>
+          <strong>Préparez trois choses</strong>
+          Votre facture — c'est elle qui ouvre la garantie —, le modèle du spa, et si vous le
+          pouvez une photo ou une courte vidéo du symptôme.
+        </li>
+        <li>
+          <span class="spa-sav__num" aria-hidden="true">3</span>
+          <strong>On cherche d'abord à distance</strong>
+          Une bonne part des pannes se règle au téléphone : une cartouche encrassée, un mode
+          veille resté actif, un différentiel qui a sauté. Quand il faut venir, on vient.
+        </li>
+      </ol>
+
+      <div class="spa-sav__contact">
+        <p class="spa-sav__contact-titre">Nous joindre</p>
+        <ul class="spa-sav__moyens" role="list">
+          <li>
+            <a href="tel:{{ tel | remove: ' ' }}">{{ tel_lisible }}</a>
+          </li>
+          <li>
+            <a href="mailto:{{ courriel }}">{{ courriel }}</a>
+          </li>
+          {%- if whatsapp != blank -%}
+            <li>
+              <a href="https://wa.me/{{ whatsapp }}" target="_blank" rel="noopener">
+                WhatsApp — pratique pour envoyer une photo
+              </a>
+            </li>
+          {%- endif -%}
+        </ul>
+
+        {%- if section.settings.delai != blank -%}
+          <p class="spa-sav__note">{{ section.settings.delai | escape }}</p>
+        {%- endif -%}
+      </div>
+    </section>
+
+    {%- comment -%}
+      LES DURÉES. Trois chiffres, repris de l'article 9 des CGV. Les
+      garanties légales sont rappelées en dessous et non à côté : elles ne
+      sont pas une quatrième ligne du tableau, elles s'appliquent en plus et
+      quoi qu'il arrive.
+    {%- endcomment -%}
+    <section class="spa-sav__bloc">
+      <h2 class="spa-sav__titre">Ce qui est garanti, et pour combien de temps</h2>
+
+      <ul class="spa-sav__durees" role="list">
+        <li>
+          <span class="spa-sav__duree">10 ans</span>
+          <span class="spa-sav__quoi">La structure</span>
+        </li>
+        <li>
+          <span class="spa-sav__duree">5 ans</span>
+          <span class="spa-sav__quoi">L'acrylique de la cuve</span>
+        </li>
+        <li>
+          <span class="spa-sav__duree">2 ans</span>
+          <span class="spa-sav__quoi">L'électronique et les pompes</span>
+        </li>
+      </ul>
+
+      <p class="spa-sav__phrase">
+        C'est la garantie commerciale du fabricant, qui couvre les défauts de fabrication.
+        S'y ajoutent, <strong>indépendamment et sans démarche de votre part</strong>, la garantie
+        légale de conformité — deux ans à compter de la livraison, articles L.217-3 et suivants du
+        Code de la consommation — et la garantie des vices cachés, articles 1641 et suivants du
+        Code civil.
+      </p>
+
+      <h3 class="spa-sav__sous-titre">Les pièces, dans dix ans</h3>
+      <p class="spa-sav__phrase">
+        <strong>100 % des pièces détachées sont disponibles</strong>, et ROCA Spa s'engage à les
+        maintenir. L'électronique est du <strong>Balboa Water Group</strong>, un standard mondial
+        qu'on trouve sur des centaines de milliers de spas : ce n'est pas une pièce propriétaire
+        dont la disparition condamnerait l'appareil.
+      </p>
+    </section>
+
+    {%- comment -%}
+      LES EXCLUSIONS. Reprises des CGV, sans en retirer une seule. Chacune
+      est suivie de ce qu'elle implique concretement — une exclusion qu'on
+      ne comprend pas ne protege personne, alors qu'expliquee, elle dit
+      comment ne pas casser son spa.
+    {%- endcomment -%}
+    <section class="spa-sav__bloc spa-sav__bloc--reserve">
+      <h2 class="spa-sav__titre">Ce que la garantie ne couvre pas</h2>
+      <p class="spa-sav__phrase">
+        Autant le savoir avant la panne qu'au moment de la panne. Cette liste est celle de
+        l'article 9 de nos conditions générales, sans rien en retirer.
+      </p>
+
+      <ul class="spa-sav__exclusions" role="list">
+        <li>
+          <strong>L'usure normale</strong> et les dégradations d'aspect liées à l'usage.
+        </li>
+        <li>
+          <strong>Le gel</strong>, notamment après un arrêt prolongé du spa sans vidange. C'est
+          la panne d'hiver la plus fréquente, et la plus coûteuse.
+        </li>
+        <li>
+          <strong>Un déséquilibre chimique de l'eau ou un défaut d'entretien.</strong> Le pH, le
+          taux de désinfectant, la dureté et l'alcalinité doivent rester dans les plages du
+          fabricant — une eau mal traitée attaque les joints, les pompes et l'acrylique.
+        </li>
+        <li>
+          <strong>Une installation non conforme</strong> à la notice ou à la norme NF C 15-100,
+          un support non plan ou insuffisamment dimensionné.
+        </li>
+        <li>
+          <strong>Une intervention par un tiers non agréé.</strong> Faire ouvrir le spa par
+          quelqu'un d'autre met fin à la garantie du fabricant — appelez-nous d'abord.
+        </li>
+        <li>
+          <strong>Un usage collectif, locatif ou professionnel.</strong> Ces spas sont conçus pour
+          un usage privé.
+        </li>
+        <li>
+          <strong>Les pièces d'usure</strong> : filtres, ampoules, joints, couverture isotherme.
+        </li>
+      </ul>
+
+      <p class="spa-sav__note">
+        Le bénéfice de la garantie commerciale suppose le respect des consignes d'entretien du
+        fabricant et la conservation de votre facture d'achat.
+        <a href="{{ section.settings.lien_cgv | default: '/pages/conditions-generales-de-vente' }}">
+          Lire l'article 9 des conditions générales
+        </a>.
+      </p>
+    </section>
+
+    {%- comment -%}
+      Deux blocs qui n'existent que si on les remplit : le tarif d'une
+      intervention hors garantie, et l'entretien courant. Vides, ils ne
+      laissent aucune trace sur la page.
+    {%- endcomment -%}
+    {%- if section.settings.hors_garantie != blank or section.settings.entretien != blank -%}
+      <section class="spa-sav__bloc">
+        <h2 class="spa-sav__titre">{{ section.settings.titre_hors | escape }}</h2>
+
+        {%- if section.settings.hors_garantie != blank -%}
+          <div class="spa-sav__phrase rte">{{ section.settings.hors_garantie }}</div>
+        {%- endif -%}
+
+        {%- if section.settings.entretien != blank -%}
+          <h3 class="spa-sav__sous-titre">L'entretien courant</h3>
+          <div class="spa-sav__phrase rte">{{ section.settings.entretien }}</div>
+        {%- endif -%}
+      </section>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Service après-vente",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "titre_panne",
+      "label": "Titre du premier bloc",
+      "default": "Si quelque chose ne va pas"
+    },
+    {
+      "type": "header",
+      "content": "Nous joindre"
+    },
+    {
+      "type": "text",
+      "id": "telephone_affiche",
+      "label": "Téléphone, tel qu'il s'affiche",
+      "default": "01 60 77 37 00"
+    },
+    {
+      "type": "text",
+      "id": "courriel",
+      "label": "Adresse e-mail du service après-vente",
+      "default": "iledefrance@linersfrance.fr"
+    },
+    {
+      "type": "text",
+      "id": "delai",
+      "label": "Délai d'intervention",
+      "info": "Laisser vide tant que vous n'êtes pas certain de pouvoir le tenir : un délai affiché est un engagement. Exemple : « Nous rappelons sous 48 heures ouvrées. »"
+    },
+    {
+      "type": "header",
+      "content": "Hors garantie et entretien"
+    },
+    {
+      "type": "text",
+      "id": "titre_hors",
+      "label": "Titre du bloc",
+      "default": "En dehors de la garantie"
+    },
+    {
+      "type": "richtext",
+      "id": "hors_garantie",
+      "label": "Intervention hors garantie",
+      "info": "Tarif d'un déplacement, d'un diagnostic. Bloc masqué si vide."
+    },
+    {
+      "type": "richtext",
+      "id": "entretien",
+      "label": "Contrat d'entretien, hivernage",
+      "info": "Bloc masqué si vide."
+    },
+    {
+      "type": "header",
+      "content": "Mise en page"
+    },
+    {
+      "type": "url",
+      "id": "lien_cgv",
+      "label": "Lien vers les conditions générales"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Jeu de couleurs",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 48
+    }
+  ],
+  "presets": [{ "name": "Service après-vente" }]
+}
+{% endschema %}
