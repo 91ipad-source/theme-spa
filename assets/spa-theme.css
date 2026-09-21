@@ -3700,6 +3700,16 @@ a, span, label, summary, button, blockquote, figcaption,
   color: var(--deep);
 }
 
+/* Le widget Trustindex apporte ses propres styles, servis depuis son CDN :
+   on ne cherche pas a le redessiner, on lui reserve sa place et l'air
+   au-dessus. La hauteur minimale evite que la page ne saute au moment ou le
+   script finit de charger — sans elle, tout ce qui suit remonte puis
+   redescend sous les yeux du visiteur. */
+.spa-avis__widget {
+  margin-top: 2.4rem;
+  min-height: 30rem;
+}
+
 .spa-avis__provenance {
   max-width: 72rem;
   margin: 2.4rem 0 0;

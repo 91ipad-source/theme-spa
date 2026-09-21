@@ -11,13 +11,32 @@
   SPAS9. Ce n'est pas un détail juridique : présenter des avis recueillis
   ailleurs sans dire d'où ils viennent, ou sans permettre de les vérifier,
   tombe sous le coup des règles sur les pratiques commerciales trompeuses.
-  D'où le lien vers la fiche, affiché aussi haut que la note elle-même, et
-  la mention de provenance en bas de section.
+  D'où la mention de provenance en bas de section, qui reste affichée dans
+  tous les cas de figure, et le lien vers la fiche — porté soit par le
+  bandeau de note, soit par le widget lui-même.
 
-  AUCUN AVIS N'EST ÉCRIT EN DUR. Chaque avis est un bloc, saisi depuis
-  l'éditeur de thème, et un bloc dont le texte est vide ne s'affiche pas.
-  Tant qu'aucun avis n'a été recopié, la section affiche la note, le nombre
-  d'avis et le lien : elle est utile dès le premier jour, meilleure ensuite.
+  DEUX MODES, ET C'EST VOULU.
+
+  1. Avec Trustindex : l'identifiant du widget est renseigné, et c'est le
+     service qui affiche les avis. Il les synchronise avec la fiche Google,
+     donc un nouvel avis apparaît ici sans que personne ait à y toucher —
+     et un avis supprimé sur Google disparaît d'ici. C'est la raison d'être
+     de ce mode : des avis recopiés à la main vieillissent, et un avis
+     affiché après avoir été retiré de sa source n'est plus attribuable.
+
+  2. Sans Trustindex : les avis sont des blocs, saisis depuis l'éditeur de
+     thème, et un bloc au texte vide ne s'affiche pas. Le repli existe pour
+     que la section reste utile si le service est un jour résilié.
+
+  Sans widget et sans bloc rempli, la section tient encore debout : elle
+  affiche la note, le nombre d'avis et le lien vers la fiche, trois faits
+  vérifiables d'un clic.
+
+  LE WIDGET CHARGE UN SCRIPT TIERS depuis cdn.trustindex.io. C'est
+  inhérent au service : il faut bien que quelqu'un aille chercher les avis
+  chez Google. Seul l'IDENTIFIANT est réglable, pas l'adresse du script —
+  un champ où l'on collerait une balise entière laisserait n'importe quel
+  script s'exécuter sur toutes les pages de la boutique.
 
   PAS DE BALISAGE aggregateRating — voir snippets/spa-localbusiness.liquid,
   qui explique la règle en détail. Résumé : déclarer en données structurées
@@ -30,6 +49,21 @@
   assign note = section.settings.note | strip
   assign nombre = section.settings.nombre
   assign lien = section.settings.lien_google | strip
+
+  comment
+    L'identifiant Trustindex est nettoye avant d'etre insere dans une URL.
+    On ne garde que les caracteres d'un identifiant — lettres et chiffres —
+    de sorte qu'un copier-coller malheureux (une balise entiere collee dans
+    le champ, un guillemet oublie) produise au pire un widget qui ne charge
+    pas, jamais une adresse detournee ni une balise cassee.
+  endcomment
+  assign widget = section.settings.trustindex_id | strip
+  assign widget = widget | split: '?' | last | split: '#' | last
+  assign widget = widget | split: "'" | first | split: '"' | first
+  assign widget = widget | remove: '<' | remove: '>' | remove: '/' | remove: ' ' | strip
+  if widget.size < 8
+    assign widget = ''
+  endif
 
   comment
     On compte les avis réellement affichables avant de decider quoi que ce
@@ -59,8 +93,22 @@
   endcomment
   assign montrer_provenance = false
   if section.settings.provenance != blank
-    if note != blank or avis_remplis > 0
+    if note != blank or avis_remplis > 0 or widget != blank
       assign montrer_provenance = true
+    endif
+  endif
+
+  comment
+    Le bandeau et les cartes s'effacent devant le widget : celui de
+    Trustindex affiche deja sa propre note, son propre compte et son propre
+    lien vers Google. Les laisser cote a cote donnerait la meme note ecrite
+    deux fois a trente pixels d'ecart. La case « Afficher le bandeau » permet
+    de le rappeler si le widget choisi n'en montre pas.
+  endcomment
+  assign montrer_bandeau = false
+  if widget == blank or section.settings.bandeau
+    if note != blank or lien != blank
+      assign montrer_bandeau = true
     endif
   endif
 -%}
@@ -83,7 +131,7 @@
       la note et le nombre sont des faits verifiables d'un clic. C'est ce qui
       permet a la section d'etre publiee avant d'etre remplie.
     {%- endcomment -%}
-    {%- if note != blank or lien != blank -%}
+    {%- if montrer_bandeau -%}
       <div class="spa-avis__bandeau">
         {%- if note != blank -%}
           <p class="spa-avis__chiffre">
@@ -108,7 +156,21 @@
       </div>
     {%- endif -%}
 
-    {%- if avis_remplis > 0 -%}
+    {%- comment -%}
+      LE WIDGET. Le script de Trustindex s'insere a l'endroit ou il est
+      declare : il vit donc ici, dans le flux de la section, et non dans
+      l'en-tete du theme. Le conteneur lui reserve sa place et l'espace
+      au-dessus.
+
+      La version « amp-iframe » fournie par Trustindex ne convient pas :
+      elle ne fonctionne que sur les pages AMP, un format que ce thème
+      n'utilise pas. C'est le meme widget, servi autrement.
+    {%- endcomment -%}
+    {%- if widget != blank -%}
+      <div class="spa-avis__widget">
+        <script defer async src="https://cdn.trustindex.io/loader.js?{{ widget }}"></script>
+      </div>
+    {%- elsif avis_remplis > 0 -%}
       <ul class="spa-avis__liste" role="list">
         {%- for block in section.blocks -%}
           {%- liquid
@@ -188,6 +250,23 @@
     },
     {
       "type": "header",
+      "content": "Widget Trustindex"
+    },
+    {
+      "type": "text",
+      "id": "trustindex_id",
+      "label": "Identifiant du widget",
+      "info": "L'identifiant seul, celui qui suit le « ? » dans la balise fournie par Trustindex. Renseigné, il affiche les avis synchronisés avec Google ; vide, la section affiche les avis saisis à la main plus bas."
+    },
+    {
+      "type": "checkbox",
+      "id": "bandeau",
+      "label": "Afficher aussi le bandeau de note",
+      "info": "Le widget affiche déjà sa propre note. À cocher seulement si celui que vous avez choisi ne la montre pas.",
+      "default": false
+    },
+    {
+      "type": "header",
       "content": "La note"
     },
     {
@@ -214,7 +293,7 @@
       "id": "provenance",
       "label": "Mention de provenance",
       "info": "Dire d'où viennent les avis n'est pas une formalité : présenter des avis recueillis ailleurs sans l'indiquer est une pratique commerciale trompeuse.",
-      "default": "<p>Ces avis sont publiés sur la fiche Google de LINERS FRANCE, la société qui exploite SPAS9. Nous les reprenons ici sans les modifier ; le lien ci-dessus ouvre la liste complète, y compris les avis moins favorables.</p>"
+      "default": "<p>Ces avis sont publiés sur la fiche Google de LINERS FRANCE, la société qui exploite SPAS9. Ils sont repris ici tels quels, sans tri ni modification : la liste complète, y compris les avis les moins favorables, reste consultable sur Google.</p>"
     },
     {
       "type": "header",

@@ -271,10 +271,12 @@
       "settings": {
         "titre": "Ce qu'en disent nos clients",
         "intro": "",
+        "trustindex_id": "b43fbbf35a7a998f55266e9d8de",
+        "bandeau": false,
         "note": "4,8",
         "nombre": 18,
         "lien_google": "https://www.google.com/maps/search/?api=1&query=Liners%20France%2C%2016%20rue%20de%20l%27Orme%2C%2091540%20Fontenay-le-Vicomte",
-        "provenance": "<p>Ces avis sont publiés sur la fiche Google de LINERS FRANCE, la société qui exploite SPAS9. Nous les reprenons ici sans les modifier ; le lien ci-dessus ouvre la liste complète, y compris les avis les moins favorables.</p>",
+        "provenance": "<p>Ces avis sont publiés sur la fiche Google de LINERS FRANCE, la société qui exploite SPAS9. Ils sont repris ici tels quels, sans tri ni modification : la liste complète, y compris les avis les moins favorables, reste consultable sur Google.</p>",
         "color_scheme": "scheme-1",
         "padding_top": 40,
         "padding_bottom": 44
