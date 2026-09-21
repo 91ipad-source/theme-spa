@@ -246,7 +246,17 @@
             </li>
           </ul>
 
-          <h4 class="spa-budget__sous-titre">Et ce que nous ne facturons pas, parce que ce n'est pas nous qui le faisons</h4>
+          {%- comment -%}
+            Titre court : il s'affiche en capitales comme tous les titres du
+            site, et une phrase entiere en capitales se lit mal. L'idee
+            complete — « ce n'est pas nous qui le faisons, donc nous ne le
+            facturons pas » — est portee par la ligne qui suit.
+          {%- endcomment -%}
+          <h4 class="spa-budget__sous-titre">À prévoir de votre côté</h4>
+          <p class="spa-budget__phrase">
+            Ces deux points ne nous sont pas facturés, parce que ce n'est pas nous qui les
+            réalisons.
+          </p>
           <ul class="spa-budget__inclus spa-budget__inclus--tiers">
             <li>
               <strong>La ligne électrique dédiée</strong>, pour les spas qui ne sont pas

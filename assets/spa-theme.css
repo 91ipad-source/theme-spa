@@ -82,11 +82,30 @@ body {
   }
 }
 
+/* TOUS LES TITRES EN CAPITALES.
+
+   La transformation est faite en CSS, jamais dans le texte. Le contenu
+   reste ecrit normalement dans l'admin et dans les gabarits : les lecteurs
+   d'ecran, les resultats de recherche, les partages sur les reseaux et le
+   fil d'Ariane continuent d'afficher « Combien coute un spa installe ? »
+   et non une suite de lettres capitales, qu'une synthese vocale epellerait
+   parfois lettre par lettre. Seul l'affichage change.
+
+   L'interlettrage passe de -0.01em a +0.02em. Une valeur negative sert a
+   resserrer des bas-de-casse dont les jambages s'emboitent ; des capitales
+   n'ont ni jambage ni hampe et se collent les unes aux autres si on ne les
+   aere pas. L'interligne passe de 1.05 a 1.1 pour la meme raison : sans
+   jambage descendant, deux lignes de capitales paraissent se toucher.
+
+   Les accents sont conserves : le navigateur transforme « é » en « É »,
+   pas en « E ». C'est l'usage typographique francais, et c'est ce que
+   fait « text-transform » sur une page dont la langue est declaree. */
 h1,
 h2,
 h3,
 h4,
 h5,
+h6,
 .h0,
 .h1,
 .h2,
@@ -96,8 +115,9 @@ h5,
 .display {
   font-family: var(--font-display);
   font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.01em;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 h1,
@@ -1973,11 +1993,15 @@ img {
   text-transform: uppercase;
 }
 
+/* Ce titre remettait l'interlettrage a zero pour annuler le resserrement
+   negatif que portaient alors tous les titres. Celui-ci est devenu positif
+   avec le passage aux capitales : on laisse donc la valeur generale
+   s'appliquer, sinon ce titre-ci serait le seul du site a ne pas etre
+   aere. */
 .spa-avant__titre {
   margin: 0;
   font-size: clamp(2.2rem, 3vw, calc(var(--font-heading-scale) * 3.2rem));
   line-height: 1.15;
-  letter-spacing: 0;
 }
 
 .spa-avant__titre a {
@@ -2115,22 +2139,27 @@ a, span, label, summary, button, blockquote, figcaption,
   -webkit-hyphens: none;
 }
 
-/* LE TITRE PRODUIT N'A PLUS BESOIN D'ETRE RAPETISSE — et c'est le passage
-   a DM Sans qui le permet.
+/* Le titre produit est le seul endroit ou un mot long depasse vraiment la
+   colonne, et les capitales l'y ramenent. Mesures prises en DM Sans 900,
+   pour « Therapeutique », le mot le plus long du catalogue, dans une
+   colonne d'environ 315 px :
 
-   La regle precedente bornait ce titre entre 24 et 32 px parce qu'en
-   Unbounded, « Therapeutique » — le mot le plus long du catalogue —
-   mesurait 370 px a la taille d'origine de 40 px, pour une colonne
-   d'environ 315 px. En DM Sans a 40 px et en graisse 900, le meme mot
-   mesure 268 px : il rentre, avec 47 px de marge. La contrainte n'avait
-   d'autre raison d'etre que la largeur de l'ancienne police ; la
-   maintenir reviendrait a garder les fiches produit volontairement
-   sous-titrees sans plus aucun motif.
+     - en bas-de-casse a 40 px ................. 268 px, il rentre ;
+     - EN CAPITALES a 40 px .................... 318 px, il deborde ;
+     - EN CAPITALES a 32 px .................... 261 px, il rentre.
 
-   La regle generale ci-dessus suffit desormais : « word-break: normal »
-   fait passer un mot trop large a la ligne suivante entier plutot que de
-   le couper. Si un futur modele portait un nom plus long que 315 px,
-   c'est ici qu'il faudrait revenir. */
+   D'ou la borne haute a 32 px. Les capitales sont plus larges a corps
+   egal, et l'interlettrage positif ajoute encore : ce qui tenait en
+   bas-de-casse ne tient plus. Le titre suit donc la largeur de la
+   fenetre, entre 24 et 32 px, taille a laquelle le mot le plus long du
+   catalogue tient dans la colonne la plus etroite. */
+@media screen and (min-width: 990px) {
+  .product__info-wrapper .product__title h1,
+  .product__info-wrapper .product__title .h1 {
+    font-size: clamp(2.4rem, 2.2vw, 3.2rem);
+    line-height: 1.2;
+  }
+}
 
 /* --------------------------------------------------------------------------
    32. COMPARATEUR DE SPAS
