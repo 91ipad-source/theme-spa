@@ -2127,6 +2127,39 @@ img {
   .header--middle-left.header--has-menu:not(.drawer-menu) .header__inline-menu {
     justify-self: center;
   }
+
+  /* LE MENU TIENT SUR UNE LIGNE.
+
+     Dawn pose « flex-wrap: wrap » sur la barre : quand les huit entrees ne
+     rentrent plus, la derniere passe a la ligne et l'en-tete grandit d'un
+     cran. Il s'en fallait de peu — le passage a DM Sans a elargi la barre
+     d'une vingtaine de pixels, assez pour faire basculer une mise en page
+     qui tenait deja de justesse.
+
+     On rend la place plutot que de rapetisser le texte : 14 px, c'est deja
+     petit pour un menu. L'espace pris autour de chaque entree suit la
+     largeur de la fenetre et se resserre quand elle se reduit, sans jamais
+     descendre sous 5 px — en dessous, deux entrees voisines se toucheraient
+     et la barre deviendrait illisible.
+
+     « flex-wrap » reste sur « wrap » a dessein. Si un jour une entree de
+     plus etait ajoutee au menu, mieux vaut qu'il se plie que qu'il
+     chevauche le panier et la loupe : un menu sur deux lignes se lit, un
+     menu qui deborde sur les icones ne se clique plus. */
+  .header__inline-menu > .list-menu--inline > li > .header__menu-item,
+  .header__inline-menu > .list-menu--inline > li > header-menu > details > .header__menu-item {
+    padding-left: clamp(0.5rem, 0.7vw, 1rem);
+    padding-right: clamp(0.5rem, 0.7vw, 1rem);
+    white-space: nowrap;
+  }
+
+  /* Le chevron des menus deroulants est positionne en absolu, a 0,8 rem du
+     bord. La reserve de Dawn — 2,7 rem — lui laisse 0,9 rem de marge
+     inutile. On la ramene a 2,1 rem : le chevron garde ses 0,8 rem de
+     decalage et sa propre largeur, et deux entrees regagnent 1,2 rem. */
+  .header__inline-menu > .list-menu--inline > li > header-menu > details > summary.header__menu-item {
+    padding-right: 2.1rem;
+  }
 }
 
 /* --------------------------------------------------------------------------
