@@ -20,8 +20,8 @@
     "cout": {
       "type": "spa-cout",
       "settings": {
-        "kwh_ete": "",
-        "kwh_hiver": "",
+        "kwh_ete": "4",
+        "kwh_hiver": "9",
         "prix_kwh": "0,2001",
         "source_kwh": "Le calcul ci-dessus retient le tarif réglementé EDF option base, 6 kVA, en vigueur en septembre 2026.",
         "collection": "tous-nos-spas",
