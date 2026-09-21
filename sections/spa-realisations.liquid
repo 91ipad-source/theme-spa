@@ -105,20 +105,28 @@
               {%- endcomment -%}
               {%- if block.settings.image_2 != blank or block.settings.image_3 != blank -%}
                 <div class="spa-realisations__angles">
-                  {%- for cle in 'image_2,image_3' | split: ',' -%}
-                    {%- assign vue = block.settings[cle] -%}
-                    {%- if vue != blank -%}
-                      {{
-                        vue
-                        | image_url: width: 600
-                        | image_tag:
-                          loading: 'lazy',
-                          widths: '200, 300, 400, 600',
-                          sizes: '(min-width: 990px) 16vw, 50vw',
-                          alt: alt
-                      }}
-                    {%- endif -%}
-                  {%- endfor -%}
+                  {%- if block.settings.image_2 != blank -%}
+                    {{
+                      block.settings.image_2
+                      | image_url: width: 600
+                      | image_tag:
+                        loading: 'lazy',
+                        widths: '200, 300, 400, 600',
+                        sizes: '(min-width: 990px) 16vw, 50vw',
+                        alt: alt
+                    }}
+                  {%- endif -%}
+                  {%- if block.settings.image_3 != blank -%}
+                    {{
+                      block.settings.image_3
+                      | image_url: width: 600
+                      | image_tag:
+                        loading: 'lazy',
+                        widths: '200, 300, 400, 600',
+                        sizes: '(min-width: 990px) 16vw, 50vw',
+                        alt: alt
+                    }}
+                  {%- endif -%}
                 </div>
               {%- endif -%}
 
