@@ -120,23 +120,28 @@ h6,
   text-transform: uppercase;
 }
 
-/* LA SEULE EXCEPTION : LES QUESTIONS D'UNE FOIRE AUX QUESTIONS.
+/* LA SEULE EXCEPTION : CE QUI SE REPLIE.
 
-   Elles sont balisees en <h3> parce que ce sont les titres de leurs
-   reponses, mais ce sont des phrases entieres, souvent interrogatives, et
-   longues — « La livraison est-elle comprise dans le prix du spa ? ». Une
-   phrase complete en capitales se lit deux fois moins vite : l'oeil ne
-   dispose plus de la silhouette des mots, seulement d'une suite de
-   rectangles de meme hauteur. Sur un titre de trois mots c'est sans
-   consequence, sur une question c'en est une.
+   Les intitules d'accordeon sont balises en titres — questions d'une foire
+   aux questions, volets d'une fiche spa — parce qu'ils annoncent le contenu
+   qu'ils ouvrent. Mais ce ne sont pas des titres d'affichage : ce sont des
+   commandes, sur lesquelles on clique. Le site les montre donc tels qu'on
+   les lit, en bas-de-casse.
 
-   L'exception ne vise QUE l'accordeon de la section « Contenu repliable ».
-   Les volets d'une fiche produit — « Garantie », « Livraison et
-   installation » — portent la meme classe mais sont des libelles courts :
-   ils restent en capitales comme le reste des titres. L'interlettrage
-   revient a sa valeur d'origine, une valeur positive n'ayant plus lieu
-   d'etre sur des bas-de-casse. */
-.collapsible-content .accordion__title {
+   Pour les questions, la raison est de lisibilite pure : « La livraison
+   est-elle comprise dans le prix du spa ? » en capitales se lit deux fois
+   moins vite, l'oeil ne disposant plus de la silhouette des mots mais d'une
+   suite de rectangles de meme hauteur.
+
+   Pour les volets d'une fiche spa — « Garantie », « Livraison et
+   installation », « Ce que le prix comprend » — la raison est de coherence :
+   les deux accordeons du site partagent la meme classe, la meme mecanique et
+   le meme geste ; les ecrire differemment ferait croire a deux objets
+   distincts.
+
+   L'interlettrage revient a sa valeur d'origine, une valeur positive n'ayant
+   plus lieu d'etre sur des bas-de-casse. */
+.accordion__title {
   letter-spacing: -0.01em;
   text-transform: none;
 }
