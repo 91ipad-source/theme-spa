@@ -4301,6 +4301,16 @@ a, span, label, summary, button, blockquote, figcaption,
   .spa-realisations__liste {
     grid-template-columns: repeat(var(--colonnes, 3), minmax(0, 1fr));
   }
+
+  /* Le nombre de colonnes ne depasse jamais le nombre de realisations (la
+     section s'en charge), mais une colonne unique occuperait alors toute la
+     largeur de page : une photo de chantier en 1200 px de large devient une
+     affiche, pas une vignette. On plafonne donc la largeur d'une colonne.
+     A trois colonnes le calcul depasse la page-width et ne change rien —
+     la regle ne se declenche que quand il y a peu de realisations. */
+  .spa-realisations__liste {
+    max-width: calc(var(--colonnes, 3) * 46rem + (var(--colonnes, 3) - 1) * 2.4rem);
+  }
 }
 
 .spa-realisations__carte {

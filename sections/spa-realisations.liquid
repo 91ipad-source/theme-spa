@@ -39,12 +39,23 @@
       assign montrables = montrables | plus: 1
     endif
   endfor
+
+  comment
+    Le reglage demande deux ou trois colonnes ; on n'en met jamais plus que
+    de realisations a montrer. Sinon la premiere fiche publiee se retrouve
+    sur un tiers de largeur, seule a gauche d'une rangee vide — ca ressemble
+    a une page en panne plutot qu'a un debut de portfolio.
+  endcomment
+  assign colonnes = section.settings.colonnes | times: 1
+  if montrables < colonnes
+    assign colonnes = montrables
+  endif
 -%}
 
 {%- if montrables > 0 -%}
   <div
     class="spa-realisations color-{{ section.settings.color_scheme }} gradient"
-    style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px; --colonnes: {{ section.settings.colonnes }};"
+    style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px; --colonnes: {{ colonnes }};"
   >
     <div class="page-width">
       {%- if section.settings.titre != blank -%}
