@@ -18,8 +18,8 @@
           "type": "message",
           "settings": {
             "text": "Jusqu'au 31 octobre : couverture isolante offerte sur tout spa rigide",
-            "link": "",
-            "fin": "2026-10-31"
+            "fin": "2026-10-31",
+            "link": ""
           }
         },
         "message-2": {
