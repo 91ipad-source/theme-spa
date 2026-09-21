@@ -3714,10 +3714,25 @@ a, span, label, summary, button, blockquote, figcaption,
 }
 
 /* La pastille est dans la rangee du bandeau : elle ne prend que sa largeur
-   et ne s'etire pas avec les autres elements. */
+   et ne s'etire pas avec les autres elements.
+
+   « max-width » est le filet de securite. Rien ne garantit que le widget
+   place dans cette fente soit petit : si Trustindex y sert un bloc large,
+   il passe a la ligne dans le bandeau — qui l'autorise — au lieu de pousser
+   le bouton hors du cadre. La mise en page se degrade, elle ne casse pas. */
 .spa-avis__widget--pastille {
   flex: 0 0 auto;
+  max-width: 100%;
   line-height: 0;
+}
+
+/* Le contenu servi par Trustindex est bride a la largeur disponible. Un
+   widget dont la largeur est fixee en pixels — et il en existe — deborderait
+   sinon du telephone et donnerait a TOUTE la page une barre de defilement
+   horizontale. « max-width » l'emporte sur « width », donc cette seule ligne
+   suffit, sans rien rogner ni masquer. */
+.spa-avis__widget > * {
+  max-width: 100%;
 }
 
 .spa-avis__provenance {
