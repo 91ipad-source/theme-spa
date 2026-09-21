@@ -3709,10 +3709,23 @@ a, span, label, summary, button, blockquote, figcaption,
    certification de 135 px : la reserve creusait alors un trou de trois
    cents pixels sous un timbre-poste. Mieux vaut un leger decalage au
    chargement qu'un vide permanent. */
-/* Marge reduite : la hauteur de cette section vient du widget, le theme ne
-   rend que ce qui l entoure. */
+/* Marge reduite : en format « large », la hauteur de cette section vient du
+   widget, le theme ne rend que ce qui l'entoure. */
 .spa-avis__widget--large {
   margin-top: 1.6rem;
+}
+
+/* Le cadre, lui, fait exactement la hauteur demandee. Sa hauteur est posee
+   en ligne, depuis les reglages de la section ; ici on ne fixe que ce qui
+   n'en depend pas. */
+.spa-avis__widget--cadre {
+  margin-top: 1.6rem;
+}
+
+.spa-avis__cadre {
+  display: block;
+  width: 100%;
+  border: 0;
 }
 
 /* La pastille est dans la rangee du bandeau : elle ne prend que sa largeur

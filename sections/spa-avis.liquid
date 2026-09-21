@@ -190,7 +190,36 @@
       elle ne fonctionne que sur les pages AMP, un format que ce thème
       n'utilise pas. C'est le meme widget, servi autrement.
     {%- endcomment -%}
-    {%- if widget != blank and format_widget == 'large' -%}
+    {%- comment -%}
+      LE CADRE A HAUTEUR FIXE. Trustindex sert le meme widget a deux
+      adresses : « loader.js », un script qui s'insere dans la page et prend
+      la hauteur qu'il veut, et « amp-widget.html », une page complete
+      destinee a l'AMP. La balise « amp-iframe » fournie avec cette
+      seconde adresse ne fonctionne que sur une page AMP — un format que ce
+      theme n'utilise pas — mais l'ADRESSE, elle, est une page HTML
+      ordinaire, affichable dans un cadre normal.
+
+      C'est ce qui rend la hauteur maitrisable. Avec le script, la section
+      fait ce que le widget decide ; avec le cadre, elle fait exactement le
+      nombre de pixels indique dans les reglages, et ce qui depasse defile
+      a l'interieur du cadre au lieu d'allonger la page.
+
+      Le cadre est isole : « sandbox » n'autorise que ce dont le widget a
+      besoin — executer son script, lire son propre stockage, et ouvrir un
+      lien vers Google dans un nouvel onglet. Rien d'autre.
+    {%- endcomment -%}
+    {%- if widget != blank and format_widget == 'cadre' -%}
+      <div class="spa-avis__widget spa-avis__widget--cadre">
+        <iframe
+          class="spa-avis__cadre"
+          src="https://cdn.trustindex.io/amp-widget.html#{{ widget }}"
+          title="Avis de nos clients publiés sur Google et Facebook"
+          loading="lazy"
+          sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+          style="height: {{ section.settings.widget_hauteur | default: 390 }}px;"
+        ></iframe>
+      </div>
+    {%- elsif widget != blank and format_widget == 'large' -%}
       <div class="spa-avis__widget spa-avis__widget--large">
         <script defer async src="https://cdn.trustindex.io/loader.js?{{ widget }}"></script>
       </div>
@@ -288,10 +317,18 @@
       "label": "Format du widget",
       "info": "Trustindex sert des widgets de tailles très différentes par le même script : impossible de deviner lequel depuis le thème.",
       "options": [
+        { "value": "cadre", "label": "Cadre — hauteur fixe, réglable ci-dessous" },
         { "value": "pastille", "label": "Pastille — se place à côté de la note" },
-        { "value": "large", "label": "Large — liste ou carrousel, sous la note" }
+        { "value": "large", "label": "Large — hauteur décidée par Trustindex" }
       ],
-      "default": "pastille"
+      "default": "cadre"
+    },
+    {
+      "type": "number",
+      "id": "widget_hauteur",
+      "label": "Hauteur du cadre, en pixels",
+      "info": "Utilisé par le format « Cadre » seulement. Trustindex indique une hauteur conseillée dans la balise amp-iframe qu'il fournit. Au-delà, le contenu défile dans le cadre au lieu d'allonger la page.",
+      "default": 390
     },
     {
       "type": "checkbox",
