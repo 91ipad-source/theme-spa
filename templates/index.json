@@ -278,7 +278,7 @@
         "trustindex_id": "80f39ae8145a949737968934c58",
         "widget_format": "cadre",
         "widget_hauteur": 520,
-        "bandeau": true,
+        "bandeau": false,
         "note": "4,9",
         "nombre": 24,
         "lien_google": "https://www.google.com/maps/search/?api=1&query=Liners%20France%2C%2016%20rue%20de%20l%27Orme%2C%2091540%20Fontenay-le-Vicomte",
