@@ -1,0 +1,300 @@
+{%- comment -%}
+  « Nos réalisations » : des spas réellement installés, chez de vrais clients.
+
+  POURQUOI CETTE SECTION EXISTE. Les photos du fabricant montrent un spa
+  posé sur une terrasse impeccable, sous un ciel de studio. Elles ne
+  répondent pas à la question que se pose l'acheteur : est-ce que ça peut
+  rentrer chez MOI. Une photo de chantier, avec sa commune et la difficulté
+  qu'il a fallu régler, répond exactement à ça — et se compare mieux à un
+  jardin normal qu'un visuel de catalogue.
+
+  UNE RÈGLE ABSOLUE : QUE DU RÉEL. Aucune image de banque, aucun rendu, rien
+  qui ne soit une installation faite par l'entreprise. Une réalisation
+  inventée est une allégation commerciale trompeuse, et elle se repère : les
+  clients du coin reconnaissent les maisons. S'il n'y a pas de photo, il n'y
+  a pas de bloc — la section disparaît entièrement plutôt que de se remplir
+  d'illustrations.
+
+  CE QUE CHAQUE FICHE RACONTE. Le modèle — relié à sa page produit, parce
+  qu'un visiteur qui aime une réalisation veut voir le spa —, la commune,
+  l'année, et surtout LA DIFFICULTÉ. C'est cette dernière phrase qui a de la
+  valeur : « passage de 78 cm entre la maison et la clôture », « grutage
+  par-dessus le garage », « dalle coulée avant la livraison ». Elle prouve
+  le savoir-faire bien mieux qu'un adjectif.
+
+  LA VIE PRIVÉE DES CLIENTS. La commune suffit, jamais la rue ni le nom. Et
+  une photo de jardin se publie avec l'accord de celui qui y habite : le
+  rappel est dans l'aide du champ, dans l'éditeur de thème.
+{%- endcomment -%}
+
+{%- liquid
+  comment
+    On compte d'abord les blocs reellement montrables : un bloc sans image
+    n'est pas une realisation, c'est un bloc qu'on a ajoute et pas encore
+    rempli. Sans cette verification, la section afficherait des cadres vides.
+  endcomment
+  assign montrables = 0
+  for block in section.blocks
+    if block.settings.image != blank
+      assign montrables = montrables | plus: 1
+    endif
+  endfor
+-%}
+
+{%- if montrables > 0 -%}
+  <div
+    class="spa-realisations color-{{ section.settings.color_scheme }} gradient"
+    style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px; --colonnes: {{ section.settings.colonnes }};"
+  >
+    <div class="page-width">
+      {%- if section.settings.titre != blank -%}
+        <h2 class="spa-realisations__titre">{{ section.settings.titre | escape }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.intro != blank -%}
+        <div class="spa-realisations__intro rte">{{ section.settings.intro }}</div>
+      {%- endif -%}
+
+      <ul class="spa-realisations__liste" role="list">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.image != blank -%}
+            {%- liquid
+              assign produit = block.settings.produit
+              assign nom = block.settings.titre | default: produit.title | strip
+              assign commune = block.settings.commune | strip
+              assign annee = block.settings.annee | strip
+
+              comment
+                Le texte alternatif se construit tout seul quand on ne l'a pas
+                ecrit : une image sans description n'existe pas pour une
+                personne qui navigue au lecteur d'ecran, et Google n'en tire
+                rien non plus.
+              endcomment
+              assign alt = block.settings.image.alt | strip
+              if alt == blank
+                capture alt
+                  echo 'Spa '
+                  echo nom
+                  if commune != blank
+                    echo ' installé à '
+                    echo commune
+                  endif
+                endcapture
+              endif
+            -%}
+
+            <li class="spa-realisations__carte" {{ block.shopify_attributes }}>
+              <div class="spa-realisations__image">
+                {{
+                  block.settings.image
+                  | image_url: width: 1200
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '400, 600, 800, 1200',
+                    sizes: '(min-width: 990px) 33vw, 100vw',
+                    alt: alt
+                }}
+              </div>
+
+              {%- comment -%}
+                LES ANGLES SECONDAIRES. Un chantier se raconte rarement en une
+                photo : la vue large dit si ca rentre, le detail dit comment
+                c'est fini. Les deux vignettes sont facultatives et
+                n'apparaissent que si on les remplit — une seule suffit, la
+                bande s'adapte.
+              {%- endcomment -%}
+              {%- if block.settings.image_2 != blank or block.settings.image_3 != blank -%}
+                <div class="spa-realisations__angles">
+                  {%- for cle in 'image_2,image_3' | split: ',' -%}
+                    {%- assign vue = block.settings[cle] -%}
+                    {%- if vue != blank -%}
+                      {{
+                        vue
+                        | image_url: width: 600
+                        | image_tag:
+                          loading: 'lazy',
+                          widths: '200, 300, 400, 600',
+                          sizes: '(min-width: 990px) 16vw, 50vw',
+                          alt: alt
+                      }}
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+
+              <div class="spa-realisations__corps">
+                {%- if commune != blank or annee != blank -%}
+                  <p class="spa-realisations__lieu">
+                    {%- if commune != blank -%}{{ commune }}{%- endif -%}
+                    {%- if annee != blank -%}
+                      {%- if commune != blank %} · {% endif -%}{{ annee }}
+                    {%- endif -%}
+                  </p>
+                {%- endif -%}
+
+                {%- if nom != blank -%}
+                  <h3 class="spa-realisations__nom">
+                    {%- if produit != blank -%}
+                      <a href="{{ produit.url }}">{{ nom }}</a>
+                    {%- else -%}
+                      {{ nom }}
+                    {%- endif -%}
+                  </h3>
+                {%- endif -%}
+
+                {%- comment -%}
+                  La difficulte est le coeur de la fiche. Elle est en gras
+                  dans la carte, pas en petits caracteres sous la photo.
+                {%- endcomment -%}
+                {%- if block.settings.difficulte != blank -%}
+                  <p class="spa-realisations__recit">{{ block.settings.difficulte }}</p>
+                {%- endif -%}
+              </div>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+
+      {%- if section.settings.lien_libelle != blank -%}
+        <p class="spa-realisations__action">
+          <a class="btn" href="{{ section.settings.lien | default: '/pages/mon-projet-spa' }}">
+            {{- section.settings.lien_libelle | escape -}}
+          </a>
+        </p>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Nos réalisations",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 24,
+  "settings": [
+    {
+      "type": "text",
+      "id": "titre",
+      "label": "Titre",
+      "default": "Des spas installés près de chez vous"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Introduction",
+      "default": "<p>Ce ne sont pas des photos de catalogue : chacune de ces installations a été livrée et mise en service par notre équipe. Nous indiquons à chaque fois ce qui était compliqué — c'est ce qui vous dira si votre propre accès est faisable.</p>"
+    },
+    {
+      "type": "select",
+      "id": "colonnes",
+      "label": "Colonnes sur grand écran",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "header",
+      "content": "Bouton"
+    },
+    {
+      "type": "text",
+      "id": "lien_libelle",
+      "label": "Libellé du bouton",
+      "default": "Nous parler de votre accès"
+    },
+    {
+      "type": "url",
+      "id": "lien",
+      "label": "Lien du bouton"
+    },
+    {
+      "type": "header",
+      "content": "Mise en page"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Jeu de couleurs",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "realisation",
+      "name": "Réalisation",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo de l'installation",
+          "info": "Une vraie photo du chantier, jamais une image de banque. Sans photo, la réalisation ne s'affiche pas. Pensez à l'accord du client avant de publier son jardin."
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Deuxième angle (facultatif)",
+          "info": "Une vue de détail, l'ambiance de nuit, le panneau de commande."
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "Troisième angle (facultatif)"
+        },
+        {
+          "type": "product",
+          "id": "produit",
+          "label": "Modèle installé",
+          "info": "Le nom devient un lien vers la fiche du spa."
+        },
+        {
+          "type": "text",
+          "id": "titre",
+          "label": "Nom affiché",
+          "info": "Laisser vide pour reprendre le titre de la fiche produit."
+        },
+        {
+          "type": "text",
+          "id": "commune",
+          "label": "Commune",
+          "info": "La commune seule, jamais la rue ni le nom du client."
+        },
+        {
+          "type": "text",
+          "id": "annee",
+          "label": "Année"
+        },
+        {
+          "type": "textarea",
+          "id": "difficulte",
+          "label": "Ce qui était compliqué",
+          "info": "La phrase la plus utile de la fiche. Soyez précis : « passage de 78 cm entre la maison et la clôture », « grutage par-dessus le garage », « dalle coulée avant la livraison ». C'est ce qui prouve le savoir-faire."
+        }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Nos réalisations" }]
+}
+{% endschema %}

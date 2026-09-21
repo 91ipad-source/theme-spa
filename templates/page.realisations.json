@@ -1,0 +1,53 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "text_alignment": "left",
+        "padding_top": 28,
+        "padding_bottom": 0
+      }
+    },
+    "realisations": {
+      "type": "spa-realisations",
+      "blocks": {
+        "proto2": {
+          "type": "realisation",
+          "settings": {
+            "produit": "spa-roca-proto-lighting-5-personnes",
+            "titre": "",
+            "commune": "",
+            "annee": "",
+            "difficulte": ""
+          }
+        }
+      },
+      "block_order": [
+        "proto2"
+      ],
+      "settings": {
+        "titre": "Des spas installés près de chez vous",
+        "intro": "<p>Ce ne sont pas des photos de catalogue : chacune de ces installations a été livrée et mise en service par notre équipe. Nous indiquons à chaque fois ce qui était compliqué — c'est ce qui vous dira si votre propre accès est faisable.</p>",
+        "colonnes": "3",
+        "lien_libelle": "Nous parler de votre accès",
+        "lien": "/pages/mon-projet-spa",
+        "color_scheme": "scheme-1",
+        "padding_top": 16,
+        "padding_bottom": 48
+      }
+    }
+  },
+  "order": [
+    "main",
+    "realisations"
+  ]
+}
