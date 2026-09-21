@@ -99,18 +99,31 @@
   endif
 
   comment
-    Le bandeau et les cartes s'effacent devant le widget : celui de
-    Trustindex affiche deja sa propre note, son propre compte et son propre
-    lien vers Google. Les laisser cote a cote donnerait la meme note ecrite
-    deux fois a trente pixels d'ecart. La case « Afficher le bandeau » permet
-    de le rappeler si le widget choisi n'en montre pas.
+    LE BANDEAU NE S'EFFACE PLUS DEVANT LE WIDGET. Il le faisait, en supposant
+    que le widget afficherait sa propre note : avec une pastille de
+    certification, la section se reduisait a un titre et un timbre de
+    135 px perdu au milieu d'un grand vide. La regle est desormais sans
+    surprise — le bandeau s'affiche si on l'a demande, point.
+
+    Les deux ne font d'ailleurs pas le meme travail : le bandeau affirme la
+    note, la pastille la certifie. L'un dit le chiffre, l'autre dit qui en
+    repond.
   endcomment
   assign montrer_bandeau = false
-  if widget == blank or section.settings.bandeau
+  if section.settings.bandeau
     if note != blank or lien != blank
       assign montrer_bandeau = true
     endif
   endif
+
+  comment
+    Deux formats de widget, declares plutot que devines. Impossible de
+    connaitre depuis le theme la taille de ce que Trustindex va servir : une
+    pastille de certification et un carrousel d'avis arrivent par le meme
+    script. On demande donc lequel c'est, au lieu de reserver une hauteur au
+    hasard — c'est cette reserve qui avait creuse le trou.
+  endcomment
+  assign format_widget = section.settings.widget_format | default: 'pastille'
 -%}
 
 <div
@@ -148,6 +161,17 @@
           </div>
         {%- endif -%}
 
+        {%- comment -%}
+          La pastille de certification vit DANS le bandeau, a cote de la
+          note : seule, elle flotte ; posee la, elle fait ce pour quoi elle
+          existe — apposer un tiers sur un chiffre que nous affirmons.
+        {%- endcomment -%}
+        {%- if widget != blank and format_widget == 'pastille' -%}
+          <div class="spa-avis__widget spa-avis__widget--pastille">
+            <script defer async src="https://cdn.trustindex.io/loader.js?{{ widget }}"></script>
+          </div>
+        {%- endif -%}
+
         {%- if lien != blank -%}
           <a class="btn spa-avis__lien" href="{{ lien }}" target="_blank" rel="noopener">
             Lire les avis sur Google
@@ -166,8 +190,8 @@
       elle ne fonctionne que sur les pages AMP, un format que ce thème
       n'utilise pas. C'est le meme widget, servi autrement.
     {%- endcomment -%}
-    {%- if widget != blank -%}
-      <div class="spa-avis__widget">
+    {%- if widget != blank and format_widget == 'large' -%}
+      <div class="spa-avis__widget spa-avis__widget--large">
         <script defer async src="https://cdn.trustindex.io/loader.js?{{ widget }}"></script>
       </div>
     {%- elsif avis_remplis > 0 -%}
@@ -259,11 +283,22 @@
       "info": "L'identifiant seul, celui qui suit le « ? » dans la balise fournie par Trustindex. Renseigné, il affiche les avis synchronisés avec Google ; vide, la section affiche les avis saisis à la main plus bas."
     },
     {
+      "type": "select",
+      "id": "widget_format",
+      "label": "Format du widget",
+      "info": "Trustindex sert des widgets de tailles très différentes par le même script : impossible de deviner lequel depuis le thème.",
+      "options": [
+        { "value": "pastille", "label": "Pastille — se place à côté de la note" },
+        { "value": "large", "label": "Large — liste ou carrousel, sous la note" }
+      ],
+      "default": "pastille"
+    },
+    {
       "type": "checkbox",
       "id": "bandeau",
-      "label": "Afficher aussi le bandeau de note",
-      "info": "Le widget affiche déjà sa propre note. À cocher seulement si celui que vous avez choisi ne la montre pas.",
-      "default": false
+      "label": "Afficher le bandeau de note",
+      "info": "La note, les étoiles, le nombre d'avis et le bouton vers Google. À décocher si le widget affiche déjà tout cela.",
+      "default": true
     },
     {
       "type": "header",

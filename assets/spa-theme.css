@@ -3701,13 +3701,23 @@ a, span, label, summary, button, blockquote, figcaption,
 }
 
 /* Le widget Trustindex apporte ses propres styles, servis depuis son CDN :
-   on ne cherche pas a le redessiner, on lui reserve sa place et l'air
-   au-dessus. La hauteur minimale evite que la page ne saute au moment ou le
-   script finit de charger — sans elle, tout ce qui suit remonte puis
-   redescend sous les yeux du visiteur. */
-.spa-avis__widget {
+   on ne cherche pas a le redessiner, on lui laisse la place qu'il prend.
+
+   AUCUNE HAUTEUR MINIMALE, et c'est une correction. Il y en avait une, de
+   30 rem, pour eviter que la page ne saute a la fin du chargement. Mais le
+   meme script sert aussi bien un carrousel d'avis qu'une pastille de
+   certification de 135 px : la reserve creusait alors un trou de trois
+   cents pixels sous un timbre-poste. Mieux vaut un leger decalage au
+   chargement qu'un vide permanent. */
+.spa-avis__widget--large {
   margin-top: 2.4rem;
-  min-height: 30rem;
+}
+
+/* La pastille est dans la rangee du bandeau : elle ne prend que sa largeur
+   et ne s'etire pas avec les autres elements. */
+.spa-avis__widget--pastille {
+  flex: 0 0 auto;
+  line-height: 0;
 }
 
 .spa-avis__provenance {
