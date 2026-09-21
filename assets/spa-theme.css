@@ -2693,11 +2693,25 @@ a, span, label, summary, button, blockquote, figcaption,
   gap: 3.2rem;
 }
 
+/* Les colonnes sont presque a egalite. Le formulaire de l'application
+   Forms s'affiche sur une seule colonne et ne s'elargit pas au-dela d'une
+   certaine mesure : lui reserver une colonne large ne fait qu'ouvrir un
+   vide a sa droite. Autant rendre la place a la colonne de gauche, qui
+   porte du texte.
+
+   L'aside est colle en haut : le formulaire fait une quinzaine de champs,
+   et sans cela la colonne de gauche se termine au tiers de la page, laissant
+   un grand blanc pendant tout le defilement. */
 @media screen and (min-width: 990px) {
   .spa-projet__grille {
     align-items: start;
     gap: 4.8rem;
-    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+  }
+
+  .spa-projet__aside {
+    position: sticky;
+    top: 2.4rem;
   }
 }
 
@@ -2739,9 +2753,22 @@ a, span, label, summary, button, blockquote, figcaption,
 /* Le panneau du formulaire : un aplat clair qui le detache de la page et
    signale « ici, on remplit ». */
 .spa-projet__panneau {
+  max-width: 56rem;
   padding: 2.4rem;
   border-radius: var(--r-lg);
   background: var(--mist);
+}
+
+/* Le bloc de l'application occupe toute la largeur du panneau. Ces regles
+   n'ont d'effet que si Forms rend son formulaire dans la page ; s'il
+   l'enferme dans un composant web etanche, elles sont sans consequence. */
+[data-projet-app] {
+  width: 100%;
+}
+
+[data-projet-app] form,
+[data-projet-app] > div {
+  max-width: none;
 }
 
 @media screen and (max-width: 749px) {
