@@ -1,0 +1,380 @@
+{%- comment -%}
+  Ce que coûte un spa à l'usage : électricité, eau, consommables.
+
+  POURQUOI CETTE PAGE EST DÉLICATE. C'est la seule du site dont le client
+  peut vérifier les chiffres — il a sa facture d'électricité sous les yeux.
+  Un montant optimiste qui se révèle faux au bout d'un hiver ne coûte pas
+  une vente : il coûte la confiance sur tout le reste du site. On préfère
+  donc une fourchette assumée à un chiffre flatteur.
+
+  D'OÙ VIENNENT LES NOMBRES.
+  - Le prix du kWh est un réglage, avec sa source et sa date affichées à
+    côté. Il change deux fois par an, en février et en août : sans la date,
+    le visiteur ne peut pas savoir si le calcul est encore valable.
+  - La consommation quotidienne est un réglage, vide par défaut. Tant
+    qu'elle n'est pas renseignée, le bloc électricité n'affiche que la
+    méthode de calcul, pas de montant. Personne ici n'invente une
+    consommation : elle dépend du modèle, de la couverture, de la
+    température de consigne et de l'exposition.
+  - Le coût de l'eau est CALCULÉ à partir des volumes réels des spas de la
+    collection. C'est le seul poste qu'on puisse chiffrer sans hypothèse,
+    et accessoirement le seul dont le montant rassure.
+  - Le prix du filtre vient de sa fiche produit.
+
+  CE QUE LA PAGE DIT AVANT TOUT CHIFFRE. Qu'un spa ne coûte pas cher à
+  chauffer mais à maintenir chaud, et que la couverture pèse plus que tout
+  le reste. C'est vrai quel que soit le modèle, ça ne périme pas, et c'est
+  ce qui aide réellement à décider.
+{%- endcomment -%}
+
+{%- liquid
+  comment
+    Le prix du kWh arrive en texte, avec la virgule francaise. On le
+    convertit une fois pour toutes : Liquid multiplie des nombres, pas des
+    chaines a virgule.
+  endcomment
+  assign prix_kwh_txt = section.settings.prix_kwh | strip
+  assign prix_kwh = prix_kwh_txt | replace: ',', '.' | times: 1.0
+
+  assign kwh_ete = section.settings.kwh_ete | replace: ',', '.' | times: 1.0
+  assign kwh_hiver = section.settings.kwh_hiver | replace: ',', '.' | times: 1.0
+
+  comment
+    Le bloc electricite n'affiche des montants que si les deux
+    consommations sont renseignees. Une seule des deux donnerait une
+    moyenne annuelle fausse.
+  endcomment
+  assign chiffre_elec = false
+  if prix_kwh > 0 and kwh_ete > 0 and kwh_hiver > 0
+    assign chiffre_elec = true
+    assign mois_ete = kwh_ete | times: prix_kwh | times: 30 | round: 0
+    assign mois_hiver = kwh_hiver | times: prix_kwh | times: 30 | round: 0
+    comment
+      L'annee compte six mois de chaque : c'est une convention, dite comme
+      telle sous le tableau. Pretendre a mieux supposerait de connaitre la
+      meteo de chaque client.
+    endcomment
+    assign an_ete = mois_ete | times: 6
+    assign an_hiver = mois_hiver | times: 6
+    assign an_total = an_ete | plus: an_hiver
+  endif
+
+  comment
+    Le cout de l'eau se calcule sur les volumes reels de la collection.
+    Aucune hypothese : un litre est un litre.
+  endcomment
+  assign gamme = section.settings.collection
+  assign vol_mini = 0
+  assign vol_maxi = 0
+  for spa in gamme.products
+    assign v = spa.metafields.custom.volume_eau.value | times: 1
+    if v > 0
+      if vol_mini == 0 or v < vol_mini
+        assign vol_mini = v
+      endif
+      if v > vol_maxi
+        assign vol_maxi = v
+      endif
+    endif
+  endfor
+
+  assign prix_eau = section.settings.prix_eau | replace: ',', '.' | times: 1.0
+  assign eau_mini = 0
+  assign eau_maxi = 0
+  if vol_mini > 0 and prix_eau > 0
+    assign eau_mini = vol_mini | divided_by: 1000.0 | times: prix_eau | round: 1
+    assign eau_maxi = vol_maxi | divided_by: 1000.0 | times: prix_eau | round: 1
+  endif
+
+  assign filtre = all_products['filtre-spa-pww50']
+  assign v_filtre = filtre.selected_or_first_available_variant
+-%}
+
+<div
+  class="spa-cout color-{{ section.settings.color_scheme }} gradient"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width">
+    {%- comment -%}
+      LE PRINCIPE AVANT LES CHIFFRES. Un visiteur qui comprend d'où vient la
+      dépense sait quoi en faire ; un visiteur à qui on donne un montant sans
+      explication ne peut ni le vérifier ni le réduire.
+    {%- endcomment -%}
+    <section class="spa-cout__bloc">
+      <h2 class="spa-cout__titre">Ce qui fait la facture</h2>
+
+      <p class="spa-cout__phrase">
+        Un spa ne coûte pas cher à <em>chauffer</em> : il coûte cher à <strong>rester chaud</strong>.
+        Monter 1 000 litres à 37 °C ne se fait qu'une fois ; les maintenir à 37 °C se fait
+        vingt-quatre heures sur vingt-quatre, toute l'année, que l'on s'y baigne ou non. C'est là
+        que part l'essentiel de l'électricité.
+      </p>
+
+      <ul class="spa-cout__leviers" role="list">
+        <li>
+          <strong>La couverture</strong>
+          C'est le premier poste d'économie, et de loin. Un spa découvert perd sa chaleur par
+          évaporation — l'eau qui s'évapore emporte l'énergie qui l'a chauffée. Une couverture
+          isotherme en bon état, posée dès la sortie du bain, change la facture d'un ordre de
+          grandeur.
+        </li>
+        <li>
+          <strong>La température de consigne</strong>
+          Chaque degré compte, parce que la perte est proportionnelle à l'écart avec l'air
+          extérieur. Passer de 38 à 36 °C se sent à peine dans l'eau et se voit sur la facture.
+        </li>
+        <li>
+          <strong>L'exposition au vent</strong>
+          Un spa dans un courant d'air perd davantage qu'un spa abrité, à température égale. Une
+          haie, un muret ou un pan de mur suffisent.
+        </li>
+        <li>
+          <strong>Les pompes de massage, presque rien</strong>
+          On les fait tourner vingt minutes par jour. Ce sont le chauffage et la filtration, qui
+          tournent en continu, qui composent la facture — pas les jets.
+        </li>
+      </ul>
+    </section>
+
+    {%- comment -%}
+      L'ÉLECTRICITÉ. Le tableau n'apparaît que si les consommations sont
+      renseignées ; sinon on montre la méthode, qui reste utilisable par le
+      visiteur avec ses propres chiffres.
+    {%- endcomment -%}
+    <section class="spa-cout__bloc spa-cout__bloc--cadre">
+      <h2 class="spa-cout__titre">L'électricité</h2>
+
+      {%- if chiffre_elec -%}
+        <ul class="spa-cout__saisons" role="list">
+          <li>
+            <span class="spa-cout__montant">{{ mois_ete }} €</span>
+            <span class="spa-cout__quand">par mois, d'avril à septembre</span>
+          </li>
+          <li>
+            <span class="spa-cout__montant">{{ mois_hiver }} €</span>
+            <span class="spa-cout__quand">par mois, d'octobre à mars</span>
+          </li>
+          <li class="spa-cout__saisons-total">
+            <span class="spa-cout__montant">{{ an_total }} €</span>
+            <span class="spa-cout__quand">sur l'année</span>
+          </li>
+        </ul>
+
+        <p class="spa-cout__note">
+          Calcul : {{ section.settings.kwh_ete }} kWh par jour en saison douce et
+          {{ section.settings.kwh_hiver }} kWh en saison froide, à {{ prix_kwh_txt }} € le kWh,
+          sur six mois de chaque. Une convention, pas une prévision météo.
+        </p>
+      {%- else -%}
+        <p class="spa-cout__phrase">
+          Le calcul tient en une ligne, et vous pouvez le faire avec vos propres chiffres :
+          <strong>consommation quotidienne en kWh × prix de votre kWh × 30</strong> donne la
+          dépense mensuelle.
+        </p>
+      {%- endif -%}
+
+      <p class="spa-cout__phrase">
+        Le prix du kWh figure sur votre facture, et il n'est pas le même pour tout le monde selon
+        l'offre et la puissance souscrite.
+        {%- if section.settings.source_kwh != blank %}
+          {{ section.settings.source_kwh }}
+        {%- endif -%}
+      </p>
+
+      <p class="spa-cout__note">
+        Ce que ce montant ne dit pas : votre consommation dépend du modèle, de l'état de la
+        couverture, de la température choisie et de l'endroit où le spa est posé. Deux voisins
+        avec le même spa n'ont pas la même facture. Nous préférons l'écrire plutôt que d'annoncer
+        un chiffre unique qui ne vaudrait pour personne.
+      </p>
+    </section>
+
+    {%- comment -%}
+      L'EAU. Seul poste entierement calculable : les volumes viennent des
+      fiches, le prix du metre cube est un reglage. C'est aussi le poste qui
+      surprend le plus, parce qu'on l'imagine enorme.
+    {%- endcomment -%}
+    {%- if eau_maxi > 0 -%}
+      <section class="spa-cout__bloc">
+        <h2 class="spa-cout__titre">L'eau</h2>
+        <p class="spa-cout__phrase">
+          C'est le poste qui inquiète le plus et qui pèse le moins. Nos spas contiennent de
+          <strong>{{ vol_mini }} à {{ vol_maxi }} litres</strong> selon le modèle : à
+          {{ section.settings.prix_eau }} € le mètre cube, un remplissage complet coûte entre
+          <strong>{{ eau_mini | replace: '.', ',' }} €</strong> et
+          <strong>{{ eau_maxi | replace: '.', ',' }} €</strong>.
+        </p>
+        <p class="spa-cout__note">
+          L'eau se renouvelle intégralement plusieurs fois par an, selon la fréquence d'usage et
+          la qualité du traitement. Même à quatre renouvellements, on reste sous le prix d'un
+          plein d'essence. Le tarif du mètre cube varie d'une commune à l'autre : vérifiez sur
+          votre facture d'eau.
+        </p>
+      </section>
+    {%- endif -%}
+
+    {%- comment -%}
+      LES CONSOMMABLES. Le filtre a un prix reel, tire de sa fiche. Les
+      produits de traitement n'en ont pas ici : nous ne les vendons pas, donc
+      le bloc reste un reglage, et disparait s'il est vide.
+    {%- endcomment -%}
+    <section class="spa-cout__bloc">
+      <h2 class="spa-cout__titre">Les consommables</h2>
+
+      <ul class="spa-cout__lignes" role="list">
+        {%- if v_filtre -%}
+          <li class="spa-cout__ligne">
+            <span class="spa-cout__libelle">
+              <a href="{{ filtre.url }}">Cartouche filtrante</a>
+              <span class="spa-cout__precision">
+                À rincer régulièrement, à remplacer quand le rinçage ne suffit plus
+              </span>
+            </span>
+            <span class="spa-cout__prix">{{ v_filtre.price | money }}</span>
+          </li>
+        {%- endif -%}
+
+        {%- if section.settings.produits != blank -%}
+          <li class="spa-cout__ligne">
+            <span class="spa-cout__libelle">
+              Produits de traitement
+              <span class="spa-cout__precision">{{ section.settings.produits | escape }}</span>
+            </span>
+            <span class="spa-cout__prix spa-cout__prix--texte">
+              {{ section.settings.produits_prix | default: 'Variable' | escape }}
+            </span>
+          </li>
+        {%- endif -%}
+      </ul>
+
+      <p class="spa-cout__note">
+        Le désinfectant, le correcteur de pH et les bandelettes de test s'achètent en grande
+        surface comme chez un pisciniste. Ce ne sont pas des produits propriétaires.
+      </p>
+    </section>
+
+    {%- if section.settings.lien_libelle != blank -%}
+      <p class="spa-cout__action">
+        <a class="btn" href="{{ section.settings.lien | default: '/pages/mon-projet-spa' }}">
+          {{- section.settings.lien_libelle | escape -}}
+        </a>
+      </p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Coût d'utilisation",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "L'électricité"
+    },
+    {
+      "type": "text",
+      "id": "kwh_ete",
+      "label": "Consommation par jour, saison douce (kWh)",
+      "info": "Laisser vide tant que le chiffre n'est pas sûr : la page affiche alors la méthode de calcul sans montant. Un coût annoncé sur cette page se vérifie sur une facture."
+    },
+    {
+      "type": "text",
+      "id": "kwh_hiver",
+      "label": "Consommation par jour, saison froide (kWh)",
+      "info": "Les deux champs doivent être remplis pour que les montants s'affichent."
+    },
+    {
+      "type": "text",
+      "id": "prix_kwh",
+      "label": "Prix du kWh, en euros",
+      "default": "0,2001"
+    },
+    {
+      "type": "text",
+      "id": "source_kwh",
+      "label": "Source et date du prix",
+      "info": "Le tarif réglementé change deux fois par an, en février et en août. Sans la date, le visiteur ne peut pas savoir si le calcul est encore valable.",
+      "default": "Le calcul ci-dessus retient le tarif réglementé EDF option base, 6 kVA, en vigueur en septembre 2026."
+    },
+    {
+      "type": "header",
+      "content": "L'eau"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection servant aux volumes",
+      "info": "Les litrages sont lus sur les fiches, aucun n'est recopié."
+    },
+    {
+      "type": "text",
+      "id": "prix_eau",
+      "label": "Prix du mètre cube d'eau, en euros",
+      "default": "4,50"
+    },
+    {
+      "type": "header",
+      "content": "Les consommables"
+    },
+    {
+      "type": "text",
+      "id": "produits",
+      "label": "Produits de traitement — description",
+      "info": "Laisser vide pour masquer la ligne."
+    },
+    {
+      "type": "text",
+      "id": "produits_prix",
+      "label": "Produits de traitement — budget"
+    },
+    {
+      "type": "header",
+      "content": "Bouton"
+    },
+    {
+      "type": "text",
+      "id": "lien_libelle",
+      "label": "Libellé du bouton",
+      "default": "Parler de mon projet"
+    },
+    {
+      "type": "url",
+      "id": "lien",
+      "label": "Lien du bouton"
+    },
+    {
+      "type": "header",
+      "content": "Mise en page"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Jeu de couleurs",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 48
+    }
+  ],
+  "presets": [{ "name": "Coût d'utilisation" }]
+}
+{% endschema %}

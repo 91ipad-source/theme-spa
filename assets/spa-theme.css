@@ -3985,3 +3985,201 @@ a, span, label, summary, button, blockquote, figcaption,
   font-size: 1.4rem;
   line-height: 1.55;
 }
+
+/* --------------------------------------------------------------------------
+   39. COUT D'UTILISATION (section spa-cout)
+
+   Meme grammaire visuelle que le budget et le SAV : des blocs successifs,
+   des montants alignes a droite, un encadre pour ce qui demande une
+   attention particuliere — ici l'electricite, seul poste que le client
+   verifiera sur sa propre facture.
+   -------------------------------------------------------------------------- */
+.spa-cout {
+  padding-top: var(--pt, 24px);
+  padding-bottom: var(--pb, 48px);
+}
+
+.spa-cout__bloc + .spa-cout__bloc {
+  margin-top: 4rem;
+}
+
+.spa-cout__titre {
+  margin: 0 0 1.6rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 2.6vw, 2.8rem);
+  line-height: 1.2;
+}
+
+.spa-cout__phrase {
+  max-width: 72rem;
+  margin: 0 0 1.6rem;
+  font-size: 1.6rem;
+  line-height: 1.6;
+  color: var(--deep-soft);
+}
+
+.spa-cout__phrase strong {
+  color: var(--deep);
+}
+
+.spa-cout__note {
+  max-width: 72rem;
+  margin: 1.6rem 0 0;
+  color: var(--deep-soft);
+  font-size: 1.4rem;
+  line-height: 1.55;
+}
+
+/* Les quatre leviers. Pas de puce ni de numero : ce n'est ni une liste de
+   courses ni une marche a suivre, ce sont quatre causes independantes. Le
+   filet vertical les relie sans les ordonner. */
+.spa-cout__leviers {
+  display: grid;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+}
+
+.spa-cout__leviers li {
+  padding-left: 1.6rem;
+  border-left: 3px solid var(--water);
+  font-size: 1.5rem;
+  line-height: 1.55;
+  color: var(--deep-soft);
+}
+
+.spa-cout__leviers strong {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: var(--deep);
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+}
+
+.spa-cout__bloc--cadre {
+  padding: 3.2rem;
+  border: 1px solid rgba(15, 58, 90, 0.12);
+  border-radius: var(--r-lg);
+  background: var(--white);
+}
+
+@media screen and (max-width: 749px) {
+  .spa-cout__bloc--cadre {
+    padding: 2.4rem 2rem;
+  }
+}
+
+/* Les deux saisons cote a cote, le total detache. On ne met pas le total
+   au milieu : c'est une somme, elle vient apres. */
+.spa-cout__saisons {
+  display: grid;
+  gap: 1.6rem;
+  margin: 0 0 1.6rem;
+  padding: 0;
+  list-style: none;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+}
+
+.spa-cout__saisons li {
+  padding: 2rem;
+  border-radius: var(--r-md);
+  background: var(--mist);
+  text-align: center;
+}
+
+.spa-cout__saisons-total {
+  background: var(--deep);
+}
+
+.spa-cout__saisons-total .spa-cout__montant {
+  color: var(--white);
+}
+
+.spa-cout__saisons-total .spa-cout__quand {
+  color: var(--water);
+}
+
+.spa-cout__montant {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 3.4vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--deep);
+}
+
+.spa-cout__quand {
+  display: block;
+  margin-top: 0.8rem;
+  font-size: 1.4rem;
+  color: var(--deep-soft);
+}
+
+/* Les consommables reprennent la ligne du devis : libelle a gauche, montant
+   a droite, filet pointille entre les deux. */
+.spa-cout__lignes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.spa-cout__ligne {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 0.4rem 1.6rem;
+  padding: 1.2rem 0;
+  border-bottom: 1px dashed rgba(15, 58, 90, 0.18);
+}
+
+.spa-cout__ligne:last-child {
+  border-bottom: 0;
+}
+
+.spa-cout__libelle {
+  min-width: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.spa-cout__libelle a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--water);
+}
+
+.spa-cout__libelle a:hover {
+  border-bottom-color: var(--sky-deep);
+}
+
+.spa-cout__precision {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--deep-soft);
+  font-size: 1.35rem;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.spa-cout__prix {
+  justify-self: end;
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.spa-cout__prix--texte {
+  font-family: var(--font-body);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--deep-soft);
+}
+
+.spa-cout__action {
+  margin: 3.2rem 0 0;
+  text-align: center;
+}
