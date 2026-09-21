@@ -120,6 +120,27 @@ h6,
   text-transform: uppercase;
 }
 
+/* LA SEULE EXCEPTION : LES QUESTIONS D'UNE FOIRE AUX QUESTIONS.
+
+   Elles sont balisees en <h3> parce que ce sont les titres de leurs
+   reponses, mais ce sont des phrases entieres, souvent interrogatives, et
+   longues — « La livraison est-elle comprise dans le prix du spa ? ». Une
+   phrase complete en capitales se lit deux fois moins vite : l'oeil ne
+   dispose plus de la silhouette des mots, seulement d'une suite de
+   rectangles de meme hauteur. Sur un titre de trois mots c'est sans
+   consequence, sur une question c'en est une.
+
+   L'exception ne vise QUE l'accordeon de la section « Contenu repliable ».
+   Les volets d'une fiche produit — « Garantie », « Livraison et
+   installation » — portent la meme classe mais sont des libelles courts :
+   ils restent en capitales comme le reste des titres. L'interlettrage
+   revient a sa valeur d'origine, une valeur positive n'ayant plus lieu
+   d'etre sur des bas-de-casse. */
+.collapsible-content .accordion__title {
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
 h1,
 .h0,
 .h1 {
