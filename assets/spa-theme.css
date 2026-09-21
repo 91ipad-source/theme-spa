@@ -3709,6 +3709,8 @@ a, span, label, summary, button, blockquote, figcaption,
    certification de 135 px : la reserve creusait alors un trou de trois
    cents pixels sous un timbre-poste. Mieux vaut un leger decalage au
    chargement qu'un vide permanent. */
+/* Marge reduite : la hauteur de cette section vient du widget, le theme ne
+   rend que ce qui l entoure. */
 .spa-avis__widget--large {
   margin-top: 1.6rem;
 }
