@@ -32,10 +32,19 @@
             "annee": "2025",
             "difficulte": "Le seul accès au jardin mesurait 120 cm, entre le mur de la maison et la clôture, pour un spa de 200 × 200 cm. C'est précisément le genre de passage qui se mesure avant de commander, jamais le jour de la livraison."
           }
+        },
+        "panope": {
+          "type": "realisation",
+          "settings": {
+            "produit": "spa-roca-panope-full-therapeutique-5-personnes",
+            "commune": "Mennecy",
+            "difficulte": "Un mètre de large entre la descente de garage et le mur, pour un spa de 230 × 230 cm. Ce n'est pas la taille du jardin qui décide de la faisabilité, c'est la largeur du couloir qui y mène."
+          }
         }
       },
       "block_order": [
-        "proto2"
+        "proto2",
+        "panope"
       ],
       "settings": {
         "titre": "Des spas installés près de chez vous",
