@@ -53,6 +53,11 @@
         "doto": {
           "type": "realisation",
           "settings": {
+            "image": "shopify://shop_images/IMG_1086_3.jpg",
+            "image_2": "shopify://shop_images/0dd9f239-7010-414e-b33e-25ac1c1086b1.jpg",
+            "image_3": "shopify://shop_images/IMG_1088_3.jpg",
+            "image_4": "shopify://shop_images/IMG_1089_3.jpg",
+            "image_5": "shopify://shop_images/IMG_1084_3.jpg",
             "produit": "spa-roca-doto-3-personnes",
             "titre": "",
             "commune": "Seine-Port",
