@@ -5359,7 +5359,7 @@ h1.h2.center {
 }
 
 /* --------------------------------------------------------------------------
-   49. LE CHAPEAU D'UNE PAGE SUIVIE DE SECTIONS RESPIRE PLUS LARGE
+   49. LE CHAPEAU D'UNE PAGE SUIVIE DE SECTIONS PREND TOUTE LA LARGEUR
    --------------------------------------------------------------------------
    La mesure de lecture vaut 36 em, soit environ soixante-treize signes par
    ligne. C'est la bonne largeur pour du texte suivi — un article, des
@@ -5370,16 +5370,24 @@ h1.h2.center {
    à 612 px au-dessus d'une grille qui en fait 1100, et le texte paraît
    abandonné dans l'angle.
 
-   Ces chapeaux passent donc à 44 em, environ quatre-vingt-neuf signes.
-   C'est au-delà de la mesure idéale, et c'est assumé : le coût d'une ligne
-   longue se paie sur deux mille mots, pas sur deux paragraphes qu'on lit
-   debout avant de regarder des photos.
+   Ces chapeaux prennent donc toute la largeur du conteneur : 1100 px sur
+   un écran de 1440, exactement la largeur de la grille qui suit. Le bloc
+   d'introduction et les cartes forment un rectangle, sans décrochement.
+
+   CE QUE ÇA COÛTE, ET POURQUOI C'EST ACCEPTÉ ICI. La ligne atteint environ
+   cent trente signes, là où la mesure confortable s'arrête vers soixante-
+   quinze. Sur du texte suivi, ce serait une faute : en revenant à la marge,
+   l'œil rate la ligne suivante. Sur deux paragraphes lus debout avant de
+   regarder des photos, la gêne est réelle mais brève, et le gain visuel a
+   été jugé plus important — décision prise sur la page en ligne, pas sur
+   une théorie.
 
    La règle ne vise que les pages réglées sur « pleine largeur ». Les
-   conditions générales, qui ne sont QUE du texte suivi, gardent les 36 em.
+   conditions générales, qui ne sont QUE du texte suivi, gardent les 36 em
+   de la mesure de lecture : là, la règle ne se discute pas.
    -------------------------------------------------------------------------- */
 .main-page--large .spa-page-corps p,
 .main-page--large .spa-page-corps ul,
 .main-page--large .spa-page-corps ol {
-  max-width: 44em;
+  max-width: none;
 }
