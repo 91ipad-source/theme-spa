@@ -5008,3 +5008,60 @@ a, span, label, summary, button, blockquote, figcaption,
 .article-template header .caption-with-letter-spacing {
   color: var(--deep-soft);
 }
+
+
+/* --------------------------------------------------------------------------
+   44. PAGES LONGUES ECRITES DANS LE CORPS (section main-page)
+   --------------------------------------------------------------------------
+   Il en reste une : les conditions generales de vente. Et c'est volontaire.
+   Un document juridique doit rester modifiable a un seul endroit — le corps
+   de la page — parce que toute recopie dans des reglages de theme est une
+   occasion de divergence entre ce qui est affiche et ce qui a ete redige.
+
+   Elle recoit donc le meme rythme de lecture que les articles, et le meme
+   sommaire, sans qu'on touche a son texte.
+   -------------------------------------------------------------------------- */
+.spa-page-corps h2 {
+  margin-top: 5.6rem;
+  margin-bottom: 1.6rem;
+  font-size: clamp(2rem, 2.4vw, 2.5rem);
+  line-height: 1.15;
+  scroll-margin-top: 10rem;
+  text-wrap: balance;
+}
+
+.spa-page-corps h3 {
+  margin-top: 3.6rem;
+  margin-bottom: 1.2rem;
+  font-size: clamp(1.8rem, 2vw, 2.1rem);
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.spa-page-corps > *:first-child {
+  margin-top: 0;
+}
+
+.spa-page-corps p,
+.spa-page-corps ul,
+.spa-page-corps ol {
+  margin-bottom: 1.6rem;
+}
+
+.spa-page-corps li {
+  margin-bottom: 0.8rem;
+}
+
+.spa-page-corps a {
+  color: var(--sky-deep);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+
+/* Le sommaire d'une page longue precede le texte : il lui faut la meme
+   marge basse qu'un premier paragraphe, pas davantage. */
+.spa-page-corps + .spa-article-sommaire,
+.spa-article-sommaire + .spa-page-corps {
+  margin-top: 3.2rem;
+}

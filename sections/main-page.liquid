@@ -18,8 +18,59 @@
   <h1 class="main-page-title page-title h0{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     {{ page.title | escape }}
   </h1>
-  <div class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-    {{ page.content }}
+  {%- comment -%}
+    SOMMAIRE ET ANCRES, POUR LES PAGES LONGUES ÉCRITES DANS LE CORPS.
+
+    Même mécanique que pour les articles du blog : l'éditeur de pages de
+    Shopify ne pose aucune ancre sur les titres, on reconstruit donc le
+    contenu — coupé sur <h2>, chaque morceau réémis précédé de son
+    <h2 id="…">. C'est la seule façon d'y arriver en Liquid : replace
+    remplacerait toutes les occurrences à la fois, sans distinguer le
+    troisième titre du premier.
+
+    Cela vaut pour les pages dont le texte reste dans le corps — les
+    conditions générales, typiquement, qu'on ne veut surtout pas recopier
+    dans des réglages de thème : un document juridique doit rester
+    modifiable à un seul endroit, et toute recopie est une occasion de
+    divergence.
+
+    Le réglage est décoché par défaut : les pages courtes n'en ont pas
+    besoin, et un sommaire de deux entrées coûte plus qu'il ne rapporte.
+  {%- endcomment -%}
+  {%- liquid
+    assign morceaux = page.content | split: '<h2>'
+    assign nb_titres = morceaux | size | minus: 1
+  -%}
+
+  {%- if section.settings.sommaire and nb_titres >= 3 -%}
+    <nav class="spa-sommaire__carte spa-article-sommaire" aria-labelledby="SommairePage-{{ section.id }}">
+      <p class="spa-surtitre" id="SommairePage-{{ section.id }}">
+        {{- section.settings.sommaire_titre | default: 'Sur cette page' | escape -}}
+      </p>
+      <ul class="spa-sommaire__liste" role="list">
+        {%- for morceau in morceaux offset: 1 -%}
+          {%- liquid
+            assign titre = morceau | split: '</h2>' | first | strip_html | strip
+            assign ancre = titre | handle
+          -%}
+          <li>
+            <a class="spa-sommaire__lien" href="#{{ ancre }}"><span>{{ titre }}</span></a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+  {%- endif -%}
+
+  <div class="rte spa-page-corps{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+    {%- if section.settings.sommaire and nb_titres > 0 -%}
+      {{ morceaux[0] }}
+      {%- for morceau in morceaux offset: 1 -%}
+        {%- assign ancre = morceau | split: '</h2>' | first | strip_html | strip | handle -%}
+        <h2 id="{{ ancre }}">{{ morceau }}
+      {%- endfor -%}
+    {%- else -%}
+      {{ page.content }}
+    {%- endif -%}
   </div>
 </div>
 
@@ -44,6 +95,19 @@
         }
       ],
       "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "id": "sommaire",
+      "label": "Afficher un sommaire",
+      "default": false,
+      "info": "Pour les pages longues écrites dans le corps de la page. N'apparaît qu'à partir de trois titres de niveau 2."
+    },
+    {
+      "type": "text",
+      "id": "sommaire_titre",
+      "label": "Intitulé du sommaire",
+      "default": "Sur cette page"
     },
     {
       "type": "header",
