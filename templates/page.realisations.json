@@ -49,11 +49,22 @@
             "annee": "2026",
             "difficulte": "Un mètre de large entre la descente de garage et le mur, pour un spa de 230 × 230 cm. Ce n'est pas la taille du jardin qui décide de la faisabilité, c'est la largeur du couloir qui y mène."
           }
+        },
+        "doto": {
+          "type": "realisation",
+          "settings": {
+            "produit": "spa-roca-doto-3-personnes",
+            "titre": "",
+            "commune": "Seine-Port",
+            "annee": "2026",
+            "difficulte": "Le Doto est semi-encastré : sur ses 81 cm de hauteur, une partie passe sous le niveau du sol fini. Le vrai point n'est pas le creusement mais l'accès aux trappes techniques une fois l'habillage refermé — un spa encastré au millimètre se démonte entièrement à la première intervention."
+          }
         }
       },
       "block_order": [
         "proto2",
-        "panope"
+        "panope",
+        "doto"
       ],
       "settings": {
         "titre": "Des spas installés près de chez vous",
