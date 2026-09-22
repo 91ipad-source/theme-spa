@@ -23,7 +23,7 @@
         "branchement": {
           "type": "argument",
           "settings": {
-            "texte": "<strong>Cinq places sans travaux</strong> : prise 16 A, ni tranchée ni ligne dédiée. Les cinq autres modèles du format demandent un électricien."
+            "texte": "<strong>Cinq places sans travaux</strong> : prise 16 A, ni tranchée ni ligne dédiée. Les quatre autres modèles du format demandent un électricien."
           }
         },
         "format": {
@@ -48,7 +48,7 @@
         "produit": "spa-roca-proto-lighting-5-personnes",
         "etiquette": "Notre best-seller",
         "titre": "",
-        "accroche": "Le seul des six modèles cinq places qui se branche sur une simple prise de courant.",
+        "accroche": "Le seul des cinq modèles cinq places qui se branche sur une simple prise de courant.",
         "libelle_bouton": "Voir le Proto 2",
         "color_scheme": "scheme-1",
         "padding_top": 36,
@@ -89,7 +89,7 @@
         "texte": {
           "type": "text",
           "settings": {
-            "text": "<p>Le 5 places est le cœur de gamme et le choix le plus courant pour une maison avec jardin. C'est à partir de ce format que l'hydromassage devient vraiment varié : places allongées et assises combinées, jets spécialisés par zone du corps — nuque, lombaires, mollets, voûte plantaire.</p><p><strong>Six modèles, six logiques.</strong> Le <a href=\"/products/spa-roca-proto-lighting-5-personnes\">Proto 2</a> reste Plug &amp; Play : cinq places dans 200 × 200 cm, sans travaux. L'<a href=\"/products/spa-roca-europe-infrared-5-personnes\">Europe Infrared</a> conserve ce format et équipe une assise de lampes infrarouges. Le <a href=\"/products/spa-roca-nemesis-5-personnes\">Némésis</a> passe à 220 × 220 cm avec une place semi-allongée et l'option Skimmer Bar. Le <a href=\"/products/spa-roca-pleuxaure-5-personnes\">Pleuxaure</a>, même encombrement, est le polyvalent de la gamme avec son système Volcano. Le <a href=\"/products/spa-roca-panope-5-personnes\">Panopé</a> monte à 230 × 230 cm et couvre le corps des pieds à la nuque. Le <a href=\"/products/spa-roca-panope-full-therapeutique-5-personnes\">Panopé Full</a> en est la version intégralement équipée.</p><p><strong>Ce que ce format implique.</strong> Un spa 5 places rempli et occupé dépasse facilement deux tonnes, réparties sur quelques mètres carrés. Une dalle béton ferraillée de 10 à 15 cm, parfaitement de niveau, est la solution de référence. Une terrasse en bois standard ne suffit généralement pas sans renfort : elle est dimensionnée pour une table et des chaises.</p><p><strong>Le conseil que nous donnons le plus souvent.</strong> Ne choisissez pas sur le nombre de jets. Quarante jets bien répartis sur deux pompes performantes valent mieux que quatre-vingts jets alimentés par une pompe sous-dimensionnée : la pression se divise et le massage devient un simple bouillonnement.</p>"
+            "text": "<p>Le 5 places est le cœur de gamme et le choix le plus courant pour une maison avec jardin. C'est à partir de ce format que l'hydromassage devient vraiment varié : places allongées et assises combinées, jets spécialisés par zone du corps — nuque, lombaires, mollets, voûte plantaire.</p><p><strong>Cinq modèles, cinq logiques.</strong> Le <a href=\"/products/spa-roca-proto-lighting-5-personnes\">Proto 2</a> reste Plug &amp; Play : cinq places dans 200 × 200 cm, sans travaux. L'<a href=\"/products/spa-roca-europe-infrared-5-personnes\">Europe Infrared</a> conserve ce format et équipe une assise de lampes infrarouges. Le <a href=\"/products/spa-roca-pleuxaure-5-personnes\">Pleuxaure</a> passe à 220 × 220 cm : c'est le polyvalent de la gamme, avec son système Volcano. Le <a href=\"/products/spa-roca-panope-5-personnes\">Panopé</a> monte à 230 × 230 cm et couvre le corps des pieds à la nuque. Le <a href=\"/products/spa-roca-panope-full-therapeutique-5-personnes\">Panopé Full</a> en est la version intégralement équipée.</p><p><strong>Ce que ce format implique.</strong> Un spa 5 places rempli et occupé dépasse facilement deux tonnes, réparties sur quelques mètres carrés. Une dalle béton ferraillée de 10 à 15 cm, parfaitement de niveau, est la solution de référence. Une terrasse en bois standard ne suffit généralement pas sans renfort : elle est dimensionnée pour une table et des chaises.</p><p><strong>Le conseil que nous donnons le plus souvent.</strong> Ne choisissez pas sur le nombre de jets. Quarante jets bien répartis sur deux pompes performantes valent mieux que quatre-vingts jets alimentés par une pompe sous-dimensionnée : la pression se divise et le massage devient un simple bouillonnement.</p>"
           }
         },
         "liens": {
