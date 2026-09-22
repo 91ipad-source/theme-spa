@@ -1400,17 +1400,28 @@ h3.spa-parcours__heading {
    liens vers la même fiche (l'image puis le nom) obligeraient un lecteur
    d'écran à annoncer la destination deux fois de suite.
    -------------------------------------------------------------------------- */
-/* Flex et non grid, pour une seule raison : la grille CSS ne sait pas
-   centrer une derniere rangee incomplete. Avec sept modeles sur quatre
-   colonnes, les trois du bas restaient colles a gauche. En flex, la
-   largeur des cases est calculee a la main mais « justify-content:
-   center » centre chaque ligne, y compris la derniere. */
+/* LA DERNIERE RANGEE RESTE CALEE A GAUCHE.
+
+   Elle etait centree, et le raisonnement se tenait au moment ou il a ete
+   ecrit : sept modeles sur quatre colonnes laissaient trois cases en bas,
+   centrees elles tombaient a peu pres sous les trous de la rangee du
+   dessus. Sauf que ce reglage dependait du NOMBRE de modeles exposes.
+
+   Le jour ou l'Europe Infrared a quitte le magasin, il en est reste six :
+   quatre en haut, deux en bas, decalees d'une colonne de chaque cote. Le
+   bord gauche de la grille disparaissait au milieu de la section.
+
+   Cale a gauche, chaque vignette du bas se range sous celle du haut, quel
+   que soit le nombre exposé — et la grille retrouve le meme bord gauche
+   que le texte, les titres et les grilles produit du reste du site.
+
+   Le flex reste : il sert a calculer la largeur des cases a la main. */
 .spa-expo,
 .rte .spa-expo {
   --spa-expo-gouttiere: 1.6rem;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 2rem var(--spa-expo-gouttiere);
   margin: 3.2rem 0 0;
   padding: 0;
