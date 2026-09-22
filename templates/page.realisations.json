@@ -77,13 +77,24 @@
             "annee": "2026",
             "difficulte": "Passage étroit entre la maison et le portail. Le Calypso ne fait que 77 cm de haut : présenté sur chant, il franchit ce qu'une cuve de deux mètres de large ne franchit pas. Ici le passage n'a pas empêché le projet."
           }
+        },
+        "corbeil": {
+          "type": "realisation",
+          "settings": {
+            "produit": "spa-roca-panope-full-therapeutique-5-personnes",
+            "titre": "",
+            "commune": "Corbeil-Essonnes",
+            "annee": "",
+            "difficulte": "Rien de compliqué : l'accès ne posait pas de question et la livraison s'est faite comme prévu. Si les autres fiches racontent des chantiers difficiles, c'est parce que ce sont eux qui renseignent — mais la plupart des installations ressemblent à celle-ci."
+          }
         }
       },
       "block_order": [
         "proto2",
         "panope",
         "doto",
-        "calypso"
+        "calypso",
+        "corbeil"
       ],
       "settings": {
         "titre": "Des spas installés près de chez vous",
