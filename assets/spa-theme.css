@@ -4604,10 +4604,30 @@ a, span, label, summary, button, blockquote, figcaption,
   display: none;
 }
 
+/* TOUT LE TEXTE EST ANCRE PAR LE BAS, PAS SEULEMENT LE RECIT.
+
+   Les cartes d'une meme rangee ont la meme hauteur, mais pas la meme
+   hauteur de photos : une realisation a cinq photos porte une bande de
+   vignettes de 120 px sous la vue d'ensemble, une realisation a une seule
+   photo n'en a pas. Le texte d'une carte a une photo demarrait donc
+   120 px plus haut que celui de ses voisines.
+
+   Seul le recit etait colle en bas (margin-top: auto). Resultat sur la
+   deuxieme rangee de « Nos realisations » : la commune et le nom du spa de
+   Milly-la-Foret flottaient a une centaine de pixels au-dessus de ceux de
+   Corbeil-Essonnes et de Saint-Maur, avec un vide entre le nom et le
+   recit.
+
+   « justify-content: flex-end » colle le bloc entier — commune, nom,
+   recit — au bas de la carte. Le vide passe donc au-dessus de la commune,
+   juste sous la photo, ou il ne separe plus rien : c'est le meme principe
+   que sur les vignettes du catalogue (section 50). Il disparait
+   completement le jour ou la fiche recoit ses autres photos. */
 .spa-realisations__corps {
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
+  justify-content: flex-end;
   padding: 2rem 2.4rem 2.4rem;
 }
 
@@ -4637,11 +4657,12 @@ a, span, label, summary, button, blockquote, figcaption,
   border-bottom-color: var(--sky-deep);
 }
 
-/* Le recit de la difficulte est colle en bas de la carte : les cartes
-   n'ont pas toutes un nom de la meme longueur, et sans cela les phrases
-   commenceraient a des hauteurs differentes d'une carte a l'autre. */
+/* Le recit ne porte plus de marge automatique : c'est « justify-content »
+   sur le corps qui colle desormais l'ensemble du texte en bas. Les deux
+   ensemble laisseraient le recit en bas et la commune en haut, c'est-a-dire
+   exactement le defaut qu'on corrige. */
 .spa-realisations__recit {
-  margin: auto 0 0;
+  margin: 0;
   color: var(--deep-soft);
   font-size: 1.5rem;
   line-height: var(--lh-texte);
