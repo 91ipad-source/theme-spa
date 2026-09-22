@@ -321,6 +321,55 @@
         if (e.key === 'ArrowLeft') montrer(rang - 1);
       });
 
+      /* LE BALAYAGE. Sur telephone, on fait glisser la photo avant de
+         chercher un bouton. Trois precautions :
+
+         - deux doigts = un pincement pour zoomer, pas un balayage. On
+           abandonne le geste et on laisse le navigateur zoomer, parce que
+           c'est exactement ce qu'on veut pouvoir faire devant la photo d'un
+           passage etroit ;
+         - un geste plus vertical qu'horizontal appartient au defilement ;
+         - 45 px de seuil, sinon une simple tape sur le fond, qui bouge
+           toujours d'un ou deux pixels, changerait de photo au lieu de
+           fermer.
+
+         Les trois ecouteurs sont passifs : ils n'appellent jamais
+         preventDefault, donc ils ne peuvent pas retarder le defilement. */
+      var doigt = null;
+
+      dlg.addEventListener(
+        'touchstart',
+        function (e) {
+          if (lot.length < 2 || e.touches.length > 1) {
+            doigt = null;
+            return;
+          }
+          doigt = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        },
+        { passive: true }
+      );
+
+      dlg.addEventListener(
+        'touchmove',
+        function (e) {
+          if (e.touches.length > 1) doigt = null;
+        },
+        { passive: true }
+      );
+
+      dlg.addEventListener(
+        'touchend',
+        function (e) {
+          if (!doigt || !e.changedTouches.length) return;
+          var dx = e.changedTouches[0].clientX - doigt.x;
+          var dy = e.changedTouches[0].clientY - doigt.y;
+          doigt = null;
+          if (Math.abs(dx) < 45 || Math.abs(dx) <= Math.abs(dy)) return;
+          montrer(dx < 0 ? rang + 1 : rang - 1);
+        },
+        { passive: true }
+      );
+
       dlg.addEventListener('close', function () {
         if (origine) origine.focus();
         origine = null;
