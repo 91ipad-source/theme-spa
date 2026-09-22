@@ -1,0 +1,316 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "photo": {
+      "type": "spa-store-banner",
+      "settings": {
+        "largeur": "contenu",
+        "image": "shopify://shop_images/SPAS9_depot_stock.png",
+        "show_on_mobile": true,
+        "image_alt": "Spas ROCA Spa en stock dans le dépôt SPAS9 | LINERS FRANCE à Fontenay-le-Vicomte, point de départ des livraisons en Île-de-France"
+      }
+    },
+    "entete": {
+      "type": "spa-page-entete",
+      "blocks": {
+        "c1": {
+          "type": "chiffre",
+          "settings": {
+            "valeur": "9",
+            "label": "Départements livrés"
+          }
+        },
+        "c2": {
+          "type": "chiffre",
+          "settings": {
+            "valeur": "15-30 jours",
+            "label": "Entre la commande et l'installation"
+          }
+        },
+        "c3": {
+          "type": "chiffre",
+          "settings": {
+            "valeur": "Gratuit",
+            "label": "Retrait au dépôt (91)"
+          }
+        },
+        "c4": {
+          "type": "chiffre",
+          "settings": {
+            "valeur": "Sur devis",
+            "label": "Hors Essonne"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "settings": {
+        "surtitre": "Les huit départements franciliens et le Loiret",
+        "chapeau": "<p>SPAS9 livre et installe des spas dans <strong>toute l'Île-de-France et dans le Loiret</strong>, au départ de notre dépôt de Fontenay-le-Vicomte, en Essonne.</p><p>Ce qui change d'un département à l'autre, ce n'est presque jamais la distance. C'est <strong>l'accès</strong> : un pavillon de grande couronne avec un portail de trois mètres et un jardin de plain-pied n'a rien à voir avec une cour d'immeuble parisienne où le camion ne rentre pas.</p>",
+        "color_scheme": "scheme-1",
+        "padding_top": 44,
+        "padding_bottom": 8
+      }
+    },
+    "sommaire": {
+      "type": "spa-sommaire",
+      "blocks": {
+        "s1": {
+          "type": "entree",
+          "settings": {
+            "rang": "01",
+            "libelle": "La méthode, partout la même",
+            "ancre": "la-methode"
+          }
+        },
+        "s2": {
+          "type": "entree",
+          "settings": {
+            "rang": "02",
+            "libelle": "Département par département",
+            "ancre": "departements"
+          }
+        },
+        "s3": {
+          "type": "entree",
+          "settings": {
+            "rang": "03",
+            "libelle": "Tarifs et retrait",
+            "ancre": "tarifs"
+          }
+        },
+        "s4": {
+          "type": "entree",
+          "settings": {
+            "libelle": "Parlons de votre accès",
+            "ancre": "votre-acces"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
+      "settings": {
+        "titre": "Sur cette page",
+        "color_scheme": "scheme-1",
+        "padding_top": 32,
+        "padding_bottom": 16
+      }
+    },
+    "ch1": {
+      "type": "spa-chapitre",
+      "settings": {
+        "numero": "01",
+        "surtitre": "Ce qui ne change nulle part",
+        "titre": "On regarde d'abord par où le spa va passer",
+        "chapeau": "<p>Quel que soit votre département, la méthode est la même, et elle commence toujours par la même chose : <strong>regarder par où le spa va passer.</strong></p>",
+        "ancre": "la-methode",
+        "filet": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 8
+      }
+    },
+    "p_methode": {
+      "type": "spa-prose",
+      "settings": {
+        "largeur": "lecture",
+        "encadre": false,
+        "color_scheme": "scheme-1",
+        "padding_top": 16,
+        "padding_bottom": 40,
+        "texte": "<ul><li><strong>L'étude de l'accès, avant toute date.</strong> Quelques photos du chemin depuis la rue, la largeur du passage le plus étroit, et les éventuelles marches. C'est à ce moment qu'on sait si ça passe — pas le jour de la livraison.</li><li><strong>Un devis qui comprend la manutention.</strong> Le transport, le passage jusqu'à l'emplacement, et le grutage s'il est nécessaire. Chiffrés avant que vous décidiez.</li><li><strong>La mise en service.</strong> Raccordement, remplissage, réglages et les premières explications d'entretien.</li></ul><p>Un spa rempli pèse une à deux tonnes, et à vide plusieurs centaines de kilos. C'est pour ça qu'on ne confirme jamais une livraison sans avoir vu l'accès. Comptez <strong>entre quinze et trente jours</strong> entre la commande et l'installation.</p>"
+      }
+    },
+    "ch2": {
+      "type": "spa-chapitre",
+      "settings": {
+        "numero": "02",
+        "surtitre": "Département par département",
+        "titre": "La densité décide, pas les kilomètres",
+        "chapeau": "<p>Les départements se ressemblent par groupes, et ce n'est pas une question de distance : c'est la densité du bâti qui détermine par où un spa peut entrer.</p>",
+        "ancre": "departements",
+        "filet": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 8
+      }
+    },
+    "p_grande": {
+      "type": "spa-prose",
+      "settings": {
+        "largeur": "large",
+        "encadre": false,
+        "color_scheme": "scheme-1",
+        "padding_top": 16,
+        "padding_bottom": 24,
+        "titre": "Grande couronne : Essonne, Seine-et-Marne, Yvelines, Val-d'Oise",
+        "html": "<h3>Essonne (91)</h3><p>Notre département. Le showroom et le dépôt sont à Fontenay-le-Vicomte, et c'est le seul secteur pour lequel <strong>nos tarifs de livraison et d'installation sont affichés directement sur les fiches produit</strong> : 650 € la livraison, 450 € la mise en service, 1 450 € le pack complet.</p><p>Évry-Courcouronnes, Massy, Corbeil-Essonnes, Palaiseau, Étampes, Mennecy, Ballancourt et toutes les communes du département. C'est aussi ici que le <strong>retrait gratuit au dépôt</strong> a le plus de sens.</p><h3>Seine-et-Marne (77)</h3><p>Le plus vaste département francilien, et souvent le plus simple : maisons avec terrain, portails larges, camion au pied du jardin. Melun, Meaux, Chelles, Fontainebleau, Provins.</p><p>La contrainte y est plutôt la distance sur les communes les plus à l'est, qui pèse sur le devis de transport, pas sur la faisabilité.</p><h3>Yvelines (78)</h3><p>Versailles, Saint-Germain-en-Laye, Mantes-la-Jolie, Rambouillet. Beaucoup de maisons de ville aux jardins fermés sur l'arrière, accessibles par un couloir latéral étroit.</p><p>C'est le cas typique où <strong>le grutage par-dessus la maison ou le mur</strong> devient la solution la plus simple — et parfois la seule.</p><h3>Val-d'Oise (95)</h3><p>Cergy, Pontoise, Argenteuil, Enghien-les-Bains. Profil proche de la grande couronne sud : pavillons, accès généralement praticables, terrains souvent de plain-pied.</p>"
+      }
+    },
+    "p_petite": {
+      "type": "spa-prose",
+      "settings": {
+        "largeur": "large",
+        "encadre": false,
+        "color_scheme": "scheme-1",
+        "padding_top": 32,
+        "padding_bottom": 24,
+        "titre": "Petite couronne : Hauts-de-Seine, Seine-Saint-Denis, Val-de-Marne",
+        "html": "<h3>Hauts-de-Seine (92)</h3><p>Boulogne-Billancourt, Nanterre, Antony, Rueil-Malmaison. Densité forte, jardins plus petits, et deux points à vérifier plus qu'ailleurs : <strong>le stationnement du camion</strong> et la largeur du passage entre la rue et le jardin.</p><h3>Seine-Saint-Denis (93)</h3><p>Montreuil, Aulnay-sous-Bois, Le Raincy, Noisy-le-Grand. Beaucoup de pavillons mitoyens avec un jardin à l'arrière et un passage latéral d'un mètre à peine. La mesure de ce passage décide de tout.</p><h3>Val-de-Marne (94)</h3><p>Créteil, Vincennes, Saint-Maur-des-Fossés, Villeneuve-Saint-Georges. Même configuration : pavillonnaire dense, accès arrière étroits, grutage fréquent.</p>"
+      }
+    },
+    "p_paris": {
+      "type": "spa-prose",
+      "settings": {
+        "largeur": "lecture",
+        "encadre": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 32,
+        "padding_bottom": 24,
+        "titre": "Paris (75) : au cas par cas, et nous le disons avant",
+        "texte": "<p><strong>Nous livrons Paris, mais au cas par cas, et non systématiquement.</strong> Ce n'est pas une réserve commerciale : Paris est le seul secteur où l'accès peut rendre l'installation réellement impossible, et nous préférons l'annoncer ici plutôt qu'après la commande.</p><p>Trois questions se posent avant même celle du modèle :</p><ul><li><strong>La charge.</strong> Une à deux tonnes sur quelques mètres carrés, sur une dalle d'immeuble ou une terrasse en étage, relève de l'avis d'un professionnel du bâtiment. Ce n'est pas nous qui pouvons le donner.</li><li><strong>Le passage.</strong> Escalier d'immeuble, ascenseur, cour intérieure : dans la majorité des cas, le spa ne monte pas par l'intérieur.</li><li><strong>Le grutage et la voie publique.</strong> Installer une grue sur la chaussée demande une <strong>autorisation d'occupation temporaire du domaine public</strong>, à demander à la mairie plusieurs semaines à l'avance.</li></ul><p>Concrètement : à Paris, <strong>appelez-nous avant de choisir un modèle</strong>. Nous étudions votre situation et nous vous disons franchement si c'est faisable. Les contraintes d'accès éliminent parfois des formats entiers — et parfois le projet lui-même. Mieux vaut le savoir tout de suite.</p>"
+      }
+    },
+    "p_loiret": {
+      "type": "spa-prose",
+      "settings": {
+        "largeur": "lecture",
+        "encadre": false,
+        "color_scheme": "scheme-1",
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "titre": "Loiret (45)",
+        "texte": "<p>Le seul département que nous livrons hors Île-de-France, héritage de l'activité piscine de <strong>LINERS FRANCE</strong>. Orléans, Montargis, Pithiviers, Gien.</p><p>C'est le plus éloigné de notre dépôt : le transport pèse davantage dans le devis, et nous regroupons quand c'est possible.</p>"
+      }
+    },
+    "grutage": {
+      "type": "image-with-text",
+      "blocks": {
+        "titre": {
+          "type": "heading",
+          "settings": {
+            "heading": "Et le grutage ?",
+            "heading_size": "h2"
+          }
+        },
+        "texte": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Quand le passage ne fait pas la largeur, il reste le dessus : la grue pose le spa par-dessus le mur, la clôture ou la maison.</p><p>C'est une opération courante chez nous, mais elle <strong>ne fait jamais partie des forfaits</strong> : elle dépend de la hauteur, de la portée, de l'accès du camion-grue et parfois d'une autorisation de voirie. Elle est donc <strong>chiffrée à part</strong>, après l'étude de l'accès, et vous la connaissez avant de vous engager.</p><p>C'est aussi la raison pour laquelle nous insistons tant sur les photos : une grue qui se découvre le jour J, c'est une livraison qui ne se fait pas.</p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "titre",
+        "texte"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/SPAS9_grutage.png",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-2",
+        "color_scheme": "scheme-2",
+        "padding_top": 28,
+        "padding_bottom": 48
+      }
+    },
+    "ch3": {
+      "type": "spa-chapitre",
+      "settings": {
+        "numero": "03",
+        "surtitre": "Tarifs et retrait",
+        "titre": "Publics en Essonne, sur devis ailleurs",
+        "chapeau": "<p>Pour l'<strong>Essonne</strong>, les tarifs sont publics et s'ajoutent directement au panier depuis chaque fiche spa : livraison seule, mise en service seule, ou pack complet.</p>",
+        "ancre": "tarifs",
+        "filet": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 8
+      }
+    },
+    "p_tarifs": {
+      "type": "spa-prose",
+      "settings": {
+        "largeur": "lecture",
+        "encadre": false,
+        "color_scheme": "scheme-1",
+        "padding_top": 16,
+        "padding_bottom": 24,
+        "texte": "<p>Pour les <strong>autres départements</strong>, le devis dépend de la distance, de l'accès et de la manutention nécessaire. <a href=\"/pages/contact\">Envoyez-nous votre adresse et quelques photos du chemin d'accès</a>, nous vous répondons avec un chiffre ferme.</p><p>Et si vous venez chercher votre spa vous-même, le <strong>retrait au dépôt est gratuit</strong>, quel que soit votre département : <a href=\"/pages/livraison-et-retrait\">voir les modalités de retrait</a>.</p>"
+      }
+    },
+    "p_hors": {
+      "type": "spa-prose",
+      "settings": {
+        "largeur": "lecture",
+        "encadre": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 24,
+        "padding_bottom": 40,
+        "titre": "Hors Île-de-France et Loiret ?",
+        "texte": "<p>Nous ne livrons pas au-delà. Préférer un périmètre restreint nous permet d'étudier chaque accès nous-mêmes, de venir sur place quand c'est nécessaire, et d'assurer le service après-vente sans sous-traiter.</p><p>En revanche, le <strong>retrait au dépôt reste possible</strong> si vous organisez votre transport. Prévoyez un véhicule adapté : plusieurs centaines de kilos à vide.</p>"
+      }
+    },
+    "contact": {
+      "type": "spa-contact-carte",
+      "settings": {
+        "surtitre": "Trois photos suffisent",
+        "titre": "Parlons de votre accès",
+        "texte": "<p>Le plus simple reste de nous envoyer <strong>trois photos</strong> : l'emplacement prévu, le chemin depuis la rue, et le point le plus étroit du parcours. Avec ça, nous vous disons rapidement ce qui passe, ce qui demande une grue, et ce que ça coûte.</p><p><a href=\"/blogs/conseils-spa/installer-un-spa-chez-soi\">Préparer l'installation</a></p>",
+        "mention": "Showroom uniquement sur rendez-vous",
+        "ancre": "votre-acces",
+        "raison_sociale": "SPAS9 | LINERS FRANCE",
+        "adresse": "16 rue de l'Orme, 91540 Fontenay-le-Vicomte",
+        "telephone": "+33 (0)1 60 77 37 00",
+        "courriel": "iledefrance@linersfrance.fr",
+        "bouton_1": "Nous écrire",
+        "lien_1": "/pages/contact",
+        "bouton_2": "Voir nos spas",
+        "lien_2": "/collections/tous-nos-spas",
+        "color_scheme": "scheme-1",
+        "padding_top": 24,
+        "padding_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "photo",
+    "entete",
+    "sommaire",
+    "ch1",
+    "p_methode",
+    "ch2",
+    "p_grande",
+    "p_petite",
+    "p_paris",
+    "p_loiret",
+    "grutage",
+    "ch3",
+    "p_tarifs",
+    "p_hors",
+    "contact"
+  ]
+}
