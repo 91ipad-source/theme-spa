@@ -64,12 +64,23 @@
             "annee": "2026",
             "difficulte": "Le Doto est semi-encastré : sur ses 81 cm de hauteur, une partie passe sous le niveau du sol fini. Le vrai point n'est pas le creusement mais l'accès aux trappes techniques une fois l'habillage refermé — un spa encastré au millimètre se démonte entièrement à la première intervention."
           }
+        },
+        "calypso": {
+          "type": "realisation",
+          "settings": {
+            "produit": "spa-roca-calypso-3-personnes",
+            "titre": "",
+            "commune": "Milly-la-Forêt",
+            "annee": "2026",
+            "difficulte": ""
+          }
         }
       },
       "block_order": [
         "proto2",
         "panope",
-        "doto"
+        "doto",
+        "calypso"
       ],
       "settings": {
         "titre": "Des spas installés près de chez vous",
