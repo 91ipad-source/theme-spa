@@ -4423,7 +4423,18 @@ a, span, label, summary, button, blockquote, figcaption,
   }
 }
 
-@media screen and (min-width: 990px) {
+/* TROIS COLONNES SEULEMENT A PARTIR DE 1200 PX.
+
+   Le seuil etait a 990 px, celui de Dawn. Mais entre 990 et 1199 px la
+   page, elle, s'est resserree : la colonne de texte d'une carte tombe a
+   231 px, et « CORBEIL-ESSONNES · 2025 · COULEUR ODYSSEY » y repasse sur
+   deux lignes alors qu'elle tient sur une en plein ecran.
+
+   A 1200 px la page atteint sa largeur maximale (1100 px de contenu) et
+   la colonne se stabilise a 301 px : c'est la largeur pour laquelle la
+   ligne de reperes a ete reglee. En dessous, deux colonnes — plus larges
+   — valent mieux que trois a l'etroit. */
+@media screen and (min-width: 1200px) {
   .spa-realisations__liste {
     grid-template-columns: repeat(var(--colonnes, 3), minmax(0, 1fr));
   }
