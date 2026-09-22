@@ -4339,10 +4339,17 @@ a, span, label, summary, button, blockquote, figcaption,
 }
 
 /* La bande des angles secondaires, entre la photo principale et le texte.
-   Deux vignettes au format carre : elles ne racontent pas la scene, elles
-   disent qu'il y a plusieurs vues du meme chantier. Une seule remplie prend
-   toute la largeur, c'est voulu — une vignette orpheline calee a gauche
-   ressemblerait a un oubli. */
+   C'est une bande de hauteur fixe, decoupee en autant de parts qu'il y a
+   d'angles remplis. Deux consequences voulues :
+
+   - la photo principale reste la plus grande quoi qu'il arrive. Sur deux
+     rangees de vignettes, la bande passerait a 458 px contre 345 px pour
+     la vue d'ensemble, et les details ecraseraient ce qu'on est venu voir ;
+   - une vignette seule occupe toute la largeur au lieu de rester calee a
+     gauche devant un vide, qui ressemble a un chargement rate.
+
+   Le cadrage paysage sert aussi le sujet : une photo de jardin se lit mieux
+   large que carree. */
 .spa-realisations__angles {
   display: grid;
   gap: 2px;
@@ -4353,7 +4360,7 @@ a, span, label, summary, button, blockquote, figcaption,
 .spa-realisations__angles img {
   display: block;
   width: 100%;
-  aspect-ratio: 1 / 1;
+  height: 12rem;
   object-fit: cover;
 }
 

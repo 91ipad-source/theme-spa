@@ -110,31 +110,66 @@
               {%- comment -%}
                 LES ANGLES SECONDAIRES. Un chantier se raconte rarement en une
                 photo : la vue large dit si ca rentre, le detail dit comment
-                c'est fini. Les deux vignettes sont facultatives et
-                n'apparaissent que si on les remplit — une seule suffit, la
-                bande s'adapte.
+                c'est fini. Les quatre vignettes sont toutes facultatives et
+                n'apparaissent que si on les remplit — la bande s'adapte au
+                nombre reellement rempli, deux par ligne, et une vignette
+                seule sur sa ligne prend toute la largeur plutot que de
+                rester calee a gauche comme un oubli.
+
+                Les quatre conditions sont ecrites en toutes lettres plutot
+                que balayees par une boucle sur une cle construite : Shopify
+                avait deja refuse d'importer ce fichier quand il contenait un
+                acces dynamique aux reglages.
               {%- endcomment -%}
-              {%- if block.settings.image_2 != blank or block.settings.image_3 != blank -%}
+              {%- liquid
+                assign a2 = block.settings.image_2
+                assign a3 = block.settings.image_3
+                assign a4 = block.settings.image_4
+                assign a5 = block.settings.image_5
+              -%}
+              {%- if a2 != blank or a3 != blank or a4 != blank or a5 != blank -%}
                 <div class="spa-realisations__angles">
-                  {%- if block.settings.image_2 != blank -%}
+                  {%- if a2 != blank -%}
                     {{
-                      block.settings.image_2
+                      a2
                       | image_url: width: 600
                       | image_tag:
                         loading: 'lazy',
                         widths: '200, 300, 400, 600',
-                        sizes: '(min-width: 990px) 16vw, 50vw',
+                        sizes: '(min-width: 990px) 23vw, 50vw',
                         alt: alt
                     }}
                   {%- endif -%}
-                  {%- if block.settings.image_3 != blank -%}
+                  {%- if a3 != blank -%}
                     {{
-                      block.settings.image_3
+                      a3
                       | image_url: width: 600
                       | image_tag:
                         loading: 'lazy',
                         widths: '200, 300, 400, 600',
-                        sizes: '(min-width: 990px) 16vw, 50vw',
+                        sizes: '(min-width: 990px) 23vw, 50vw',
+                        alt: alt
+                    }}
+                  {%- endif -%}
+                  {%- if a4 != blank -%}
+                    {{
+                      a4
+                      | image_url: width: 600
+                      | image_tag:
+                        loading: 'lazy',
+                        widths: '200, 300, 400, 600',
+                        sizes: '(min-width: 990px) 23vw, 50vw',
+                        alt: alt
+                    }}
+                  {%- endif -%}
+                  {%- if a5 != blank -%}
+                    {{
+                      a5
+                      | image_url: width: 600
+                      | image_tag:
+                        loading: 'lazy',
+                        widths: '200, 300, 400, 600',
+                        sizes: '(min-width: 990px) 23vw, 50vw',
                         alt: alt
                     }}
                   {%- endif -%}
@@ -281,6 +316,16 @@
           "type": "image_picker",
           "id": "image_3",
           "label": "Troisième angle (facultatif)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_4",
+          "label": "Quatrième angle (facultatif)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_5",
+          "label": "Cinquième angle (facultatif)"
         },
         {
           "type": "product",
