@@ -11,9 +11,30 @@ plus la section `main-page` : le corps n'était plus affiché, mais restait
 visible dans l'administration Shopify, où il invitait à la confusion — on
 pouvait le modifier en croyant modifier la page.
 
-Le corps a donc été vidé. Or **Shopify ne conserve aucun historique du
-corps d'une page** : une fois vidé, il ne se restaure pas. D'où cette
-archive.
+Le corps a donc été réduit à **une seule phrase**. Or **Shopify ne conserve
+aucun historique du corps d'une page** : le texte remplacé ne se restaure
+pas. D'où cette archive.
+
+### Pourquoi une phrase et non rien du tout
+
+La recherche interne du site indexe le **titre et le corps** des pages, et
+`sections/main-search.liquid` affiche bien les pages dans ses résultats. Un
+corps vide aurait rendu ces trois pages introuvables autrement que par leur
+titre — et « SPAS9 » est un mauvais titre de recherche pour la page « À
+propos ». La phrase conservée porte donc les mots que l'on cherche
+réellement : grutage, rendez-vous, retrait, devis, Essonne.
+
+Elle est écrite pour être **lue** : c'est elle qui s'affichera comme extrait
+sous le titre dans les résultats de recherche du site. C'est aussi la raison
+pour laquelle elle ne contient aucune note destinée à l'administrateur — une
+telle note deviendrait un extrait de recherche visible par les clients.
+
+### Avertissement pour qui modifiera ces pages
+
+**Modifier le corps de ces trois pages ne change rien à ce qui s'affiche.**
+Le contenu visible est dans les sections du thème : passez par
+*Boutique en ligne → Thèmes → Personnaliser*, et non par l'éditeur de page.
+Le corps ne sert plus qu'à la recherche interne.
 
 | fichier | page | gabarit qui la remplace |
 |---|---|---|
