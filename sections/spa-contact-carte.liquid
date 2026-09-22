@@ -35,7 +35,7 @@
         {%- endif -%}
 
         {%- if section.settings.texte != blank -%}
-          <p class="spa-contact-carte__texte">{{ section.settings.texte | escape }}</p>
+          <div class="spa-contact-carte__texte rte">{{ section.settings.texte }}</div>
         {%- endif -%}
 
         {%- if section.settings.mention != blank -%}
@@ -110,9 +110,10 @@
       "default": "Parlons de votre projet"
     },
     {
-      "type": "textarea",
+      "type": "richtext",
       "id": "texte",
-      "label": "Texte"
+      "label": "Texte",
+      "info": "Les liens sont acceptés : c'est le dernier endroit de la page où l'on peut renvoyer vers une collection."
     },
     {
       "type": "text",
