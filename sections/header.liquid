@@ -527,6 +527,26 @@
     "@id": {{ request.origin | append: '/#organization' | json }},
     "name": {{ shop.name | json }},
     "url": {{ request.origin | append: '/' | json }},
+    {%- comment -%}
+      QUI EST SPAS9, ET DE QUI.
+
+      La marque apparait sous deux noms selon l'endroit : SPAS9 dans
+      l'en-tete, LINERS FRANCE sur le bandeau du magasin et sur les visuels
+      du fabricant. Un moteur qui rencontre les deux n'a aucun moyen de
+      savoir s'il s'agit d'une seule maison ou de deux concurrents.
+
+      « parentOrganization » le dit une fois pour toutes : SPAS9 est la
+      marque spa de LINERS FRANCE. C'est aussi ce que les moteurs de reponse
+      reprennent quand on leur demande qui vend des spas en Essonne.
+
+      Pas d'« url » sur la maison mere : nous n'en declarons que ce dont
+      nous sommes surs.
+    {%- endcomment -%}
+    "slogan": "La marque spa de LINERS FRANCE",
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "LINERS FRANCE"
+    },
     {% if settings.logo %}
       "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
     {% endif %}
