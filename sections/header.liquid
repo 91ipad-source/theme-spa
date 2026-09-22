@@ -469,41 +469,84 @@
   customElements.define('sticky-header', StickyHeader);
 {% endjavascript %}
 
+{%- comment -%}
+  LES PROFILS SOCIAUX, ET LE PIEGE DES CHAINES VIDES.
+
+  Dawn listait les neuf reseaux sans verifier qu'ils etaient renseignes.
+  Un premier correctif n'ecrivait la propriete que si la liste n'etait pas
+  vide — ce qui ne reglait que le cas ou AUCUN reseau n'est rempli.
+
+  Deux le sont : Facebook et Instagram, en deuxieme et quatrieme position.
+  Le balisage annoncait donc :
+
+      "sameAs": ["", "https://…facebook…", "", "https://…instagram…"]
+
+  Deux chaines vides au milieu de deux vraies adresses. Une chaine vide
+  n'est pas un profil absent, c'est un profil invalide : le moteur doit
+  resoudre une URL qui n'existe pas, et le signal des deux vrais profils
+  s'en trouve affaibli plutot que renforce.
+
+  On filtre donc entree par entree, comme le fait deja le balisage du
+  magasin, et la propriete disparait entierement s'il ne reste rien.
+{%- endcomment -%}
+{%- liquid
+  assign sources = settings.social_facebook_link
+  assign sources = sources | append: '|' | append: settings.social_instagram_link
+  assign sources = sources | append: '|' | append: settings.social_youtube_link
+  assign sources = sources | append: '|' | append: settings.social_tiktok_link
+  assign sources = sources | append: '|' | append: settings.social_pinterest_link
+  assign sources = sources | append: '|' | append: settings.social_twitter_link
+  assign sources = sources | append: '|' | append: settings.social_tumblr_link
+  assign sources = sources | append: '|' | append: settings.social_snapchat_link
+  assign sources = sources | append: '|' | append: settings.social_vimeo_link
+  assign profils = sources | split: '|'
+-%}
+{%- capture profils_json -%}
+  {%- for profil in profils -%}
+    {%- assign adresse = profil | strip -%}
+    {%- if adresse != blank -%},{{ adresse | json }}{%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- assign profils_json = profils_json | strip | remove_first: ',' -%}
+
 <script type="application/ld+json">
   {
-    "@context": "http://schema.org",
+    "@context": "https://schema.org",
     "@type": "Organization",
+    {%- comment -%}
+      UN IDENTIFIANT STABLE ET UNE ADRESSE STABLE.
+
+      Sans « @id », chaque page declarait une organisation anonyme de plus :
+      rien ne disait a un moteur que celle de la page d'accueil et celle de
+      la page Contact sont la meme. Et « url » valait l'adresse de la page
+      en cours — l'entreprise semblait donc changer d'adresse a chaque page.
+
+      Les deux sont desormais fixes, et l'identifiant repond a celui du
+      magasin declare juste apres, qui porte l'adresse et le telephone.
+    {%- endcomment -%}
+    "@id": {{ request.origin | append: '/#organization' | json }},
     "name": {{ shop.name | json }},
+    "url": {{ request.origin | append: '/' | json }},
     {% if settings.logo %}
       "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
     {% endif %}
+    {%- if profils_json != blank %}
+      "sameAs": [{{ profils_json }}],
+    {% endif -%}
     {%- comment -%}
-      Dawn listait les neuf reseaux sans verifier qu'ils etaient renseignes :
-      aucun ne l'etant, le balisage annoncait « sameAs: ["", "", "", ...] ».
-      Neuf chaines vides ne valent pas zero profil pour un moteur, elles
-      valent neuf profils invalides. On ne garde que ce qui existe, et on
-      n'ecrit la propriete que s'il reste quelque chose a dire.
+      Une reference a un autre noeud s'ecrit comme un objet portant son
+      identifiant, pas comme une chaine : « location »: "https://…" serait
+      lu comme un lieu dont le NOM est cette adresse.
     {%- endcomment -%}
-    {%- liquid
-      assign reseaux = ''
-      assign liens = settings.social_twitter_link | append: ',' | append: settings.social_facebook_link | append: ',' | append: settings.social_pinterest_link | append: ',' | append: settings.social_instagram_link | append: ',' | append: settings.social_tiktok_link | append: ',' | append: settings.social_tumblr_link | append: ',' | append: settings.social_snapchat_link | append: ',' | append: settings.social_youtube_link | append: ',' | append: settings.social_vimeo_link
-      assign liens = liens | split: ','
-    -%}
-    {%- if liens.size > 0 -%}
-      "sameAs": [
-        {%- for lien in liens -%}
-          {{ lien | json }}{% unless forloop.last %},{% endunless %}
-        {%- endfor -%}
-      ],
-    {%- endif -%}
-    "url": {{ request.origin | append: page.url | json }}
+    "location": { "@id": {{ request.origin | append: '/#localbusiness' | json }} }
   }
 </script>
 
 {%- comment -%}
   Le bloc Organization ci-dessus dit qui nous sommes ; celui-ci dit où nous
-  sommes. Les deux cohabitent sans se contredire : ils portent des @id
-  distincts.
+  sommes. Les deux portent des @id distincts et se citent l'un l'autre :
+  l'organisation déclare le magasin comme sa « location », le magasin
+  déclare LINERS FRANCE comme sa société mère.
 {%- endcomment -%}
 {% render 'spa-localbusiness' %}
 {% render 'spa-faq-schema' %}
