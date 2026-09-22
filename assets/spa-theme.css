@@ -4525,3 +4525,368 @@ a, span, label, summary, button, blockquote, figcaption,
   margin: 3.2rem 0 0;
   text-align: center;
 }
+
+/* --------------------------------------------------------------------------
+   42. PAGES DE CONTENU : CHAPITRES, SOMMAIRE, COLONNE DE LECTURE
+   --------------------------------------------------------------------------
+   Le probleme resolu ici. La page « A propos » faisait 2 500 mots en un
+   seul flux, onze h2 de meme poids, aucun moyen de naviguer, et — le plus
+   couteux — tout le texte centre. Un paragraphe centre n'a pas de bord
+   gauche stable : l'oeil doit rechercher le debut de chaque ligne, ce qui
+   coute a chaque retour a la ligne. Sur cinq lignes c'est elegant, sur
+   deux mille cinq cents mots c'est epuisant.
+
+   Trois outils, pas davantage :
+
+   - LE CHAPITRE, qui regroupe les onze titres en trois temps numerotes.
+     Le numero n'est pas un ornement : la page raconte reellement une suite
+     — qui nous sommes, comment choisir, comment ca se passe — et le
+     sommaire s'appuie sur cette suite.
+   - LE SOMMAIRE, cinq entrees, juste sous le chapeau.
+   - LA COLONNE DE LECTURE, calee a gauche sur 66 caracteres.
+
+   Le blanc casse arrive avec --coquille. Il est plus clair et plus neutre
+   que --brume, qui reste reservee aux petits aplats : deux bleus tres
+   proches sur de grandes surfaces se concurrencent au lieu de se repondre.
+   -------------------------------------------------------------------------- */
+:root {
+  --coquille: #f7fafc;
+}
+
+/* LE SURTITRE. Petit, interlettre, en bleu profond. Il nomme la nature du
+   bloc avant que le titre n'en donne le contenu — et il donne aux titres
+   en capitales un cran de hierarchie supplementaire, sans quoi tous les
+   niveaux se ressemblent. */
+.spa-surtitre {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 0 1.2rem;
+  color: var(--sky-deep);
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.spa-surtitre__num {
+  display: inline-flex;
+  min-width: 2.8rem;
+  height: 2.8rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.8rem;
+  border-radius: var(--r-pill);
+  background: var(--mist);
+  font-size: 1.3rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+/* --------------------------------------------------------------------------
+   LE CHAPITRE
+   -------------------------------------------------------------------------- */
+.spa-chapitre {
+  padding-top: var(--pt, 56px);
+  padding-bottom: var(--pb, 8px);
+}
+
+/* Le filet marque la rupture mieux qu'un grand vide, qui se confond avec
+   l'espacement courant entre les sections. */
+.spa-chapitre__filet {
+  height: 1px;
+  margin-bottom: 3.2rem;
+  border: 0;
+  background: linear-gradient(90deg, var(--water), rgba(179, 228, 245, 0));
+}
+
+.spa-chapitre__titre {
+  max-width: 20ch;
+  margin: 0;
+  font-size: clamp(2.6rem, 3.4vw, 3.8rem);
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.spa-chapitre__chapeau {
+  max-width: 62ch;
+  margin: 1.8rem 0 0;
+  color: var(--deep-soft);
+  font-size: clamp(1.8rem, 1.6vw, 2.1rem);
+  line-height: 1.55;
+}
+
+.spa-chapitre__chapeau p {
+  margin: 0 0 1.2rem;
+}
+
+.spa-chapitre__chapeau p:last-child {
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   L'EN-TETE DE PAGE
+   -------------------------------------------------------------------------- */
+.spa-page-entete {
+  padding-top: var(--pt, 44px);
+  padding-bottom: var(--pb, 8px);
+}
+
+.spa-page-entete__titre {
+  max-width: 18ch;
+  margin: 0;
+  font-size: clamp(3.2rem, 5vw, 5rem);
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.spa-page-entete__chapeau {
+  max-width: 62ch;
+  margin: 2rem 0 0;
+  color: var(--deep-soft);
+  font-size: clamp(1.8rem, 1.7vw, 2.2rem);
+  line-height: 1.55;
+}
+
+.spa-page-entete__chapeau p {
+  margin: 0 0 1.2rem;
+}
+
+.spa-page-entete__chapeau p:last-child {
+  margin-bottom: 0;
+}
+
+/* Les chiffres se lisaient jusqu'ici dans le corps de la page, sous .rte.
+   Sortis de la, ils ont besoin de leur propre marge haute. */
+.spa-page-entete .spa-chiffres {
+  margin-top: 3.6rem;
+}
+
+/* --------------------------------------------------------------------------
+   LE SOMMAIRE
+   -------------------------------------------------------------------------- */
+.spa-sommaire {
+  padding-top: var(--pt, 24px);
+  padding-bottom: var(--pb, 24px);
+}
+
+.spa-sommaire__carte {
+  padding: 2.8rem;
+  border: 1px solid rgba(15, 58, 90, 0.08);
+  border-radius: var(--r-lg);
+  background: var(--coquille);
+}
+
+.spa-sommaire__titre {
+  margin: 0 0 1.6rem;
+  font-size: 1.4rem;
+}
+
+.spa-sommaire__liste {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  gap: 0.4rem;
+  list-style: none;
+}
+
+.spa-sommaire__lien {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  padding: 1.1rem 0.8rem;
+  border-radius: var(--r-md);
+  color: var(--deep);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.spa-sommaire__lien:hover,
+.spa-sommaire__lien:focus-visible {
+  background: var(--white);
+  color: var(--sky-deep);
+}
+
+.spa-sommaire__rang {
+  color: var(--sky-deep);
+  font-size: 1.3rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+@media screen and (min-width: 750px) {
+  .spa-sommaire__carte {
+    padding: 3.2rem 3.6rem;
+  }
+
+  .spa-sommaire__liste {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.4rem 3.2rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   LA COLONNE DE LECTURE
+   --------------------------------------------------------------------------
+   66 caracteres : au-dela, l'oeil rate la ligne suivante en revenant a la
+   marge ; en deca, on coupe trop souvent. Calee a gauche, jamais centree.
+   -------------------------------------------------------------------------- */
+.spa-prose {
+  padding-top: var(--pt, 24px);
+  padding-bottom: var(--pb, 24px);
+}
+
+.spa-prose__col {
+  max-width: 66ch;
+  text-align: left;
+}
+
+.spa-prose--large .spa-prose__col {
+  max-width: none;
+}
+
+.spa-prose__titre {
+  margin: 0 0 1.6rem;
+  font-size: clamp(2rem, 2.2vw, 2.4rem);
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.spa-prose__col > p {
+  margin: 0 0 1.6rem;
+}
+
+.spa-prose__col > p:last-child {
+  margin-bottom: 0;
+}
+
+.spa-prose__col > ul,
+.spa-prose__col > ol {
+  margin: 0 0 1.6rem;
+  padding-left: 2.2rem;
+}
+
+.spa-prose__col li {
+  margin-bottom: 0.6rem;
+}
+
+/* Les liens du corps de texte sont soulignes : dans un paragraphe dense,
+   la seule couleur ne suffit pas a les distinguer, et elle disparait pour
+   qui percoit mal les contrastes de teinte. */
+.spa-prose__col a {
+  color: var(--sky-deep);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+
+.spa-prose__col a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* L'ENCADRE. Un seul niveau de mise en avant, sur blanc casse. Il sert aux
+   informations qu'on doit pouvoir retrouver sans relire le paragraphe :
+   une adresse, un delai, une condition. */
+.spa-prose--encadre .spa-prose__col {
+  max-width: 72ch;
+  padding: 2.8rem;
+  border-left: 3px solid var(--sky);
+  border-radius: 0 var(--r-lg) var(--r-lg) 0;
+  background: var(--coquille);
+}
+
+@media screen and (min-width: 750px) {
+  .spa-prose--encadre .spa-prose__col {
+    padding: 3.2rem 3.6rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   LA CARTE DE CONTACT DE FIN DE PAGE
+   -------------------------------------------------------------------------- */
+.spa-contact-carte {
+  padding-top: var(--pt, 48px);
+  padding-bottom: var(--pb, 56px);
+}
+
+.spa-contact-carte__boite {
+  display: grid;
+  gap: 2.8rem;
+  padding: 3.2rem 2.8rem;
+  border-radius: var(--r-xl);
+  background: var(--mist);
+}
+
+.spa-contact-carte__titre {
+  margin: 0 0 1.2rem;
+  font-size: clamp(2.2rem, 2.6vw, 2.8rem);
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.spa-contact-carte__texte {
+  max-width: 54ch;
+  margin: 0;
+  color: var(--deep-soft);
+}
+
+.spa-contact-carte__coords {
+  margin: 0;
+  font-style: normal;
+  line-height: 1.9;
+}
+
+.spa-contact-carte__coords a {
+  color: var(--deep);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+/* LA MENTION DU RENDEZ-VOUS. Elle est repetee sur tout le site, toujours
+   avec les memes mots et la meme forme : un visiteur qui l'a lue une fois
+   la reconnait sans la relire. C'est une pastille, pas une phrase noyee en
+   fin de paragraphe, parce que c'est la condition pour venir. */
+.spa-mention-rdv {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 1.6rem 0 0;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--r-pill);
+  background: var(--white);
+  color: var(--deep);
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.spa-mention-rdv::before {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background: var(--sky);
+  content: '';
+}
+
+.spa-contact-carte__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+/* 4,8 rem de haut : une cible tactile confortable, au-dessus du minimum de
+   4,4 rem en dessous duquel un pouce rate une fois sur trois. */
+.spa-contact-carte__actions .btn {
+  min-height: 4.8rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+@media screen and (min-width: 750px) {
+  .spa-contact-carte__boite {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+    padding: 4rem;
+  }
+}

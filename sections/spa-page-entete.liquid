@@ -1,0 +1,139 @@
+{%- comment -%}
+  L'EN-TÊTE D'UNE PAGE DE CONTENU.
+
+  Le titre, une ligne de situation, un chapeau, et les chiffres qui font
+  office de preuve avant même le premier paragraphe.
+
+  POURQUOI CE N'EST PLUS LE CORPS DE LA PAGE. Jusqu'ici ces éléments étaient
+  écrits dans le corps de la page Shopify, faute de mieux : ce corps est un
+  champ unique, il ne peut donc rien intercaler entre le titre et le reste
+  du texte. Déplacé dans une section, l'en-tête se règle sans toucher au
+  texte, et les photos peuvent s'intercaler ensuite.
+
+  LE TITRE RESTE CELUI DE LA PAGE par défaut. Le champ ne sert qu'à afficher
+  autre chose que le titre enregistré dans l'administration — à n'utiliser
+  qu'en connaissance de cause : c'est le h1, il pèse dans le référencement.
+{%- endcomment -%}
+
+{%- liquid
+  assign titre = section.settings.titre | default: page.title
+
+  assign chiffres = 0
+  for block in section.blocks
+    if block.settings.valeur != blank
+      assign chiffres = chiffres | plus: 1
+    endif
+  endfor
+-%}
+
+<div
+  class="spa-page-entete color-{{ section.settings.color_scheme }} gradient"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width">
+    {%- if section.settings.surtitre != blank -%}
+      <p class="spa-surtitre">{{ section.settings.surtitre | escape }}</p>
+    {%- endif -%}
+
+    {%- if titre != blank -%}
+      <h1 class="spa-page-entete__titre">{{ titre | escape }}</h1>
+    {%- endif -%}
+
+    {%- if section.settings.chapeau != blank -%}
+      <div class="spa-page-entete__chapeau rte">{{ section.settings.chapeau }}</div>
+    {%- endif -%}
+
+    {%- if chiffres > 0 -%}
+      <ul class="spa-chiffres" role="list">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.valeur != blank -%}
+            <li class="spa-chiffre" {{ block.shopify_attributes }}>
+              <span class="spa-chiffre__valeur">{{ block.settings.valeur | escape }}</span>
+              {%- if block.settings.label != blank -%}
+                <span class="spa-chiffre__label">{{ block.settings.label | escape }}</span>
+              {%- endif -%}
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "En-tête de page",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "surtitre",
+      "label": "Surtitre",
+      "info": "La situation en trois mots. Exemple : Spas en Île-de-France"
+    },
+    {
+      "type": "text",
+      "id": "titre",
+      "label": "Titre",
+      "info": "Laisser vide pour reprendre le titre de la page. C'est le h1 : il pèse dans le référencement."
+    },
+    {
+      "type": "richtext",
+      "id": "chapeau",
+      "label": "Chapeau",
+      "info": "Deux ou trois phrases. C'est ce que lira quelqu'un qui ne lit rien d'autre."
+    },
+    {
+      "type": "header",
+      "content": "Mise en page"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Jeu de couleurs",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 8
+    }
+  ],
+  "blocks": [
+    {
+      "type": "chiffre",
+      "name": "Chiffre clé",
+      "settings": [
+        {
+          "type": "text",
+          "id": "valeur",
+          "label": "Valeur"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Libellé"
+        }
+      ]
+    }
+  ],
+  "presets": [{ "name": "En-tête de page" }]
+}
+{% endschema %}

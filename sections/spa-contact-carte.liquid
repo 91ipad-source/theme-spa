@@ -1,0 +1,217 @@
+{%- comment -%}
+  LA CARTE DE CONTACT DE FIN DE PAGE.
+
+  Quelqu'un qui arrive au bas d'une page longue a fini de s'informer : soit
+  il part, soit il agit. Lui redonner un paragraphe serait le perdre. On lui
+  donne les coordonnées, la condition de visite et deux boutons.
+
+  LA MENTION DU RENDEZ-VOUS EST UNE PASTILLE, PAS UNE PHRASE. Elle se
+  répétait jusqu'ici sous quatre formulations différentes selon les pages
+  — « Showroom ouvert uniquement sur rendez-vous », « ouvert uniquement sur
+  rendez-vous », « uniquement sur rendez-vous » — et chaque fois noyée en
+  fin de paragraphe. Mêmes mots, même forme, même place partout : c'est la
+  condition pour venir, elle ne se lit pas deux fois.
+
+  LE TÉLÉPHONE ET LE COURRIEL SONT CLIQUABLES. Sur téléphone, un numéro
+  qu'il faut recopier à la main est un numéro qu'on n'appelle pas.
+{%- endcomment -%}
+
+<div
+  class="spa-contact-carte color-{{ section.settings.color_scheme }} gradient"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width">
+    <div
+      class="spa-contact-carte__boite"
+      {% if section.settings.ancre != blank %}id="{{ section.settings.ancre | handle }}"{% endif %}
+    >
+      <div>
+        {%- if section.settings.surtitre != blank -%}
+          <p class="spa-surtitre">{{ section.settings.surtitre | escape }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.titre != blank -%}
+          <h2 class="spa-contact-carte__titre">{{ section.settings.titre | escape }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.texte != blank -%}
+          <p class="spa-contact-carte__texte">{{ section.settings.texte | escape }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.mention != blank -%}
+          <p class="spa-mention-rdv">{{ section.settings.mention | escape }}</p>
+        {%- endif -%}
+      </div>
+
+      <div>
+        <address class="spa-contact-carte__coords">
+          {%- if section.settings.raison_sociale != blank -%}
+            <strong>{{ section.settings.raison_sociale | escape }}</strong><br>
+          {%- endif -%}
+          {%- if section.settings.adresse != blank -%}
+            {{ section.settings.adresse | escape }}<br>
+          {%- endif -%}
+          {%- if section.settings.telephone != blank -%}
+            {%- comment -%}
+              Le lien tel: ne garde que les chiffres et le plus : un numéro
+              écrit avec des espaces reste lisible à l'écran, mais un
+              composeur n'en veut pas.
+            {%- endcomment -%}
+            {%- assign compose = section.settings.telephone
+              | remove: ' '
+              | remove: '.'
+              | remove: '('
+              | remove: ')'
+              | remove: '-'
+            -%}
+            <a href="tel:{{ compose }}">{{ section.settings.telephone | escape }}</a><br>
+          {%- endif -%}
+          {%- if section.settings.courriel != blank -%}
+            <a href="mailto:{{ section.settings.courriel | escape }}">
+              {{- section.settings.courriel | escape -}}
+            </a>
+          {%- endif -%}
+        </address>
+
+        {%- if section.settings.bouton_1 != blank or section.settings.bouton_2 != blank -%}
+          <p class="spa-contact-carte__actions">
+            {%- if section.settings.bouton_1 != blank -%}
+              <a class="btn" href="{{ section.settings.lien_1 | default: '/pages/contact' }}">
+                {{- section.settings.bouton_1 | escape -}}
+              </a>
+            {%- endif -%}
+            {%- if section.settings.bouton_2 != blank -%}
+              <a class="btn ghost" href="{{ section.settings.lien_2 | default: '/collections/tous-nos-spas' }}">
+                {{- section.settings.bouton_2 | escape -}}
+              </a>
+            {%- endif -%}
+          </p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Carte de contact",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "surtitre",
+      "label": "Surtitre"
+    },
+    {
+      "type": "text",
+      "id": "titre",
+      "label": "Titre",
+      "default": "Parlons de votre projet"
+    },
+    {
+      "type": "textarea",
+      "id": "texte",
+      "label": "Texte"
+    },
+    {
+      "type": "text",
+      "id": "mention",
+      "label": "Mention du rendez-vous",
+      "default": "Showroom uniquement sur rendez-vous",
+      "info": "Exactement les mêmes mots sur toutes les pages du site."
+    },
+    {
+      "type": "text",
+      "id": "ancre",
+      "label": "Ancre",
+      "info": "Facultatif, pour être visé depuis le sommaire. Exemple : nous-contacter"
+    },
+    {
+      "type": "header",
+      "content": "Coordonnées"
+    },
+    {
+      "type": "text",
+      "id": "raison_sociale",
+      "label": "Raison sociale",
+      "default": "SPAS9 | LINERS FRANCE"
+    },
+    {
+      "type": "text",
+      "id": "adresse",
+      "label": "Adresse",
+      "default": "16 rue de l'Orme, 91540 Fontenay-le-Vicomte"
+    },
+    {
+      "type": "text",
+      "id": "telephone",
+      "label": "Téléphone",
+      "default": "+33 (0)1 60 77 37 00"
+    },
+    {
+      "type": "text",
+      "id": "courriel",
+      "label": "Courriel",
+      "default": "iledefrance@linersfrance.fr"
+    },
+    {
+      "type": "header",
+      "content": "Boutons"
+    },
+    {
+      "type": "text",
+      "id": "bouton_1",
+      "label": "Bouton principal",
+      "default": "Prendre rendez-vous"
+    },
+    {
+      "type": "url",
+      "id": "lien_1",
+      "label": "Lien du bouton principal"
+    },
+    {
+      "type": "text",
+      "id": "bouton_2",
+      "label": "Bouton secondaire",
+      "default": "Découvrir nos spas"
+    },
+    {
+      "type": "url",
+      "id": "lien_2",
+      "label": "Lien du bouton secondaire"
+    },
+    {
+      "type": "header",
+      "content": "Mise en page"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Jeu de couleurs",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 56
+    }
+  ],
+  "presets": [{ "name": "Carte de contact" }]
+}
+{% endschema %}

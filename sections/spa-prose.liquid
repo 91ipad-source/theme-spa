@@ -1,0 +1,153 @@
+{%- comment -%}
+  UN BLOC DE TEXTE COURANT.
+
+  POURQUOI UNE SECTION PLUTÔT QUE LE CORPS DE LA PAGE. Le corps d'une page
+  Shopify est un seul champ : il n'accepte ni photo intercalée, ni encadré,
+  ni bouton au milieu. Tout le texte se retrouve donc empilé d'un bloc, et
+  les sections riches du thème sont rejetées dessous, là où presque
+  personne n'arrive. Découpé en blocs de prose, le même texte s'intercale
+  entre les photos et les tableaux.
+
+  DEUX REGLAGES DE LARGEUR, ET C'EST TOUT :
+
+  - « Colonne de lecture » borne le texte à 66 caractères. C'est la mesure
+    au-delà de laquelle l'œil rate la ligne suivante en revenant à la
+    marge. Elle vaut pour tout ce qui se lit en continu.
+  - « Pleine largeur » sert à ce qui se regarde plutôt qu'à ce qui se lit :
+    un tableau, une grille de pictogrammes.
+
+  Le texte est calé à gauche, jamais centré. Un paragraphe centré n'a pas
+  de bord gauche stable : l'œil doit rechercher le début de chaque ligne.
+  Sur cinq lignes c'est élégant, sur deux mille mots c'est épuisant.
+{%- endcomment -%}
+
+{%- if section.settings.texte != blank or section.settings.titre != blank or section.settings.html != blank -%}
+  {%- liquid
+    assign classes = 'spa-prose'
+    if section.settings.largeur == 'large'
+      assign classes = classes | append: ' spa-prose--large'
+    endif
+    if section.settings.encadre
+      assign classes = classes | append: ' spa-prose--encadre'
+    endif
+
+    assign ancre = section.settings.ancre | handle
+  -%}
+
+  <div
+    class="{{ classes }} color-{{ section.settings.color_scheme }} gradient"
+    style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+  >
+    <div class="page-width">
+      <div class="spa-prose__col rte">
+        {%- if section.settings.surtitre != blank -%}
+          <p class="spa-surtitre">{{ section.settings.surtitre | escape }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.titre != blank -%}
+          <h3 class="spa-prose__titre"{% if ancre != blank %} id="{{ ancre }}"{% endif %}>
+            {{- section.settings.titre | escape -}}
+          </h3>
+        {%- endif -%}
+
+        {{ section.settings.texte }}
+
+        {%- comment -%}
+          LE CHAMP HTML LIBRE. Un réglage « texte enrichi » de Shopify ne
+          conserve que les paragraphes, les listes, le gras et les liens :
+          il supprime silencieusement les tableaux, les accordéons et les
+          grilles de pictogrammes. Ces trois-là existent déjà sur le site,
+          avec leurs styles, d'où ce second champ qui les accepte tels quels.
+        {%- endcomment -%}
+        {{ section.settings.html }}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Texte de page",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "surtitre",
+      "label": "Surtitre"
+    },
+    {
+      "type": "text",
+      "id": "titre",
+      "label": "Titre",
+      "info": "Sous-titre du chapitre en cours. Laisser vide pour un simple bloc de texte."
+    },
+    {
+      "type": "richtext",
+      "id": "texte",
+      "label": "Texte"
+    },
+    {
+      "type": "html",
+      "id": "html",
+      "label": "Contenu HTML (tableau, accordéons, pictogrammes)",
+      "info": "Pour ce que le champ ci-dessus supprime : tableaux, accordéons, grilles de pictogrammes."
+    },
+    {
+      "type": "select",
+      "id": "largeur",
+      "label": "Largeur",
+      "options": [
+        { "value": "lecture", "label": "Colonne de lecture (66 caractères)" },
+        { "value": "large", "label": "Pleine largeur" }
+      ],
+      "default": "lecture",
+      "info": "La pleine largeur est réservée aux tableaux et aux grilles, pas au texte suivi."
+    },
+    {
+      "type": "checkbox",
+      "id": "encadre",
+      "label": "Présenter en encadré",
+      "default": false,
+      "info": "Pour une information qu'on doit retrouver sans relire le paragraphe : une adresse, un délai, une condition."
+    },
+    {
+      "type": "text",
+      "id": "ancre",
+      "label": "Ancre",
+      "info": "Facultatif, pour être visé depuis le sommaire."
+    },
+    {
+      "type": "header",
+      "content": "Mise en page"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Jeu de couleurs",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 24
+    }
+  ],
+  "presets": [{ "name": "Texte de page" }]
+}
+{% endschema %}

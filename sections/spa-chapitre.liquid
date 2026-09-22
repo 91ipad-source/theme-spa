@@ -1,0 +1,134 @@
+{%- comment -%}
+  UN CHAPITRE DE PAGE.
+
+  Une page de contenu longue n'a pas besoin de plus de titres, elle a besoin
+  de moins de niveaux. « À propos » alignait onze h2 de poids identique :
+  onze débuts, aucun palier. Le chapitre regroupe ces titres en trois temps
+  et leur donne un rang.
+
+  LE NUMÉRO N'EST PAS UN ORNEMENT. Il n'a sa place que parce que la page
+  raconte réellement une suite — qui nous sommes, comment choisir, comment
+  ça se passe — et parce que le sommaire s'appuie sur cette suite pour
+  numéroter ses entrées. Sur une page dont les parties sont interchangeables,
+  il faut laisser le champ vide : la pastille disparaît.
+
+  L'ANCRE relie le chapitre au sommaire. Sans elle, le lien du sommaire ne
+  mène nulle part — d'où la valeur par défaut, qui vaut mieux qu'un lien mort.
+{%- endcomment -%}
+
+{%- liquid
+  assign ancre = section.settings.ancre | handle
+  if ancre == blank
+    assign ancre = section.id
+  endif
+-%}
+
+<div
+  class="spa-chapitre color-{{ section.settings.color_scheme }} gradient"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width">
+    {%- if section.settings.filet -%}
+      <hr class="spa-chapitre__filet">
+    {%- endif -%}
+
+    {%- if section.settings.surtitre != blank or section.settings.numero != blank -%}
+      <p class="spa-surtitre">
+        {%- if section.settings.numero != blank -%}
+          <span class="spa-surtitre__num">{{ section.settings.numero | escape }}</span>
+        {%- endif -%}
+        {%- if section.settings.surtitre != blank -%}
+          <span>{{ section.settings.surtitre | escape }}</span>
+        {%- endif -%}
+      </p>
+    {%- endif -%}
+
+    {%- comment -%}
+      L'ancre est portée par le titre lui-même : le navigateur amène alors
+      le titre en haut de l'écran, et non le filet qui le précède.
+    {%- endcomment -%}
+    {%- if section.settings.titre != blank -%}
+      <h2 class="spa-chapitre__titre" id="{{ ancre }}">{{ section.settings.titre | escape }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.chapeau != blank -%}
+      <div class="spa-chapitre__chapeau rte">{{ section.settings.chapeau }}</div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Chapitre",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "numero",
+      "label": "Numéro",
+      "info": "À ne remplir que si les chapitres se lisent dans un ordre. Vide, la pastille disparaît."
+    },
+    {
+      "type": "text",
+      "id": "surtitre",
+      "label": "Surtitre",
+      "info": "Trois ou quatre mots qui disent de quoi parle le chapitre."
+    },
+    {
+      "type": "text",
+      "id": "titre",
+      "label": "Titre"
+    },
+    {
+      "type": "richtext",
+      "id": "chapeau",
+      "label": "Chapeau",
+      "info": "Une à trois phrases, en plus grand. C'est ce que lira quelqu'un qui ne lit que les débuts."
+    },
+    {
+      "type": "text",
+      "id": "ancre",
+      "label": "Ancre",
+      "info": "Le nom utilisé dans le sommaire, sans accent ni espace. Exemple : qui-nous-sommes"
+    },
+    {
+      "type": "checkbox",
+      "id": "filet",
+      "label": "Filet de séparation",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Mise en page"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Jeu de couleurs",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 8
+    }
+  ],
+  "presets": [{ "name": "Chapitre" }]
+}
+{% endschema %}
