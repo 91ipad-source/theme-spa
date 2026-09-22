@@ -75,6 +75,7 @@
               assign nom = block.settings.titre | default: produit.title | strip
               assign commune = block.settings.commune | strip
               assign annee = block.settings.annee | strip
+              assign couleur = block.settings.couleur | strip
 
               comment
                 Le texte alternatif se construit tout seul quand on ne l'a pas
@@ -200,11 +201,32 @@
               {%- endif -%}
 
               <div class="spa-realisations__corps">
-                {%- if commune != blank or annee != blank -%}
+                {%- comment -%}
+                  LE COLORIS EST UN CHAMP, PAS UN BOUT DE COMMUNE.
+
+                  Il s'ecrivait a la main au bout du nom de la commune —
+                  « Draveil - Couleur Odyssey », « Milly-la-Foret - Odyssey ».
+                  Deux inconvenients : la formulation variait d'une fiche a
+                  l'autre, et la commune n'etait plus une commune, ce qui
+                  interdit d'en faire quoi que ce soit plus tard — un filtre,
+                  une carte, une mention dans le texte alternatif.
+
+                  Le champ ne contient que le nom du coloris. Le mot
+                  « Couleur » est ecrit ici, une fois, pour toutes les fiches.
+                {%- endcomment -%}
+                {%- if commune != blank or annee != blank or couleur != blank -%}
                   <p class="spa-realisations__lieu">
-                    {%- if commune != blank -%}{{ commune }}{%- endif -%}
+                    {%- assign separateur = '' -%}
+                    {%- if commune != blank -%}
+                      {{- commune -}}
+                      {%- assign separateur = ' · ' -%}
+                    {%- endif -%}
                     {%- if annee != blank -%}
-                      {%- if commune != blank %} · {% endif -%}{{ annee }}
+                      {{- separateur }}{{ annee -}}
+                      {%- assign separateur = ' · ' -%}
+                    {%- endif -%}
+                    {%- if couleur != blank -%}
+                      {{- separateur }}Couleur {{ couleur -}}
                     {%- endif -%}
                   </p>
                 {%- endif -%}
@@ -507,6 +529,12 @@
           "type": "text",
           "id": "annee",
           "label": "Année"
+        },
+        {
+          "type": "text",
+          "id": "couleur",
+          "label": "Coloris posé",
+          "info": "Le nom seul — « Odyssey », « Midnight Opal », « Sterling Silver ». Le mot « Couleur » est ajouté à l'affichage, ne l'écrivez pas ici."
         },
         {
           "type": "textarea",

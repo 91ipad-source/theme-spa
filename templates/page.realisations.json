@@ -33,8 +33,9 @@
             "image_5": "shopify://shop_images/220c3932-0948-43c5-8441-0a45768126d0_3.jpg",
             "produit": "spa-roca-proto-lighting-5-personnes",
             "titre": "",
-            "commune": "Draveil - Couleur Odyssey",
+            "commune": "Draveil",
             "annee": "2025",
+            "couleur": "Odyssey",
             "difficulte": "Le seul accès au jardin mesurait 120 cm, entre le mur de la maison et la clôture, pour un spa de 200 × 200 cm. C'est précisément le genre de passage qui se mesure avant de commander, jamais le jour de la livraison."
           }
         },
@@ -48,8 +49,9 @@
             "image_5": "shopify://shop_images/IMG_3344_14fcc2f1-abd1-4f01-b153-159828a82aaf.jpg",
             "produit": "spa-roca-panope-full-therapeutique-5-personnes",
             "titre": "",
-            "commune": "Mennecy - Couleur Midnight Opal",
+            "commune": "Mennecy",
             "annee": "2026",
+            "couleur": "Midnight Opal",
             "difficulte": "Un mètre de large entre la descente de garage et le mur, pour un spa de 230 × 230 cm. Ce n'est pas la taille du jardin qui décide de la faisabilité, c'est la largeur du couloir qui y mène."
           }
         },
@@ -63,8 +65,9 @@
             "image_5": "shopify://shop_images/IMG_1084_3.jpg",
             "produit": "spa-roca-doto-3-personnes",
             "titre": "",
-            "commune": "Seine-Port - Couleur Odyssey",
+            "commune": "Seine-Port",
             "annee": "2026",
+            "couleur": "Odyssey",
             "difficulte": "Le Doto est semi-encastré : sur ses 81 cm de hauteur, une partie passe sous le niveau du sol fini. Le vrai point, c'est l'accès aux trappes techniques une fois l'habillage refermé."
           }
         },
@@ -74,8 +77,9 @@
             "image": "shopify://shop_images/1d833186-52dc-4109-b0b4-c374bfc9d6af.jpg",
             "produit": "spa-roca-calypso-3-personnes",
             "titre": "",
-            "commune": "Milly-la-Forêt - Odyssey",
+            "commune": "Milly-la-Forêt",
             "annee": "2026",
+            "couleur": "Odyssey",
             "difficulte": "Passage étroit entre la maison et le portail. Le Calypso ne fait que 77 cm de haut : présenté sur chant, il franchit ce qu'une cuve de deux mètres de large ne franchit pas. Ici le passage n'a pas empêché le projet."
           }
         },
@@ -88,6 +92,7 @@
             "titre": "",
             "commune": "Corbeil-Essonnes",
             "annee": "2025",
+            "couleur": "",
             "difficulte": "Rien de compliqué : l'accès ne posait pas de question et la livraison s'est faite comme prévu. Si les autres fiches racontent des chantiers difficiles, c'est parce que ce sont eux qui renseignent — mais la plupart des installations ressemblent à celle-ci."
           }
         }
