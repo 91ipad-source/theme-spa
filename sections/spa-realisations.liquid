@@ -54,6 +54,7 @@
 
 {%- if montrables > 0 -%}
   <div
+    id="SpaRealisations-{{ section.id }}"
     class="spa-realisations color-{{ section.settings.color_scheme }} gradient"
     style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px; --colonnes: {{ colonnes }};"
   >
@@ -95,16 +96,30 @@
             -%}
 
             <li class="spa-realisations__carte" {{ block.shopify_attributes }}>
+              {%- comment -%}
+                CHAQUE PHOTO S'AGRANDIT. Dans une carte, la vue d'ensemble
+                fait 460 px et les vignettes 113 px : on devine le chantier,
+                on ne l'examine pas. Or c'est justement ce que veut faire
+                quelqu'un qui se demande si le passage de chez lui ressemble
+                a celui-la.
+
+                Le lien pointe vers le fichier en pleine definition et la
+                visionneuse l'intercepte. Sans JavaScript — ou si le
+                navigateur ignore <dialog> — le clic ouvre simplement la
+                photo : degrade, mais jamais mort.
+              {%- endcomment -%}
               <div class="spa-realisations__image">
-                {{
-                  block.settings.image
-                  | image_url: width: 1200
-                  | image_tag:
-                    loading: 'lazy',
-                    widths: '400, 600, 800, 1200',
-                    sizes: '(min-width: 990px) 33vw, 100vw',
-                    alt: alt
-                }}
+                <a class="spa-realisations__loupe" href="{{ block.settings.image | image_url: width: 2048 }}">
+                  {{
+                    block.settings.image
+                    | image_url: width: 1200
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '400, 600, 800, 1200',
+                      sizes: '(min-width: 990px) 33vw, 100vw',
+                      alt: alt
+                  }}
+                </a>
               </div>
 
               {%- comment -%}
@@ -130,48 +145,56 @@
               {%- if a2 != blank or a3 != blank or a4 != blank or a5 != blank -%}
                 <div class="spa-realisations__angles">
                   {%- if a2 != blank -%}
-                    {{
-                      a2
-                      | image_url: width: 600
-                      | image_tag:
-                        loading: 'lazy',
-                        widths: '200, 300, 400, 600',
-                        sizes: '(min-width: 990px) 23vw, 50vw',
-                        alt: alt
-                    }}
+                    <a class="spa-realisations__loupe" href="{{ a2 | image_url: width: 2048 }}">
+                      {{
+                        a2
+                        | image_url: width: 600
+                        | image_tag:
+                          loading: 'lazy',
+                          widths: '200, 300, 400, 600',
+                          sizes: '(min-width: 990px) 23vw, 50vw',
+                          alt: alt
+                      }}
+                    </a>
                   {%- endif -%}
                   {%- if a3 != blank -%}
-                    {{
-                      a3
-                      | image_url: width: 600
-                      | image_tag:
-                        loading: 'lazy',
-                        widths: '200, 300, 400, 600',
-                        sizes: '(min-width: 990px) 23vw, 50vw',
-                        alt: alt
-                    }}
+                    <a class="spa-realisations__loupe" href="{{ a3 | image_url: width: 2048 }}">
+                      {{
+                        a3
+                        | image_url: width: 600
+                        | image_tag:
+                          loading: 'lazy',
+                          widths: '200, 300, 400, 600',
+                          sizes: '(min-width: 990px) 23vw, 50vw',
+                          alt: alt
+                      }}
+                    </a>
                   {%- endif -%}
                   {%- if a4 != blank -%}
-                    {{
-                      a4
-                      | image_url: width: 600
-                      | image_tag:
-                        loading: 'lazy',
-                        widths: '200, 300, 400, 600',
-                        sizes: '(min-width: 990px) 23vw, 50vw',
-                        alt: alt
-                    }}
+                    <a class="spa-realisations__loupe" href="{{ a4 | image_url: width: 2048 }}">
+                      {{
+                        a4
+                        | image_url: width: 600
+                        | image_tag:
+                          loading: 'lazy',
+                          widths: '200, 300, 400, 600',
+                          sizes: '(min-width: 990px) 23vw, 50vw',
+                          alt: alt
+                      }}
+                    </a>
                   {%- endif -%}
                   {%- if a5 != blank -%}
-                    {{
-                      a5
-                      | image_url: width: 600
-                      | image_tag:
-                        loading: 'lazy',
-                        widths: '200, 300, 400, 600',
-                        sizes: '(min-width: 990px) 23vw, 50vw',
-                        alt: alt
-                    }}
+                    <a class="spa-realisations__loupe" href="{{ a5 | image_url: width: 2048 }}">
+                      {{
+                        a5
+                        | image_url: width: 600
+                        | image_tag:
+                          loading: 'lazy',
+                          widths: '200, 300, 400, 600',
+                          sizes: '(min-width: 990px) 23vw, 50vw',
+                          alt: alt
+                      }}
+                    </a>
                   {%- endif -%}
                 </div>
               {%- endif -%}
@@ -217,7 +240,93 @@
         </p>
       {%- endif -%}
     </div>
+
+    {%- comment -%}
+      LA VISIONNEUSE. Une seule pour toute la section : c'est la fiche sur
+      laquelle on a clique qui fournit ses photos, et on passe de l'une a
+      l'autre sans refermer. <dialog> apporte gratuitement le fond assombri,
+      la fermeture par Echap et le piegeage du clavier dans la fenetre —
+      trois choses qu'une fausse fenetre en <div> oublie presque toujours.
+    {%- endcomment -%}
+    <dialog class="spa-visionneuse" aria-label="Photos de la réalisation">
+      <button class="spa-visionneuse__fermer" type="button" aria-label="Fermer">&times;</button>
+      <img class="spa-visionneuse__image" src="" alt="" width="2048" height="1536">
+      <button class="spa-visionneuse__nav spa-visionneuse__prec" type="button" aria-label="Photo précédente">
+        &#8249;
+      </button>
+      <button class="spa-visionneuse__nav spa-visionneuse__suiv" type="button" aria-label="Photo suivante">
+        &#8250;
+      </button>
+      <p class="spa-visionneuse__compteur" aria-live="polite"></p>
+    </dialog>
   </div>
+
+  <script>
+    (function () {
+      var racine = document.getElementById('SpaRealisations-{{ section.id }}');
+      if (!racine) return;
+      var dlg = racine.querySelector('.spa-visionneuse');
+
+      /* Sans <dialog>, on ne touche a rien : les liens continuent d'ouvrir
+         la photo en pleine definition, ce qui reste utilisable. */
+      if (!dlg || typeof dlg.showModal !== 'function') return;
+
+      var vue = dlg.querySelector('.spa-visionneuse__image');
+      var compteur = dlg.querySelector('.spa-visionneuse__compteur');
+      var navs = dlg.querySelectorAll('.spa-visionneuse__nav');
+      var lot = [];
+      var rang = 0;
+      var origine = null;
+
+      function montrer(n) {
+        if (!lot.length) return;
+        rang = (n + lot.length) % lot.length;
+        vue.src = lot[rang].href;
+        vue.alt = lot[rang].alt;
+        compteur.textContent = lot.length > 1 ? rang + 1 + ' / ' + lot.length : '';
+      }
+
+      racine.addEventListener('click', function (e) {
+        var lien = e.target.closest ? e.target.closest('.spa-realisations__loupe') : null;
+        if (!lien) return;
+        e.preventDefault();
+
+        var carte = lien.closest('.spa-realisations__carte');
+        var liens = Array.prototype.slice.call(carte.querySelectorAll('.spa-realisations__loupe'));
+        lot = liens.map(function (a) {
+          var im = a.querySelector('img');
+          return { href: a.href, alt: im ? im.alt : '' };
+        });
+
+        for (var i = 0; i < navs.length; i++) navs[i].hidden = lot.length < 2;
+
+        /* On note d'ou l'on vient pour y rendre le focus a la fermeture :
+           sinon, au clavier, on repart du haut de la page. */
+        origine = lien;
+        montrer(liens.indexOf(lien));
+        dlg.showModal();
+      });
+
+      dlg.addEventListener('click', function (e) {
+        var c = e.target.closest ? e.target.closest.bind(e.target) : function () { return null; };
+        if (c('.spa-visionneuse__suiv')) return montrer(rang + 1);
+        if (c('.spa-visionneuse__prec')) return montrer(rang - 1);
+        /* Un clic sur le fond — donc sur la boite elle-meme, pas sur son
+           contenu — ferme, comme partout ailleurs sur le web. */
+        if (c('.spa-visionneuse__fermer') || e.target === dlg) dlg.close();
+      });
+
+      dlg.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight') montrer(rang + 1);
+        if (e.key === 'ArrowLeft') montrer(rang - 1);
+      });
+
+      dlg.addEventListener('close', function () {
+        if (origine) origine.focus();
+        origine = null;
+      });
+    })();
+  </script>
 {%- endif -%}
 
 {% schema %}

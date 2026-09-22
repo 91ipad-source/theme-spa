@@ -4364,6 +4364,120 @@ a, span, label, summary, button, blockquote, figcaption,
   object-fit: cover;
 }
 
+/* Chaque photo est un lien vers sa version pleine definition. Il doit se
+   comporter exactement comme l'image qu'il enveloppe, sinon il casse la
+   grille : c'est lui, desormais, qui est la case. */
+.spa-realisations__loupe {
+  display: block;
+  min-width: 0;
+  cursor: zoom-in;
+}
+
+.spa-realisations__image .spa-realisations__loupe {
+  width: 100%;
+  height: 100%;
+}
+
+/* La cible du clic doit rester visible au clavier : sans ca, on tabule sur
+   les photos sans savoir ou l'on est. */
+.spa-realisations__loupe:focus-visible {
+  outline: 2px solid var(--deep, #0f3a5a);
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   LA VISIONNEUSE
+
+   Volontairement sobre : la photo occupe la place, tout le reste s'efface.
+   Les commandes font 44 px de cote, la taille en dessous de laquelle un
+   pouce rate sa cible une fois sur trois.
+   -------------------------------------------------------------------------- */
+.spa-visionneuse {
+  position: relative;
+  max-width: min(96vw, 140rem);
+  max-height: 94vh;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-lg);
+  background: transparent;
+  overflow: visible;
+}
+
+.spa-visionneuse::backdrop {
+  background: rgba(6, 28, 45, 0.88);
+}
+
+.spa-visionneuse__image {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 94vh;
+  border-radius: var(--r-lg);
+  object-fit: contain;
+}
+
+.spa-visionneuse__fermer,
+.spa-visionneuse__nav {
+  position: absolute;
+  display: flex;
+  width: 4.4rem;
+  height: 4.4rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--deep, #0f3a5a);
+  cursor: pointer;
+  font-size: 2.6rem;
+  line-height: 1;
+}
+
+.spa-visionneuse__fermer:hover,
+.spa-visionneuse__nav:hover {
+  background: #fff;
+}
+
+.spa-visionneuse__fermer {
+  top: 0.8rem;
+  right: 0.8rem;
+}
+
+.spa-visionneuse__prec {
+  top: 50%;
+  left: 0.8rem;
+  transform: translateY(-50%);
+}
+
+.spa-visionneuse__suiv {
+  top: 50%;
+  right: 0.8rem;
+  transform: translateY(-50%);
+}
+
+.spa-visionneuse__nav[hidden] {
+  display: none;
+}
+
+.spa-visionneuse__compteur {
+  position: absolute;
+  bottom: 0.8rem;
+  left: 50%;
+  margin: 0;
+  padding: 0.4rem 1.2rem;
+  border-radius: 999px;
+  background: rgba(6, 28, 45, 0.7);
+  color: #fff;
+  font-size: 1.3rem;
+  transform: translateX(-50%);
+}
+
+.spa-visionneuse__compteur:empty {
+  display: none;
+}
+
 .spa-realisations__corps {
   display: flex;
   flex: 1 1 auto;
