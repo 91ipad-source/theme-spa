@@ -468,6 +468,17 @@ a.spa-marquee__item:hover {
   border-radius: var(--r-lg);
 }
 
+/* A la mesure du texte. Les 66ch sont exactement ceux de .spa-prose__col :
+   meme police, meme corps, donc meme largeur au pixel pres.
+
+   Et calee a gauche, pas centree. Une illustration qui appartient au fil de
+   la lecture partage sa marge gauche ; centree dans une page de 1200 px a
+   cote d'un texte qui en fait 620, elle flotterait sans s'y rattacher. */
+.spa-store-banner--texte picture {
+  max-width: min(100%, 66ch, var(--largeur-native, 100%));
+  margin-inline: 0;
+}
+
 .spa-store-banner__image {
   display: block;
   width: 100%;

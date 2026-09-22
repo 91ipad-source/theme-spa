@@ -21,9 +21,26 @@
 
   La borne est calculée sur l'image « ordinateur ». Sur téléphone, l'écran est
   de toute façon plus étroit que n'importe quel fichier : elle ne joue jamais.
+
+  TROIS LARGEURS, POUR TROIS RÔLES DIFFÉRENTS :
+
+  - « bord à bord » pour une vraie panoramique d'ouverture, qui doit toucher
+    les deux côtés de l'écran ;
+  - « largeur du contenu » pour une image qui accompagne la page sans la
+    dominer ;
+  - « largeur du texte » pour une illustration qui appartient au fil de la
+    lecture. Elle prend alors exactement la mesure de la colonne, 66
+    caractères, et la même marge gauche : centrée, elle flotterait à côté du
+    texte au lieu de s'y rattacher.
 {% endcomment %}
 
 {%- liquid
+  comment
+    Ancien reglage : une case a cocher « pleine largeur ». Les gabarits qui
+    la portent encore tombent sur « bord a bord », qui etait son effet.
+  endcomment
+  assign largeur = section.settings.largeur | default: 'plein'
+
   assign image = section.settings.image
   assign image_mobile = section.settings.image_mobile
   assign alt = section.settings.image_alt
@@ -34,7 +51,10 @@
 
 {%- if image != blank -%}
   <div
-    class="spa-store-banner{% unless section.settings.full_width %} page-width{% endunless %}{% unless section.settings.show_on_mobile %} spa-store-banner--no-mobile{% endunless %}"
+    class="spa-store-banner
+      {%- unless largeur == 'plein' %} page-width{% endunless -%}
+      {%- if largeur == 'texte' %} spa-store-banner--texte{% endif -%}
+      {%- unless section.settings.show_on_mobile %} spa-store-banner--no-mobile{% endunless -%}"
     {% if image.width %}style="--largeur-native: {{ image.width }}px;"{% endif %}
   >
     {%- if section.settings.link != blank -%}
@@ -95,11 +115,16 @@
       "info": "Facultatif mais recommandé pour une image panoramique : sur un écran de 400 px elle ne fait plus que ~130 px de haut et les textes deviennent illisibles. Prévoyez une version plus haute, recadrée sur l'essentiel. Sans cette image, celle du dessus est réutilisée."
     },
     {
-      "type": "checkbox",
-      "id": "full_width",
-      "label": "Image sur toute la largeur de l'écran",
-      "info": "Décochez pour contenir l'image dans la largeur du contenu, comme le reste de la page.",
-      "default": true
+      "type": "select",
+      "id": "largeur",
+      "label": "Largeur",
+      "options": [
+        { "value": "plein", "label": "Bord à bord" },
+        { "value": "contenu", "label": "Largeur du contenu" },
+        { "value": "texte", "label": "Largeur du texte" }
+      ],
+      "default": "plein",
+      "info": "« Bord à bord » ne convient qu'à une vraie panoramique. Une photo plus carrée y est agrandie et devient un pavé."
     },
     {
       "type": "checkbox",

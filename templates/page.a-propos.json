@@ -13,9 +13,9 @@
       "type": "spa-store-banner",
       "settings": {
         "image": "shopify://shop_images/Capture_d_ecran_2026-09-14_a_13.06.48.png",
-        "full_width": true,
         "show_on_mobile": true,
-        "image_alt": "Spa SPAS9 | LINERS FRANCE installé sur une terrasse, au coucher du soleil"
+        "image_alt": "Spa SPAS9 | LINERS FRANCE installé sur une terrasse, au coucher du soleil",
+        "largeur": "plein"
       }
     },
     "main": {
@@ -83,10 +83,10 @@
       "type": "spa-store-banner",
       "settings": {
         "image": "shopify://shop_images/SPAS9_depot_stock.png",
-        "full_width": true,
         "show_on_mobile": true,
         "image_alt": "Spas ROCA Spa en stock sur palettes dans le dépôt SPAS9 | LINERS FRANCE, à Fontenay-le-Vicomte",
-        "link": "shopify://collections/all"
+        "link": "shopify://collections/all",
+        "largeur": "plein"
       }
     },
     "portrait": {

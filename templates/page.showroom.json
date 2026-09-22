@@ -4,9 +4,9 @@
       "type": "spa-store-banner",
       "settings": {
         "image": "shopify://shop_images/SPAS9_showroom.jpg",
-        "full_width": true,
         "show_on_mobile": true,
-        "image_alt": "Le showroom SPAS9 | LINERS FRANCE à Fontenay-le-Vicomte : spas exposés, accessoires et produits de traitement"
+        "image_alt": "Le showroom SPAS9 | LINERS FRANCE à Fontenay-le-Vicomte : spas exposés, accessoires et produits de traitement",
+        "largeur": "plein"
       }
     },
     "main": {

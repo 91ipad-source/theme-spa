@@ -16,7 +16,8 @@
       "settings": {
         "image": "shopify://shop_images/Bandeau_SPAS9_Liners_France_magasin.jpg",
         "show_on_mobile": true,
-        "image_alt": "Le magasin LINERS FRANCE à Fontenay-le-Vicomte : piscine, spa et bien-être"
+        "image_alt": "Le magasin LINERS FRANCE à Fontenay-le-Vicomte : piscine, spa et bien-être",
+        "largeur": "plein"
       }
     },
     "footer": {
