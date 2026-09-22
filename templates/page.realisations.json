@@ -36,8 +36,13 @@
         "panope": {
           "type": "realisation",
           "settings": {
+            "image": "shopify://shop_images/IMG_3359.jpg",
+            "image_2": "shopify://shop_images/IMG_3350_ec55f6fe-2db0-478b-b181-056ebc4c7005.jpg",
+            "image_3": "shopify://shop_images/IMG_3185_2_6417d45b-0146-475c-8c8e-106447d9315e.jpg",
             "produit": "spa-roca-panope-full-therapeutique-5-personnes",
+            "titre": "",
             "commune": "Mennecy",
+            "annee": "",
             "difficulte": "Un mètre de large entre la descente de garage et le mur, pour un spa de 230 × 230 cm. Ce n'est pas la taille du jardin qui décide de la faisabilité, c'est la largeur du couloir qui y mène."
           }
         }
