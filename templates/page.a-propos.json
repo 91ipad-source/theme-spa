@@ -485,7 +485,7 @@
         "texte": {
           "type": "text",
           "settings": {
-            "text": "<p>Passage trop étroit, escalier, dénivelé, mur ou clôture à franchir : chaque accès est étudié au cas par cas, et la manutention nécessaire est chiffrée dans le devis — grutage compris.</p><p>C'est pour cette raison que nous demandons des photos, ou une visite, avant de confirmer une livraison. Mieux vaut le savoir à ce moment-là qu'au pied du portail.</p>",
+            "text": "<p>Passage trop étroit, escalier, dénivelé, mur ou clôture à franchir : chaque accès est étudié au cas par cas, et la manutention nécessaire est chiffrée dans le devis — grutage compris.</p><p>C'est pour cette raison que nous demandons des photos, ou une visite, avant de confirmer une livraison. Mieux vaut le savoir à ce moment-là qu'au pied du portail.</p><p><a href=\"/pages/nos-realisations\">Nos réalisations</a> donnent une idée de ce que « compliqué » veut dire en pratique : chaque chantier y est décrit avec sa difficulté et ses photos.</p>",
             "text_style": "body"
           }
         },
