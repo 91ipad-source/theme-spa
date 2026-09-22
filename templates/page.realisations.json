@@ -81,10 +81,12 @@
         "corbeil": {
           "type": "realisation",
           "settings": {
+            "image": "shopify://shop_images/508a245b-0c9f-432d-ad5e-6ee094dc77e1.jpg",
+            "image_2": "shopify://shop_images/f482f724-9aff-4677-96ba-77892f21f439.jpg",
             "produit": "spa-roca-panope-full-therapeutique-5-personnes",
             "titre": "",
             "commune": "Corbeil-Essonnes",
-            "annee": "",
+            "annee": "2025",
             "difficulte": "Rien de compliqué : l'accès ne posait pas de question et la livraison s'est faite comme prévu. Si les autres fiches racontent des chantiers difficiles, c'est parce que ce sont eux qui renseignent — mais la plupart des installations ressemblent à celle-ci."
           }
         }
