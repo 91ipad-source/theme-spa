@@ -34,9 +34,11 @@
 {%- endcomment -%}
 {%- liquid
   assign classes = 'page-width'
-  unless section.settings.largeur == 'large'
+  if section.settings.largeur == 'large'
+    assign classes = classes | append: ' main-page--large'
+  else
     assign classes = classes | append: ' page-width--narrow'
-  endunless
+  endif
   if section.settings.text_alignment == 'center'
     assign classes = classes | append: ' main-page--centre'
   endif

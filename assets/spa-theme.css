@@ -5357,3 +5357,29 @@ h1.h2.center {
   line-height: var(--lh-page);
   text-wrap: balance;
 }
+
+/* --------------------------------------------------------------------------
+   49. LE CHAPEAU D'UNE PAGE SUIVIE DE SECTIONS RESPIRE PLUS LARGE
+   --------------------------------------------------------------------------
+   La mesure de lecture vaut 36 em, soit environ soixante-treize signes par
+   ligne. C'est la bonne largeur pour du texte suivi — un article, des
+   conditions générales, un chapitre.
+
+   Ce n'est pas la bonne pour les deux paragraphes d'introduction d'une page
+   dont le corps se poursuit en sections pleine largeur : la colonne s'arrête
+   à 612 px au-dessus d'une grille qui en fait 1100, et le texte paraît
+   abandonné dans l'angle.
+
+   Ces chapeaux passent donc à 44 em, environ quatre-vingt-neuf signes.
+   C'est au-delà de la mesure idéale, et c'est assumé : le coût d'une ligne
+   longue se paie sur deux mille mots, pas sur deux paragraphes qu'on lit
+   debout avant de regarder des photos.
+
+   La règle ne vise que les pages réglées sur « pleine largeur ». Les
+   conditions générales, qui ne sont QUE du texte suivi, gardent les 36 em.
+   -------------------------------------------------------------------------- */
+.main-page--large .spa-page-corps p,
+.main-page--large .spa-page-corps ul,
+.main-page--large .spa-page-corps ol {
+  max-width: 44em;
+}
