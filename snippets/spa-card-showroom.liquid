@@ -23,4 +23,11 @@
     </span>
     Le voir au showroom
   </a>
+{%- elsif card_product.metafields.custom.expose_showroom != blank -%}
+  {%- comment -%}
+    Le spa existe mais n'est pas expose. La vignette reserve quand meme la
+    ligne du lien : sans elle, son prix descendrait jusqu'a la ligne ou les
+    vignettes voisines posent le leur. Voir la section 50 de spa-theme.css.
+  {%- endcomment -%}
+  <span class="spa-card-showroom--absent" aria-hidden="true"></span>
 {%- endif -%}
