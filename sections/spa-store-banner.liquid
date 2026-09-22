@@ -9,6 +9,18 @@
   haute pour le téléphone. Sans la seconde, la première est réutilisée telle
   quelle — utile à savoir, car un panorama 3/1 ne fait plus que ~130 px de haut
   sur un écran de 400 px, et tout texte incrusté y devient illisible.
+
+  JAMAIS AGRANDIE AU-DELÀ DE SA TAILLE D'ORIGINE. Un bandeau « pleine
+  largeur » occupe la fenêtre, quelle qu'elle soit : sur un écran de 2560 px,
+  une photo de 1648 px est étirée d'une fois et demie. Elle devient molle, et
+  sa hauteur explose avec sa largeur — 1 480 px pour cette photo-là, plus que
+  l'écran. On borne donc l'affichage à la largeur réelle du fichier, et on
+  centre le reste. C'est invisible sur une vraie panoramique, qui est presque
+  toujours plus large que la fenêtre ; cela ne se déclenche que là où c'est
+  nécessaire.
+
+  La borne est calculée sur l'image « ordinateur ». Sur téléphone, l'écran est
+  de toute façon plus étroit que n'importe quel fichier : elle ne joue jamais.
 {% endcomment %}
 
 {%- liquid
@@ -21,7 +33,10 @@
 -%}
 
 {%- if image != blank -%}
-  <div class="spa-store-banner{% unless section.settings.full_width %} page-width{% endunless %}{% unless section.settings.show_on_mobile %} spa-store-banner--no-mobile{% endunless %}">
+  <div
+    class="spa-store-banner{% unless section.settings.full_width %} page-width{% endunless %}{% unless section.settings.show_on_mobile %} spa-store-banner--no-mobile{% endunless %}"
+    {% if image.width %}style="--largeur-native: {{ image.width }}px;"{% endif %}
+  >
     {%- if section.settings.link != blank -%}
       <a class="spa-store-banner__link" href="{{ section.settings.link }}">
     {%- endif -%}

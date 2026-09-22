@@ -448,6 +448,26 @@ a.spa-marquee__item:hover {
   display: block;
 }
 
+/* La borne : jamais plus large que le fichier d'origine, et centre au-dela.
+   Un bandeau « pleine largeur » prend la fenetre quelle qu'elle soit ; sur un
+   grand ecran, une photo de 1648 px y est agrandie d'une fois et demie, donc
+   molle, et sa hauteur explose avec sa largeur. min() ne se declenche que
+   lorsque la fenetre depasse le fichier : sur une vraie panoramique, plus
+   large que l'ecran, la regle ne fait rien. */
+.spa-store-banner picture {
+  display: block;
+  max-width: min(100%, var(--largeur-native, 100%));
+  margin-inline: auto;
+}
+
+/* Contenu dans la largeur du texte, le bandeau devient une image de page et
+   non plus une bande : il reprend le rayon des autres blocs, sans quoi ses
+   angles vifs jurent au milieu d'une page qui n'en a aucun. */
+.spa-store-banner.page-width picture {
+  overflow: hidden;
+  border-radius: var(--r-lg);
+}
+
 .spa-store-banner__image {
   display: block;
   width: 100%;
