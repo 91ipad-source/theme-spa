@@ -13,9 +13,10 @@
       "type": "spa-store-banner",
       "settings": {
         "image": "shopify://shop_images/Capture_d_ecran_2026-09-14_a_13.06.48.png",
+        "largeur": "plein",
         "show_on_mobile": true,
         "image_alt": "Spa SPAS9 | LINERS FRANCE installé sur une terrasse, au coucher du soleil",
-        "largeur": "plein"
+        "link": ""
       }
     },
     "entete": {
@@ -58,6 +59,7 @@
       ],
       "settings": {
         "surtitre": "Spas en Île-de-France",
+        "titre": "",
         "chapeau": "<p>SPAS9 est la marque spécialisée dans l'univers du spa de LINERS FRANCE. Nous vendons, livrons, installons et dépannons des spas en Île-de-France et dans le Loiret — depuis notre showroom de Fontenay-le-Vicomte, dans l'Essonne.</p>",
         "color_scheme": "scheme-1",
         "padding_top": 44,
@@ -94,6 +96,7 @@
         "s4": {
           "type": "entree",
           "settings": {
+            "rang": "",
             "libelle": "Questions fréquentes",
             "ancre": "questions-frequentes"
           }
@@ -101,6 +104,7 @@
         "s5": {
           "type": "entree",
           "settings": {
+            "rang": "",
             "libelle": "Nous contacter",
             "ancre": "nous-contacter"
           }
@@ -137,12 +141,16 @@
     "p_apropos": {
       "type": "spa-prose",
       "settings": {
+        "surtitre": "",
+        "titre": "",
+        "texte": "<p>Nous accompagnons les particuliers dans leurs projets piscine et spa depuis 2007.</p><p>Parce qu'un spa ne se choisit pas uniquement sur une photo ou sur un nombre de jets, nous prenons en compte plusieurs éléments essentiels : le nombre d'utilisateurs, le type d'assises recherché, l'espace disponible, les conditions d'accès, l'alimentation électrique ainsi que les modalités de livraison et d'installation.</p><p>Notre expérience technique nous permet ainsi de vous accompagner depuis le choix du modèle jusqu'à sa mise en place.</p>",
+        "html": "",
         "largeur": "lecture",
         "encadre": false,
+        "ancre": "",
         "color_scheme": "scheme-1",
         "padding_top": 16,
-        "padding_bottom": 16,
-        "texte": "<p>Nous accompagnons les particuliers dans leurs projets piscine et spa depuis 2007.</p><p>Parce qu'un spa ne se choisit pas uniquement sur une photo ou sur un nombre de jets, nous prenons en compte plusieurs éléments essentiels : le nombre d'utilisateurs, le type d'assises recherché, l'espace disponible, les conditions d'accès, l'alimentation électrique ainsi que les modalités de livraison et d'installation.</p><p>Notre expérience technique nous permet ainsi de vous accompagner depuis le choix du modèle jusqu'à sa mise en place.</p>"
+        "padding_bottom": 16
       }
     },
     "portrait": {
@@ -195,13 +203,16 @@
     "p_approche": {
       "type": "spa-prose",
       "settings": {
+        "surtitre": "",
+        "titre": "Vous conseiller avant de vous vendre un spa",
+        "texte": "<p>Acheter un spa représente un véritable projet d'aménagement.</p><p>Chez SPAS9, nous préférons donc prendre quelques minutes pour comprendre votre besoin plutôt que de vous orienter immédiatement vers un modèle.</p><p>Nombre d'utilisateurs, espace disponible, accès, type d'assises, équipements recherchés et budget global : ces informations nous permettent de vous proposer une sélection beaucoup plus pertinente.</p><p>Vous hésitez entre plusieurs modèles ? Prenez rendez-vous pour les comparer au showroom, ou <a href=\"/pages/contact\">contactez-nous</a> pour nous présenter votre projet.</p>",
+        "html": "",
         "largeur": "lecture",
         "encadre": false,
+        "ancre": "",
         "color_scheme": "scheme-1",
         "padding_top": 32,
-        "padding_bottom": 24,
-        "titre": "Vous conseiller avant de vous vendre un spa",
-        "texte": "<p>Acheter un spa représente un véritable projet d'aménagement.</p><p>Chez SPAS9, nous préférons donc prendre quelques minutes pour comprendre votre besoin plutôt que de vous orienter immédiatement vers un modèle.</p><p>Nombre d'utilisateurs, espace disponible, accès, type d'assises, équipements recherchés et budget global : ces informations nous permettent de vous proposer une sélection beaucoup plus pertinente.</p><p>Vous hésitez entre plusieurs modèles ? Prenez rendez-vous pour les comparer au showroom, ou <a href=\"/pages/contact\">contactez-nous</a> pour nous présenter votre projet.</p>"
+        "padding_bottom": 24
       }
     },
     "liners": {
@@ -226,7 +237,10 @@
           "settings": {
             "button_label": "Découvrir linersfrance.pro",
             "button_link": "https://linersfrance.pro",
-            "button_style_secondary": true
+            "button_style_secondary": true,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
           }
         }
       },
@@ -247,13 +261,16 @@
     "p_marques": {
       "type": "spa-prose",
       "settings": {
+        "surtitre": "",
+        "titre": "Des marques et des garanties choisies",
+        "texte": "<p>Nous distribuons les spas <strong>ROCA Spa</strong>, sélectionnés en tenant compte de plusieurs critères : conception, équipements, cohérence du rapport qualité-prix, disponibilité des pièces et conditions de garantie.</p><p>LINERS FRANCE est <strong>labellisée ProPiscine</strong> par la Fédération des Professionnels de la Piscine et du Spa, et couverte par une <strong>garantie décennale</strong> sur ses travaux de piscine.</p><p>Les caractéristiques peuvent varier selon les modèles et les versions. Nous vous invitons donc à consulter chaque fiche produit ou à nous contacter pour obtenir les informations correspondant précisément au spa qui vous intéresse.</p>",
+        "html": "",
         "largeur": "lecture",
         "encadre": true,
+        "ancre": "",
         "color_scheme": "scheme-1",
         "padding_top": 32,
-        "padding_bottom": 40,
-        "titre": "Des marques et des garanties choisies",
-        "texte": "<p>Nous distribuons les spas <strong>ROCA Spa</strong>, sélectionnés en tenant compte de plusieurs critères : conception, équipements, cohérence du rapport qualité-prix, disponibilité des pièces et conditions de garantie.</p><p>LINERS FRANCE est <strong>labellisée ProPiscine</strong> par la Fédération des Professionnels de la Piscine et du Spa, et couverte par une <strong>garantie décennale</strong> sur ses travaux de piscine.</p><p>Les caractéristiques peuvent varier selon les modèles et les versions. Nous vous invitons donc à consulter chaque fiche produit ou à nous contacter pour obtenir les informations correspondant précisément au spa qui vous intéresse.</p>"
+        "padding_bottom": 40
       }
     },
     "ch2": {
@@ -273,46 +290,56 @@
     "p_taille": {
       "type": "spa-prose",
       "settings": {
+        "surtitre": "",
+        "titre": "",
+        "texte": "",
+        "html": "<ul class=\"spa-picto-grid\" role=\"list\">\n<li class=\"spa-picto\">\n<span class=\"spa-picto__icone\"><img src=\"https://cdn.shopify.com/s/files/1/1077/6399/0858/files/Le_nombre_de_places.png?v=1789388068&amp;width=192\" width=\"192\" height=\"192\" alt=\"\" loading=\"lazy\"></span><span class=\"spa-picto__label\">Le nombre de places</span>\n</li>\n<li class=\"spa-picto\">\n<span class=\"spa-picto__icone\"><img src=\"https://cdn.shopify.com/s/files/1/1077/6399/0858/files/Places_assises.png?v=1789388068&amp;width=192\" width=\"192\" height=\"192\" alt=\"\" loading=\"lazy\"></span><span class=\"spa-picto__label\">Places assises</span>\n</li>\n<li class=\"spa-picto\">\n<span class=\"spa-picto__icone\"><img src=\"https://cdn.shopify.com/s/files/1/1077/6399/0858/files/Places_allongees.png?v=1789388068&amp;width=192\" width=\"192\" height=\"192\" alt=\"\" loading=\"lazy\"></span><span class=\"spa-picto__label\">Places allongées</span>\n</li>\n<li class=\"spa-picto\">\n<span class=\"spa-picto__icone\"><img src=\"https://cdn.shopify.com/s/files/1/1077/6399/0858/files/L_encombrement_disponible.png?v=1789388068&amp;width=192\" width=\"192\" height=\"192\" alt=\"\" loading=\"lazy\"></span><span class=\"spa-picto__label\">L'encombrement disponible</span>\n</li>\n<li class=\"spa-picto\">\n<span class=\"spa-picto__icone\"><img src=\"https://cdn.shopify.com/s/files/1/1077/6399/0858/files/Les_conditions_de_passage.png?v=1789388069&amp;width=192\" width=\"192\" height=\"192\" alt=\"\" loading=\"lazy\"></span><span class=\"spa-picto__label\">Les conditions de passage</span>\n</li>\n<li class=\"spa-picto\">\n<span class=\"spa-picto__icone\"><img src=\"https://cdn.shopify.com/s/files/1/1077/6399/0858/files/La_preparation_de_l_emplacement.png?v=1789388068&amp;width=192\" width=\"192\" height=\"192\" alt=\"\" loading=\"lazy\"></span><span class=\"spa-picto__label\">La préparation de l'emplacement</span>\n</li>\n<li class=\"spa-picto\">\n<span class=\"spa-picto__icone\"><img src=\"https://cdn.shopify.com/s/files/1/1077/6399/0858/files/L_alimentation_electrique.png?v=1789388068&amp;width=192\" width=\"192\" height=\"192\" alt=\"\" loading=\"lazy\"></span><span class=\"spa-picto__label\">L'alimentation électrique</span>\n</li>\n<li class=\"spa-picto\">\n<span class=\"spa-picto__icone\"><img src=\"https://cdn.shopify.com/s/files/1/1077/6399/0858/files/La_livraison_et_l_installation.png?v=1789388068&amp;width=192\" width=\"192\" height=\"192\" alt=\"\" loading=\"lazy\"></span><span class=\"spa-picto__label\">La livraison et l'installation</span>\n</li>\n</ul>\n<p>Cette approche permet de construire un projet cohérent dans son ensemble, et pas simplement de choisir un spa sur catalogue.</p>\n<h3 class=\"spa-prose__titre\">Quelle taille de spa pour quel usage ?</h3>\n<p>Vous disposez d'une petite terrasse, d'un espace réduit ou au contraire d'un emplacement permettant l'installation d'un spa familial ? Voici les quatre formats de la gamme SPAS9, leur encombrement réel et les modèles correspondants.</p>\n<div class=\"spa-tableau\">\n<table>\n<thead><tr>\n<th scope=\"col\">Format</th>\n<th scope=\"col\">Encombrement au sol</th>\n<th scope=\"col\">Modèles SPAS9</th>\n<th scope=\"col\">Idéal pour</th>\n</tr></thead>\n<tbody>\n<tr>\n<th scope=\"row\"><a href=\"/collections/spa-2-places\">2 places</a></th>\n<td data-label=\"Encombrement au sol\">135 × 200 cm</td>\n<td data-label=\"Modèles SPAS9\"><a href=\"/products/spa-roca-duo-2-personnes\">Duo</a></td>\n<td data-label=\"Idéal pour\">Une utilisation en couple, sur un petit extérieur. Deux places allongées.</td>\n</tr>\n<tr>\n<th scope=\"row\"><a href=\"/collections/spa-3-places\">3 places</a></th>\n<td data-label=\"Encombrement au sol\">158 × 210 à 170 × 210 cm</td>\n<td data-label=\"Modèles SPAS9\">\n<a href=\"/products/spa-roca-calypso-3-personnes\">Calypso</a>, <a href=\"/products/spa-roca-calypso-web-3-personnes\">Calypso Web</a>, <a href=\"/products/spa-roca-doto-3-personnes\">Doto</a>\n</td>\n<td data-label=\"Idéal pour\">Deux bains allongés et une assise, sans pousser les murs.</td>\n</tr>\n<tr>\n<th scope=\"row\"><a href=\"/collections/spa-5-places\">5 places</a></th>\n<td data-label=\"Encombrement au sol\">200 × 200 à 230 × 230 cm</td>\n<td data-label=\"Modèles SPAS9\">\n<a href=\"/products/spa-roca-proto-lighting-5-personnes\">Proto 2</a>, <a href=\"/products/spa-roca-europe-infrared-5-personnes\">Europe Infrared</a>, <a href=\"/products/spa-roca-pleuxaure-5-personnes\">Pleuxaure</a>, <a href=\"/products/spa-roca-panope-5-personnes\">Panopé</a>, <a href=\"/products/spa-roca-panope-full-therapeutique-5-personnes\">Panopé Full Thérapeutique</a>, <a href=\"/products/spa-roca-nemesis-5-personnes\">Némésis</a> (épuisé)</td>\n<td data-label=\"Idéal pour\">Un usage familial ou pour recevoir. Allongées et assises combinées.</td>\n</tr>\n<tr>\n<th scope=\"row\"><a href=\"/collections/spa-7-places\">7 places</a></th>\n<td data-label=\"Encombrement au sol\">Diamètre 200 cm (rond)</td>\n<td data-label=\"Modèles SPAS9\"><a href=\"/products/spa-roca-doro-plus-7-personnes\">Doro Plus</a></td>\n<td data-label=\"Idéal pour\">Recevoir largement, sur un format rond de 800 litres.</td>\n</tr>\n</tbody>\n</table>\n</div>\n<p class=\"spa-tableau-note\">Dimensions hors tout. Prévoyez un dégagement autour du spa pour l'entretien et l'accès technique. Le <a href=\"/products/spa-roca-calypso-3-personnes\">Calypso</a> ne mesure que 77 cm de haut : il franchit une porte d'entrée standard, ce qui permet de l'installer en intérieur ou en véranda.</p>\n<p>Avant toute recommandation définitive, nous tenons également compte des dimensions de l'emplacement et surtout du chemin permettant d'y acheminer le spa.</p>\n<p>Vous hésitez entre plusieurs modèles ? <a href=\"/pages/comparer-les-spas\">Comparez-les ligne à ligne</a>.</p>",
         "largeur": "large",
         "encadre": false,
+        "ancre": "",
         "color_scheme": "scheme-1",
         "padding_top": 24,
-        "padding_bottom": 32,
-        "html": "<ul class=\"spa-picto-grid\" role=\"list\">\n<li class=\"spa-picto\"><span class=\"spa-picto__icone\"><img src=\"https://cdn.shopify.com/s/files/1/1077/6399/0858/files/Le_nombre_de_places.png?v=1789388068&width=192\" width=\"192\" height=\"192\" alt=\"\" loading=\"lazy\"></span><span class=\"spa-picto__label\">Le nombre de places</span></li>\n<li class=\"spa-picto\"><span class=\"spa-picto__icone\"><img src=\"https://cdn.shopify.com/s/files/1/1077/6399/0858/files/Places_assises.png?v=1789388068&width=192\" width=\"192\" height=\"192\" alt=\"\" loading=\"lazy\"></span><span class=\"spa-picto__label\">Places assises</span></li>\n<li class=\"spa-picto\"><span class=\"spa-picto__icone\"><img src=\"https://cdn.shopify.com/s/files/1/1077/6399/0858/files/Places_allongees.png?v=1789388068&width=192\" width=\"192\" height=\"192\" alt=\"\" loading=\"lazy\"></span><span class=\"spa-picto__label\">Places allongées</span></li>\n<li class=\"spa-picto\"><span class=\"spa-picto__icone\"><img src=\"https://cdn.shopify.com/s/files/1/1077/6399/0858/files/L_encombrement_disponible.png?v=1789388068&width=192\" width=\"192\" height=\"192\" alt=\"\" loading=\"lazy\"></span><span class=\"spa-picto__label\">L'encombrement disponible</span></li>\n<li class=\"spa-picto\"><span class=\"spa-picto__icone\"><img src=\"https://cdn.shopify.com/s/files/1/1077/6399/0858/files/Les_conditions_de_passage.png?v=1789388069&width=192\" width=\"192\" height=\"192\" alt=\"\" loading=\"lazy\"></span><span class=\"spa-picto__label\">Les conditions de passage</span></li>\n<li class=\"spa-picto\"><span class=\"spa-picto__icone\"><img src=\"https://cdn.shopify.com/s/files/1/1077/6399/0858/files/La_preparation_de_l_emplacement.png?v=1789388068&width=192\" width=\"192\" height=\"192\" alt=\"\" loading=\"lazy\"></span><span class=\"spa-picto__label\">La préparation de l'emplacement</span></li>\n<li class=\"spa-picto\"><span class=\"spa-picto__icone\"><img src=\"https://cdn.shopify.com/s/files/1/1077/6399/0858/files/L_alimentation_electrique.png?v=1789388068&width=192\" width=\"192\" height=\"192\" alt=\"\" loading=\"lazy\"></span><span class=\"spa-picto__label\">L'alimentation électrique</span></li>\n<li class=\"spa-picto\"><span class=\"spa-picto__icone\"><img src=\"https://cdn.shopify.com/s/files/1/1077/6399/0858/files/La_livraison_et_l_installation.png?v=1789388068&width=192\" width=\"192\" height=\"192\" alt=\"\" loading=\"lazy\"></span><span class=\"spa-picto__label\">La livraison et l'installation</span></li>\n</ul>\n<p>Cette approche permet de construire un projet cohérent dans son ensemble, et pas simplement de choisir un spa sur catalogue.</p>\n<h3 class=\"spa-prose__titre\">Quelle taille de spa pour quel usage ?</h3>\n<p>Vous disposez d'une petite terrasse, d'un espace réduit ou au contraire d'un emplacement permettant l'installation d'un spa familial ? Voici les quatre formats de la gamme SPAS9, leur encombrement réel et les modèles correspondants.</p>\n<div class=\"spa-tableau\">\n<table>\n<thead><tr><th scope=\"col\">Format</th><th scope=\"col\">Encombrement au sol</th><th scope=\"col\">Modèles SPAS9</th><th scope=\"col\">Idéal pour</th></tr></thead>\n<tbody>\n<tr><th scope=\"row\"><a href=\"/collections/spa-2-places\">2 places</a></th><td data-label=\"Encombrement au sol\">135 × 200 cm</td><td data-label=\"Modèles SPAS9\"><a href=\"/products/spa-roca-duo-2-personnes\">Duo</a></td><td data-label=\"Idéal pour\">Une utilisation en couple, sur un petit extérieur. Deux places allongées.</td></tr>\n<tr><th scope=\"row\"><a href=\"/collections/spa-3-places\">3 places</a></th><td data-label=\"Encombrement au sol\">158 × 210 à 170 × 210 cm</td><td data-label=\"Modèles SPAS9\"><a href=\"/products/spa-roca-calypso-3-personnes\">Calypso</a>, <a href=\"/products/spa-roca-calypso-web-3-personnes\">Calypso Web</a>, <a href=\"/products/spa-roca-doto-3-personnes\">Doto</a></td><td data-label=\"Idéal pour\">Deux bains allongés et une assise, sans pousser les murs.</td></tr>\n<tr><th scope=\"row\"><a href=\"/collections/spa-5-places\">5 places</a></th><td data-label=\"Encombrement au sol\">200 × 200 à 230 × 230 cm</td><td data-label=\"Modèles SPAS9\"><a href=\"/products/spa-roca-proto-lighting-5-personnes\">Proto 2</a>, <a href=\"/products/spa-roca-europe-infrared-5-personnes\">Europe Infrared</a>, <a href=\"/products/spa-roca-pleuxaure-5-personnes\">Pleuxaure</a>, <a href=\"/products/spa-roca-panope-5-personnes\">Panopé</a>, <a href=\"/products/spa-roca-panope-full-therapeutique-5-personnes\">Panopé Full Thérapeutique</a>, <a href=\"/products/spa-roca-nemesis-5-personnes\">Némésis</a> (épuisé)</td><td data-label=\"Idéal pour\">Un usage familial ou pour recevoir. Allongées et assises combinées.</td></tr>\n<tr><th scope=\"row\"><a href=\"/collections/spa-7-places\">7 places</a></th><td data-label=\"Encombrement au sol\">Diamètre 200 cm (rond)</td><td data-label=\"Modèles SPAS9\"><a href=\"/products/spa-roca-doro-plus-7-personnes\">Doro Plus</a></td><td data-label=\"Idéal pour\">Recevoir largement, sur un format rond de 800 litres.</td></tr>\n</tbody>\n</table>\n</div>\n<p class=\"spa-tableau-note\">Dimensions hors tout. Prévoyez un dégagement autour du spa pour l'entretien et l'accès technique. Le <a href=\"/products/spa-roca-calypso-3-personnes\">Calypso</a> ne mesure que 77 cm de haut : il franchit une porte d'entrée standard, ce qui permet de l'installer en intérieur ou en véranda.</p>\n<p>Avant toute recommandation définitive, nous tenons également compte des dimensions de l'emplacement et surtout du chemin permettant d'y acheminer le spa.</p>\n<p>Vous hésitez entre plusieurs modèles ? <a href=\"/pages/comparer-les-spas\">Comparez-les ligne à ligne</a>.</p>"
+        "padding_bottom": 32
       }
     },
     "p_confort": {
       "type": "spa-prose",
       "settings": {
+        "surtitre": "",
+        "titre": "Confort et ergonomie",
+        "texte": "<p>Un spa doit avant tout être agréable à utiliser.</p><p>La disposition des places, la profondeur des assises, la présence éventuelle de places allongées et la répartition des jets ont une influence directe sur les sensations ressenties dans le spa.</p><p>C'est pourquoi nous vous conseillons de ne pas choisir uniquement en fonction du nombre de places annoncé. Deux spas de capacité identique peuvent offrir des expériences très différentes selon leur conception.</p><p>Comparer les modèles permet de trouver celui qui correspond réellement à votre morphologie, à vos habitudes et au nombre de personnes qui utiliseront régulièrement le spa. Notre article <a href=\"/blogs/conseils-spa/spa-quelle-taille-nombre-de-places\">Spa 2, 3, 5 ou 7 places : quelle taille choisir ?</a> détaille ces différences format par format.</p>",
+        "html": "",
         "largeur": "lecture",
         "encadre": false,
+        "ancre": "",
         "color_scheme": "scheme-1",
         "padding_top": 32,
-        "padding_bottom": 24,
-        "titre": "Confort et ergonomie",
-        "texte": "<p>Un spa doit avant tout être agréable à utiliser.</p><p>La disposition des places, la profondeur des assises, la présence éventuelle de places allongées et la répartition des jets ont une influence directe sur les sensations ressenties dans le spa.</p><p>C'est pourquoi nous vous conseillons de ne pas choisir uniquement en fonction du nombre de places annoncé. Deux spas de capacité identique peuvent offrir des expériences très différentes selon leur conception.</p><p>Comparer les modèles permet de trouver celui qui correspond réellement à votre morphologie, à vos habitudes et au nombre de personnes qui utiliseront régulièrement le spa. Notre article <a href=\"/blogs/conseils-spa/spa-quelle-taille-nombre-de-places\">Spa 2, 3, 5 ou 7 places : quelle taille choisir ?</a> détaille ces différences format par format.</p>"
+        "padding_bottom": 24
       }
     },
     "p_equipements": {
       "type": "spa-prose",
       "settings": {
+        "surtitre": "",
+        "titre": "Les équipements ne sont pas tous sur tous les modèles",
+        "texte": "<p>Selon les modèles et les versions, différents équipements peuvent compléter l'expérience : éclairage LED, systèmes de filtration, commandes électroniques, équipements audio, connectivité ou autres fonctions de confort.</p><p>Ces équipements ne sont pas systématiquement présents sur tous les spas. Lors de votre choix, nous vous indiquons précisément les caractéristiques du modèle concerné afin que vous sachiez exactement ce qui est compris dans sa configuration.</p><p>La gamme SPAS9 comprend différents modèles de <a href=\"/collections/tous-nos-spas\">2 à 7 places</a>, afin de répondre aussi bien à une utilisation à deux qu'à un projet familial.</p>",
+        "html": "",
         "largeur": "lecture",
         "encadre": true,
+        "ancre": "",
         "color_scheme": "scheme-1",
         "padding_top": 32,
-        "padding_bottom": 40,
-        "titre": "Les équipements ne sont pas tous sur tous les modèles",
-        "texte": "<p>Selon les modèles et les versions, différents équipements peuvent compléter l'expérience : éclairage LED, systèmes de filtration, commandes électroniques, équipements audio, connectivité ou autres fonctions de confort.</p><p>Ces équipements ne sont pas systématiquement présents sur tous les spas. Lors de votre choix, nous vous indiquons précisément les caractéristiques du modèle concerné afin que vous sachiez exactement ce qui est compris dans sa configuration.</p><p>La gamme SPAS9 comprend différents modèles de <a href=\"/collections/tous-nos-spas\">2 à 7 places</a>, afin de répondre aussi bien à une utilisation à deux qu'à un projet familial.</p>"
+        "padding_bottom": 40
       }
     },
     "depot": {
       "type": "spa-store-banner",
       "settings": {
         "image": "shopify://shop_images/SPAS9_depot_stock.png",
+        "largeur": "texte",
         "show_on_mobile": true,
         "image_alt": "Spas ROCA Spa en stock sur palettes dans le dépôt SPAS9 | LINERS FRANCE, à Fontenay-le-Vicomte",
-        "link": "shopify://collections/all",
-        "largeur": "texte"
+        "link": "shopify://collections/all"
       }
     },
     "ch3": {
@@ -379,13 +406,16 @@
     "p_showroom": {
       "type": "spa-prose",
       "settings": {
+        "surtitre": "",
+        "titre": "Le showroom de Fontenay-le-Vicomte",
+        "texte": "<p>Notre showroom SPAS9 est situé au <strong>16 rue de l'Orme, 91540 Fontenay-le-Vicomte</strong>, à une trentaine de minutes du sud de Paris. <strong>Showroom uniquement sur rendez-vous</strong> : nous préparons la visite à partir de ce que vous cherchez, et un vendeur vous consacre le temps nécessaire. Un parking permet de se garer sur place, sans avoir à chercher une place dans la rue.</p><p>Venir au showroom vous permet de découvrir les spas dans des conditions réelles et de comparer plus facilement leurs dimensions, la disposition des assises, leur ergonomie, les finitions et les équipements. C'est également l'occasion de nous présenter votre projet et de poser directement vos questions concernant l'installation, l'accès, l'électricité, la livraison ou la manutention.</p><p>Le showroom est un espace de présentation et de conseil consacré à la vente de spas. Il ne s'agit pas d'un centre de bien-être et aucune prestation de soin ou de baignade publique n'y est proposée.</p><p><a href=\"/pages/showroom-spa-essonne\">Tout savoir sur le showroom de Fontenay-le-Vicomte</a></p>",
+        "html": "",
         "largeur": "lecture",
         "encadre": false,
+        "ancre": "",
         "color_scheme": "scheme-1",
         "padding_top": 24,
-        "padding_bottom": 24,
-        "titre": "Le showroom de Fontenay-le-Vicomte",
-        "texte": "<p>Notre showroom SPAS9 est situé au <strong>16 rue de l'Orme, 91540 Fontenay-le-Vicomte</strong>, à une trentaine de minutes du sud de Paris. <strong>Showroom uniquement sur rendez-vous</strong> : nous préparons la visite à partir de ce que vous cherchez, et un vendeur vous consacre le temps nécessaire. Un parking permet de se garer sur place, sans avoir à chercher une place dans la rue.</p><p>Venir au showroom vous permet de découvrir les spas dans des conditions réelles et de comparer plus facilement leurs dimensions, la disposition des assises, leur ergonomie, les finitions et les équipements. C'est également l'occasion de nous présenter votre projet et de poser directement vos questions concernant l'installation, l'accès, l'électricité, la livraison ou la manutention.</p><p>Le showroom est un espace de présentation et de conseil consacré à la vente de spas. Il ne s'agit pas d'un centre de bien-être et aucune prestation de soin ou de baignade publique n'y est proposée.</p><p><a href=\"/pages/showroom-spa-essonne\">Tout savoir sur le showroom de Fontenay-le-Vicomte</a></p>"
+        "padding_bottom": 24
       }
     },
     "parcours": {
@@ -491,13 +521,16 @@
     "p_livraison": {
       "type": "spa-prose",
       "settings": {
+        "surtitre": "",
+        "titre": "Livraison et installation de votre spa",
+        "texte": "<p>SPAS9 livre et installe dans toute l'<strong>Île-de-France</strong> ainsi que dans le <strong>Loiret</strong>, y compris lorsque l'accès nécessite une organisation particulière. Comptez entre quinze et trente jours entre la commande et l'installation.</p><p>Selon votre projet, nous pouvons notamment étudier :</p><ul><li>la livraison jusqu'à votre domicile ;</li><li>le passage jusqu'à l'emplacement définitif ;</li><li>la manutention et les accès difficiles ;</li><li>le passage au-dessus d'un mur ou d'une clôture ;</li><li>le recours éventuel à un grutage ;</li><li>l'installation et la mise en service selon le devis établi.</li></ul><p>Chaque projet étant différent, les conditions sont étudiées à partir du modèle choisi, de l'adresse et des caractéristiques de l'accès. Les modalités complètes figurent sur notre page <a href=\"/pages/livraison-et-retrait\">Livraison et retrait</a>, et notre article <a href=\"/blogs/conseils-spa/installer-un-spa-chez-soi\">Installer un spa chez soi</a> détaille les points à vérifier avant de commander.</p>",
+        "html": "",
         "largeur": "lecture",
         "encadre": false,
+        "ancre": "",
         "color_scheme": "scheme-1",
         "padding_top": 24,
-        "padding_bottom": 40,
-        "titre": "Livraison et installation de votre spa",
-        "texte": "<p>SPAS9 livre et installe dans toute l'<strong>Île-de-France</strong> ainsi que dans le <strong>Loiret</strong>, y compris lorsque l'accès nécessite une organisation particulière. Comptez entre quinze et trente jours entre la commande et l'installation.</p><p>Selon votre projet, nous pouvons notamment étudier :</p><ul><li>la livraison jusqu'à votre domicile ;</li><li>le passage jusqu'à l'emplacement définitif ;</li><li>la manutention et les accès difficiles ;</li><li>le passage au-dessus d'un mur ou d'une clôture ;</li><li>le recours éventuel à un grutage ;</li><li>l'installation et la mise en service selon le devis établi.</li></ul><p>Chaque projet étant différent, les conditions sont étudiées à partir du modèle choisi, de l'adresse et des caractéristiques de l'accès. Les modalités complètes figurent sur notre page <a href=\"/pages/livraison-et-retrait\">Livraison et retrait</a>, et notre article <a href=\"/blogs/conseils-spa/installer-un-spa-chez-soi\">Installer un spa chez soi</a> détaille les points à vérifier avant de commander.</p>"
+        "padding_bottom": 40
       }
     },
     "criteres": {
@@ -506,6 +539,7 @@
         "r1": {
           "type": "reassurance",
           "settings": {
+            "icone": "",
             "icone_image": "shopify://shop_images/Conseil_personnalise.png",
             "label": "Conseil personnalisé"
           }
@@ -513,6 +547,7 @@
         "r2": {
           "type": "reassurance",
           "settings": {
+            "icone": "",
             "icone_image": "shopify://shop_images/Expertise_technique.png",
             "label": "Expertise technique"
           }
@@ -520,6 +555,7 @@
         "r3": {
           "type": "reassurance",
           "settings": {
+            "icone": "",
             "icone_image": "shopify://shop_images/Showroom.png",
             "label": "Showroom à Fontenay-le-Vicomte"
           }
@@ -527,6 +563,7 @@
         "r4": {
           "type": "reassurance",
           "settings": {
+            "icone": "",
             "icone_image": "shopify://shop_images/Accompagnement_de_A_a_Z.png",
             "label": "Accompagnement de A à Z"
           }
@@ -547,6 +584,7 @@
         "r5"
       ],
       "settings": {
+        "heading": "Plusieurs éléments essentiels pour un choix adapté",
         "color_scheme": "scheme-1",
         "cta_heading": "Vous avez un projet ?",
         "cta_text": "Parlez-nous de vos besoins et nous vous aiderons à comparer les modèles adaptés.",
@@ -559,13 +597,16 @@
     "p_faq": {
       "type": "spa-prose",
       "settings": {
+        "surtitre": "Questions fréquentes",
+        "titre": "",
+        "texte": "",
+        "html": "<h2 class=\"spa-chapitre__titre\" id=\"questions-frequentes\">Ce qu'on nous demande le plus souvent</h2>\n<div class=\"spa-faq\">\n<details class=\"spa-faq__item\"><summary class=\"spa-faq__question\">Où se trouve le showroom SPAS9 ?</summary><div class=\"spa-faq__reponse\"><p>Notre showroom est situé au 16 rue de l'Orme, 91540 Fontenay-le-Vicomte, dans l'Essonne. Showroom uniquement sur rendez-vous : appelez le 01 60 77 37 00 ou écrivez-nous, et nous convenons d'un créneau. Un parking est disponible devant le magasin.</p></div></details>\n<details class=\"spa-faq__item\"><summary class=\"spa-faq__question\">Dans quels départements livrez-vous un spa ?</summary><div class=\"spa-faq__reponse\"><p>Nous livrons et installons dans toute l'Île-de-France — Paris (75), Seine-et-Marne (77), Yvelines (78), Essonne (91), Hauts-de-Seine (92), Seine-Saint-Denis (93), Val-de-Marne (94) et Val-d'Oise (95) — ainsi que dans le Loiret (45).</p></div></details>\n<details class=\"spa-faq__item\"><summary class=\"spa-faq__question\">Quel est le délai entre la commande et l'installation ?</summary><div class=\"spa-faq__reponse\"><p>Entre quinze et trente jours entre la commande et l'installation. Ce délai dépend du modèle choisi, de sa disponibilité et des conditions d'accès à l'emplacement, que nous étudions avant de le confirmer.</p></div></details>\n<details class=\"spa-faq__item\"><summary class=\"spa-faq__question\">Quelle est la garantie sur un spa SPAS9 ?</summary><div class=\"spa-faq__reponse\"><p>La structure est garantie 10 ans, l'acrylique 5 ans, l'électronique et les pompes 2 ans. Le détail des conditions figure dans nos conditions générales de vente.</p></div></details>\n<details class=\"spa-faq__item\"><summary class=\"spa-faq__question\">Quel branchement électrique faut-il prévoir pour un spa ?</summary><div class=\"spa-faq__reponse\"><p>Cela dépend du modèle. Les spas Plug &amp; Play se raccordent sur une prise dédiée de 16 A ; les modèles plus équipés demandent une ligne dédiée de plus forte intensité. Dans tous les cas, la ligne doit partir du tableau électrique et être protégée par un dispositif différentiel 30 mA, conformément à la norme NF C 15-100. Nous vérifions ce point avec vous avant la commande.</p></div></details>\n<details class=\"spa-faq__item\"><summary class=\"spa-faq__question\">Peut-on installer un spa sur une terrasse en bois ?</summary><div class=\"spa-faq__reponse\"><p>C'est possible si la structure supporte la charge. Un spa rempli et occupé peut peser une à deux tonnes selon le modèle, soit une charge au sol très supérieure à celle d'une terrasse courante. Nous examinons le support existant et vous indiquons si un renforcement, des plots ou une dalle sont nécessaires.</p></div></details>\n<details class=\"spa-faq__item\"><summary class=\"spa-faq__question\">Comment se passe la livraison quand l'accès est difficile ?</summary><div class=\"spa-faq__reponse\"><p>Nous étudions chaque accès au cas par cas : passage étroit, escalier, franchissement d'un mur ou d'une clôture, et si nécessaire recours à un grutage. C'est pour cette raison que nous demandons des photos ou une visite avant de confirmer une livraison.</p></div></details>\n<details class=\"spa-faq__item\"><summary class=\"spa-faq__question\">Quelle taille de spa choisir ?</summary><div class=\"spa-faq__reponse\"><p>Nous proposons des modèles de 2 à 7 places. Le nombre de places annoncé ne suffit pas à décider : deux spas de capacité identique peuvent offrir un confort très différent selon la disposition des assises. Notre article « Spa 2, 3, 5 ou 7 places : quelle taille choisir ? » détaille les différences format par format.</p></div></details>\n</div>",
         "largeur": "large",
         "encadre": false,
+        "ancre": "",
         "color_scheme": "scheme-1",
         "padding_top": 48,
-        "padding_bottom": 40,
-        "html": "<h2 class=\"spa-chapitre__titre\" id=\"questions-frequentes\">Ce qu'on nous demande le plus souvent</h2>\n<div class=\"spa-faq\">\n<details class=\"spa-faq__item\"><summary class=\"spa-faq__question\">Où se trouve le showroom SPAS9 ?</summary><div class=\"spa-faq__reponse\"><p>Notre showroom est situé au 16 rue de l'Orme, 91540 Fontenay-le-Vicomte, dans l'Essonne. Showroom uniquement sur rendez-vous : appelez le 01 60 77 37 00 ou écrivez-nous, et nous convenons d'un créneau. Un parking est disponible devant le magasin.</p></div></details>\n<details class=\"spa-faq__item\"><summary class=\"spa-faq__question\">Dans quels départements livrez-vous un spa ?</summary><div class=\"spa-faq__reponse\"><p>Nous livrons et installons dans toute l'Île-de-France — Paris (75), Seine-et-Marne (77), Yvelines (78), Essonne (91), Hauts-de-Seine (92), Seine-Saint-Denis (93), Val-de-Marne (94) et Val-d'Oise (95) — ainsi que dans le Loiret (45).</p></div></details>\n<details class=\"spa-faq__item\"><summary class=\"spa-faq__question\">Quel est le délai entre la commande et l'installation ?</summary><div class=\"spa-faq__reponse\"><p>Entre quinze et trente jours entre la commande et l'installation. Ce délai dépend du modèle choisi, de sa disponibilité et des conditions d'accès à l'emplacement, que nous étudions avant de le confirmer.</p></div></details>\n<details class=\"spa-faq__item\"><summary class=\"spa-faq__question\">Quelle est la garantie sur un spa SPAS9 ?</summary><div class=\"spa-faq__reponse\"><p>La structure est garantie 10 ans, l'acrylique 5 ans, l'électronique et les pompes 2 ans. Le détail des conditions figure dans nos conditions générales de vente.</p></div></details>\n<details class=\"spa-faq__item\"><summary class=\"spa-faq__question\">Quel branchement électrique faut-il prévoir pour un spa ?</summary><div class=\"spa-faq__reponse\"><p>Cela dépend du modèle. Les spas Plug &amp; Play se raccordent sur une prise dédiée de 16 A ; les modèles plus équipés demandent une ligne dédiée de plus forte intensité. Dans tous les cas, la ligne doit partir du tableau électrique et être protégée par un dispositif différentiel 30 mA, conformément à la norme NF C 15-100. Nous vérifions ce point avec vous avant la commande.</p></div></details>\n<details class=\"spa-faq__item\"><summary class=\"spa-faq__question\">Peut-on installer un spa sur une terrasse en bois ?</summary><div class=\"spa-faq__reponse\"><p>C'est possible si la structure supporte la charge. Un spa rempli et occupé peut peser une à deux tonnes selon le modèle, soit une charge au sol très supérieure à celle d'une terrasse courante. Nous examinons le support existant et vous indiquons si un renforcement, des plots ou une dalle sont nécessaires.</p></div></details>\n<details class=\"spa-faq__item\"><summary class=\"spa-faq__question\">Comment se passe la livraison quand l'accès est difficile ?</summary><div class=\"spa-faq__reponse\"><p>Nous étudions chaque accès au cas par cas : passage étroit, escalier, franchissement d'un mur ou d'une clôture, et si nécessaire recours à un grutage. C'est pour cette raison que nous demandons des photos ou une visite avant de confirmer une livraison.</p></div></details>\n<details class=\"spa-faq__item\"><summary class=\"spa-faq__question\">Quelle taille de spa choisir ?</summary><div class=\"spa-faq__reponse\"><p>Nous proposons des modèles de 2 à 7 places. Le nombre de places annoncé ne suffit pas à décider : deux spas de capacité identique peuvent offrir un confort très différent selon la disposition des assises. Notre article « Spa 2, 3, 5 ou 7 places : quelle taille choisir ? » détaille les différences format par format.</p></div></details>\n</div>",
-        "surtitre": "Questions fréquentes"
+        "padding_bottom": 40
       }
     },
     "articles": {
