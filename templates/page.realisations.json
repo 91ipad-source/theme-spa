@@ -64,14 +64,25 @@
             "titre": "",
             "commune": "Seine-Port - Couleur Odyssey",
             "annee": "2026",
-            "difficulte": "Le Doto est semi-encastré : sur ses 81 cm de hauteur, une partie passe sous le niveau du sol fini. Le vrai point l'accès aux trappes techniques une fois l'habillage refermé."
+            "difficulte": "Le Doto est semi-encastré : sur ses 81 cm de hauteur, une partie passe sous le niveau du sol fini. Le vrai point, c'est l'accès aux trappes techniques une fois l'habillage refermé."
+          }
+        },
+        "calypso": {
+          "type": "realisation",
+          "settings": {
+            "produit": "spa-roca-calypso-3-personnes",
+            "titre": "",
+            "commune": "Milly-la-Forêt",
+            "annee": "2026",
+            "difficulte": "Passage étroit entre la maison et le portail. Le Calypso ne fait que 77 cm de haut : présenté sur chant, il franchit ce qu'une cuve de deux mètres de large ne franchit pas. Ici le passage n'a pas empêché le projet — il a choisi le modèle."
           }
         }
       },
       "block_order": [
         "proto2",
         "panope",
-        "doto"
+        "doto",
+        "calypso"
       ],
       "settings": {
         "titre": "Des spas installés près de chez vous",
