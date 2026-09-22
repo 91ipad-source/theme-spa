@@ -23,14 +23,20 @@
         "proto2": {
           "type": "realisation",
           "settings": {
+            "image": "shopify://shop_images/f2528d3e-cf1e-42b9-8368-34329addd4c1_2.jpg",
+            "image_2": "shopify://shop_images/26ae5369-23e9-4e2e-a7e2-867fd504e70d_4_f12a6e9f-d919-4559-becf-764e284caaa1.jpg",
+            "image_3": "shopify://shop_images/7c09cc36-8797-43f6-8f31-fced9102057b_3_3f5daabd-e641-4224-b062-f1f6dad9ce35.jpg",
             "produit": "spa-roca-proto-lighting-5-personnes",
+            "titre": "",
             "commune": "Draveil",
             "annee": "2025",
             "difficulte": "Le seul accès au jardin mesurait 120 cm, entre le mur de la maison et la clôture, pour un spa de 200 × 200 cm. C'est précisément le genre de passage qui se mesure avant de commander, jamais le jour de la livraison."
           }
         }
       },
-      "block_order": ["proto2"],
+      "block_order": [
+        "proto2"
+      ],
       "settings": {
         "titre": "Des spas installés près de chez vous",
         "intro": "<p>Ce ne sont pas des photos de catalogue : chacune de ces installations a été livrée et mise en service par notre équipe. Nous indiquons à chaque fois ce qui était compliqué — c'est ce qui vous dira si votre propre accès est faisable.</p>",
@@ -43,5 +49,8 @@
       }
     }
   },
-  "order": ["main", "realisations"]
+  "order": [
+    "main",
+    "realisations"
+  ]
 }
