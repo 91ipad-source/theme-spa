@@ -4601,6 +4601,14 @@ a, span, label, summary, button, blockquote, figcaption,
   text-transform: uppercase;
 }
 
+/* 12 px suffisent sur grand ecran pour une etiquette interlettree, mais
+   pas a bout de bras dans un jardin. Un cran de plus sur telephone. */
+@media screen and (max-width: 749px) {
+  .spa-surtitre {
+    font-size: 1.3rem;
+  }
+}
+
 .spa-surtitre__num {
   display: inline-flex;
   min-width: 2.8rem;
@@ -4890,6 +4898,12 @@ a, span, label, summary, button, blockquote, figcaption,
   color: var(--deep);
   font-size: 1.4rem;
   font-weight: 600;
+}
+
+/* Sur deux lignes, la coupure se fait au milieu plutot qu'en bout : une
+   pastille dont la seconde ligne ne porte qu'un mot est bancale. */
+.spa-mention-rdv {
+  text-wrap: balance;
 }
 
 .spa-mention-rdv::before {

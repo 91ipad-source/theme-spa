@@ -39,7 +39,21 @@
         {%- endif -%}
 
         {%- if section.settings.mention != blank -%}
-          <p class="spa-mention-rdv">{{ section.settings.mention | escape }}</p>
+          {%- comment -%}
+            Le trait d'union devient insecable. Sans cela, « rendez-vous »
+            se coupe en fin de ligne dans la pastille : mesure faite a
+            390 px, elle tient sur deux lignes et casse apres le trait.
+            Un navigateur considere un trait d'union comme une occasion de
+            retour a la ligne, et la saisit des qu'elle fait gagner de la
+            place — ni hyphens: none ni word-break ne l'en empechent, ils
+            ne concernent que la cesure automatique.
+
+            La substitution vaut pour tous les traits d'union de la
+            mention, et c'est voulu : c'est une pastille de quelques mots,
+            aucun de ses termes ne doit se couper.
+          {%- endcomment -%}
+          {%- assign mention = section.settings.mention | escape | replace: '-', '‑' -%}
+          <p class="spa-mention-rdv">{{ mention }}</p>
         {%- endif -%}
       </div>
 
@@ -49,7 +63,12 @@
             <strong>{{ section.settings.raison_sociale | escape }}</strong><br>
           {%- endif -%}
           {%- if section.settings.adresse != blank -%}
-            {{ section.settings.adresse | escape }}<br>
+            {%- comment -%}
+              Meme traitement que la pastille : « Fontenay-le-Vicomte » se
+              coupait en « Fontenay-le- » / « Vicomte » a 390 px. Un nom de
+              commune ne se coupe pas.
+            {%- endcomment -%}
+            {{ section.settings.adresse | escape | replace: '-', '‑' }}<br>
           {%- endif -%}
           {%- if section.settings.telephone != blank -%}
             {%- comment -%}
@@ -77,12 +96,12 @@
           <p class="spa-contact-carte__actions">
             {%- if section.settings.bouton_1 != blank -%}
               <a class="btn" href="{{ section.settings.lien_1 | default: '/pages/contact' }}">
-                {{- section.settings.bouton_1 | escape -}}
+                {{- section.settings.bouton_1 | escape | replace: '-', '‑' -}}
               </a>
             {%- endif -%}
             {%- if section.settings.bouton_2 != blank -%}
               <a class="btn ghost" href="{{ section.settings.lien_2 | default: '/collections/tous-nos-spas' }}">
-                {{- section.settings.bouton_2 | escape -}}
+                {{- section.settings.bouton_2 | escape | replace: '-', '‑' -}}
               </a>
             {%- endif -%}
           </p>
