@@ -14,10 +14,10 @@
     "store_banner": {
       "type": "spa-store-banner",
       "settings": {
+        "largeur": "plein",
         "image": "shopify://shop_images/Bandeau_SPAS9_Liners_France_magasin.jpg",
         "show_on_mobile": true,
-        "image_alt": "Le magasin LINERS FRANCE à Fontenay-le-Vicomte : piscine, spa et bien-être",
-        "largeur": "plein"
+        "image_alt": "Le magasin LINERS FRANCE à Fontenay-le-Vicomte : piscine, spa et bien-être"
       }
     },
     "footer": {
@@ -48,7 +48,7 @@
           "type": "text",
           "settings": {
             "heading": "Nous contacter",
-            "subtext": "<p><strong>SPAS9 &ndash; LINERS FRANCE</strong><br/>16 rue de l'Orme<br/>91540 Fontenay-le-Vicomte</p><p><a href=\"tel:+33160773700\">01 60 77 37 00</a><br/><a href=\"mailto:iledefrance@linersfrance.fr\">iledefrance@linersfrance.fr</a></p><p><strong>Showroom ouvert uniquement sur rendez-vous</strong></p>"
+            "subtext": "<p><strong>SPAS9 &ndash; LINERS FRANCE</strong><br/>16 rue de l'Orme<br/>91540 Fontenay-le-Vicomte</p><p><a href=\"tel:+33160773700\">01 60 77 37 00</a><br/><a href=\"mailto:iledefrance@linersfrance.fr\">iledefrance@linersfrance.fr</a></p><p><strong>Showroom uniquement sur rendez-vous</strong></p>"
           }
         }
       },
