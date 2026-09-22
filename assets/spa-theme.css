@@ -4921,3 +4921,90 @@ a, span, label, summary, button, blockquote, figcaption,
     padding: 4rem;
   }
 }
+
+/* --------------------------------------------------------------------------
+   43. ARTICLES DU BLOG : RESPIRATION ET REPERES
+   --------------------------------------------------------------------------
+   Les articles sont deja bornes a 72,6 rem par page-width--narrow, ce qui
+   est une bonne mesure de lecture. Ce qui leur manque, c'est le rythme :
+   des titres qui se detachent du paragraphe precedent, des listes qui
+   respirent, et un moyen de revenir a une partie qu'on a lue.
+
+   Le sommaire reprend exactement les classes des pages — .spa-sommaire__carte,
+   .spa-sommaire__lien — pour qu'un lecteur qui passe d'une page a un article
+   retrouve le meme objet. Il est construit en Liquid dans main-article.liquid.
+   -------------------------------------------------------------------------- */
+.spa-article-sommaire {
+  margin: 3.2rem 0 0.8rem;
+}
+
+/* Les titres d'article portent desormais une ancre. Sans cette marge, le
+   navigateur les colle au bord haut de la fenetre et l'en-tete du site les
+   recouvre : on arrive sur un titre qu'on ne voit pas. */
+.article-template__content h2 {
+  scroll-margin-top: 10rem;
+}
+
+/* LE RYTHME DES TITRES. Un h2 appartient a ce qui le suit, pas a ce qui le
+   precede : sa marge haute doit etre nettement plus grande que sa marge
+   basse, sinon le lecteur ne sait pas ou commence la partie. */
+.article-template__content h2,
+.article-template__content h3 {
+  text-wrap: balance;
+}
+
+.article-template__content h2 {
+  margin-top: 5.6rem;
+  margin-bottom: 1.6rem;
+  font-size: clamp(2.2rem, 2.6vw, 2.8rem);
+  line-height: 1.15;
+}
+
+.article-template__content h3 {
+  margin-top: 3.6rem;
+  margin-bottom: 1.2rem;
+  font-size: clamp(1.8rem, 2vw, 2.1rem);
+  line-height: 1.2;
+}
+
+.article-template__content > *:first-child {
+  margin-top: 0;
+}
+
+/* LE CHAPEAU. Le premier paragraphe d'un article resume presque toujours le
+   propos : c'est le seul que lira quelqu'un qui hesite a rester. Un cran
+   plus gros suffit a le signaler. */
+.article-template__content > p:first-child {
+  color: var(--deep-soft);
+  font-size: clamp(1.8rem, 1.7vw, 2.1rem);
+  line-height: 1.55;
+}
+
+.article-template__content p,
+.article-template__content ul,
+.article-template__content ol {
+  margin-bottom: 1.6rem;
+}
+
+.article-template__content li {
+  margin-bottom: 0.8rem;
+}
+
+/* Souligne : dans un paragraphe dense, la couleur seule ne distingue pas un
+   lien, et elle disparait pour qui percoit mal les contrastes de teinte. */
+.article-template__content a {
+  color: var(--sky-deep);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+
+.article-template__content a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* L'en-tete : date et temps de lecture sur la meme ligne, separes par le
+   point median que Dawn dessine deja avec .circle-divider. */
+.article-template header .caption-with-letter-spacing {
+  color: var(--deep-soft);
+}

@@ -56,6 +56,22 @@
               {{- article.published_at | time_tag: format: 'date' -}}
             </span>
           {%- endif -%}
+          {%- comment -%}
+            LE TEMPS DE LECTURE. Il repond a la seule question qu'on se pose
+            avant d'attaquer un texte long : est-ce que j'ai le temps
+            maintenant. 200 mots par minute est la vitesse de lecture
+            courante sur ecran en francais ; on arrondit vers le haut, une
+            minute annoncee en trop vaut mieux qu'une de moins.
+          {%- endcomment -%}
+          {%- if block.settings.temps_de_lecture -%}
+            {%- liquid
+              assign mots = article.content | strip_html | split: ' ' | size
+              assign minutes = mots | divided_by: 200 | plus: 1
+            -%}
+            <span class="caption-with-letter-spacing">
+              {{- minutes }} min de lecture
+            </span>
+          {%- endif -%}
           {%- if block.settings.blog_show_author -%}
             <span class="caption-with-letter-spacing">
               <span>{{ article.author }}</span>
@@ -64,11 +80,61 @@
         </header>
 
       {%- when 'content' -%}
+        {%- comment -%}
+          SOMMAIRE ET ANCRES, SANS JAVASCRIPT.
+
+          Un article de mille cinq cents mots aligne cinq ou six titres et
+          aucun moyen d'y revenir : on relit tout, ou on part. Le sommaire
+          repond a ca, mais il lui faut des ancres, et l'editeur d'articles
+          de Shopify n'en pose aucune.
+
+          On reconstruit donc le contenu : coupe sur <h2>, chaque morceau est
+          reemis precede de son <h2 id="...">. C'est la seule facon d'y
+          arriver en Liquid — replace remplacerait toutes les occurrences a
+          la fois, sans distinguer le troisieme titre du premier.
+
+          Le sommaire n'apparait qu'a partir de trois titres. En dessous, il
+          coute plus de place qu'il ne fait gagner de temps.
+        {%- endcomment -%}
+        {%- liquid
+          assign morceaux = article.content | split: '<h2>'
+          assign nb_titres = morceaux | size | minus: 1
+        -%}
+
+        {%- if block.settings.sommaire and nb_titres >= 3 -%}
+          <div class="page-width page-width--narrow">
+            <nav class="spa-sommaire__carte spa-article-sommaire" aria-labelledby="SommaireArticle">
+              <p class="spa-surtitre" id="SommaireArticle">Dans cet article</p>
+              <ul class="spa-sommaire__liste" role="list">
+                {%- for morceau in morceaux offset: 1 -%}
+                  {%- liquid
+                    assign titre = morceau | split: '</h2>' | first | strip_html | strip
+                    assign ancre = titre | handle
+                  -%}
+                  <li>
+                    <a class="spa-sommaire__lien" href="#{{ ancre }}">
+                      <span>{{ titre }}</span>
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </nav>
+          </div>
+        {%- endif -%}
+
         <div
           class="article-template__content page-width page-width--narrow rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
           {{ block.shopify_attributes }}
         >
-          {{ article.content }}
+          {%- if nb_titres > 0 -%}
+            {{ morceaux[0] }}
+            {%- for morceau in morceaux offset: 1 -%}
+              {%- assign ancre = morceau | split: '</h2>' | first | strip_html | strip | handle -%}
+              <h2 id="{{ ancre }}">{{ morceau }}
+            {%- endfor -%}
+          {%- else -%}
+            {{ article.content }}
+          {%- endif -%}
         </div>
 
       {%- when 'share' -%}
@@ -348,13 +414,29 @@
           "id": "blog_show_author",
           "default": false,
           "label": "t:sections.main-article.blocks.title.settings.blog_show_author.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "temps_de_lecture",
+          "default": true,
+          "label": "Afficher le temps de lecture",
+          "info": "Calculé sur 200 mots par minute, la vitesse de lecture courante sur écran."
         }
       ]
     },
     {
       "type": "content",
       "name": "t:sections.main-article.blocks.content.name",
-      "limit": 1
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "sommaire",
+          "default": true,
+          "label": "Afficher le sommaire de l'article",
+          "info": "N'apparaît qu'à partir de trois titres de niveau 2. En dessous, il coûte plus de place qu'il ne fait gagner de temps."
+        }
+      ]
     },
     {
       "type": "share",
