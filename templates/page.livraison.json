@@ -1,0 +1,340 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "photo": {
+      "type": "spa-store-banner",
+      "settings": {
+        "largeur": "contenu",
+        "image": "shopify://shop_images/SPAS9_depot_stock.png",
+        "show_on_mobile": true,
+        "image_alt": "Spas ROCA Spa en stock sur palettes dans le dépôt SPAS9 | LINERS FRANCE, à Fontenay-le-Vicomte"
+      }
+    },
+    "entete": {
+      "type": "spa-page-entete",
+      "blocks": {
+        "c1": {
+          "type": "chiffre",
+          "settings": {
+            "valeur": "15-30 jours",
+            "label": "Entre la commande et l'installation"
+          }
+        },
+        "c2": {
+          "type": "chiffre",
+          "settings": {
+            "valeur": "Gratuit",
+            "label": "Retrait au showroom (91)"
+          }
+        },
+        "c3": {
+          "type": "chiffre",
+          "settings": {
+            "valeur": "Toute la France",
+            "label": "Zone de livraison"
+          }
+        },
+        "c4": {
+          "type": "chiffre",
+          "settings": {
+            "valeur": "Sur devis",
+            "label": "Tarif de la livraison"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "settings": {
+        "surtitre": "Livraison, installation et retrait",
+        "chapeau": "<p>Un spa ne se livre pas comme un colis : son poids, son encombrement et le chemin qui mène à son emplacement décident de tout. Cette page dit ce que nous prenons en charge, ce qui reste à votre charge, et ce qu'il faut avoir vérifié avant de commander.</p>",
+        "color_scheme": "scheme-1",
+        "padding_top": 44,
+        "padding_bottom": 8
+      }
+    },
+    "sommaire": {
+      "type": "spa-sommaire",
+      "blocks": {
+        "s1": {
+          "type": "entree",
+          "settings": {
+            "rang": "01",
+            "libelle": "La livraison",
+            "ancre": "la-livraison"
+          }
+        },
+        "s2": {
+          "type": "entree",
+          "settings": {
+            "rang": "02",
+            "libelle": "Ce qu'il faut préparer",
+            "ancre": "preparer"
+          }
+        },
+        "s3": {
+          "type": "entree",
+          "settings": {
+            "rang": "03",
+            "libelle": "Le retrait au showroom",
+            "ancre": "le-retrait"
+          }
+        },
+        "s4": {
+          "type": "entree",
+          "settings": {
+            "libelle": "Nous contacter",
+            "ancre": "nous-contacter"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
+      "settings": {
+        "titre": "Sur cette page",
+        "color_scheme": "scheme-1",
+        "padding_top": 32,
+        "padding_bottom": 16
+      }
+    },
+    "ch1": {
+      "type": "spa-chapitre",
+      "settings": {
+        "numero": "01",
+        "surtitre": "La livraison",
+        "titre": "Partout en France, toujours sur devis",
+        "chapeau": "<p>Nous proposons la <strong>livraison de nos spas partout en France</strong>, exclusivement <strong>sur devis</strong>. Aucun tarif forfaitaire ne tiendrait : deux adresses à distance égale peuvent demander deux organisations très différentes.</p>",
+        "ancre": "la-livraison",
+        "filet": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 8
+      }
+    },
+    "p_devis": {
+      "type": "spa-prose",
+      "settings": {
+        "largeur": "lecture",
+        "encadre": false,
+        "color_scheme": "scheme-1",
+        "padding_top": 16,
+        "padding_bottom": 24,
+        "titre": "Ce qui détermine le tarif",
+        "texte": "<p>Le tarif est déterminé notamment en fonction :</p><ul><li>de la distance entre notre showroom et le lieu de livraison ;</li><li>du modèle et des dimensions du spa ;</li><li>des conditions d'accès à la propriété ;</li><li>de la distance entre le véhicule de livraison et l'emplacement définitif du spa ;</li><li>des moyens de manutention éventuellement nécessaires ;</li><li>des prestations d'installation et de mise en service demandées.</li></ul><p>Nous vous recommandons de nous contacter <strong>avant votre commande</strong> afin que nous puissions étudier les conditions de livraison et établir un devis adapté.</p>"
+      }
+    },
+    "p_prestation": {
+      "type": "spa-prose",
+      "settings": {
+        "largeur": "lecture",
+        "encadre": false,
+        "color_scheme": "scheme-1",
+        "padding_top": 32,
+        "padding_bottom": 24,
+        "titre": "Ce que comprend l'installation",
+        "texte": "<p>Lorsque la prestation d'installation est confiée à LINERS FRANCE, celle-ci peut comprendre, selon les conditions précisées sur le devis :</p><ul><li>la livraison du spa ;</li><li>le déchargement ;</li><li>la manutention jusqu'à son emplacement définitif ;</li><li>la mise en place du spa ;</li><li>le raccordement final du spa à l'alimentation électrique préparée ;</li><li>le remplissage ;</li><li>la mise en service ;</li><li>les réglages initiaux ;</li><li>la vérification du fonctionnement ;</li><li>les premières explications concernant l'utilisation et l'entretien du spa.</li></ul><p>Le contenu exact de la prestation est précisé sur votre devis.</p>"
+      }
+    },
+    "p_reception": {
+      "type": "spa-prose",
+      "settings": {
+        "largeur": "lecture",
+        "encadre": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 32,
+        "padding_bottom": 40,
+        "titre": "À la réception de la livraison",
+        "texte": "<p>Vérifiez l'état apparent du spa et de son emballage <strong>en présence du transporteur ou de notre équipe</strong>. En cas d'anomalie ou de dommage apparent, <strong>des réserves précises et détaillées doivent être inscrites sur le document de livraison</strong> — c'est ce document qui fera foi. Des photographies du produit et de son emballage facilitent le traitement du dossier.</p><p>Signalez-nous toute anomalie dans les meilleurs délais à <a href=\"mailto:iledefrance@linersfrance.fr\">iledefrance@linersfrance.fr</a>.</p><p>Les délais et droits légaux applicables au consommateur restent naturellement applicables. Lorsque le transporteur ne lui a pas effectivement permis de vérifier l'état du produit lors de la livraison, le délai légal applicable à certaines réclamations contre le transporteur peut notamment être porté à 10 jours.</p>"
+      }
+    },
+    "ch2": {
+      "type": "spa-chapitre",
+      "settings": {
+        "numero": "02",
+        "surtitre": "Ce qu'il faut préparer",
+        "titre": "L'électricité et le chemin d'accès",
+        "chapeau": "<p>Deux choses doivent être prêtes avant notre venue, et ce sont les deux seules qui font reporter une installation : l'alimentation électrique et le passage jusqu'à l'emplacement.</p>",
+        "ancre": "preparer",
+        "filet": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 8
+      }
+    },
+    "p_elec_pnp": {
+      "type": "spa-prose",
+      "settings": {
+        "largeur": "lecture",
+        "encadre": false,
+        "color_scheme": "scheme-1",
+        "padding_top": 16,
+        "padding_bottom": 24,
+        "titre": "Spas Plug & Play",
+        "texte": "<p>Les modèles <strong>Plug &amp; Play</strong> sont conçus pour fonctionner selon les prescriptions électriques prévues par leur fabricant.</p><p>L'installation électrique utilisée doit dans tous les cas être adaptée, conforme et protégée conformément à la réglementation applicable et aux préconisations du fabricant.</p>"
+      }
+    },
+    "p_elec_dediee": {
+      "type": "spa-prose",
+      "settings": {
+        "largeur": "lecture",
+        "encadre": false,
+        "color_scheme": "scheme-1",
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "titre": "Spas nécessitant une alimentation dédiée",
+        "texte": "<p>Pour les spas qui ne sont pas Plug &amp; Play, une <strong>ligne électrique dédiée</strong> doit impérativement être préparée avant notre intervention.</p><p>Cette ligne doit être réalisée par un <strong>électricien habilité</strong>, depuis le tableau électrique général du logement jusqu'à l'emplacement prévu pour le spa, conformément aux caractéristiques techniques du modèle installé et aux normes électriques en vigueur.</p><p>Au niveau de l'emplacement du spa, prévoyez environ <strong>3 mètres de câble supplémentaire</strong> : c'est ce qui nous permet d'effectuer correctement le raccordement à l'intérieur du spa.</p><p>Lorsque LINERS FRANCE réalise l'installation, <strong>le raccordement final du câble au spa est effectué par nos soins</strong>. En revanche, LINERS FRANCE ne réalise pas, sauf prestation spécifiquement prévue au devis, la création de la ligne électrique entre le tableau général et l'emplacement du spa.</p>"
+      }
+    },
+    "p_acces": {
+      "type": "spa-prose",
+      "settings": {
+        "largeur": "lecture",
+        "encadre": false,
+        "color_scheme": "scheme-1",
+        "padding_top": 32,
+        "padding_bottom": 24,
+        "titre": "Conditions d'accès",
+        "texte": "<p>Avant la livraison, vous devez vous assurer que l'accès jusqu'à l'emplacement définitif du spa est compatible avec ses dimensions et avec les moyens de manutention nécessaires.</p><p>Il convient notamment de vérifier :</p><ul><li>la largeur et la hauteur des passages ;</li><li>les portails, portes et couloirs ;</li><li>les angles de passage ;</li><li>les escaliers ou différences de niveau ;</li><li>les murs, clôtures ou obstacles éventuels ;</li><li>la distance entre le stationnement du véhicule de livraison et l'emplacement du spa ;</li><li>la résistance et l'accessibilité du sol.</li></ul><p>L'emplacement prévu doit être <strong>plan, stable, adapté et suffisamment résistant</strong> pour supporter le poids du spa rempli d'eau et occupé.</p>"
+      }
+    },
+    "grutage": {
+      "type": "image-with-text",
+      "blocks": {
+        "titre": {
+          "type": "heading",
+          "settings": {
+            "heading": "Un accès difficile n'arrête pas un projet",
+            "heading_size": "h2"
+          }
+        },
+        "texte": {
+          "type": "text",
+          "settings": {
+            "text": "<p>LINERS FRANCE peut étudier et intégrer au devis les moyens de manutention particuliers nécessaires : <strong>grutage</strong>, levage du spa, passage par-dessus un mur, une clôture ou un bâtiment, portage sur une distance importante, accès particulièrement étroit, ou intervention nécessitant du personnel et du matériel supplémentaires.</p><p>Ces prestations sont étudiées au cas par cas. Pour établir une proposition précise, des photographies, des vidéos, des dimensions de passage ou une visite préalable peuvent être demandées.</p>",
+            "text_style": "body"
+          }
+        },
+        "bouton": {
+          "type": "button",
+          "settings": {
+            "button_label": "Nous décrire votre accès",
+            "button_link": "shopify://pages/mon-projet-spa",
+            "button_style_secondary": true
+          }
+        }
+      },
+      "block_order": [
+        "titre",
+        "texte",
+        "bouton"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/SPAS9_grutage.png",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-2",
+        "color_scheme": "scheme-2",
+        "padding_top": 28,
+        "padding_bottom": 48
+      }
+    },
+    "ch3": {
+      "type": "spa-chapitre",
+      "settings": {
+        "numero": "03",
+        "surtitre": "Le retrait au showroom",
+        "titre": "Gratuit, sur rendez-vous, en Essonne",
+        "chapeau": "<p>Tous nos spas disponibles en stock peuvent être retirés <strong>gratuitement</strong> à Fontenay-le-Vicomte, par l'entrée arrière du bâtiment — celle des livraisons.</p>",
+        "ancre": "le-retrait",
+        "filet": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 8
+      }
+    },
+    "p_retrait": {
+      "type": "spa-prose",
+      "settings": {
+        "largeur": "lecture",
+        "encadre": false,
+        "color_scheme": "scheme-1",
+        "padding_top": 16,
+        "padding_bottom": 24,
+        "titre": "Comment se passe un retrait",
+        "texte": "<p><strong>LINERS FRANCE – SPAS9</strong><br>16 rue de l'Orme<br>91540 Fontenay-le-Vicomte</p><p>Le retrait s'effectue <strong>sur rendez-vous, dès confirmation de la disponibilité de votre spa</strong>. Avant tout déplacement, attendez notre confirmation : c'est elle qui garantit que votre commande est prête à être enlevée.</p><p>Prévoyez un véhicule adapté au transport du spa. Selon les modèles, le poids à vide peut atteindre plusieurs centaines de kilogrammes.</p>"
+      }
+    },
+    "p_retours": {
+      "type": "spa-prose",
+      "settings": {
+        "largeur": "lecture",
+        "encadre": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 32,
+        "padding_bottom": 40,
+        "titre": "Retours et droit de rétractation",
+        "texte": "<p>Les modalités applicables aux retours, au droit de rétractation et, le cas échéant, aux frais d'enlèvement du spa sont détaillées dans notre <a href=\"/policies/refund-policy\">Politique de retour et de remboursement</a>.</p>"
+      }
+    },
+    "contact": {
+      "type": "spa-contact-carte",
+      "settings": {
+        "surtitre": "Avant de commander",
+        "titre": "Faisons étudier votre accès",
+        "texte": "<p>Envoyez-nous quelques photos du chemin depuis la rue et la largeur du passage le plus étroit. Nous vous disons ce qui passe, ce qui demande une manutention particulière, et à quel prix — avant la commande, pas au pied du portail.</p>",
+        "mention": "Showroom uniquement sur rendez-vous",
+        "ancre": "nous-contacter",
+        "raison_sociale": "SPAS9 | LINERS FRANCE",
+        "adresse": "16 rue de l'Orme, 91540 Fontenay-le-Vicomte",
+        "telephone": "+33 (0)1 60 77 37 00",
+        "courriel": "iledefrance@linersfrance.fr",
+        "bouton_1": "Demander un devis",
+        "lien_1": "/pages/mon-projet-spa",
+        "bouton_2": "Nous contacter",
+        "lien_2": "/pages/contact",
+        "color_scheme": "scheme-1",
+        "padding_top": 24,
+        "padding_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "photo",
+    "entete",
+    "sommaire",
+    "ch1",
+    "p_devis",
+    "p_prestation",
+    "p_reception",
+    "ch2",
+    "p_elec_pnp",
+    "p_elec_dediee",
+    "p_acces",
+    "grutage",
+    "ch3",
+    "p_retrait",
+    "p_retours",
+    "contact"
+  ]
+}
