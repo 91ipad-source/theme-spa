@@ -465,6 +465,7 @@
         "e5"
       ],
       "settings": {
+        "niveau": "h3",
         "heading": "De votre premier appel à la mise en service",
         "color_scheme": "scheme-2",
         "padding_top": 52,
@@ -584,6 +585,7 @@
         "r5"
       ],
       "settings": {
+        "niveau": "h3",
         "heading": "Plusieurs éléments essentiels pour un choix adapté",
         "color_scheme": "scheme-1",
         "cta_heading": "Vous avez un projet ?",

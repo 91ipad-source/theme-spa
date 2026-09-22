@@ -33,8 +33,26 @@
 
 <div class="spa-parcours color-{{ section.settings.color_scheme }} gradient">
   <div class="page-width section-{{ section.id }}-padding">
+    {%- comment -%}
+      LE NIVEAU DE TITRE EST UN REGLAGE, ET IL A UNE RAISON D'ETRE.
+
+      Cette section s'emploie de deux facons. Posee seule sur la page
+      d'accueil, son titre est un titre de premier rang : h2. Glissee au
+      milieu d'un chapitre — c'est le cas sur A propos — un h2 refermerait
+      le chapitre en cours et en ouvrirait un autre, si bien que le
+      paragraphe qui suit la section se retrouverait rattache a elle et
+      non au chapitre auquel il appartient. Regle sur h3, le titre reste
+      dans le chapitre, ou il est a sa place.
+
+      Cela ne change pas seulement le plan lu par un moteur de recherche
+      ou par un lecteur d'ecran : la feuille de style cale la taille sur
+      la balise, un h3 prenant le degre en dessous.
+    {%- endcomment -%}
+    {%- assign niveau = section.settings.niveau | default: 'h2' -%}
     {%- if section.settings.heading != blank -%}
-      <h2 class="spa-parcours__heading">{{ section.settings.heading | escape }}</h2>
+      <{{ niveau }} class="spa-parcours__heading">
+        {{- section.settings.heading | escape -}}
+      </{{ niveau }}>
     {%- endif -%}
 
     {%- if section.blocks.size > 0 -%}
@@ -65,6 +83,17 @@
       "id": "heading",
       "label": "Titre",
       "default": "De votre premier appel à la mise en service"
+    },
+    {
+      "type": "select",
+      "id": "niveau",
+      "label": "Niveau du titre",
+      "options": [
+        { "value": "h2", "label": "Titre de section (h2)" },
+        { "value": "h3", "label": "Sous-titre, dans un chapitre (h3)" }
+      ],
+      "default": "h2",
+      "info": "h3 quand la section est glissée à l'intérieur d'un chapitre : sinon elle le referme et le texte qui suit change de rattachement."
     },
     {
       "type": "color_scheme",

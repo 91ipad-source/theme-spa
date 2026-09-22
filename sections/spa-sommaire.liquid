@@ -43,9 +43,17 @@
             {%- if block.settings.libelle != blank and block.settings.ancre != blank -%}
               <li {{ block.shopify_attributes }}>
                 <a class="spa-sommaire__lien" href="#{{ block.settings.ancre | handle }}">
-                  {%- if block.settings.rang != blank -%}
-                    <span class="spa-sommaire__rang">{{ block.settings.rang | escape }}</span>
-                  {%- endif -%}
+                  {%- comment -%}
+                    La case du numero est posee meme quand il est vide, et
+                    elle a une largeur fixe : sans cela, une entree numerotee
+                    et une entree qui ne l'est pas ne commencent pas au meme
+                    endroit, et la colonne perd son bord gauche. C'est le cas
+                    sur cette page meme, ou « Questions frequentes » et
+                    « Nous contacter » suivent des chapitres numerotes.
+                  {%- endcomment -%}
+                  <span class="spa-sommaire__rang" aria-hidden="true">
+                    {{- block.settings.rang | escape -}}
+                  </span>
                   <span>{{ block.settings.libelle | escape }}</span>
                 </a>
               </li>

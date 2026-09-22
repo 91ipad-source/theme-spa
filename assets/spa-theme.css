@@ -33,6 +33,74 @@
   --font-display: 'DM Sans', system-ui, sans-serif;
   --font-body: 'DM Sans', system-ui, sans-serif;
 
+  /* ÉCHELLE TYPOGRAPHIQUE DES TITRES.
+
+     Avant : cinquante, trente-huit, trente-deux, vingt-huit, vingt-six,
+     vingt-cinq, vingt-quatre, dix-huit, dix-sept, seize pixels — dix tailles
+     produites par trois mécanismes différents, clamp(), calc() et rem fixes.
+     Rien n'y était faux, mais rien n'y formait un ensemble, et deux titres
+     ne rétrécissaient même pas sur téléphone.
+
+     Cinq degrés suffisent, et un seul mécanisme. Chaque degré est fluide :
+     la première valeur est la taille sur téléphone, la dernière celle sur
+     grand écran, et la valeur du milieu fait la transition.
+
+     Le rapport entre deux degrés voisins tourne autour de 1,15 : assez pour
+     qu'on distingue un niveau du suivant, pas assez pour qu'une page paraisse
+     faite de titres qui se disputent.
+
+     À QUOI SERT CHAQUE DEGRÉ, ET RIEN D'AUTRE. C'est la règle qui évite
+     qu'un titre reprenne, page après page, la taille de son voisin plutôt
+     que celle de son rang. Un titre de bande fait 32 px sur la page
+     d'accueil comme au bas des conditions générales, qu'il s'agisse d'une
+     section écrite pour cette boutique ou d'une section du thème. */
+  --t-page: clamp(3.2rem, 5vw, 5rem); /* le h1 de la page */
+  --t-chapitre: clamp(2.6rem, 3.4vw, 3.8rem); /* un chapitre de page longue */
+  --t-section: clamp(2.4rem, 3vw, 3.2rem); /* le titre d'une bande */
+  --t-bloc: clamp(2.2rem, 2.6vw, 2.8rem); /* un h2 écrit dans le texte */
+  --t-sous: clamp(2rem, 2.2vw, 2.4rem); /* un h3, sous-titre */
+  --t-carte: 1.7rem; /* le titre d'une vignette */
+
+  /* Interlignes. Un grand titre se serre, un petit respire : a taille egale
+     d'interligne, un titre de 50 px parait trop aere et un titre de 17 px
+     trop compact. */
+  --lh-page: 1.05;
+  --lh-titre: 1.15;
+  --lh-carte: 1.3;
+
+  /* LE CHAPEAU. Le paragraphe d'accroche qui suit un titre : un cran
+     au-dessus du texte courant, jamais autant qu'un titre. Il valait
+     22 px sous un titre de page et 21 px sous un titre de chapitre —
+     un pixel d'ecart n'est pas une hierarchie, c'est une inattention. */
+  --t-chapeau: clamp(1.8rem, 1.7vw, 2.1rem);
+
+  /* L'interligne du texte suivi, partout. Il se promenait entre 1,5 et
+     1,6 selon les sections. */
+  --lh-texte: 1.55;
+
+  /* Les mentions et les notes, ecrites plus petit, se serrent d'un cran :
+     a 13 px, 1,55 laisse un blanc entre les lignes qui detache la mention
+     du paragraphe auquel elle se rapporte. */
+  --lh-note: 1.45;
+
+  /* LA MESURE : la largeur au-dela de laquelle l'oeil rate la ligne
+     suivante en revenant a la marge. On vise soixante-dix a soixante-
+     quinze signes.
+
+     ET SURTOUT PAS EN ch. L'unite ch vaut la largeur du zero, qui en
+     DM Sans fait 12 px quand le texte en fait 17 — 0,7 em, alors qu'un
+     caractere francais moyen en mesure 8,2, soit 0,48 em. Un max-width
+     de 66ch ne donne donc pas soixante-six signes mais QUATRE-VINGT-
+     TREIZE : mesure faite au navigateur sur les paragraphes de la page
+     A propos, qui s'etalaient sur 792 px. L'unite em, elle, ne ment
+     pas : 36 em font 612 px, soit soixante-douze signes.
+
+     Elle suit le corps du texte : un chapeau de 21 px et un paragraphe
+     de 17 px tiennent le meme nombre de signes, ce qui est le seul
+     reglage qui compte. Elle remplace un 66ch, un 68ch, deux 62ch,
+     trois 68rem, quatre 72rem, un 76rem et deux colonnes sans borne. */
+  --mesure: 36em;
+
   /* Rayons */
   --r-pill: 999px;
   --r-xl: 40px;
@@ -70,7 +138,7 @@
 body {
   font-size: 1.7rem;
   letter-spacing: normal;
-  line-height: 1.55;
+  line-height: var(--lh-texte);
   color: var(--deep);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -154,9 +222,10 @@ h1,
 
 /* Chapô */
 .lead {
-  font-size: clamp(1.7rem, 1.4vw, 2rem);
+  font-size: var(--t-chapeau);
+  line-height: var(--lh-texte);
   color: var(--deep-soft);
-  max-width: 34em;
+  max-width: var(--mesure);
 }
 
 /* --------------------------------------------------------------------------
@@ -468,14 +537,13 @@ a.spa-marquee__item:hover {
   border-radius: var(--r-lg);
 }
 
-/* A la mesure du texte. Les 66ch sont exactement ceux de .spa-prose__col :
-   meme police, meme corps, donc meme largeur au pixel pres.
+/* A la mesure du texte : la meme que .spa-prose__col, au pixel pres.
 
    Et calee a gauche, pas centree. Une illustration qui appartient au fil de
    la lecture partage sa marge gauche ; centree dans une page de 1200 px a
    cote d'un texte qui en fait 620, elle flotterait sans s'y rattacher. */
 .spa-store-banner--texte picture {
-  max-width: min(100%, 66ch, var(--largeur-native, 100%));
+  max-width: min(100%, var(--mesure), var(--largeur-native, 100%));
   margin-inline: 0;
 }
 
@@ -494,39 +562,42 @@ a.spa-marquee__item:hover {
 /* --------------------------------------------------------------------------
    11. TITRES DE PAGE
    --------------------------------------------------------------------------
-   Dawn affiche le titre des pages en .h0, sa plus grosse taille : 52 px sur
-   ordinateur. Sur des titres un peu longs — « Conditions générales de vente »,
-   « SPAS9 - Liners France » — cela donne trois ou quatre lignes. On descend
-   d'un cran, sur les valeurs de .h1, en gardant le calcul à partir de
-   --font-heading-scale pour que le réglage de thème continue de s'appliquer.
+   Deux traitements coexistaient pour un titre de page : celui-ci, a 30 px
+   sur telephone et 40 px sur ordinateur, et celui des pages refaites, a
+   32 et 50 px. Meme role, deux tailles — c'est exactement ce qu'on cherche
+   a supprimer. Les deux prennent desormais --t-page.
+
+   Le titre est borne a dix-huit caracteres et equilibre : « Conditions
+   generales de vente » passe ainsi sur deux lignes de longueur voisine
+   plutot que sur une ligne pleine suivie d'un mot seul.
+
+   L'écart sous le titre vaut 3,2 rem, à toutes les largeurs. Il valait
+   3 rem sur téléphone et 4 sur ordinateur, réglés séparément sans que rien
+   ne l'exige.
 
    .page-subtitle : une deuxième ligne de titre, écrite dans le corps de la
    page puisque le titre Shopify est échappé et n'accepte aucun retour à la
-   ligne. La marge haute négative rattrape l'espace laissé sous le titre pour
-   que les deux lignes se lisent comme un seul bloc.
+   ligne. Elle portait deux marges hautes négatives, calées sur une taille
+   de titre qui n'existe plus, et que deux règles de « premier enfant »
+   annulaient de toute façon. Elle prend maintenant l'écart normal : le
+   même que sous n'importe quel titre.
    -------------------------------------------------------------------------- */
 .main-page-title.page-title {
-  font-size: calc(var(--font-heading-scale) * 3rem);
+  max-width: 18ch;
+  margin-bottom: 3.2rem;
+  font-size: var(--t-page);
+  line-height: var(--lh-page);
+  text-wrap: balance;
 }
 
 .rte .page-subtitle {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: calc(var(--font-heading-scale) * 2rem);
-  line-height: 1.2;
+  max-width: var(--mesure);
+  font-size: var(--t-chapeau);
+  line-height: var(--lh-texte);
   color: var(--deep-soft);
-  margin: -2rem 0 3rem;
-}
-
-@media screen and (min-width: 750px) {
-  .main-page-title.page-title {
-    font-size: calc(var(--font-heading-scale) * 4rem);
-  }
-
-  .rte .page-subtitle {
-    font-size: calc(var(--font-heading-scale) * 2.6rem);
-    margin-top: -2.8rem;
-  }
+  margin: 0 0 3.2rem;
 }
 
 /* --------------------------------------------------------------------------
@@ -537,10 +608,19 @@ a.spa-marquee__item:hover {
    grand écran, trois sur tablette, deux sur téléphone — pour que les
    libellés restent lisibles là où l'image d'origine les rendait minuscules.
    -------------------------------------------------------------------------- */
+/* Le titre est cale a gauche, comme les treize autres titres de section du
+   site. Il etait centre ici et dans spa-parcours, et nulle part ailleurs :
+   deux exceptions sans regle, qui se voyaient surtout sur les pages A propos
+   et Showroom, ou ces sections voisinent des chapitres alignes a gauche. */
+h3.spa-criteres__heading,
+h3.spa-parcours__heading {
+  font-size: var(--t-sous);
+}
+
 .spa-criteres__heading {
   margin: 0 0 3rem;
-  font-size: calc(var(--font-heading-scale) * 2rem);
-  text-align: center;
+  font-size: var(--t-section);
+  line-height: var(--lh-titre);
 }
 
 /* La grille de pictos sert à deux endroits : dans cette section, et dans le
@@ -648,14 +728,14 @@ a.spa-marquee__item:hover {
   margin: 0 0 0.4rem;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: calc(var(--font-heading-scale) * 1.9rem);
-  line-height: 1.2;
+  font-size: var(--t-carte);
+  line-height: var(--lh-carte);
 }
 
 .spa-criteres__cta-sous-titre {
   margin: 0;
   font-size: 1.5rem;
-  line-height: 1.45;
+  line-height: var(--lh-texte);
 }
 
 /* Le bouton est posé sur un fond marine : le cyan du logo s'y détache
@@ -668,9 +748,21 @@ a.spa-marquee__item:hover {
 }
 
 /* --- Bande de gages --- */
+
+/* DEUX COLONNES IMPOSEES, C'ETAIT UNE DE TROP SUR TELEPHONE. A 390 px,
+   chaque case faisait 172 px : l'icone en prend 44 et l'ecart 12, il
+   restait 116 px au libelle. « ACCOMPAGNEMENT », en capitales interlettrees,
+   en demande 141 a lui seul — le mot ne se coupant pas, la case debordait
+   de dix pixels hors de l'ecran. Les autres tenaient, mais sur trois ou
+   quatre lignes.
+
+   La bande compte donc ses colonnes elle-meme : chacune fait au moins
+   20 rem, ce qui en donne une seule sur telephone, deux ou trois sur
+   tablette. Au-dela de 750 px, la regle plus bas reprend la main et cale
+   le nombre de colonnes sur le nombre de gages. */
 .spa-criteres__reassurance {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   gap: 2rem 1.6rem;
   margin: 4rem 0 0;
   padding: 0;
@@ -701,10 +793,6 @@ a.spa-marquee__item:hover {
 }
 
 @media screen and (min-width: 750px) {
-  .spa-criteres__heading {
-    font-size: calc(var(--font-heading-scale) * 2.5rem);
-  }
-
   /* Quatre colonnes : avec sept pictos, la rangee se lit 4 puis 3, ce qui
      laisse a chaque libelle assez de place dans la colonne de texte. */
   .spa-picto-grid,
@@ -935,7 +1023,7 @@ a.spa-marquee__item:hover {
 .rte .spa-faq__reponse p {
   margin: 0 0 1.2rem;
   font-size: 1.5rem;
-  line-height: 1.6;
+  line-height: var(--lh-texte);
 }
 
 .spa-faq__reponse p:last-child,
@@ -1026,7 +1114,7 @@ a.spa-marquee__item:hover {
 .rte .spa-tableau-note {
   margin: -3rem 0 4rem;
   font-size: 1.4rem;
-  line-height: 1.5;
+  line-height: var(--lh-texte);
   color: var(--deep-soft);
 }
 
@@ -1043,11 +1131,13 @@ a.spa-marquee__item:hover {
    colonne PLUS la gouttière, sinon il s'arrête juste avant la pastille
    d'après — d'où la variable de gouttière, partagée par les deux paliers.
    -------------------------------------------------------------------------- */
+/* Cale a gauche : meme raison que dans spa-criteres. Les etapes, elles,
+   restent centrees sous leur pastille — ce sont trois mots dans une colonne
+   etroite, pas du texte suivi. */
 .spa-parcours__heading {
   margin: 0 0 3.6rem;
-  font-size: calc(var(--font-heading-scale) * 2.2rem);
-  line-height: 1.25;
-  text-align: center;
+  font-size: var(--t-section);
+  line-height: var(--lh-titre);
 }
 
 .spa-parcours__liste {
@@ -1101,15 +1191,15 @@ a.spa-marquee__item:hover {
   margin: 1rem 0 0.4rem;
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 1.7rem;
-  line-height: 1.3;
+  font-size: var(--t-carte);
+  line-height: var(--lh-carte);
   color: var(--deep);
 }
 
 .spa-parcours__detail {
   margin: 0;
   font-size: 1.5rem;
-  line-height: 1.5;
+  line-height: var(--lh-texte);
   color: var(--deep-soft);
 }
 
@@ -1150,10 +1240,6 @@ a.spa-marquee__item:hover {
 }
 
 @media screen and (min-width: 990px) {
-  .spa-parcours__heading {
-    font-size: calc(var(--font-heading-scale) * 2.6rem);
-  }
-
   .spa-parcours__liste {
     --spa-parcours-gouttiere: 2rem;
   }
@@ -1403,7 +1489,7 @@ a.spa-marquee__item:hover {
   margin-top: auto;
   padding-top: 1rem;
   font-size: 1.3rem;
-  line-height: 1.45;
+  line-height: var(--lh-note);
   opacity: 0.85;
 }
 
@@ -1613,9 +1699,10 @@ a.spa-marquee__item:hover {
 
 .spa-prestations__titre {
   padding: 0;
-  font-size: 1.6rem;
+  font-size: var(--t-carte);
   font-weight: 600;
   color: var(--deep);
+  line-height: var(--lh-carte);
 }
 
 .spa-prestations__zone {
@@ -1687,7 +1774,7 @@ a.spa-marquee__item:hover {
   display: block;
   margin-top: 0.4rem;
   font-size: 1.3rem;
-  line-height: 1.45;
+  line-height: var(--lh-note);
   opacity: 0.85;
 }
 
@@ -1716,8 +1803,8 @@ a.spa-marquee__item:hover {
 
 .spa-complement__titre {
   margin: 0 0 1.2rem;
-  font-size: 1.7rem;
-  line-height: 1.3;
+  font-size: var(--t-carte);
+  line-height: var(--lh-carte);
   letter-spacing: 0.02em;
 }
 
@@ -1776,7 +1863,7 @@ a.spa-marquee__item:hover {
 .spa-complement__raison {
   margin-top: 0.4rem;
   font-size: 1.3rem;
-  line-height: 1.45;
+  line-height: var(--lh-note);
   opacity: 0.85;
 }
 
@@ -1880,7 +1967,8 @@ img {
 
 .spa-lies__titre {
   margin: 0 0 2.8rem;
-  font-size: calc(var(--font-heading-scale) * 2.4rem);
+  font-size: var(--t-section);
+  line-height: var(--lh-titre);
 }
 
 .spa-lies__grille {
@@ -1911,10 +1999,6 @@ img {
     margin: 0;
     padding: 0;
     overflow-x: visible;
-  }
-
-  .spa-lies__titre {
-    font-size: calc(var(--font-heading-scale) * 2.8rem);
   }
 
   .spa-lies__grille {
@@ -2057,8 +2141,8 @@ img {
    aere. */
 .spa-avant__titre {
   margin: 0;
-  font-size: clamp(2.2rem, 3vw, calc(var(--font-heading-scale) * 3.2rem));
-  line-height: 1.15;
+  font-size: var(--t-section);
+  line-height: var(--lh-titre);
 }
 
 .spa-avant__titre a {
@@ -2075,7 +2159,7 @@ img {
 .spa-avant__accroche {
   margin: 1.2rem 0 0;
   font-size: 1.6rem;
-  line-height: 1.5;
+  line-height: var(--lh-texte);
 }
 
 .spa-avant__points {
@@ -2090,7 +2174,7 @@ img {
   position: relative;
   padding-left: 2.4rem;
   font-size: 1.5rem;
-  line-height: 1.45;
+  line-height: var(--lh-texte);
 }
 
 /* Une pastille plutot qu'une puce : la puce par defaut se cale sur la
@@ -2246,8 +2330,8 @@ a, span, label, summary, button, blockquote, figcaption,
 @media screen and (min-width: 990px) {
   .product__info-wrapper .product__title h1,
   .product__info-wrapper .product__title .h1 {
-    font-size: clamp(2.4rem, 2.2vw, 3.2rem);
-    line-height: 1.2;
+    font-size: var(--t-section);
+    line-height: var(--lh-titre);
   }
 }
 
@@ -2271,12 +2355,12 @@ a, span, label, summary, button, blockquote, figcaption,
 .spa-comparo__titre {
   margin: 0 0 1.2rem;
   font-family: var(--font-display);
-  font-size: 2.8rem;
-  line-height: 1.15;
+  font-size: var(--t-section);
+  line-height: var(--lh-titre);
 }
 
 .spa-comparo__intro {
-  max-width: 68ch;
+  max-width: var(--mesure);
   margin: 0 0 2.4rem;
   color: var(--deep-soft);
 }
@@ -2804,7 +2888,7 @@ a, span, label, summary, button, blockquote, figcaption,
   margin: 1.6rem 0 0;
   color: var(--deep-soft);
   font-size: 1.3rem;
-  line-height: 1.5;
+  line-height: var(--lh-note);
 }
 
 /* --------------------------------------------------------------------------
@@ -2855,11 +2939,12 @@ a, span, label, summary, button, blockquote, figcaption,
 .spa-projet__titre {
   margin: 0 0 1.2rem;
   font-family: var(--font-display);
-  font-size: 2.8rem;
-  line-height: 1.15;
+  font-size: var(--t-section);
+  line-height: var(--lh-titre);
 }
 
 .spa-projet__intro {
+  max-width: var(--mesure);
   margin-bottom: 2.4rem;
   color: var(--deep-soft);
 }
@@ -2867,7 +2952,8 @@ a, span, label, summary, button, blockquote, figcaption,
 .spa-projet__sous-titre {
   margin: 2.4rem 0 1.2rem;
   font-family: var(--font-display);
-  font-size: 1.7rem;
+  font-size: var(--t-sous);
+  line-height: var(--lh-titre);
 }
 
 /* Les trois reperes : une pastille numerotee en marge, le titre du repere
@@ -2884,7 +2970,7 @@ a, span, label, summary, button, blockquote, figcaption,
   margin-bottom: 1.6rem;
   padding-left: 3.6rem;
   font-size: 1.5rem;
-  line-height: 1.55;
+  line-height: var(--lh-texte);
   color: var(--deep-soft);
 }
 
@@ -2915,13 +3001,13 @@ a, span, label, summary, button, blockquote, figcaption,
   border-radius: var(--r-md);
   background: var(--white);
   font-size: 1.5rem;
-  line-height: 1.6;
+  line-height: var(--lh-texte);
 }
 
 .spa-projet__reponse {
   margin: 0 0 1.2rem;
   font-size: 1.5rem;
-  line-height: 1.6;
+  line-height: var(--lh-texte);
 }
 
 /* Le panneau du formulaire : un aplat clair qui le detache de la page et
@@ -3060,7 +3146,7 @@ a, span, label, summary, button, blockquote, figcaption,
   border-radius: var(--r-md);
   background: var(--mist);
   font-size: 1.4rem;
-  line-height: 1.55;
+  line-height: var(--lh-texte);
 }
 
 .spa-projet__envoyer {
@@ -3071,7 +3157,7 @@ a, span, label, summary, button, blockquote, figcaption,
   margin: 1.2rem 0 0;
   color: var(--deep-soft);
   font-size: 1.3rem;
-  line-height: 1.5;
+  line-height: var(--lh-note);
 }
 
 .spa-projet__ok {
@@ -3089,7 +3175,7 @@ a, span, label, summary, button, blockquote, figcaption,
 .spa-projet__ok p {
   margin: 0 0 1rem;
   font-size: 1.5rem;
-  line-height: 1.6;
+  line-height: var(--lh-texte);
 }
 
 .spa-projet__erreur {
@@ -3197,12 +3283,12 @@ a, span, label, summary, button, blockquote, figcaption,
 .spa-budget__titre {
   margin: 0 0 1.2rem;
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 3vw, 3.2rem);
-  line-height: 1.15;
+  font-size: var(--t-section);
+  line-height: var(--lh-titre);
 }
 
 .spa-budget__intro {
-  max-width: 68rem;
+  max-width: var(--mesure);
   margin-bottom: 3.2rem;
   color: var(--deep-soft);
 }
@@ -3310,18 +3396,18 @@ a, span, label, summary, button, blockquote, figcaption,
    perdre en revenant a la ligne. Les colonnes de prix, elles, gardent toute
    la largeur — c'est leur alignement qui fait la lisibilite. */
 .spa-budget__phrase {
-  max-width: 72rem;
+  max-width: var(--mesure);
   margin: 0 0 1.6rem;
   color: var(--deep-soft);
   font-size: 1.5rem;
-  line-height: 1.6;
+  line-height: var(--lh-texte);
 }
 
 .spa-budget__sous-titre {
   margin: 2.4rem 0 1.2rem;
   font-family: var(--font-display);
-  font-size: 1.6rem;
-  line-height: 1.3;
+  font-size: var(--t-carte);
+  line-height: var(--lh-carte);
 }
 
 /* Liste des elements compris : une coche dessinee au trait plutot qu'un
@@ -3339,7 +3425,7 @@ a, span, label, summary, button, blockquote, figcaption,
   margin-bottom: 1rem;
   padding-left: 2.8rem;
   font-size: 1.5rem;
-  line-height: 1.55;
+  line-height: var(--lh-texte);
 }
 
 /* Sept lignes courtes sur un panneau large laissent les deux tiers de la
@@ -3444,7 +3530,7 @@ a, span, label, summary, button, blockquote, figcaption,
   color: var(--deep-soft);
   font-size: 1.35rem;
   font-weight: 400;
-  line-height: 1.45;
+  line-height: var(--lh-note);
 }
 
 .spa-budget__prix {
@@ -3496,11 +3582,11 @@ a, span, label, summary, button, blockquote, figcaption,
 }
 
 .spa-budget__note {
-  max-width: 72rem;
+  max-width: var(--mesure);
   margin: 1.6rem 0 0;
   color: var(--deep-soft);
   font-size: 1.4rem;
-  line-height: 1.55;
+  line-height: var(--lh-texte);
 }
 
 /* L'exemple chiffre. C'est le seul endroit de la page ou l'on additionne :
@@ -3610,12 +3696,12 @@ a, span, label, summary, button, blockquote, figcaption,
 .spa-avis__titre {
   margin: 0 0 1.2rem;
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 3vw, 3.2rem);
-  line-height: 1.15;
+  font-size: var(--t-section);
+  line-height: var(--lh-titre);
 }
 
 .spa-avis__intro {
-  max-width: 68rem;
+  max-width: var(--mesure);
   margin-bottom: 2.8rem;
   color: var(--deep-soft);
 }
@@ -3716,7 +3802,7 @@ a, span, label, summary, button, blockquote, figcaption,
   margin: 0;
   font-style: normal;
   font-size: 1.6rem;
-  line-height: 1.6;
+  line-height: var(--lh-texte);
 }
 
 .spa-avis__signature {
@@ -3782,11 +3868,11 @@ a, span, label, summary, button, blockquote, figcaption,
 }
 
 .spa-avis__provenance {
-  max-width: 72rem;
+  max-width: var(--mesure);
   margin: 2.4rem 0 0;
   color: var(--deep-soft);
   font-size: 1.35rem;
-  line-height: 1.55;
+  line-height: var(--lh-texte);
 }
 
 .spa-avis__provenance p {
@@ -3813,22 +3899,21 @@ a, span, label, summary, button, blockquote, figcaption,
 .spa-sav__titre {
   margin: 0 0 1.6rem;
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 2.6vw, 2.8rem);
-  line-height: 1.2;
+  font-size: var(--t-section);
+  line-height: var(--lh-titre);
 }
 
 .spa-sav__sous-titre {
   margin: 3.2rem 0 1.2rem;
   font-family: var(--font-display);
-  font-size: 1.8rem;
-  line-height: 1.3;
+  font-size: var(--t-sous);
+  line-height: var(--lh-titre);
 }
 
 .spa-sav__phrase {
-  max-width: 72rem;
+  max-width: var(--mesure);
   margin: 0 0 1.6rem;
-  font-size: 1.6rem;
-  line-height: 1.6;
+  line-height: var(--lh-texte);
   color: var(--deep-soft);
 }
 
@@ -3854,7 +3939,7 @@ a, span, label, summary, button, blockquote, figcaption,
   border-radius: var(--r-lg);
   background: var(--white);
   font-size: 1.5rem;
-  line-height: 1.55;
+  line-height: var(--lh-texte);
   color: var(--deep-soft);
 }
 
@@ -3975,11 +4060,11 @@ a, span, label, summary, button, blockquote, figcaption,
 
 .spa-sav__exclusions li {
   position: relative;
-  max-width: 76rem;
+  max-width: var(--mesure);
   margin-bottom: 1.4rem;
   padding-left: 2.8rem;
   font-size: 1.5rem;
-  line-height: 1.55;
+  line-height: var(--lh-texte);
   color: var(--deep-soft);
 }
 
@@ -4010,11 +4095,11 @@ a, span, label, summary, button, blockquote, figcaption,
 }
 
 .spa-sav__note {
-  max-width: 72rem;
+  max-width: var(--mesure);
   margin: 1.6rem 0 0;
   color: var(--deep-soft);
   font-size: 1.4rem;
-  line-height: 1.55;
+  line-height: var(--lh-texte);
 }
 
 /* --------------------------------------------------------------------------
@@ -4037,15 +4122,14 @@ a, span, label, summary, button, blockquote, figcaption,
 .spa-cout__titre {
   margin: 0 0 1.6rem;
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 2.6vw, 2.8rem);
-  line-height: 1.2;
+  font-size: var(--t-section);
+  line-height: var(--lh-titre);
 }
 
 .spa-cout__phrase {
-  max-width: 72rem;
+  max-width: var(--mesure);
   margin: 0 0 1.6rem;
-  font-size: 1.6rem;
-  line-height: 1.6;
+  line-height: var(--lh-texte);
   color: var(--deep-soft);
 }
 
@@ -4054,11 +4138,11 @@ a, span, label, summary, button, blockquote, figcaption,
 }
 
 .spa-cout__note {
-  max-width: 72rem;
+  max-width: var(--mesure);
   margin: 1.6rem 0 0;
   color: var(--deep-soft);
   font-size: 1.4rem;
-  line-height: 1.55;
+  line-height: var(--lh-texte);
 }
 
 /* Les quatre leviers. Pas de puce ni de numero : ce n'est ni une liste de
@@ -4077,7 +4161,7 @@ a, span, label, summary, button, blockquote, figcaption,
   padding-left: 1.6rem;
   border-left: 3px solid var(--water);
   font-size: 1.5rem;
-  line-height: 1.55;
+  line-height: var(--lh-texte);
   color: var(--deep-soft);
 }
 
@@ -4197,7 +4281,7 @@ a, span, label, summary, button, blockquote, figcaption,
   color: var(--deep-soft);
   font-size: 1.35rem;
   font-weight: 400;
-  line-height: 1.45;
+  line-height: var(--lh-note);
 }
 
 .spa-cout__prix {
@@ -4304,12 +4388,12 @@ a, span, label, summary, button, blockquote, figcaption,
 .spa-realisations__titre {
   margin: 0 0 1.2rem;
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 3vw, 3.2rem);
-  line-height: 1.15;
+  font-size: var(--t-section);
+  line-height: var(--lh-titre);
 }
 
 .spa-realisations__intro {
-  max-width: 68rem;
+  max-width: var(--mesure);
   margin-bottom: 3.2rem;
   color: var(--deep-soft);
 }
@@ -4549,7 +4633,7 @@ a, span, label, summary, button, blockquote, figcaption,
   margin: auto 0 0;
   color: var(--deep-soft);
   font-size: 1.5rem;
-  line-height: 1.55;
+  line-height: var(--lh-texte);
 }
 
 .spa-realisations__action {
@@ -4643,17 +4727,17 @@ a, span, label, summary, button, blockquote, figcaption,
 .spa-chapitre__titre {
   max-width: 20ch;
   margin: 0;
-  font-size: clamp(2.6rem, 3.4vw, 3.8rem);
-  line-height: 1.08;
+  font-size: var(--t-chapitre);
+  line-height: var(--lh-titre);
   text-wrap: balance;
 }
 
 .spa-chapitre__chapeau {
-  max-width: 62ch;
+  max-width: var(--mesure);
   margin: 1.8rem 0 0;
   color: var(--deep-soft);
-  font-size: clamp(1.8rem, 1.6vw, 2.1rem);
-  line-height: 1.55;
+  font-size: var(--t-chapeau);
+  line-height: var(--lh-texte);
 }
 
 .spa-chapitre__chapeau p {
@@ -4675,17 +4759,17 @@ a, span, label, summary, button, blockquote, figcaption,
 .spa-page-entete__titre {
   max-width: 18ch;
   margin: 0;
-  font-size: clamp(3.2rem, 5vw, 5rem);
-  line-height: 1.02;
+  font-size: var(--t-page);
+  line-height: var(--lh-page);
   text-wrap: balance;
 }
 
 .spa-page-entete__chapeau {
-  max-width: 62ch;
+  max-width: var(--mesure);
   margin: 2rem 0 0;
   color: var(--deep-soft);
-  font-size: clamp(1.8rem, 1.7vw, 2.2rem);
-  line-height: 1.55;
+  font-size: var(--t-chapeau);
+  line-height: var(--lh-texte);
 }
 
 .spa-page-entete__chapeau p {
@@ -4748,6 +4832,8 @@ a, span, label, summary, button, blockquote, figcaption,
 }
 
 .spa-sommaire__rang {
+  flex: 0 0 auto;
+  min-width: 2.2ch;
   color: var(--sky-deep);
   font-size: 1.3rem;
   font-variant-numeric: tabular-nums;
@@ -4778,7 +4864,7 @@ a, span, label, summary, button, blockquote, figcaption,
 }
 
 .spa-prose__col {
-  max-width: 66ch;
+  max-width: var(--mesure);
   text-align: left;
 }
 
@@ -4788,8 +4874,8 @@ a, span, label, summary, button, blockquote, figcaption,
 
 .spa-prose__titre {
   margin: 0 0 1.6rem;
-  font-size: clamp(2rem, 2.2vw, 2.4rem);
-  line-height: 1.15;
+  font-size: var(--t-sous);
+  line-height: var(--lh-titre);
   text-wrap: balance;
 }
 
@@ -4860,8 +4946,8 @@ a, span, label, summary, button, blockquote, figcaption,
 
 .spa-contact-carte__titre {
   margin: 0 0 1.2rem;
-  font-size: clamp(2.2rem, 2.6vw, 2.8rem);
-  line-height: 1.12;
+  font-size: var(--t-section);
+  line-height: var(--lh-titre);
   text-wrap: balance;
 }
 
@@ -4970,15 +5056,15 @@ a, span, label, summary, button, blockquote, figcaption,
 .article-template__content h2 {
   margin-top: 5.6rem;
   margin-bottom: 1.6rem;
-  font-size: clamp(2.2rem, 2.6vw, 2.8rem);
-  line-height: 1.15;
+  font-size: var(--t-bloc);
+  line-height: var(--lh-titre);
 }
 
 .article-template__content h3 {
   margin-top: 3.6rem;
   margin-bottom: 1.2rem;
-  font-size: clamp(1.8rem, 2vw, 2.1rem);
-  line-height: 1.2;
+  font-size: var(--t-sous);
+  line-height: var(--lh-titre);
 }
 
 .article-template__content > *:first-child {
@@ -4990,13 +5076,20 @@ a, span, label, summary, button, blockquote, figcaption,
    plus gros suffit a le signaler. */
 .article-template__content > p:first-child {
   color: var(--deep-soft);
-  font-size: clamp(1.8rem, 1.7vw, 2.1rem);
-  line-height: 1.55;
+  font-size: var(--t-chapeau);
+  line-height: var(--lh-texte);
 }
 
+/* LA MESURE, ICI AUSSI. Le conteneur « etroit » du theme fait 720 px :
+   a 17 px, cela donne environ quatre-vingt-cinq caracteres par ligne, la
+   ou le reste du site s'arrete a soixante-six. C'est le texte qu'on borne,
+   pas le conteneur — les titres et les photos gardent toute la largeur,
+   comme les chapitres des pages refaites gardent la leur au-dessus de
+   leur colonne de lecture. */
 .article-template__content p,
 .article-template__content ul,
 .article-template__content ol {
+  max-width: var(--mesure);
   margin-bottom: 1.6rem;
 }
 
@@ -5038,8 +5131,8 @@ a, span, label, summary, button, blockquote, figcaption,
 .spa-page-corps h2 {
   margin-top: 5.6rem;
   margin-bottom: 1.6rem;
-  font-size: clamp(2rem, 2.4vw, 2.5rem);
-  line-height: 1.15;
+  font-size: var(--t-bloc);
+  line-height: var(--lh-titre);
   scroll-margin-top: 10rem;
   text-wrap: balance;
 }
@@ -5047,8 +5140,8 @@ a, span, label, summary, button, blockquote, figcaption,
 .spa-page-corps h3 {
   margin-top: 3.6rem;
   margin-bottom: 1.2rem;
-  font-size: clamp(1.8rem, 2vw, 2.1rem);
-  line-height: 1.2;
+  font-size: var(--t-sous);
+  line-height: var(--lh-titre);
   text-wrap: balance;
 }
 
@@ -5059,6 +5152,7 @@ a, span, label, summary, button, blockquote, figcaption,
 .spa-page-corps p,
 .spa-page-corps ul,
 .spa-page-corps ol {
+  max-width: var(--mesure);
   margin-bottom: 1.6rem;
 }
 
@@ -5078,4 +5172,177 @@ a, span, label, summary, button, blockquote, figcaption,
 .spa-page-corps + .spa-article-sommaire,
 .spa-article-sommaire + .spa-page-corps {
   margin-top: 3.2rem;
+}
+
+/* --------------------------------------------------------------------------
+   45. LA COLONNE DE LECTURE VAUT AUSSI POUR LES BLOCS « TEXTE ENRICHI »
+   --------------------------------------------------------------------------
+   Le bloc « SPAS9 | LINERS FRANCE, specialiste du spa en Ile-de-France »
+   de la page d'accueil etait centre : trois paragraphes, cent dix mots,
+   sans bord gauche stable. Il est desormais cale a gauche comme le reste
+   du site.
+
+   Reste la largeur. Le theme laisse ce bloc s'etaler sur 780 px, soit
+   environ quatre-vingt-quinze caracteres par ligne. C'est trop : au-dela
+   de soixante-six, l'oeil rate la ligne suivante en revenant a la marge.
+   Les pages de contenu bornent deja leur texte a la mesure de lecture —
+   la meme ici, pour que le meme paragraphe se lise pareil sur l'accueil
+   et sur A propos.
+
+   Seul le texte est borne. Le titre garde toute la largeur : il tient sur
+   deux lignes, et le brider ne ferait que le casser plus tot.
+   -------------------------------------------------------------------------- */
+.rich-text__blocks.left > .rich-text__text {
+  max-width: var(--mesure);
+}
+
+/* --------------------------------------------------------------------------
+   46. LES TITRES DES SECTIONS DU THEME REJOIGNENT L'ECHELLE
+   --------------------------------------------------------------------------
+   Une page mele deux familles de sections : celles ecrites pour cette
+   boutique, dont les titres suivent l'echelle plus haut, et celles livrees
+   avec le theme — texte enrichi, image et texte, articles en avant, produits
+   associes. Les secondes prennent leur taille du reglage « Taille du titre »,
+   dont le cran h2 vaut 24 px : un titre de bande y etait donc plus petit que
+   les sous-titres qui l'entourent. Sur A propos, « LINERS FRANCE, le metier
+   d'origine » s'affichait exactement comme les h3 au-dessus et en dessous.
+
+   ON NE TOUCHE PAS A .h2 TOUT SEUL. Cette classe sert aussi aux titres de
+   vignettes — fiches produit, cartes d'article, nom de la boutique dans
+   l'en-tete. Les regles ci-dessous ne visent donc que les titres DE SECTION,
+   reconnaissables a leur classe propre. Une vignette garde sa taille.
+
+   La specificite de :is() vaut celle de son argument le plus fort : deux
+   classes ici, contre une pour .h2, ce qui suffit sans !important.
+   -------------------------------------------------------------------------- */
+:is(
+  .title,
+  .rich-text__heading,
+  .image-with-text__heading,
+  .blog__title,
+  .related-products__heading,
+  .collection-list-title,
+  .collage-wrapper-title,
+  .collapsible-content__heading,
+  .banner__heading,
+  .email-signup-banner__heading
+):is(.h0, .hxl, .hxxl) {
+  font-size: var(--t-page);
+  line-height: var(--lh-page);
+}
+
+:is(
+  .title,
+  .rich-text__heading,
+  .image-with-text__heading,
+  .blog__title,
+  .related-products__heading,
+  .collection-list-title,
+  .collage-wrapper-title,
+  .collapsible-content__heading,
+  .banner__heading,
+  .email-signup-banner__heading
+):is(.h1) {
+  font-size: var(--t-chapitre);
+  line-height: var(--lh-titre);
+}
+
+:is(
+  .title,
+  .rich-text__heading,
+  .image-with-text__heading,
+  .blog__title,
+  .related-products__heading,
+  .collection-list-title,
+  .collage-wrapper-title,
+  .collapsible-content__heading,
+  .banner__heading,
+  .email-signup-banner__heading
+):is(.h2) {
+  font-size: var(--t-section);
+  line-height: var(--lh-titre);
+}
+
+:is(
+  .title,
+  .rich-text__heading,
+  .image-with-text__heading,
+  .blog__title,
+  .related-products__heading,
+  .collection-list-title,
+  .collage-wrapper-title,
+  .collapsible-content__heading,
+  .banner__heading,
+  .email-signup-banner__heading
+):is(.h3) {
+  font-size: var(--t-bloc);
+  line-height: var(--lh-titre);
+}
+
+/* --------------------------------------------------------------------------
+   47. LES TITRES ÉCRITS À LA MAIN DANS UN BLOC DE TEXTE
+   --------------------------------------------------------------------------
+   Le champ « Contenu HTML » d'un bloc de texte accepte des titres écrits
+   directement, et la page « Livraison en Île-de-France » s'en sert pour ses
+   huit départements. Sans classe, ces titres prenaient la taille par défaut
+   du thème — 18 px, soit six de moins que les sous-titres qui les entourent,
+   alors qu'ils occupent exactement le même rang.
+
+   LE :not([class]) EST LA CONDITION DE SÛRETÉ. Certains titres écrits dans
+   ce champ portent déjà une classe et leur propre taille — le « Ce qu'on
+   nous demande le plus souvent » de la FAQ, par exemple, qui emprunte le
+   style d'un titre de chapitre. Un sélecteur sur la balise seule serait plus
+   fort que leur classe et les écraserait tous.
+   -------------------------------------------------------------------------- */
+.spa-prose__col h2:not([class]) {
+  margin: 4rem 0 1.6rem;
+  font-size: var(--t-bloc);
+  line-height: var(--lh-titre);
+  text-wrap: balance;
+}
+
+.spa-prose__col h3:not([class]) {
+  margin: 3.2rem 0 1.2rem;
+  font-size: var(--t-sous);
+  line-height: var(--lh-titre);
+  text-wrap: balance;
+}
+
+.spa-prose__col h4:not([class]) {
+  margin: 2.4rem 0 0.8rem;
+  font-size: var(--t-carte);
+  line-height: var(--lh-carte);
+}
+
+.spa-prose__col > :first-child {
+  margin-top: 0;
+}
+
+/* --------------------------------------------------------------------------
+   48. TOUS LES TITRES DE PAGE AU MÊME DEGRÉ
+   --------------------------------------------------------------------------
+   Deux pages seulement portaient leur titre au degré prévu pour lui : les
+   pages de contenu et les pages écrites dans le corps. Partout ailleurs —
+   une collection, le blog, un article, le panier, les résultats de recherche
+   — le titre restait à la valeur par défaut du thème, 40 px, et sur la
+   recherche à 24 px. Trois tailles pour un même rang, selon le gabarit
+   atteint.
+
+   LE TITRE DE LA FICHE PRODUIT RESTE EN DEHORS, et c'est mesuré : dans sa
+   colonne d'environ 315 px, « Thérapeutique » en capitales déborde au-delà
+   de 32 px. Sa règle et le relevé qui la justifie sont plus haut, au 31.
+
+   Les sélecteurs visent la balise h1 et non la classe seule : .title et .h2
+   servent aussi à des titres qui ne sont pas des titres de page — le nom de
+   la boutique dans l'en-tête, le titre d'une page insérée dans une fiche
+   produit, les titres de vignettes. Ceux-là gardent leur taille.
+   -------------------------------------------------------------------------- */
+.collection-hero__title,
+.article-template__title,
+h1.title,
+h1.title--primary,
+h1.h2.center {
+  font-size: var(--t-page);
+  line-height: var(--lh-page);
+  text-wrap: balance;
 }
