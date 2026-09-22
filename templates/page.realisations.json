@@ -12,6 +12,7 @@
     "main": {
       "type": "main-page",
       "settings": {
+        "largeur": "large",
         "text_alignment": "left",
         "sommaire": false,
         "sommaire_titre": "Sur cette page",
@@ -100,7 +101,7 @@
       ],
       "settings": {
         "titre": "Des spas installés près de chez vous",
-        "intro": "<p>Ce ne sont pas des photos de catalogue : chacune de ces installations a été livrée et mise en service par notre équipe. Nous indiquons à chaque fois ce qui était compliqué — c'est ce qui vous dira si votre propre accès est faisable.</p>",
+        "intro": "",
         "colonnes": "3",
         "lien_libelle": "Nous parler de votre accès",
         "lien": "/pages/mon-projet-spa",

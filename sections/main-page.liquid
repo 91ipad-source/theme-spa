@@ -14,7 +14,35 @@
   }
 {%- endstyle -%}
 
-<div class="page-width page-width--narrow section-{{ section.id }}-padding{% if section.settings.text_alignment == 'center' %} main-page--centre{% endif %}">
+{%- comment -%}
+  LA LARGEUR DU CONTENEUR EST UN RÉGLAGE, ET ELLE A UNE RAISON D'ÊTRE.
+
+  Ce corps de page s'affichait toujours dans le conteneur étroit du thème,
+  720 px centrés. C'est la bonne largeur quand la page N'EST QUE ce texte —
+  les conditions générales, par exemple.
+
+  Mais six pages posent une ou deux sections sous ce texte : le budget, le
+  coût d'usage, le SAV, le projet, le comparateur, les réalisations. Ces
+  sections-là s'affichent dans le conteneur normal, 1200 px. Le titre de la
+  page commençait donc 307 px plus à droite que les titres de section —
+  mesuré à 1440 px — et la page montrait deux bords gauches sans qu'aucun
+  ne soit le bon.
+
+  Réglé sur « pleine largeur », le titre et le texte partagent le bord
+  gauche des sections. Le texte, lui, ne s'étale pas pour autant : la
+  feuille de style le borne à la mesure de lecture, comme partout ailleurs.
+{%- endcomment -%}
+{%- liquid
+  assign classes = 'page-width'
+  unless section.settings.largeur == 'large'
+    assign classes = classes | append: ' page-width--narrow'
+  endunless
+  if section.settings.text_alignment == 'center'
+    assign classes = classes | append: ' main-page--centre'
+  endif
+-%}
+
+<div class="{{ classes }} section-{{ section.id }}-padding">
   <h1 class="main-page-title page-title h0{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     {{ page.title | escape }}
   </h1>
@@ -80,6 +108,17 @@
   "tag": "section",
   "class": "section",
   "settings": [
+    {
+      "type": "select",
+      "id": "largeur",
+      "label": "Largeur du texte",
+      "options": [
+        { "value": "etroite", "label": "Colonne étroite (page de texte seule)" },
+        { "value": "large", "label": "Pleine largeur (page suivie de sections)" }
+      ],
+      "default": "etroite",
+      "info": "Pleine largeur dès qu'une section est posée sous ce texte : sinon le titre de la page et les titres de section n'ont pas le même bord gauche."
+    },
     {
       "type": "select",
       "id": "text_alignment",
