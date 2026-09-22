@@ -1,11 +1,11 @@
 # Archive des corps de page
 
-Ce dossier conserve le contenu du champ « corps » de trois pages Shopify,
+Ce dossier conserve le contenu du champ « corps » de quatre pages Shopify,
 tel qu'il existait le 22 septembre 2026, juste avant d'être vidé.
 
 ## Pourquoi ces fichiers existent
 
-Ces trois pages ont reçu une nouvelle mise en page, construite en sections
+Ces quatre pages ont reçu une nouvelle mise en page, construite en sections
 de thème et non plus dans le corps de la page. Leur gabarit n'appelle donc
 plus la section `main-page` : le corps n'était plus affiché, mais restait
 visible dans l'administration Shopify, où il invitait à la confusion — on
@@ -31,7 +31,7 @@ telle note deviendrait un extrait de recherche visible par les clients.
 
 ### Avertissement pour qui modifiera ces pages
 
-**Modifier le corps de ces trois pages ne change rien à ce qui s'affiche.**
+**Modifier le corps de ces quatre pages ne change rien à ce qui s'affiche.**
 Le contenu visible est dans les sections du thème : passez par
 *Boutique en ligne → Thèmes → Personnaliser*, et non par l'éditeur de page.
 Le corps ne sert plus qu'à la recherche interne.
@@ -41,6 +41,7 @@ Le corps ne sert plus qu'à la recherche interne.
 | `corps-a-propos.html` | `/pages/a-propos` | `templates/page.a-propos.json` |
 | `corps-showroom-spa-essonne.html` | `/pages/showroom-spa-essonne` | `templates/page.showroom.json` |
 | `corps-livraison-et-retrait.html` | `/pages/livraison-et-retrait` | `templates/page.livraison.json` |
+| `corps-livraison-spa-ile-de-france.html` | `/pages/livraison-spa-ile-de-france` | `templates/page.livraison-idf.json` |
 
 ## Ce qui n'est pas perdu
 
@@ -64,3 +65,12 @@ elle doit refléter ce qui existait, pas ce qui aurait dû exister.
 Shopify ne synchronise que `assets`, `blocks`, `config`, `layout`,
 `locales`, `sections`, `snippets` et `templates`. Un dossier commençant par
 un point est ignoré.
+
+## Les conditions générales font exception
+
+`/pages/conditions-generales-de-vente` garde tout son texte dans le corps,
+et ce n'est pas un oubli. Un document juridique doit rester modifiable à un
+seul endroit : le recopier dans des réglages de thème créerait deux
+versions, donc tôt ou tard un écart entre ce qui est affiché et ce qui a
+été rédigé. Son gabarit `page.cgv.json` lui ajoute seulement un sommaire de
+ses douze articles, construit automatiquement à partir des titres.
