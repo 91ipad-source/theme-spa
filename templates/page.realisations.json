@@ -13,6 +13,8 @@
       "type": "main-page",
       "settings": {
         "text_alignment": "left",
+        "sommaire": false,
+        "sommaire_titre": "Sur cette page",
         "padding_top": 28,
         "padding_bottom": 0
       }
@@ -30,7 +32,7 @@
             "image_5": "shopify://shop_images/220c3932-0948-43c5-8441-0a45768126d0_3.jpg",
             "produit": "spa-roca-proto-lighting-5-personnes",
             "titre": "",
-            "commune": "Draveil",
+            "commune": "Draveil - Couleur Odyssey",
             "annee": "2025",
             "difficulte": "Le seul accès au jardin mesurait 120 cm, entre le mur de la maison et la clôture, pour un spa de 200 × 200 cm. C'est précisément le genre de passage qui se mesure avant de commander, jamais le jour de la livraison."
           }
@@ -62,25 +64,14 @@
             "titre": "",
             "commune": "Seine-Port",
             "annee": "2026",
-            "difficulte": "Le Doto est semi-encastré : sur ses 81 cm de hauteur, une partie passe sous le niveau du sol fini. Le vrai point n'est pas le creusement mais l'accès aux trappes techniques une fois l'habillage refermé — un spa encastré au millimètre se démonte entièrement à la première intervention."
-          }
-        },
-        "calypso": {
-          "type": "realisation",
-          "settings": {
-            "produit": "spa-roca-calypso-3-personnes",
-            "titre": "",
-            "commune": "Milly-la-Forêt",
-            "annee": "2026",
-            "difficulte": ""
+            "difficulte": "Le Doto est semi-encastré : sur ses 81 cm de hauteur, une partie passe sous le niveau du sol fini. Le vrai point l'accès aux trappes techniques une fois l'habillage refermé."
           }
         }
       },
       "block_order": [
         "proto2",
         "panope",
-        "doto",
-        "calypso"
+        "doto"
       ],
       "settings": {
         "titre": "Des spas installés près de chez vous",
