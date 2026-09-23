@@ -4504,6 +4504,36 @@ a, span, label, summary, button, blockquote, figcaption,
 /* Chaque photo est un lien vers sa version pleine definition. Il doit se
    comporter exactement comme l'image qu'il enveloppe, sinon il casse la
    grille : c'est lui, desormais, qui est la case. */
+/* UNE SEULE PHOTO : ELLE RECUPERE LA PLACE DE LA BANDE ABSENTE.
+
+   Une realisation a plusieurs photos porte une bande de vignettes de
+   120 px sous la vue d'ensemble. Une realisation a une seule photo n'en a
+   pas, et comme les cartes d'une rangee ont la meme hauteur, ces 120 px
+   devenaient du blanc entre la photo et le texte.
+
+   Plutot que de laisser ce vide, la photo l'absorbe. Le corps prend sa
+   hauteur de contenu (flex: 0 0 auto) et la photo grandit de tout ce qui
+   reste (flex-grow: 1). Le 4/3 est conserve comme plancher par
+   flex-shrink: 0 : la photo peut s'agrandir, jamais se tasser sous son
+   cadrage d'origine. L'image est en object-fit: cover, elle se recadre
+   donc au lieu de se deformer.
+
+   Contrepartie assumee : sur cette carte-la, le cadrage 4/3 impose
+   partout ailleurs n'est plus tenu, la photo est plus haute. C'est le
+   prix a payer pour ne pas afficher un trou, et cela disparait des que
+   la fiche recoit une deuxieme photo.
+
+   « :has() » n'est pas connu des navigateurs d'avant 2023. Dans ce cas la
+   regle ne s'applique pas et on retombe sur le comportement precedent :
+   le vide reapparait, rien ne casse. */
+.spa-realisations__carte:not(:has(.spa-realisations__angles)) .spa-realisations__image {
+  flex: 1 0 auto;
+}
+
+.spa-realisations__carte:not(:has(.spa-realisations__angles)) .spa-realisations__corps {
+  flex: 0 0 auto;
+}
+
 .spa-realisations__loupe {
   display: block;
   min-width: 0;
