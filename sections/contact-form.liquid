@@ -49,22 +49,30 @@
 
           Si elle venait a disparaitre, cet evenement partirait dans le
           vide sans provoquer la moindre erreur : rien dans la console, un
-          formulaire qui fonctionne, et plus aucune conversion remontee.
+          formulaire qui fonctionne, et plus rien qui remonte.
+
+          CE QUE CE FICHIER SAIT, ET CE QU'IL NE SAIT PAS. Tout ce qui suit
+          parle d'evenements DECLENCHES. Qu'ils soient ensuite comptes comme
+          conversions par Google depend de choses que le navigateur ne
+          constate pas : le consentement, les bloqueurs, la fenetre
+          d'attribution, le fait que la visite vienne ou non d'une annonce.
+          Un evenement declenche n'est donc pas une conversion comptee — la
+          reception se verifie dans Google Ads, jamais ici.
 
           UNE SEULE FOIS PAR ENVOI. Shopify renvoie vers la page de
           confirmation apres l'envoi ; « form.posted_successfully? » y est
           vrai. Mais cette page se recharge : touche F5, retour arriere,
-          lien partage. A chaque fois, l'evenement serait renvoye et la
-          conversion comptee en double.
+          lien partage. A chaque fois, l'evenement serait renvoye pour un
+          seul et meme message.
 
-          D'ou le verrou ci-dessous : sessionStorage retient que la
-          conversion est partie. La cle est effacee a chaque nouvel envoi,
+          D'ou le verrou ci-dessous : sessionStorage retient que
+          l'evenement est parti. La cle est effacee a chaque nouvel envoi,
           par le script pose en bas du formulaire — sans quoi le deuxieme
-          message d'un meme onglet ne compterait aucune conversion.
+          message d'un meme onglet ne declencherait rien.
 
           S'il est indisponible — navigation privee, cookies bloques — on
-          envoie quand meme : rater toutes les conversions coute plus cher
-          que d'en compter une en trop.
+          envoie quand meme : ne rien declencher coute plus cher que de
+          declencher une fois de trop.
 
           Identifiant de conversion fourni par le compte Google Ads :
           AW-988988697/FiMqCOG794IdEJmKy9cD
@@ -198,13 +206,13 @@
         LE VERROU SE LIBERE A CHAQUE NOUVEL ENVOI.
 
         Sans ceci, la cle posee plus haut ne serait jamais effacee : le
-        premier message de l'onglet compterait une conversion, le deuxieme
-        aucune. En voulant empecher le double-comptage, on creerait un
-        sous-comptage.
+        premier message de l'onglet declencherait l'evenement, le deuxieme
+        rien du tout. En voulant empecher les envois en double, on
+        supprimerait des envois legitimes.
 
         Le clic sur « Envoyer » efface donc la cle. Consequence voulue :
 
-        - un nouvel envoi reinitialise le verrou, la conversion repart ;
+        - un nouvel envoi reinitialise le verrou, l'evenement repart ;
         - la page de reussite qui suit declenche l'evenement ;
         - un simple rechargement de cette page reste bloque, puisqu'il ne
           passe pas par « submit ».
