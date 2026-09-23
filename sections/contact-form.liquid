@@ -38,14 +38,16 @@
           « form.posted_successfully? » a vrai. Le script ne s'execute donc
           qu'une fois, au retour, et seulement si le message est parti.
 
-          ATTENTION, CE BLOC NE SUFFIT PAS A LUI SEUL. « gtag » n'est ici
-          qu'une file d'attente : il empile l'evenement dans dataLayer. Pour
-          qu'il soit reellement envoye, la balise Google (gtag.js, chargee
-          avec le compte AW-988988697) doit deja etre presente sur le site.
-          Au 23 septembre 2026 elle ne l'est ni dans le theme, ni par une
-          application installee. Tant qu'elle manque, cet evenement part
-          dans le vide sans provoquer la moindre erreur — c'est bien ce qui
-          rend la chose difficile a reperer.
+          CE BLOC NE MARCHE PAS SEUL. « gtag » n'est ici qu'une file
+          d'attente : il empile l'evenement dans dataLayer. C'est la balise
+          Google — gtag.js, chargee avec le compte AW-988988697 — qui
+          l'envoie reellement. Elle est posee dans « layout/theme.liquid »,
+          juste avant la fermeture du head.
+
+          Si cette balise disparait un jour, cet evenement partira dans le
+          vide sans provoquer la moindre erreur : rien dans la console, un
+          formulaire qui fonctionne, et plus aucune conversion remontee.
+          C'est la premiere chose a verifier.
 
           Identifiant de conversion fourni par le compte Google Ads :
           AW-988988697/FiMqCOG794IdEJmKy9cD
