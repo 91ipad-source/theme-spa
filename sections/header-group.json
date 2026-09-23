@@ -17,30 +17,33 @@
         "message-1": {
           "type": "message",
           "settings": {
-            "text": "Jusqu'au 31 octobre : couverture isolante offerte sur tout spa rigide",
-            "fin": "2026-10-31",
-            "link": ""
+            "text": "Jusqu'au 31 octobre : couverture isolante + escalier offerts sur tout spa rigide",
+            "link": "",
+            "fin": "2026-10-31"
           }
         },
         "message-2": {
           "type": "message",
           "settings": {
             "text": "Paiement en 3 ou 4 chèques sans frais",
-            "link": ""
+            "link": "",
+            "fin": ""
           }
         },
         "message-3": {
           "type": "message",
           "settings": {
             "text": "Showroom à Fontenay-Le-Vicomte (91) : venez voir nos spas",
-            "link": ""
+            "link": "",
+            "fin": ""
           }
         },
         "message-4": {
           "type": "message",
           "settings": {
             "text": "Garantie 10 ans structure, 5 ans acrylique, 2 ans électronique et pompes",
-            "link": ""
+            "link": "",
+            "fin": ""
           }
         }
       },
@@ -51,9 +54,9 @@
         "message-4"
       ],
       "settings": {
-        "background_color": "#0F3A5A",
-        "text_color": "#FFFFFF",
-        "dot_color": "#2FB4E5"
+        "background_color": "#0f3a5a",
+        "text_color": "#ffffff",
+        "dot_color": "#2fb4e5"
       }
     },
     "header": {
