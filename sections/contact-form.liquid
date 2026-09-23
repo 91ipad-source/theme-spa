@@ -38,16 +38,32 @@
           « form.posted_successfully? » a vrai. Le script ne s'execute donc
           qu'une fois, au retour, et seulement si le message est parti.
 
-          CE BLOC NE MARCHE PAS SEUL. « gtag » n'est ici qu'une file
-          d'attente : il empile l'evenement dans dataLayer. C'est la balise
-          Google — gtag.js, chargee avec le compte AW-988988697 — qui
-          l'envoie reellement. Elle est posee dans « layout/theme.liquid »,
-          juste avant la fermeture du head.
+          OU EST LA BALISE. « gtag » n'est ici qu'une file d'attente : il
+          empile l'evenement dans dataLayer. C'est la balise Google —
+          gtag.js, compte AW-988988697 — qui l'envoie reellement, et elle
+          est chargee par l'application Google & YouTube, donc par
+          « content_for_header ». Elle n'apparait nulle part dans les
+          fichiers du theme : ne concluez pas de son absence dans le code
+          qu'elle n'est pas la, verifiez avec Tag Assistant sur le site en
+          ligne.
 
-          Si cette balise disparait un jour, cet evenement partira dans le
+          Si elle venait a disparaitre, cet evenement partirait dans le
           vide sans provoquer la moindre erreur : rien dans la console, un
           formulaire qui fonctionne, et plus aucune conversion remontee.
-          C'est la premiere chose a verifier.
+
+          UNE SEULE FOIS PAR ENVOI. Shopify renvoie vers la page de
+          confirmation apres l'envoi ; « form.posted_successfully? » y est
+          vrai. Mais cette page se recharge : touche F5, retour arriere,
+          lien partage. A chaque fois, l'evenement serait renvoye et la
+          conversion comptee en double.
+
+          D'ou le verrou ci-dessous. sessionStorage retient que la
+          conversion est partie et ne la laisse repartir qu'au prochain
+          onglet. Ce n'est pas parfait — un autre onglet, une navigation
+          privee, et le compteur repart de zero — mais cela couvre le cas
+          courant, qui est le rechargement de la page de confirmation.
+          S'il est indisponible, on envoie quand meme : rater toutes les
+          conversions coute plus cher que d'en compter une en trop.
 
           Identifiant de conversion fourni par le compte Google Ads :
           AW-988988697/FiMqCOG794IdEJmKy9cD
@@ -58,9 +74,23 @@
             window.dataLayer.push(arguments);
           };
 
-          gtag('event', 'conversion', {
-            'send_to': 'AW-988988697/FiMqCOG794IdEJmKy9cD'
-          });
+          (function () {
+            var cle = 'spas9:conversion-contact';
+            var dejaEnvoyee = false;
+
+            try {
+              dejaEnvoyee = sessionStorage.getItem(cle) === '1';
+              sessionStorage.setItem(cle, '1');
+            } catch (e) {
+              dejaEnvoyee = false;
+            }
+
+            if (!dejaEnvoyee) {
+              gtag('event', 'conversion', {
+                'send_to': 'AW-988988697/FiMqCOG794IdEJmKy9cD'
+              });
+            }
+          })();
         </script>
         <h2 class="form-status form-status-list form__message" tabindex="-1" autofocus>
           {{- 'icon-success.svg' | inline_asset_content -}}
