@@ -57,13 +57,14 @@
           lien partage. A chaque fois, l'evenement serait renvoye et la
           conversion comptee en double.
 
-          D'ou le verrou ci-dessous. sessionStorage retient que la
-          conversion est partie et ne la laisse repartir qu'au prochain
-          onglet. Ce n'est pas parfait — un autre onglet, une navigation
-          privee, et le compteur repart de zero — mais cela couvre le cas
-          courant, qui est le rechargement de la page de confirmation.
-          S'il est indisponible, on envoie quand meme : rater toutes les
-          conversions coute plus cher que d'en compter une en trop.
+          D'ou le verrou ci-dessous : sessionStorage retient que la
+          conversion est partie. La cle est effacee a chaque nouvel envoi,
+          par le script pose en bas du formulaire — sans quoi le deuxieme
+          message d'un meme onglet ne compterait aucune conversion.
+
+          S'il est indisponible — navigation privee, cookies bloques — on
+          envoie quand meme : rater toutes les conversions coute plus cher
+          que d'en compter une en trop.
 
           Identifiant de conversion fourni par le compte Google Ads :
           AW-988988697/FiMqCOG794IdEJmKy9cD
@@ -192,6 +193,37 @@
           {{ 'templates.contact.form.send' | t }}
         </button>
       </div>
+
+      {%- comment -%}
+        LE VERROU SE LIBERE A CHAQUE NOUVEL ENVOI.
+
+        Sans ceci, la cle posee plus haut ne serait jamais effacee : le
+        premier message de l'onglet compterait une conversion, le deuxieme
+        aucune. En voulant empecher le double-comptage, on creerait un
+        sous-comptage.
+
+        Le clic sur « Envoyer » efface donc la cle. Consequence voulue :
+
+        - un nouvel envoi reinitialise le verrou, la conversion repart ;
+        - la page de reussite qui suit declenche l'evenement ;
+        - un simple rechargement de cette page reste bloque, puisqu'il ne
+          passe pas par « submit ».
+
+        L'evenement « submit » n'est pas emis quand un champ obligatoire est
+        vide : le navigateur bloque avant. La cle ne s'efface donc que sur
+        un envoi reellement parti.
+
+        Ce bloc est hors du « if form.posted_successfully? » : il doit
+        s'executer a chaque affichage du formulaire, pas seulement au
+        retour d'un envoi.
+      {%- endcomment -%}
+      <script>
+        document.getElementById('ContactForm').addEventListener('submit', function () {
+          try {
+            sessionStorage.removeItem('spas9:conversion-contact');
+          } catch (e) {}
+        });
+      </script>
     {%- endform -%}
   </div>
 </div>
