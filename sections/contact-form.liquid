@@ -31,6 +31,35 @@
     -%}
     {%- form 'contact', id: 'ContactForm', class: contact_form_class -%}
       {%- if form.posted_successfully? -%}
+        {%- comment -%}
+          CONVERSION GOOGLE ADS.
+
+          Shopify recharge la page apres l'envoi du formulaire, avec
+          « form.posted_successfully? » a vrai. Le script ne s'execute donc
+          qu'une fois, au retour, et seulement si le message est parti.
+
+          ATTENTION, CE BLOC NE SUFFIT PAS A LUI SEUL. « gtag » n'est ici
+          qu'une file d'attente : il empile l'evenement dans dataLayer. Pour
+          qu'il soit reellement envoye, la balise Google (gtag.js, chargee
+          avec le compte AW-988988697) doit deja etre presente sur le site.
+          Au 23 septembre 2026 elle ne l'est ni dans le theme, ni par une
+          application installee. Tant qu'elle manque, cet evenement part
+          dans le vide sans provoquer la moindre erreur — c'est bien ce qui
+          rend la chose difficile a reperer.
+
+          Identifiant de conversion fourni par le compte Google Ads :
+          AW-988988697/FiMqCOG794IdEJmKy9cD
+        {%- endcomment -%}
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = window.gtag || function () {
+            window.dataLayer.push(arguments);
+          };
+
+          gtag('event', 'conversion', {
+            'send_to': 'AW-988988697/FiMqCOG794IdEJmKy9cD'
+          });
+        </script>
         <h2 class="form-status form-status-list form__message" tabindex="-1" autofocus>
           {{- 'icon-success.svg' | inline_asset_content -}}
           {{ 'templates.contact.form.post_success' | t }}
