@@ -31,7 +31,7 @@
 {%- liquid
   assign tel = settings.spa_telephone | default: '+33160773700' | strip
   assign tel_lisible = section.settings.telephone_affiche | default: '01 60 77 37 00'
-  assign courriel = section.settings.courriel | default: 'iledefrance@linersfrance.fr'
+  assign courriel = section.settings.courriel | default: 'spas9@linersfrance.fr'
   assign whatsapp = settings.spa_whatsapp | strip | remove: ' ' | remove: '+' | remove: '.' | remove: '-'
 -%}
 
@@ -235,7 +235,7 @@
       "type": "text",
       "id": "courriel",
       "label": "Adresse e-mail du service après-vente",
-      "default": "iledefrance@linersfrance.fr"
+      "default": "spas9@linersfrance.fr"
     },
     {
       "type": "text",

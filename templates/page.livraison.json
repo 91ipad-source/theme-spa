@@ -159,7 +159,7 @@
         "padding_top": 32,
         "padding_bottom": 40,
         "titre": "À la réception de la livraison",
-        "texte": "<p>Vérifiez l'état apparent du spa et de son emballage <strong>en présence du transporteur ou de notre équipe</strong>. En cas d'anomalie ou de dommage apparent, <strong>des réserves précises et détaillées doivent être inscrites sur le document de livraison</strong> — c'est ce document qui fera foi. Des photographies du produit et de son emballage facilitent le traitement du dossier.</p><p>Signalez-nous toute anomalie dans les meilleurs délais à <a href=\"mailto:iledefrance@linersfrance.fr\">iledefrance@linersfrance.fr</a>.</p><p>Les délais et droits légaux applicables au consommateur restent naturellement applicables. Lorsque le transporteur ne lui a pas effectivement permis de vérifier l'état du produit lors de la livraison, le délai légal applicable à certaines réclamations contre le transporteur peut notamment être porté à 10 jours.</p>"
+        "texte": "<p>Vérifiez l'état apparent du spa et de son emballage <strong>en présence du transporteur ou de notre équipe</strong>. En cas d'anomalie ou de dommage apparent, <strong>des réserves précises et détaillées doivent être inscrites sur le document de livraison</strong> — c'est ce document qui fera foi. Des photographies du produit et de son emballage facilitent le traitement du dossier.</p><p>Signalez-nous toute anomalie dans les meilleurs délais à <a href=\"mailto:spas9@linersfrance.fr\">spas9@linersfrance.fr</a>.</p><p>Les délais et droits légaux applicables au consommateur restent naturellement applicables. Lorsque le transporteur ne lui a pas effectivement permis de vérifier l'état du produit lors de la livraison, le délai légal applicable à certaines réclamations contre le transporteur peut notamment être porté à 10 jours.</p>"
       }
     },
     "ch2": {
@@ -308,7 +308,7 @@
         "raison_sociale": "SPAS9 | LINERS FRANCE",
         "adresse": "16 rue de l'Orme, 91540 Fontenay-le-Vicomte",
         "telephone": "+33 (0)1 60 77 37 00",
-        "courriel": "iledefrance@linersfrance.fr",
+        "courriel": "spas9@linersfrance.fr",
         "bouton_1": "Demander un devis",
         "lien_1": "/pages/mon-projet-spa",
         "bouton_2": "Nous contacter",
