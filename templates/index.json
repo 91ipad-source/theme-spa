@@ -255,7 +255,7 @@
         "bouton"
       ],
       "settings": {
-        "image": "shopify://shop_images/SPAS9_showroom.jpg",
+        "image": "shopify://shop_images/spas9-showroom-comparer-les-modeles.png",
         "height": "adapt",
         "desktop_image_width": "medium",
         "layout": "image_first",
