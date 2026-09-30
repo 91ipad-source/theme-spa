@@ -49,25 +49,26 @@ body {
   break-after: page; page-break-after: always;
 }
 
-/* Bandeau */
+/* Bandeau : logo à gauche, gamme à droite */
 .bandeau {
-  height: 17mm; flex: none;
+  height: 22mm; flex: none;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 14mm;
-  background: var(--marine); color: #fff;
+  background: #fff; color: var(--marine);
+  border-bottom: .35mm solid var(--trait);
 }
-.marque { font-weight: 800; font-size: 9mm; letter-spacing: .06em; line-height: 1; }
-.marque span { color: var(--ciel); }
-.badge {
-  display: flex; align-items: center; gap: 2.2mm;
-  font-size: 3.6mm; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+.logo { height: 13mm; width: auto; display: block; }
+.gamme {
+  text-align: right; font-size: 6.2mm; font-weight: 800; line-height: 1.05; color: var(--marine);
 }
-.badge .point { width: 2.4mm; height: 2.4mm; border-radius: 50%; background: var(--ciel); box-shadow: 0 0 0 1.2mm rgba(47, 180, 229, .28); }
+.gamme span {
+  display: block; font-size: 3.2mm; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--bleu);
+}
 
 /* Visuel */
 .visuel {
   position: relative; flex: none;
-  height: 86mm;
+  height: 84mm;
   background:
     radial-gradient(ellipse 70% 60% at 50% 58%, #fff 0%, rgba(255,255,255,0) 70%),
     linear-gradient(180deg, var(--brume) 0%, #d6ecf6 100%);
@@ -79,12 +80,6 @@ body {
   background: linear-gradient(90deg, var(--bleu), var(--ciel));
 }
 .visuel img { max-width: 100%; max-height: 100%; object-fit: contain; filter: drop-shadow(0 4mm 5mm rgba(15, 58, 90, .18)); }
-.gamme {
-  position: absolute; top: 6mm; left: 14mm;
-  background: #fff; color: var(--bleu);
-  border: .35mm solid var(--trait); border-radius: 20mm;
-  padding: 1.4mm 4mm; font-size: 3.4mm; font-weight: 700; letter-spacing: .04em;
-}
 
 /* Corps */
 .corps { flex: 1; padding: 6mm 14mm 0; display: flex; flex-direction: column; min-height: 0; }
@@ -166,11 +161,11 @@ body {
 
 <section class="affiche">
   <header class="bandeau">
-    <div class="marque">SPAS<span>9</span></div>
+    <img class="logo" src="https://cdn.shopify.com/s/files/1/1077/6399/0858/files/logo-spas9-propre_5501aabd-3cdd-46a7-88d5-9e35daeec8f4.png?v=1789777108&width=800" alt="SPAS9">
+    <div class="gamme"><span>Gamme</span>Plug &amp; Play</div>
   </header>
 
   <div class="visuel">
-    <span class="gamme">Gamme Plug &amp; Play</span>
     <img src="https://cdn.shopify.com/s/files/1/1077/6399/0858/files/SpaDuo_a13831fb-0324-479a-8a60-fe00f317b569.png?v=1789641841&width=1400" alt="Spa Duo">
   </div>
 
@@ -216,11 +211,11 @@ body {
 
 <section class="affiche">
   <header class="bandeau">
-    <div class="marque">SPAS<span>9</span></div>
+    <img class="logo" src="https://cdn.shopify.com/s/files/1/1077/6399/0858/files/logo-spas9-propre_5501aabd-3cdd-46a7-88d5-9e35daeec8f4.png?v=1789777108&width=800" alt="SPAS9">
+    <div class="gamme"><span>Gamme</span>Plug &amp; Play</div>
   </header>
 
   <div class="visuel">
-    <span class="gamme">Gamme Plug &amp; Play</span>
     <img src="https://cdn.shopify.com/s/files/1/1077/6399/0858/files/SpaDoto.png?v=1789340541&width=1400" alt="Spa Doto">
   </div>
 
@@ -266,11 +261,11 @@ body {
 
 <section class="affiche">
   <header class="bandeau">
-    <div class="marque">SPAS<span>9</span></div>
+    <img class="logo" src="https://cdn.shopify.com/s/files/1/1077/6399/0858/files/logo-spas9-propre_5501aabd-3cdd-46a7-88d5-9e35daeec8f4.png?v=1789777108&width=800" alt="SPAS9">
+    <div class="gamme"><span>Gamme</span>Plug &amp; Play</div>
   </header>
 
   <div class="visuel">
-    <span class="gamme">Gamme Plug &amp; Play</span>
     <img src="https://cdn.shopify.com/s/files/1/1077/6399/0858/files/SpaProto2.png?v=1789343975&width=1400" alt="Spa Proto 2">
   </div>
 
@@ -315,11 +310,11 @@ body {
 
 <section class="affiche">
   <header class="bandeau">
-    <div class="marque">SPAS<span>9</span></div>
+    <img class="logo" src="https://cdn.shopify.com/s/files/1/1077/6399/0858/files/logo-spas9-propre_5501aabd-3cdd-46a7-88d5-9e35daeec8f4.png?v=1789777108&width=800" alt="SPAS9">
+    <div class="gamme"><span>Gamme</span>Chronos</div>
   </header>
 
   <div class="visuel">
-    <span class="gamme">Gamme Chronos</span>
     <img src="https://cdn.shopify.com/s/files/1/1077/6399/0858/files/SpaCalypso_b16fc06d-3acf-459c-8384-3c1934778bb9.png?v=1789347750&width=1400" alt="Spa Calypso">
   </div>
 
@@ -365,11 +360,11 @@ body {
 
 <section class="affiche">
   <header class="bandeau">
-    <div class="marque">SPAS<span>9</span></div>
+    <img class="logo" src="https://cdn.shopify.com/s/files/1/1077/6399/0858/files/logo-spas9-propre_5501aabd-3cdd-46a7-88d5-9e35daeec8f4.png?v=1789777108&width=800" alt="SPAS9">
+    <div class="gamme"><span>Gamme</span>Plug &amp; Play</div>
   </header>
 
   <div class="visuel">
-    <span class="gamme">Gamme Plug &amp; Play</span>
     <img src="https://cdn.shopify.com/s/files/1/1077/6399/0858/files/SpaDoroPlus.png?v=1789349463&width=1400" alt="Spa Doro Plus">
   </div>
 
@@ -415,11 +410,11 @@ body {
 
 <section class="affiche">
   <header class="bandeau">
-    <div class="marque">SPAS<span>9</span></div>
+    <img class="logo" src="https://cdn.shopify.com/s/files/1/1077/6399/0858/files/logo-spas9-propre_5501aabd-3cdd-46a7-88d5-9e35daeec8f4.png?v=1789777108&width=800" alt="SPAS9">
+    <div class="gamme"><span>Gamme</span>Full Therapeutic</div>
   </header>
 
   <div class="visuel">
-    <span class="gamme">Gamme Full Therapeutic</span>
     <img src="https://cdn.shopify.com/s/files/1/1077/6399/0858/files/SpaPanopeFull_e0768885-6d31-4f84-bbb7-3de54c01b273.png?v=1789347438&width=1400" alt="Spa Panopé FULL Thérapeutique">
   </div>
 
