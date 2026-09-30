@@ -16,8 +16,9 @@
       "settings": {
         "largeur": "plein",
         "image": "shopify://shop_images/Bandeau_SPAS9_Liners_France_magasin.jpg",
+        "image_mobile": "shopify://shop_images/bandeau-magasin-mobile.jpg",
         "show_on_mobile": true,
-        "image_alt": "Le magasin de LINERS FRANCE à Fontenay-le-Vicomte, où SPAS9 expose ses spas : piscine, spa et bien-être"
+        "image_alt": "LINERS FRANCE à Fontenay-le-Vicomte, marque spa SPAS9 : deux accès, l'entrée magasin pour le conseil et l'entrée arrière pour les livraisons et les retraits"
       }
     },
     "footer": {
