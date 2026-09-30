@@ -9,8 +9,8 @@
   raison de les faire chercher.
 
   D'OÙ VIENNENT LES DONNÉES. Uniquement des métachamps produit : places,
-  configuration, encombrement, hauteur, jets, volume d'eau, poids, pompes et
-  gamme. Rien n'est écrit en dur ici. Une valeur corrigée dans la fiche
+  configuration, encombrement, hauteur, jets, volume d'eau, poids,
+  raccordement electrique, pompes et gamme. Rien n'est écrit en dur ici. Une valeur corrigée dans la fiche
   produit se répercute donc sur le comparateur sans toucher au code, et un
   spa ajouté à la collection y apparaît tout seul.
 
@@ -307,6 +307,7 @@
               "jets": {{ mf.jets.value | json }},
               "volume": {{ mf.volume_eau.value | json }},
               "poids": {{ mf.poids.value | json }},
+              "raccordement": {{ mf.raccordement.value | json }},
               "pompes": {{ mf.pompes.value | json }},
               "electronique": {{ mf.electronique.value | json }},
               "equipements": {{ mf.equipements.value | json }},
@@ -437,6 +438,7 @@
       { cle: 'jets', libelle: 'Jets' },
       { cle: 'volume', libelle: 'Volume d’eau', unite: ' L' },
       { cle: 'poids', libelle: 'Poids à vide', unite: ' kg' },
+      { cle: 'raccordement', libelle: 'Raccordement électrique' },
       { cle: 'pompes', libelle: 'Pompes' },
       { cle: 'electronique', libelle: 'Électronique' },
       { cle: 'equipements', libelle: 'Équipements' },

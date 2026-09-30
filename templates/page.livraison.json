@@ -185,7 +185,7 @@
         "padding_top": 16,
         "padding_bottom": 24,
         "titre": "Spas Plug & Play",
-        "texte": "<p>Les modèles <strong>Plug &amp; Play</strong> sont conçus pour fonctionner selon les prescriptions électriques prévues par leur fabricant.</p><p>L'installation électrique utilisée doit dans tous les cas être adaptée, conforme et protégée conformément à la réglementation applicable et aux préconisations du fabricant.</p>"
+        "texte": "<p>Les modèles <strong>Plug &amp; Play</strong> se raccordent sur une <strong>prise dédiée de 16 A</strong>. Aucune ligne n'est à tirer depuis le tableau, et aucun électricien n'a besoin d'intervenir avant notre venue.</p><p>L'installation électrique utilisée doit dans tous les cas être adaptée, conforme et protégée conformément à la réglementation applicable et aux préconisations du fabricant.</p>"
       }
     },
     "p_elec_dediee": {
@@ -197,7 +197,7 @@
         "padding_top": 24,
         "padding_bottom": 24,
         "titre": "Spas nécessitant une alimentation dédiée",
-        "texte": "<p>Pour les spas qui ne sont pas Plug &amp; Play, une <strong>ligne électrique dédiée</strong> doit impérativement être préparée avant notre intervention.</p><p>Cette ligne doit être réalisée par un <strong>électricien habilité</strong>, depuis le tableau électrique général du logement jusqu'à l'emplacement prévu pour le spa, conformément aux caractéristiques techniques du modèle installé et aux normes électriques en vigueur.</p><p>Au niveau de l'emplacement du spa, prévoyez environ <strong>3 mètres de câble supplémentaire</strong> : c'est ce qui nous permet d'effectuer correctement le raccordement à l'intérieur du spa.</p><p>Lorsque LINERS FRANCE réalise l'installation, <strong>le raccordement final du câble au spa est effectué par nos soins</strong>. En revanche, LINERS FRANCE ne réalise pas, sauf prestation spécifiquement prévue au devis, la création de la ligne électrique entre le tableau général et l'emplacement du spa.</p>"
+        "texte": "<p>Pour <strong>tous les autres spas</strong> — gammes Chronos et Full Therapeutic — une <strong>ligne électrique directe protégée par un disjoncteur de 32 A</strong> doit impérativement être préparée avant notre intervention. C'est le point qui fait reporter le plus d'installations : faites-la poser dès la commande, pas la veille de la livraison.</p><p>Cette ligne doit être réalisée par un <strong>électricien habilité</strong>, depuis le tableau électrique général du logement jusqu'à l'emplacement prévu pour le spa, conformément aux caractéristiques techniques du modèle installé et aux normes électriques en vigueur.</p><p>Au niveau de l'emplacement du spa, prévoyez environ <strong>3 mètres de câble supplémentaire</strong> : c'est ce qui nous permet d'effectuer correctement le raccordement à l'intérieur du spa.</p><p>Lorsque LINERS FRANCE réalise l'installation, <strong>le raccordement final du câble au spa est effectué par nos soins</strong>. En revanche, LINERS FRANCE ne réalise pas, sauf prestation spécifiquement prévue au devis, la création de la ligne électrique entre le tableau général et l'emplacement du spa.</p>"
       }
     },
     "p_acces": {
