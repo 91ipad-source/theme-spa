@@ -68,34 +68,43 @@ body {
 /* Visuel */
 .visuel {
   position: relative; flex: none;
-  height: 84mm;
+  height: 92mm;
   background:
     radial-gradient(ellipse 70% 60% at 50% 58%, #fff 0%, rgba(255,255,255,0) 70%),
     linear-gradient(180deg, var(--brume) 0%, #d6ecf6 100%);
   display: flex; align-items: center; justify-content: center;
-  padding: 6mm 14mm 4mm;
+  padding: 0;
+  overflow: hidden;
 }
 .visuel::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1.6mm;
   background: linear-gradient(90deg, var(--bleu), var(--ciel));
+  z-index: 1;
 }
-.visuel img { max-width: 100%; max-height: 100%; object-fit: contain; filter: drop-shadow(0 4mm 5mm rgba(15, 58, 90, .18)); }
+/* La photo produit est carrée, le spa occupe le centre et du vide l'entoure.
+   On l'agrandit (--zoom) pour que le spa prenne la largeur ; seul le vide
+   au-dessus et au-dessous est rogné, le spa garde ses proportions. */
+.visuel img {
+  position: absolute; left: 50%; top: 50%;
+  height: calc(100% * var(--zoom, 1.7)); width: auto; max-width: none;
+  transform: translate(-50%, -50%);
+}
 
 /* Corps */
 .corps { flex: 1; padding: 6mm 14mm 0; display: flex; flex-direction: column; min-height: 0; }
 .surtitre { font-size: 3.7mm; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--bleu); }
 .nom { font-size: 15mm; font-weight: 800; line-height: .95; letter-spacing: -.01em; margin: 1.5mm 0 3mm; }
 .nom--long { font-size: 11mm; line-height: 1.05; }
-.accroche { font-size: 4.3mm; line-height: 1.42; color: #2c4d66; max-width: 172mm; }
+.accroche { font-size: 4.15mm; line-height: 1.42; color: #2c4d66; max-width: 172mm; }
 
 .chiffres {
-  list-style: none; display: grid; grid-template-columns: repeat(4, 1fr);
-  margin: 4.5mm 0 4.5mm;
+  list-style: none; display: grid; grid-template-columns: repeat(5, 1fr);
+  margin: 4mm 0 4mm;
   border-top: .35mm solid var(--trait); border-bottom: .35mm solid var(--trait);
 }
 .chiffres li { padding: 3.2mm 0 3mm; text-align: center; }
 .chiffres li + li { border-left: .35mm solid var(--trait); }
-.chiffres strong { display: block; font-size: 7.4mm; font-weight: 800; line-height: 1.05; color: var(--marine); white-space: nowrap; }
+.chiffres strong { display: block; font-size: 6.8mm; font-weight: 800; line-height: 1.05; color: var(--marine); white-space: nowrap; }
 .chiffres span { display: block; margin-top: .6mm; font-size: 3.2mm; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--gris); }
 
 .titre-fiche { font-size: 3.6mm; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--bleu); margin-bottom: 1.5mm; }
@@ -165,7 +174,7 @@ body {
     <div class="gamme"><span>Gamme</span>Plug &amp; Play</div>
   </header>
 
-  <div class="visuel">
+  <div class="visuel" style="--zoom: 1.7">
     <img src="https://cdn.shopify.com/s/files/1/1077/6399/0858/files/SpaDuo_a13831fb-0324-479a-8a60-fe00f317b569.png?v=1789641841&width=1400" alt="Spa Duo">
   </div>
 
@@ -177,6 +186,7 @@ body {
     <ul class="chiffres">
       <li><strong>2</strong><span>places</span></li>
       <li><strong>38</strong><span>jets</span></li>
+      <li><strong>1</strong><span>pompe</span></li>
       <li><strong>135 × 200</strong><span>cm au sol</span></li>
       <li><strong>81</strong><span>cm de haut</span></li>
     </ul>
@@ -215,7 +225,7 @@ body {
     <div class="gamme"><span>Gamme</span>Plug &amp; Play</div>
   </header>
 
-  <div class="visuel">
+  <div class="visuel" style="--zoom: 1.7">
     <img src="https://cdn.shopify.com/s/files/1/1077/6399/0858/files/SpaDoto.png?v=1789340541&width=1400" alt="Spa Doto">
   </div>
 
@@ -227,6 +237,7 @@ body {
     <ul class="chiffres">
       <li><strong>3</strong><span>places</span></li>
       <li><strong>28</strong><span>jets</span></li>
+      <li><strong>1</strong><span>pompe</span></li>
       <li><strong>170 × 210</strong><span>cm au sol</span></li>
       <li><strong>81</strong><span>cm de haut</span></li>
     </ul>
@@ -265,7 +276,7 @@ body {
     <div class="gamme"><span>Gamme</span>Plug &amp; Play</div>
   </header>
 
-  <div class="visuel">
+  <div class="visuel" style="--zoom: 1.7">
     <img src="https://cdn.shopify.com/s/files/1/1077/6399/0858/files/SpaProto2.png?v=1789343975&width=1400" alt="Spa Proto 2">
   </div>
 
@@ -277,6 +288,7 @@ body {
     <ul class="chiffres">
       <li><strong>5</strong><span>places</span></li>
       <li><strong>34</strong><span>jets</span></li>
+      <li><strong>1</strong><span>pompe</span></li>
       <li><strong>200 × 200</strong><span>cm au sol</span></li>
       <li><strong>90</strong><span>cm de haut</span></li>
     </ul>
@@ -314,7 +326,7 @@ body {
     <div class="gamme"><span>Gamme</span>Chronos</div>
   </header>
 
-  <div class="visuel">
+  <div class="visuel" style="--zoom: 1.7">
     <img src="https://cdn.shopify.com/s/files/1/1077/6399/0858/files/SpaCalypso_b16fc06d-3acf-459c-8384-3c1934778bb9.png?v=1789347750&width=1400" alt="Spa Calypso">
   </div>
 
@@ -326,6 +338,7 @@ body {
     <ul class="chiffres">
       <li><strong>3</strong><span>places</span></li>
       <li><strong>60</strong><span>jets</span></li>
+      <li><strong>2</strong><span>pompes</span></li>
       <li><strong>158 × 210</strong><span>cm au sol</span></li>
       <li><strong>77</strong><span>cm de haut</span></li>
     </ul>
@@ -364,7 +377,7 @@ body {
     <div class="gamme"><span>Gamme</span>Plug &amp; Play</div>
   </header>
 
-  <div class="visuel">
+  <div class="visuel" style="--zoom: 1.7">
     <img src="https://cdn.shopify.com/s/files/1/1077/6399/0858/files/SpaDoroPlus.png?v=1789349463&width=1400" alt="Spa Doro Plus">
   </div>
 
@@ -376,6 +389,7 @@ body {
     <ul class="chiffres">
       <li><strong>7</strong><span>places</span></li>
       <li><strong>31</strong><span>jets</span></li>
+      <li><strong>1</strong><span>pompe</span></li>
       <li><strong>Ø 200</strong><span>cm au sol</span></li>
       <li><strong>81</strong><span>cm de haut</span></li>
     </ul>
@@ -414,7 +428,7 @@ body {
     <div class="gamme"><span>Gamme</span>Full Therapeutic</div>
   </header>
 
-  <div class="visuel">
+  <div class="visuel" style="--zoom: 1.7">
     <img src="https://cdn.shopify.com/s/files/1/1077/6399/0858/files/SpaPanopeFull_e0768885-6d31-4f84-bbb7-3de54c01b273.png?v=1789347438&width=1400" alt="Spa Panopé FULL Thérapeutique">
   </div>
 
@@ -426,6 +440,7 @@ body {
     <ul class="chiffres">
       <li><strong>5</strong><span>places</span></li>
       <li><strong>100</strong><span>jets</span></li>
+      <li><strong>3</strong><span>pompes</span></li>
       <li><strong>230 × 230</strong><span>cm au sol</span></li>
       <li><strong>90</strong><span>cm de haut</span></li>
     </ul>
@@ -435,7 +450,7 @@ body {
       <div><dt>Configuration</dt><dd>2 allongées + 3 assises</dd></div>
       <div><dt>Dimensions</dt><dd>230 × 230 × 90 cm</dd></div>
       <div><dt>Volume d'eau</dt><dd>1 500 litres</dd></div>
-      <div><dt>Hydromassage</dt><dd>100 jets · blower chauffant cuisses et mollets</dd></div>
+      <div><dt>Hydromassage</dt><dd>100 jets · 3 pompes · 1 blower chauffant cuisses et mollets</dd></div>
       <div><dt>Électronique</dt><dd>Balboa · écran tactile Spa Touch</dd></div>
       <div><dt>Isolation</dt><dd>Cuve, parois, base et tuyauteries</dd></div>
       <div><dt>Équipements</dt><dd>Son 4.1 avec caisson · ozone UV · LED dans les jets · WiFi de série</dd></div>
