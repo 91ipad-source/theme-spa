@@ -20,36 +20,36 @@
     "mise-en-avant": {
       "type": "spa-mise-en-avant",
       "blocks": {
-        "facture": {
+        "seul": {
           "type": "argument",
           "settings": {
-            "texte": "<strong>On s'en aperçoit sur la facture</strong>, six mois plus tard — jamais sur le spa."
+            "texte": "<strong>Une personne suffit.</strong> Le vérin hydraulique accompagne le mouvement dans les deux sens : on ne porte pas, on guide."
           }
         },
-        "dimensions": {
+        "place": {
           "type": "argument",
           "settings": {
-            "texte": "<strong>Quatre dimensions seulement</strong> : 160 × 210, 200 × 200, 220 × 220 et 230 × 230 cm. Le Duo, le Doto et le Doro Plus n'en font pas partie."
+            "texte": "<strong>70 cm libres derrière le spa</strong>, 125 cm pour être à l'aise. C'est le seul vrai point bloquant : mesurez avant de commander."
           }
         },
-        "matiere": {
+        "montage": {
           "type": "argument",
           "settings": {
-            "texte": "Structure multicouche haute densité, tissu résistant au gel, à l'humidité et aux UV. Se pose et se retire seul."
+            "texte": "<strong>Montage sans perçage</strong>, en 15 à 30 minutes : la plaque se glisse sous le spa et tient par son poids. Seule exception de la gamme, le Doro Plus — sa cuve est ronde, aucun lève-couverture ne s'y monte."
           }
         }
       },
       "block_order": [
-        "facture",
-        "dimensions",
-        "matiere"
+        "seul",
+        "place",
+        "montage"
       ],
       "settings": {
-        "produit": "couverture-isothermique-spa",
-        "etiquette": "À prévoir en premier",
-        "titre": "Couverture isothermique",
-        "accroche": "C'est la pièce qui s'use le plus vite, et la seule dont la panne ne se voit pas : la mousse prend l'humidité, la couverture s'alourdit, et la résistance se met à tourner en continu sans rien signaler.",
-        "libelle_bouton": "Voir la couverture",
+        "produit": "leve-couverture-hydraulique-rogue",
+        "etiquette": "Ce qui change le quotidien",
+        "titre": "Lève-couverture hydraulique Rogue",
+        "accroche": "Deux fois par bain, on tire une couverture de plusieurs dizaines de kilos et on la pose par terre — où elle ramasse le gravier qui finira par rayer l'acrylique, et où elle retient l'eau jusqu'à ce que la mousse n'isole plus rien. Le vérin la redresse contre le spa : elle ne touche plus le sol, et elle s'égoutte.",
+        "libelle_bouton": "Voir le lève-couverture",
         "color_scheme": "scheme-1",
         "padding_top": 36,
         "padding_bottom": 8
