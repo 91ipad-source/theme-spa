@@ -337,6 +337,8 @@
     "contact": {
       "type": "spa-contact-carte",
       "settings": {
+        "video": "shopify://files/showroom-spas9.mp4",
+        "video_poster": "shopify://shop_images/showroom-spas9-poster.jpg",
         "surtitre": "Nous trouver",
         "titre": "Fixer un créneau",
         "texte": "<p>Pour fixer un créneau et vous assurer qu'un modèle précis sera visible le jour de votre venue, écrivez-nous ou appelez-nous. Un parking est à votre disposition devant le magasin.</p>",

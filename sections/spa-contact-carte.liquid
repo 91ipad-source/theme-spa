@@ -107,9 +107,100 @@
           </p>
         {%- endif -%}
       </div>
+
+      {%- comment -%}
+        LA VIDEO NE SE TELECHARGE QUE SI ON ARRIVE JUSQU'A ELLE.
+
+        preload="none" et pas d'attribut autoplay : le navigateur ne va
+        chercher un seul octet qu'au moment ou le script appelle play().
+        Cette carte est en bas d'une page longue — la majorite des
+        visiteurs ne descend jamais jusque-la, et ceux-la ne paient rien.
+
+        muted, loop et playsinline ne sont pas des preferences. Sans muted
+        la lecture automatique est refusee par tous les navigateurs, et
+        sans playsinline iOS ouvre la video en plein ecran par-dessus la
+        page. Les trois vont ensemble ou rien ne marche.
+
+        On ne garde que les rendus mp4 : Shopify fournit aussi du HLS,
+        que seul Safari lit sans lecteur JavaScript.
+      {%- endcomment -%}
+      {%- assign video = section.settings.video -%}
+      {%- if video != blank -%}
+        <div class="spa-contact-carte__video">
+          <video
+            class="spa-contact-carte__video-el"
+            muted
+            loop
+            playsinline
+            preload="none"
+            disablepictureinpicture
+            {% if section.settings.video_poster != blank -%}
+              poster="{{ section.settings.video_poster | image_url: width: 720 }}"
+            {%- endif %}
+            {% if video.alt != blank -%}
+              aria-label="{{ video.alt | escape }}"
+            {%- endif %}
+          >
+            {%- comment -%}
+              UN SEUL RENDU, CHOISI ICI.
+
+              Shopify transcode en 480p, 720p et 1080p. Un navigateur ne
+              choisit pas le meilleur <source> : il prend le premier qu'il
+              sait lire. Les trois etant du mp4, il servirait le 480p a
+              tout le monde. On designe donc le rendu nous-memes : le plus
+              petit d'au moins 720 px de haut, ce qui couvre une colonne de
+              24 rem sur un ecran a forte densite sans payer le 1080p.
+            {%- endcomment -%}
+            {%- assign retenue = null -%}
+            {%- for source in video.sources -%}
+              {%- if source.format == 'mp4' and source.height >= 720 -%}
+                {%- if retenue == null or source.height < retenue.height -%}
+                  {%- assign retenue = source -%}
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if retenue == null -%}
+              {%- for source in video.sources -%}
+                {%- if source.format == 'mp4' -%}
+                  {%- if retenue == null or source.height > retenue.height -%}
+                    {%- assign retenue = source -%}
+                  {%- endif -%}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+            {%- if retenue != null -%}
+              <source src="{{ retenue.url }}" type="{{ retenue.mime_type }}">
+            {%- endif -%}
+          </video>
+        </div>
+      {%- endif -%}
     </div>
   </div>
 </div>
+
+{%- if section.settings.video != blank -%}
+  <script>
+    /* Lecture quand la video entre dans le champ, pause quand elle en sort.
+       Une video qui tourne hors ecran consomme de la batterie pour rien.
+       Sans IntersectionObserver — navigateurs anciens — on ne fait rien :
+       l'affiche reste, et c'est un defaut acceptable. */
+    (function () {
+      var el = document.querySelector('#shopify-section-{{ section.id }} .spa-contact-carte__video-el');
+      if (!el || !('IntersectionObserver' in window)) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      new IntersectionObserver(function (entrees) {
+        entrees.forEach(function (e) {
+          if (e.isIntersecting) {
+            var p = el.play();
+            if (p && p.catch) p.catch(function () {});
+          } else if (!el.paused) {
+            el.pause();
+          }
+        });
+      }, { threshold: 0.25 }).observe(el);
+    })();
+  </script>
+{%- endif -%}
 
 {% schema %}
 {
@@ -204,6 +295,22 @@
     {
       "type": "header",
       "content": "Mise en page"
+    },
+    {
+      "type": "header",
+      "content": "Vidéo"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Vidéo",
+      "info": "Sans son, en boucle. Elle ne se charge que lorsque le visiteur atteint la carte."
+    },
+    {
+      "type": "image_picker",
+      "id": "video_poster",
+      "label": "Image d'attente",
+      "info": "Affichée avant la lecture. Sans elle, le bloc reste vide au chargement."
     },
     {
       "type": "color_scheme",

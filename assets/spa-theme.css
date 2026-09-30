@@ -5113,11 +5113,60 @@ a, span, label, summary, button, blockquote, figcaption,
   align-items: center;
 }
 
+/* LA VIDEO DU SHOWROOM.
+
+   Format vertical, filme au telephone. Sur un telephone justement, une
+   verticale en pleine largeur ferait 700 px de haut et repousserait les
+   boutons hors de l'ecran : elle est donc bornee a 22rem et centree. Ce
+   sont les boutons qui comptent ici, pas la video.
+
+   aspect-ratio reserve la place avant que le fichier n'arrive. Sans lui,
+   le bloc se deplierait d'un coup au chargement et ferait sauter la page
+   sous le pouce de quelqu'un qui vise deja « Prendre rendez-vous ». */
+.spa-contact-carte__video {
+  width: 100%;
+  max-width: 22rem;
+  margin-inline: auto;
+}
+
+.spa-contact-carte__video-el {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 716 / 1280;
+  border-radius: var(--r-lg, 1.2rem);
+  object-fit: cover;
+  background: var(--deep-soft, #2b3a44);
+}
+
 @media screen and (min-width: 750px) {
   .spa-contact-carte__boite {
     grid-template-columns: 1.2fr 1fr;
     align-items: center;
     padding: 4rem;
+  }
+
+  /* A cette largeur la boite n'a que deux colonnes : la video passe sous
+     les deux, centree, plutot que de serrer le texte. */
+  .spa-contact-carte__video {
+    grid-column: 1 / -1;
+    max-width: 24rem;
+  }
+}
+
+/* A partir de 1100 px la boite tient trois colonnes. La video prend la
+   troisieme, a cote de l'adresse et des boutons — c'est la qu'elle sert :
+   on lit l'adresse, on voit l'endroit, on prend rendez-vous. */
+@media screen and (min-width: 1100px) {
+  .spa-contact-carte__boite {
+    grid-template-columns: 1.15fr 0.85fr auto;
+  }
+
+  .spa-contact-carte__video {
+    grid-column: auto;
+    width: 24rem;
+    max-width: none;
+    margin-inline: 0;
   }
 }
 
