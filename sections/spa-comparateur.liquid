@@ -108,13 +108,26 @@
           <div class="spa-comparo__choix">
             <label class="spa-comparo__puce">
               <input type="checkbox" data-comparo-porte>
-              <span>Passe une porte</span>
+              <span>Hauteur sous 80&nbsp;cm</span>
             </label>
             <label class="spa-comparo__puce">
               <input type="checkbox" data-comparo-dispo>
               <span>Disponible</span>
             </label>
           </div>
+          {%- comment -%}
+            POURQUOI « HAUTEUR SOUS 80 CM » ET PLUS « PASSE UNE PORTE ». Le
+            filtre a toujours trié sur la hauteur de cuve, seule donnée
+            fabricant disponible : annoncer « passe une porte » promettait un
+            trajet entier sur la foi d'une seule mesure. Le critère est
+            maintenant écrit tel qu'il est calculé, et la limite du
+            raisonnement est dite juste en dessous.
+          {%- endcomment -%}
+          <p class="spa-comparo__contrainte-note">
+            Un spa de moins de 80&nbsp;cm de haut, posé sur chant, franchit une porte
+            standard. La hauteur ne décide pas du reste&nbsp;: angles, paliers, portail et
+            largeur de passage se mesurent sur le trajet complet.
+          </p>
         </fieldset>
 
         <div class="spa-comparo__barre">

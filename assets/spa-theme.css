@@ -2411,6 +2411,18 @@ a, span, label, summary, button, blockquote, figcaption,
   gap: 0.8rem;
 }
 
+/* La note sous les contraintes dit ce que le filtre mesure vraiment. Elle
+   reste alignee sur la colonne du groupe et ne s'etire pas sur toute la
+   largeur : au-dela d'une quarantaine de caracteres, une note de bas de
+   filtre ne se lit plus. */
+.spa-comparo__contrainte-note {
+  max-width: 34rem;
+  margin: 0.9rem 0 0;
+  color: var(--deep-soft);
+  font-size: 1.2rem;
+  line-height: var(--lh-note, 1.5);
+}
+
 /* La puce est un bouton visuel ; la case ou le bouton radio reste present
    pour le clavier et les lecteurs d'ecran, simplement rendu invisible. */
 .spa-comparo__puce {
