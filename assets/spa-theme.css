@@ -5674,7 +5674,7 @@ h1.h2.center {
 }
 
 /* --------------------------------------------------------------------------
-   50. CONTACT : LES COORDONNEES ET LE FORMULAIRE DANS LE PREMIER ECRAN
+   52. CONTACT : LES COORDONNEES ET LE FORMULAIRE DANS LE PREMIER ECRAN
    (section spa-contact-tete)
 
    La page contact s'ouvrait sur une grande image, puis empilait visite,
@@ -5969,7 +5969,7 @@ h1.h2.center {
 }
 
 /* --------------------------------------------------------------------------
-   51. FICHE PRODUIT : LE RESUME, LES DEUX AUTRES CHEMINS, LE TABLEAU
+   53. FICHE PRODUIT : LE RESUME, LES DEUX AUTRES CHEMINS, LE TABLEAU
    (snippets spa-fiche-resume, spa-fiche-actions, spa-fiche-technique)
 
    Le premier ecran d'une fiche portait le nom, le prix et l'achat — rien sur
@@ -6121,7 +6121,7 @@ h1.h2.center {
 }
 
 /* --------------------------------------------------------------------------
-   52. PRESTATIONS : UN BLOC PAR PRESTATION, ET CE QUI EST DEJA AU PANIER
+   54. PRESTATIONS : UN BLOC PAR PRESTATION, ET CE QUI EST DEJA AU PANIER
    -------------------------------------------------------------------------- */
 
 /* L'ECART ENTRE PRESTATIONS CHANGE DE PORTEUR. Chaque etiquette vit
@@ -6193,7 +6193,7 @@ h1.h2.center {
 }
 
 /* --------------------------------------------------------------------------
-   53. COMPARATEUR : LA BARRE DE SELECTION ET LE FACE-A-FACE SUR TELEPHONE
+   55. COMPARATEUR : LA BARRE DE SELECTION ET LE FACE-A-FACE SUR TELEPHONE
 
    Cocher deux modeles construisait la comparaison sous la liste — donc hors
    de l'ecran, sans que rien ne dise qu'elle existait. Une barre fixee rappelle
@@ -6363,7 +6363,7 @@ h1.h2.center {
 }
 
 /* --------------------------------------------------------------------------
-   54. CATALOGUE : LA BARRE DE FILTRES (section spa-catalogue-filtres)
+   56. CATALOGUE : LA BARRE DE FILTRES (section spa-catalogue-filtres)
 
    Le catalogue ne filtrait que sur la disponibilite et le prix — les deux
    criteres qui ne font renoncer personne. Places, gamme et « a decouvrir au
@@ -6547,13 +6547,13 @@ h1.h2.center {
    une seule classe suffirait a la battre — c'est exactement ce qui est arrive
    sur les champs du formulaire de contact. Deux classes ici, pour que le
    filtre du catalogue ne depende pas d'une absence de declaration chez Dawn.
-   Voir aussi « .spa-ctete .field[hidden] », section 50. */
+   Voir aussi « .spa-ctete .field[hidden] », section 52. */
 .grid__item[hidden] {
   display: none;
 }
 
 /* --------------------------------------------------------------------------
-   55. SHOWROOM : LES MODELES EXPOSES (section spa-showroom-modeles)
+   57. SHOWROOM : LES MODELES EXPOSES (section spa-showroom-modeles)
 
    La liste elle-meme reutilise .spa-expo, deja dessinee section 15 : elle
    remplace un bloc de contenu ecrit a la main, pas sa mise en forme. Seuls le
