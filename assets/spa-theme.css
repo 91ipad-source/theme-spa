@@ -5647,40 +5647,62 @@ h1.h2.center {
    alors que la courbe, elle, avance moins vite. C'est pour cela qu'un chiffre
    fixe ne pouvait pas marcher.
 
-   --banniere-zone-claire EST LE SEUL REGLAGE A TOUCHER. Il dit ou commence la
-   courbe, en pourcentage de la largeur de l'image. Mesure a 45 % sur la photo
-   actuelle. La premiere valeur essayee, 42 %, etait prudente et laissait trop
-   d'air a droite du texte : les 45 % viennent d'une mesure faite sur une
-   capture de la page en situation. Dans la bande de hauteur qu'occupe le
-   texte, le spa ne commence jamais avant 45,8 % de la largeur ; la
-   respiration de 2,4 rem fait le reste. Si la photo est remplacee par une
-   autre decoupe, c'est cette valeur qu'on remesure.
+   45 % : LA SEULE VALEUR A REMESURER SI LA PHOTO CHANGE. Elle dit ou
+   commence le spa, en pourcentage de la largeur de l'image. La premiere
+   estimation, 42 %, faite a l'oeil avant d'avoir vu la page, laissait trop
+   d'air a droite du texte. Les 45 % viennent d'une mesure sur une capture en
+   situation : dans la bande de hauteur qu'occupe le texte, le spa ne commence
+   jamais avant 45,8 % de la largeur.
 
    La regle ne vise que la combinaison « sans cadre + aligne a gauche », qui
    est exactement le cas d'un texte pose sur la partie claire d'une photo.
    -------------------------------------------------------------------------- */
 
-@media screen and (min-width: 750px) {
-  /* TROIS CLASSES NE SUFFISAIENT PAS, ET C'EST UNE QUESTION D'ORDRE.
-     Dawn pose « .banner--content-align-left.banner--desktop-transparent
-     .banner__box { max-width: 68rem } » — exactement le meme poids que la
-     regle ci-dessous. A poids egal, c'est la derniere chargee qui gagne, et
-     section-image-banner.css est appelee DANS la section, donc dans le corps
-     du document : apres spa-theme.css, qui est dans l'en-tete. La regle etait
-     donc ecrasee et le texte mordait toujours sur le spa. « .banner » en tete
-     ajoute la classe qui tranche. */
-  .banner.banner--desktop-transparent.banner--content-align-left .banner__box {
-    /* 5 rem : la marge laterale que Dawn donne a .page-width au-dela de
-       750 px. Pas la gouttiere du theme, qui vaut 4,8 rem et ne s'applique
-       pas a ce conteneur-ci. 120 rem : la largeur maximale de la page. */
-    --banniere-zone-claire: 45vw;
-    --banniere-decalage: max(5rem, (100vw - 120rem) / 2);
-    --banniere-respiration: 2.4rem;
+/* TROIS CLASSES NE SUFFISAIENT PAS, ET C'EST UNE QUESTION D'ORDRE. Dawn pose
+   « .banner--content-align-left.banner--desktop-transparent .banner__box
+   { max-width: 68rem } » — exactement le meme poids que les regles ci-dessous.
+   A poids egal, c'est la derniere chargee qui gagne, et section-image-banner.css
+   est appelee DANS la section, donc dans le corps du document : apres
+   spa-theme.css, qui est dans l'en-tete. « .banner » en tete ajoute la classe
+   qui tranche.
 
-    max-width: min(
-      68rem,
-      calc(var(--banniere-zone-claire) - var(--banniere-decalage) - var(--banniere-respiration))
-    );
+   ET LE CALCUL EST ECRIT EN DEUX TEMPS, SANS VARIABLE NI FONCTION IMBRIQUEE.
+   La premiere version passait par trois proprietes personnalisees, un min() et
+   un max() imbriques dans un calc(). Elle etait juste sur le papier et n'a
+   jamais pris : une declaration que le navigateur refuse de lire est
+   silencieusement ignoree, et celle de Dawn reprenait la main. Deux soustractions
+   suffisent, et chaque regle porte d'abord une valeur fixe de repli — si le
+   calc() tombait a son tour, le bloc resterait borne au lieu de s'etaler sur le
+   spa.
+
+   D'OU VIENNENT LES CHIFFRES. 45vw : la ou commence le spa, mesure sur une
+   capture de la page — dans la bande de hauteur qu'occupe le texte, il ne
+   commence jamais avant 45,8 % de la largeur. 5rem : la marge laterale que Dawn
+   donne a .page-width au-dela de 750 px. 2,4rem : la respiration entre le texte
+   et le spa. Soit 45vw - 5rem - 2,4rem = 45vw - 7,4rem.
+
+   AU-DELA DE 1300 PX, LE CONTENEUR SE CENTRE et sa marge gauche grandit plus
+   vite que la zone claire : 45vw - (100vw - 120rem) / 2 - 2,4rem, qui se
+   simplifie en 57,6rem - 5vw. Les deux formules se rejoignent exactement a
+   1300 px, a 511 px de large. La place disponible DIMINUE ensuite quand l'ecran
+   s'elargit, ce qu'aucune largeur fixe n'aurait su faire.
+
+   SI LA PHOTO CHANGE, les deux formules se refont a partir du nouveau
+   pourcentage : largeur = zone claire - 5rem - 2,4rem en dessous de 1300 px,
+   et zone claire - (100vw - 120rem) / 2 - 2,4rem au-dessus. Le point de
+   bascule est la largeur ou la moitie du debordement atteint 5rem, soit
+   1300 px pour une page bornee a 120rem. */
+@media screen and (min-width: 750px) {
+  .banner.banner--desktop-transparent.banner--content-align-left .banner__box {
+    max-width: 26rem;
+    max-width: calc(45vw - 7.4rem);
+  }
+}
+
+@media screen and (min-width: 1300px) {
+  .banner.banner--desktop-transparent.banner--content-align-left .banner__box {
+    max-width: 42rem;
+    max-width: calc(57.6rem - 5vw);
   }
 }
 
