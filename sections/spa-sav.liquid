@@ -74,8 +74,7 @@
         <p class="spa-sav__contact-titre">Nous joindre</p>
         <ul class="spa-sav__moyens" role="list">
           <li>
-            {%- capture tel_lien -%}{%- render 'spa-tel', numero: tel -%}{%- endcapture -%}
-            <a href="tel:{{ tel_lien | strip }}">{{ tel_lisible }}</a>
+            <a href="tel:{{ tel | remove: ' ' }}">{{ tel_lisible }}</a>
           </li>
           <li>
             <a href="mailto:{{ courriel }}">{{ courriel }}</a>
