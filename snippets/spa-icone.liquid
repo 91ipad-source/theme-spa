@@ -63,6 +63,15 @@
   {%- when 'expertise' -%}
     <circle cx="12" cy="12" r="3.4"/>
     <path d="M10.4 2.6h3.2v2.6l2.2.9 1.9-1.9 2.2 2.2-1.9 1.9.9 2.2h2.6v3.2h-2.6l-.9 2.2 1.9 1.9-2.2 2.2-1.9-1.9-2.2.9v2.6h-3.2v-2.6l-2.2-.9-1.9 1.9-2.2-2.2 1.9-1.9-.9-2.2H2.6v-3.2h2.6l.9-2.2-1.9-1.9 2.2-2.2 1.9 1.9 2.2-.9z"/>
+  {%- comment -%}
+    « comparer » : deux colonnes et une barre de regard entre elles. Dessine
+    comme les autres au trait fin de 1,6, pour que le picto du lien vers le
+    comparateur ne detonne pas a cote de ceux du catalogue.
+  {%- endcomment -%}
+  {%- when 'comparer' -%}
+    <rect x="3" y="4.4" width="7" height="15.2" rx="1.2"/>
+    <rect x="14" y="4.4" width="7" height="15.2" rx="1.2"/>
+    <path d="M10.8 9.2h2.4M10.8 12h2.4M10.8 14.8h2.4"/>
   {%- when 'showroom' -%}
     <path d="M12 21.4c0-.1 7-7.4 7-11.9a7 7 0 1 0-14 0c0 4.5 7 11.8 7 11.9z"/>
     <circle cx="12" cy="9.6" r="3"/>

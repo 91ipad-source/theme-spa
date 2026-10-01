@@ -6191,3 +6191,363 @@ h1.h2.center {
 .spa-prestation__conditions-corps p:last-child {
   margin-bottom: 0;
 }
+
+/* --------------------------------------------------------------------------
+   53. COMPARATEUR : LA BARRE DE SELECTION ET LE FACE-A-FACE SUR TELEPHONE
+
+   Cocher deux modeles construisait la comparaison sous la liste — donc hors
+   de l'ecran, sans que rien ne dise qu'elle existait. Une barre fixee rappelle
+   les modeles retenus et porte l'action qui mene au tableau.
+   -------------------------------------------------------------------------- */
+
+.spa-comparo__selection {
+  position: fixed;
+  z-index: 11;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-top: 1px solid rgba(15, 58, 90, 0.12);
+  background: var(--white);
+  box-shadow: 0 -2px 16px rgba(15, 58, 90, 0.12);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+/* ELLE SE CALE AU-DESSUS DE LA BARRE D'APPEL, PAS DESSUS. Sur telephone,
+   spa-contact-rapide occupe deja le bas de l'ecran sur 6,4 rem : deux barres
+   fixees au meme endroit se cacheraient l'une l'autre. Son z-index est de 10,
+   celui-ci de 11 — l'ordre importe peu puisqu'elles ne se chevauchent plus,
+   mais il garde la barre de comparaison au-dessus en cas de debordement. */
+@media screen and (max-width: 749px) {
+  .spa-comparo__selection {
+    bottom: calc(6.4rem + env(safe-area-inset-bottom, 0px));
+    padding-bottom: 0;
+  }
+}
+
+.spa-comparo__selection-corps {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.6rem;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding: 1.2rem var(--gutter);
+}
+
+.spa-comparo__selection-titre {
+  margin: 0;
+  color: var(--deep-soft);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.spa-comparo__selection-compte {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--sky-deep);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.spa-comparo__selection-choix {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.spa-comparo__selection-puce {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.6rem 0.5rem 1.2rem;
+  border-radius: var(--r-pill);
+  background: var(--mist);
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+/* La croix de retrait : une vraie cible tactile de 2,8 rem, pas un caractere
+   de 1,4 rem qu'on manque une fois sur trois au pouce. */
+.spa-comparo__selection-retirer {
+  display: grid;
+  place-items: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--deep);
+  cursor: pointer;
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.spa-comparo__selection-retirer:hover,
+.spa-comparo__selection-retirer:focus-visible {
+  background: var(--water);
+}
+
+.spa-comparo__selection-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.spa-comparo__selection-voir[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.spa-comparo__selection-vider {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--deep-soft);
+  cursor: pointer;
+  font-size: 1.3rem;
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+.spa-comparo__selection-vider:hover {
+  color: var(--deep);
+}
+
+/* L'indication de defilement ne concerne que les petits ecrans. */
+.spa-comparo__duel-glisser {
+  display: none;
+}
+
+@media screen and (max-width: 749px) {
+  .spa-comparo__duel-glisser {
+    display: block;
+    margin: 0 0 0.8rem;
+    color: var(--deep-soft);
+    font-size: 1.2rem;
+    font-style: italic;
+  }
+
+  /* Le tableau defile, et la colonne des criteres reste. Sans elle, au bout
+     de deux colonnes on lit deux valeurs sans savoir de quoi elles parlent. */
+  .spa-comparo__duel-corps {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .spa-comparo__duel-table {
+    min-width: 52rem;
+  }
+
+  .spa-comparo__duel-table tbody th[scope='row'],
+  .spa-comparo__duel-table thead tr > td:first-child,
+  .spa-comparo__duel-table tfoot tr > td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    min-width: 13rem;
+    background: var(--white);
+  }
+
+  /* La ligne qui differe garde son aplat jusque sous la colonne collee :
+     sinon le fond blanc de celle-ci casserait le reperage visuel. */
+  .spa-comparo__differe th[scope='row'] {
+    background: var(--mist);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   54. CATALOGUE : LA BARRE DE FILTRES (section spa-catalogue-filtres)
+
+   Le catalogue ne filtrait que sur la disponibilite et le prix — les deux
+   criteres qui ne font renoncer personne. Places, gamme et « a decouvrir au
+   showroom » viennent des memes metachamps que le comparateur, et la barre
+   emprunte sa forme a celle du comparateur : meme page, memes gestes.
+   -------------------------------------------------------------------------- */
+
+.spa-catfiltres {
+  padding-top: var(--pt);
+  padding-bottom: var(--pb);
+}
+
+.spa-catfiltres__corps {
+  display: grid;
+  gap: 1.6rem 3.2rem;
+  padding: 2rem 2.4rem;
+  border-radius: var(--r-md);
+  background: var(--mist);
+}
+
+@media screen and (min-width: 750px) {
+  .spa-catfiltres__corps {
+    grid-template-columns: repeat(3, minmax(0, auto));
+    align-items: start;
+    justify-content: start;
+  }
+
+  /* La barre du compte et du comparateur prend toute la largeur sous les
+     trois groupes : posee en quatrieme colonne, elle les ecraserait. */
+  .spa-catfiltres__barre {
+    grid-column: 1 / -1;
+  }
+}
+
+.spa-catfiltres__groupe {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.spa-catfiltres__legende {
+  padding: 0 0 0.8rem;
+  color: var(--deep-soft);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.spa-catfiltres__choix {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+/* Meme puce que le comparateur : le bouton radio ou la case reste present
+   pour le clavier et les lecteurs d'ecran, simplement rendu invisible. */
+.spa-catfiltres__puce {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem 1.4rem;
+  border: 1px solid rgba(15, 58, 90, 0.18);
+  border-radius: var(--r-pill);
+  background: var(--white);
+  cursor: pointer;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.spa-catfiltres__puce input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+}
+
+.spa-catfiltres__puce:hover {
+  border-color: var(--sky-deep);
+}
+
+.spa-catfiltres__puce:has(input:checked) {
+  border-color: var(--deep);
+  background: var(--deep);
+  color: var(--white);
+}
+
+/* Repli pour les navigateurs sans :has() — l'anneau de focus suffit alors a
+   savoir ou l'on est, et le compte dit combien de spas restent. */
+.spa-catfiltres__puce:focus-within {
+  outline: 0.2rem solid var(--sky-deep);
+  outline-offset: 0.2rem;
+}
+
+.spa-catfiltres__barre {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem 1.6rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid rgba(15, 58, 90, 0.12);
+}
+
+.spa-catfiltres__compte {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.spa-catfiltres__reset {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--deep-soft);
+  cursor: pointer;
+  font-size: 1.3rem;
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+.spa-catfiltres__reset:hover {
+  color: var(--deep);
+}
+
+/* Le comparateur est une action de navigation, pas une note de bas de page :
+   il se voit, et il se voit la ou l'oeil revient apres chaque filtre. */
+.spa-catfiltres__comparer {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-left: auto;
+  padding: 0.8rem 1.6rem;
+  border-radius: var(--r-pill);
+  background: var(--deep);
+  color: var(--white);
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.spa-catfiltres__comparer:hover,
+.spa-catfiltres__comparer:focus-visible {
+  background: var(--sky-deep);
+  color: var(--white);
+}
+
+.spa-catfiltres__comparer-icone {
+  display: grid;
+  place-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.spa-catfiltres__comparer-icone svg {
+  width: 100%;
+  height: 100%;
+}
+
+.spa-catfiltres__vide {
+  margin: 1.6rem 0 0;
+  font-size: 1.5rem;
+}
+
+.spa-catfiltres__vide button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--sky-deep);
+  cursor: pointer;
+  font-size: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+/* GARDE-FOU DE SPECIFICITE SUR LA VIGNETTE MASQUEE. Dawn ne declare pas de
+   « display » sur .grid__item aujourd'hui, donc la regle de navigateur
+   « [hidden] { display: none } » s'applique et le filtrage fonctionne. Mais
+   une seule classe suffirait a la battre — c'est exactement ce qui est arrive
+   sur les champs du formulaire de contact. Deux classes ici, pour que le
+   filtre du catalogue ne depende pas d'une absence de declaration chez Dawn.
+   Voir aussi « .spa-ctete .field[hidden] », section 50. */
+.grid__item[hidden] {
+  display: none;
+}

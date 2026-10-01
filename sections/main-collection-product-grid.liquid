@@ -162,8 +162,31 @@
                   {%- if forloop.index > 2 -%}
                     {%- assign lazy_load = true -%}
                   {%- endif -%}
+                  {%- comment -%}
+                    LES QUATRE DONNEES QUE LA BARRE DE FILTRES LIT.
+
+                    Elles sont posees sur la vignette, et non reconstituees en
+                    JavaScript depuis le texte affiche : un filtre qui lit
+                    « 5 places » dans un libelle se casse le jour ou le libelle
+                    change. Ce sont les memes metachamps que le comparateur
+                    utilise, pour que les deux pages ne puissent pas se
+                    contredire.
+
+                    Les attributs sortent meme vides : la barre de filtres les
+                    cherche pour savoir quelles vignettes sont filtrables, et un
+                    accessoire sans metachamp doit rester visible plutot que de
+                    disparaitre au premier filtre.
+                  {%- endcomment -%}
+                  {%- liquid
+                    assign mf_carte = product.metafields.custom
+                    assign nb_places = mf_carte.places.value | split: ' ' | first
+                  -%}
                   <li
                     class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                    data-spa-places="{{ nb_places | escape }}"
+                    data-spa-gamme="{{ mf_carte.gamme.value | escape }}"
+                    data-spa-showroom="{% if mf_carte.expose_showroom.value %}1{% else %}0{% endif %}"
+                    data-spa-dispo="{% if product.available %}1{% else %}0{% endif %}"
                     {% if settings.animations_reveal_on_scroll %}
                       data-cascade
                       style="--animation-order: {{ forloop.index }};"

@@ -296,6 +296,17 @@
             <span>Afficher uniquement les différences</span>
           </label>
         </div>
+        {%- comment -%}
+          L'INDICATION DE DEFILEMENT NE SORT QUE SUR TELEPHONE. Trois colonnes
+          — le critere et les deux modeles — ne tiennent pas dans 360 px. Le
+          tableau defile donc horizontalement, et un defilement qu'on ne
+          soupconne pas revient a cacher la moitie du tableau : la colonne des
+          criteres reste collee a gauche pendant le defilement, et cette ligne
+          dit qu'il y a quelque chose a aller chercher.
+        {%- endcomment -%}
+        <p class="spa-comparo__duel-glisser" aria-hidden="true">
+          Faites glisser le tableau pour voir les deux colonnes
+        </p>
         <div class="spa-comparo__duel-corps" data-comparo-duel-corps></div>
         <p class="spa-comparo__note" data-comparo-note></p>
       </section>
@@ -331,6 +342,48 @@
         ]
       </script>
     {%- endif -%}
+  </div>
+
+  {%- comment -%}
+    LA BARRE DE SELECTION : LE FACE-A-FACE EST EN BAS DE PAGE, IL FAUT POUVOIR
+    Y ALLER.
+
+    Cocher deux modeles construisait bien la comparaison, mais celle-ci
+    s'affiche sous la liste — donc hors de l'ecran, et rien ne disait qu'elle
+    existait. Cette barre reste visible des qu'un modele est coche : elle
+    rappelle lesquels sont retenus, permet de les retirer un par un, et porte
+    l'action qui mene au tableau.
+
+    ELLE EST FIXEE, ET ELLE LAISSE PASSER LA BARRE D'APPEL. Sur telephone, la
+    barre de contact rapide occupe deja le bas de l'ecran sur 6,4 rem. Celle-ci
+    se cale au-dessus, a la meme hauteur exactement — deux barres superposees
+    au meme endroit cacheraient l'une l'autre.
+
+    SANS JAVASCRIPT ELLE NE SORT PAS, et c'est sans consequence : les cases a
+    cocher ne font rien non plus sans script, et le tableau comme les cartes
+    restent entierement lisibles.
+  {%- endcomment -%}
+  <div class="spa-comparo__selection" data-comparo-selection hidden>
+    <div class="spa-comparo__selection-corps">
+      <p class="spa-comparo__selection-titre">
+        Comparer
+        <span class="spa-comparo__selection-compte" data-comparo-selection-compte></span>
+      </p>
+      <ul class="spa-comparo__selection-choix" data-comparo-selection-choix role="list"></ul>
+      <div class="spa-comparo__selection-actions">
+        <button
+          type="button"
+          class="button spa-comparo__selection-voir"
+          data-comparo-voir
+          disabled
+        >
+          Voir la comparaison
+        </button>
+        <button type="button" class="spa-comparo__selection-vider" data-comparo-vider>
+          Tout effacer
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -478,8 +531,70 @@
       });
     }
 
+    /* ---- La barre de selection ----------------------------------------- */
+
+    var barre = racine.querySelector('[data-comparo-selection]');
+    var barreChoix = racine.querySelector('[data-comparo-selection-choix]');
+    var barreCompte = racine.querySelector('[data-comparo-selection-compte]');
+    var boutonVoir = racine.querySelector('[data-comparo-voir]');
+    var boutonVider = racine.querySelector('[data-comparo-vider]');
+
+    function dessinerBarre() {
+      if (!barre || !barreChoix) return;
+
+      barre.hidden = choisis.length === 0;
+      if (barreCompte) {
+        barreCompte.textContent = choisis.length === 1 ? '1 modèle sur 2' : '2 modèles sur 2';
+      }
+      if (boutonVoir) boutonVoir.disabled = choisis.length < 2;
+
+      barreChoix.innerHTML = '';
+      choisis.forEach(function (id) {
+        var spa = spas[id];
+        if (!spa) return;
+        var li = document.createElement('li');
+        li.className = 'spa-comparo__selection-puce';
+
+        var nom = document.createElement('span');
+        nom.textContent = spa.nom;
+        li.appendChild(nom);
+
+        /* Retirer un modele depuis la barre : sans ce bouton, il faudrait
+           remonter chercher sa case dans la liste — exactement le va-et-vient
+           que cette barre existe pour supprimer. */
+        var retirer = document.createElement('button');
+        retirer.type = 'button';
+        retirer.className = 'spa-comparo__selection-retirer';
+        retirer.setAttribute('aria-label', 'Retirer le ' + spa.nom + ' de la comparaison');
+        retirer.textContent = '\u00d7';
+        retirer.addEventListener('click', function () {
+          choisis = choisis.filter(function (autre) { return autre !== id; });
+          dessiner();
+        });
+        li.appendChild(retirer);
+
+        barreChoix.appendChild(li);
+      });
+    }
+
+    if (boutonVoir) {
+      boutonVoir.addEventListener('click', function () {
+        if (choisis.length < 2) return;
+        duel.hidden = false;
+        duel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
+    if (boutonVider) {
+      boutonVider.addEventListener('click', function () {
+        choisis = [];
+        dessiner();
+      });
+    }
+
     function dessiner() {
       synchroniserCases();
+      dessinerBarre();
 
       if (choisis.length < 2) {
         duel.hidden = true;
@@ -564,8 +679,15 @@
         }
       }
 
+      /* LE DEFILEMENT AUTOMATIQUE NE SE DECLENCHE QU'A L'APPARITION.
+         Il etait appele a chaque dessin : cocher « afficher uniquement les
+         differences » faisait sauter la page sous le doigt de quelqu'un qui
+         venait justement de cocher la case. Desormais la page ne bouge
+         qu'au moment ou le face-a-face apparait, et le bouton de la barre
+         de selection sert a y revenir quand on veut. */
+      var apparait = duel.hidden;
       duel.hidden = false;
-      duel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      if (apparait) duel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
     var bascule = racine.querySelector('[data-comparo-differences]');

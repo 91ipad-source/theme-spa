@@ -1,0 +1,286 @@
+{%- comment -%}
+  La barre de filtres du catalogue, au-dessus de la grille.
+
+  POURQUOI ELLE EXISTE. Le catalogue ne proposait que la disponibilité et le
+  prix — les deux critères qui ne font renoncer personne. Ce qui élimine un
+  spa, c'est le nombre de places, la gamme, et le fait de pouvoir aller
+  s'asseoir dedans avant d'acheter. Ces trois-là sont ici, et ils lisent
+  exactement les mêmes métachamps que le comparateur : les deux pages ne
+  peuvent pas se contredire.
+
+  POURQUOI PAS LES FILTRES NATIFS DE SHOPIFY. Un filtre sur métachamp se
+  configure dans l'application Search & Discovery, pas dans le thème. Les
+  définitions sont prêtes — places, gamme et « exposé au showroom » sont en
+  accès vitrine —, mais tant que l'application n'est pas configurée, la page
+  n'affiche rien de plus. Cette barre fonctionne sans elle.
+
+  ATTENTION SI LES FILTRES NATIFS SONT UN JOUR ACTIVES : la page afficherait
+  alors DEUX barres de filtres. Le réglage « Activer le filtrage » de la
+  grille est donc décoché dans le gabarit. Si l'un revient, l'autre doit
+  partir.
+
+  LES CHOIX SURVIVENT A UN ALLER-RETOUR. Ils s'écrivent dans l'adresse, après
+  le dièse : quelqu'un qui filtre sur cinq places, ouvre une fiche puis revient
+  en arrière retrouve sa sélection. Sans cela, le retour au catalogue
+  rebattrait les cartes à chaque visite de fiche.
+
+  SANS JAVASCRIPT, TOUS LES SPAS S'AFFICHENT. La barre disparaît et la grille
+  reste entière : un filtre est un raccourci, jamais une condition d'accès au
+  catalogue.
+
+  CE QUE CETTE BARRE NE SAIT PAS FAIRE. Elle filtre les vignettes présentes
+  dans la page, donc celles de la page courante si la collection est paginée.
+  À onze spas pour seize par page, la question ne se pose pas ; au-delà, il
+  faudra passer aux filtres natifs.
+{%- endcomment -%}
+
+{%- liquid
+  assign produits = collection.products
+  assign uid = section.id
+-%}
+
+<div
+  class="spa-catfiltres color-{{ section.settings.color_scheme }} gradient"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+  data-catfiltres
+  hidden
+>
+  <div class="page-width">
+    <form class="spa-catfiltres__corps" data-catfiltres-form>
+      <fieldset class="spa-catfiltres__groupe">
+        <legend class="spa-catfiltres__legende">Places</legend>
+        <div class="spa-catfiltres__choix">
+          <label class="spa-catfiltres__puce">
+            <input type="radio" name="places-{{ uid }}" value="" checked>
+            <span>Toutes</span>
+          </label>
+          {%- assign places_vues = '' -%}
+          {%- for produit in produits -%}
+            {%- assign nb = produit.metafields.custom.places.value | split: ' ' | first -%}
+            {%- if nb != blank -%}
+              {%- assign marqueur = '|' | append: nb | append: '|' -%}
+              {%- unless places_vues contains marqueur -%}
+                {%- assign places_vues = places_vues | append: marqueur -%}
+                <label class="spa-catfiltres__puce">
+                  <input type="radio" name="places-{{ uid }}" value="{{ nb }}">
+                  <span>{{ nb }}</span>
+                </label>
+              {%- endunless -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </fieldset>
+
+      <fieldset class="spa-catfiltres__groupe">
+        <legend class="spa-catfiltres__legende">Gamme</legend>
+        <div class="spa-catfiltres__choix">
+          <label class="spa-catfiltres__puce">
+            <input type="radio" name="gamme-{{ uid }}" value="" checked>
+            <span>Toutes</span>
+          </label>
+          {%- assign gammes_vues = '' -%}
+          {%- for produit in produits -%}
+            {%- assign gamme = produit.metafields.custom.gamme.value -%}
+            {%- if gamme != blank -%}
+              {%- assign marqueur = '|' | append: gamme | append: '|' -%}
+              {%- unless gammes_vues contains marqueur -%}
+                {%- assign gammes_vues = gammes_vues | append: marqueur -%}
+                <label class="spa-catfiltres__puce">
+                  <input type="radio" name="gamme-{{ uid }}" value="{{ gamme | escape }}">
+                  <span>{{ gamme | escape }}</span>
+                </label>
+              {%- endunless -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </fieldset>
+
+      <fieldset class="spa-catfiltres__groupe">
+        <legend class="spa-catfiltres__legende">Autres critères</legend>
+        <div class="spa-catfiltres__choix">
+          <label class="spa-catfiltres__puce">
+            <input type="checkbox" data-catfiltres-showroom>
+            <span>À découvrir au showroom</span>
+          </label>
+          <label class="spa-catfiltres__puce">
+            <input type="checkbox" data-catfiltres-dispo>
+            <span>Disponible</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="spa-catfiltres__barre">
+        <p class="spa-catfiltres__compte" data-catfiltres-compte aria-live="polite"></p>
+        <button type="button" class="spa-catfiltres__reset" data-catfiltres-reset hidden>
+          Tout afficher
+        </button>
+        {%- comment -%}
+          Le comparateur est une action de navigation, pas une note de bas de
+          page : il tient sa place dans la barre, a cote du compte, la ou l'oeil
+          revient apres chaque filtre.
+        {%- endcomment -%}
+        <a class="spa-catfiltres__comparer" href="{{ section.settings.lien_comparateur | default: '/pages/comparer-les-spas' }}">
+          <span class="spa-catfiltres__comparer-icone" aria-hidden="true">
+            {% render 'spa-icone', nom: 'comparer' %}
+          </span>
+          Comparer les spas
+        </a>
+      </div>
+    </form>
+
+    <p class="spa-catfiltres__vide" data-catfiltres-vide hidden>
+      Aucun spa ne correspond à ces critères. <button type="button" data-catfiltres-reset>Tout afficher</button>
+    </p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var racine = document.currentScript.previousElementSibling;
+    if (!racine || !racine.hasAttribute('data-catfiltres')) return;
+
+    /* La grille est rendue par une autre section. On ne la cherche donc pas
+       dans « racine » mais dans la page, et si elle n'y est pas la barre ne
+       s'affiche pas du tout : des filtres sans rien a filtrer ne servent qu'a
+       egarer. */
+    var grille = document.getElementById('product-grid');
+    if (!grille) return;
+
+    var vignettes = Array.prototype.slice.call(grille.querySelectorAll('[data-spa-places]'));
+    if (vignettes.length === 0) return;
+
+    racine.hidden = false;
+
+    var form = racine.querySelector('[data-catfiltres-form]');
+    var compte = racine.querySelector('[data-catfiltres-compte]');
+    var vide = racine.querySelector('[data-catfiltres-vide]');
+    var showroom = racine.querySelector('[data-catfiltres-showroom]');
+    var dispo = racine.querySelector('[data-catfiltres-dispo]');
+
+    function coche(prefixe) {
+      var champ = form.querySelector('input[name^="' + prefixe + '"]:checked');
+      return champ ? champ.value : '';
+    }
+
+    /* ---- L'adresse garde les choix ------------------------------------- */
+
+    function ecrireAdresse() {
+      var bouts = [];
+      if (coche('places')) bouts.push('places=' + encodeURIComponent(coche('places')));
+      if (coche('gamme')) bouts.push('gamme=' + encodeURIComponent(coche('gamme')));
+      if (showroom && showroom.checked) bouts.push('showroom=1');
+      if (dispo && dispo.checked) bouts.push('dispo=1');
+      var cible = bouts.length ? '#' + bouts.join('&') : window.location.pathname + window.location.search;
+      /* replaceState et non pushState : filtrer n'est pas naviguer, et on ne
+         veut pas que le bouton Retour parcoure dix etats de filtre avant de
+         sortir de la page. */
+      try { window.history.replaceState(null, '', cible); } catch (e) {}
+    }
+
+    function lireAdresse() {
+      var brut = (window.location.hash || '').replace(/^#/, '');
+      if (!brut) return;
+      var paires = {};
+      brut.split('&').forEach(function (bout) {
+        var p = bout.split('=');
+        if (p.length === 2) paires[p[0]] = decodeURIComponent(p[1]);
+      });
+
+      ['places', 'gamme'].forEach(function (cle) {
+        if (!paires[cle]) return;
+        var champ = form.querySelector('input[name^="' + cle + '"][value="' + paires[cle].replace(/"/g, '\\"') + '"]');
+        if (champ) champ.checked = true;
+      });
+      if (showroom && paires.showroom === '1') showroom.checked = true;
+      if (dispo && paires.dispo === '1') dispo.checked = true;
+    }
+
+    /* ---- Le filtrage ---------------------------------------------------- */
+
+    function filtrer() {
+      var places = coche('places');
+      var gamme = coche('gamme');
+      var visibles = 0;
+
+      vignettes.forEach(function (item) {
+        var ok = true;
+        if (places && item.dataset.spaPlaces !== places) ok = false;
+        if (gamme && item.dataset.spaGamme !== gamme) ok = false;
+        if (showroom && showroom.checked && item.dataset.spaShowroom !== '1') ok = false;
+        if (dispo && dispo.checked && item.dataset.spaDispo !== '1') ok = false;
+        item.hidden = !ok;
+        if (ok) visibles++;
+      });
+
+      var actif = places || gamme || (showroom && showroom.checked) || (dispo && dispo.checked);
+
+      if (compte) {
+        compte.textContent = visibles === 0
+          ? 'Aucun spa ne correspond'
+          : visibles + (visibles > 1 ? ' spas' : ' spa') + (actif ? ' sur ' + vignettes.length : '');
+      }
+      if (vide) vide.hidden = visibles !== 0;
+      racine.querySelectorAll('[data-catfiltres-reset]').forEach(function (bouton) {
+        bouton.hidden = !actif;
+      });
+
+      ecrireAdresse();
+    }
+
+    form.addEventListener('change', filtrer);
+
+    racine.querySelectorAll('[data-catfiltres-reset]').forEach(function (bouton) {
+      bouton.addEventListener('click', function () {
+        form.reset();
+        if (showroom) showroom.checked = false;
+        if (dispo) dispo.checked = false;
+        filtrer();
+      });
+    });
+
+    lireAdresse();
+    filtrer();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Catalogue — filtres",
+  "tag": "section",
+  "class": "spa-section",
+  "settings": [
+    {
+      "type": "url",
+      "id": "lien_comparateur",
+      "label": "Lien vers le comparateur"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Jeu de couleurs",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 8
+    }
+  ],
+  "presets": [{ "name": "Catalogue — filtres" }]
+}
+{% endschema %}
