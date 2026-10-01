@@ -27,13 +27,6 @@
           "type": "price",
           "settings": {}
         },
-        "paiement": {
-          "type": "text",
-          "settings": {
-            "text": "Payable en <strong>3 ou 4 chèques sans frais</strong>, à raison d'un par mois.",
-            "text_style": "body"
-          }
-        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -65,7 +58,7 @@
             "icon_1": "truck",
             "heading_1": "Livré et installé en Île-de-France et dans le Loiret",
             "icon_2": "price_tag",
-            "heading_2": "Carte bancaire, ou 3 à 4 chèques sans frais",
+            "heading_2": "Carte bancaire ou chèque, réglés à la commande",
             "icon_3": "map_pin",
             "heading_3": "Showroom à Fontenay-le-Vicomte (91)"
           }
@@ -98,14 +91,6 @@
             "content": "<p><strong>10 ans</strong> sur la structure, <strong>5 ans</strong> sur l'acrylique de la cuve, <strong>2 ans</strong> sur l'électronique et les pompes.</p><p>S'y ajoutent la garantie légale de conformité et la garantie des vices cachés, qui s'appliquent indépendamment de toute garantie commerciale. 100 % des pièces détachées sont disponibles.</p><p><a href=\"/pages/service-apres-vente\">Comment se passe le service après-vente</a> · <a href=\"/pages/conditions-generales-de-vente\">Conditions et exclusions de garantie</a></p>"
           }
         },
-        "tab_paiement": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Paiement en 3 ou 4 fois sans frais",
-            "icon": "price_tag",
-            "content": "<p>Vous pouvez régler par <strong>carte bancaire</strong>, ou en <strong>trois ou quatre chèques d'égal montant</strong> remis ensemble au moment de la commande. Le premier chèque est encaissé à la commande, les suivants au rythme d'un par mois.</p><p>Cette facilité est accordée <strong>sans frais ni intérêts</strong> : le montant total réglé est strictement égal au prix affiché. Aucun frais de dossier, aucune majoration.</p><p><a href=\"/pages/contact\">Contactez-nous</a> pour un règlement par chèque.</p>"
-          }
-        },
         "tab_showroom": {
           "type": "collapsible_tab",
           "settings": {
@@ -125,7 +110,6 @@
         "vendor",
         "title",
         "price",
-        "paiement",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
@@ -135,7 +119,6 @@
         "tab_prix",
         "tab_livraison",
         "tab_garantie",
-        "tab_paiement",
         "tab_showroom",
         "share"
       ],

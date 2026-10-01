@@ -22,14 +22,6 @@
             "fin": "2026-10-31"
           }
         },
-        "message-2": {
-          "type": "message",
-          "settings": {
-            "text": "Paiement en 3 ou 4 chèques sans frais",
-            "link": "",
-            "fin": ""
-          }
-        },
         "message-3": {
           "type": "message",
           "settings": {
@@ -49,7 +41,6 @@
       },
       "block_order": [
         "message-1",
-        "message-2",
         "message-3",
         "message-4"
       ],
