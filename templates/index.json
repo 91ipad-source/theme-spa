@@ -36,7 +36,7 @@
         "content_alignment": "center",
         "color_scheme": "scheme-1",
         "full_width": false,
-        "padding_top": 32,
+        "padding_top": 24,
         "padding_bottom": 8
       }
     },
@@ -317,14 +317,24 @@
       }
     },
     "banniere": {
-      "type": "image-banner",
+      "type": "spa-store-banner",
+      "settings": {
+        "image": "shopify://shop_images/spas9-accueil-avec-texte.webp",
+        "largeur": "plein",
+        "show_on_mobile": true,
+        "image_alt": "SPAS9 — Le bien-être, à la maison. Spa Proto 2 ROCA Spa, 5 places, 4 990 € TTC",
+        "link": ""
+      }
+    },
+    "actions": {
+      "type": "rich-text",
       "blocks": {
-        "actions": {
-          "type": "buttons",
+        "boutons": {
+          "type": "button",
           "settings": {
-            "button_label_1": "Découvrir nos spas",
-            "button_link_1": "/collections/tous-nos-spas",
-            "button_style_secondary_1": false,
+            "button_label": "Découvrir nos spas",
+            "button_link": "/collections/tous-nos-spas",
+            "button_style_secondary": false,
             "button_label_2": "Visiter le showroom",
             "button_link_2": "/pages/showroom-spa-essonne",
             "button_style_secondary_2": true
@@ -332,24 +342,21 @@
         }
       },
       "block_order": [
-        "actions"
+        "boutons"
       ],
       "settings": {
-        "image": "shopify://shop_images/spas9-accueil-avec-texte.webp",
-        "image_overlay_opacity": 0,
-        "image_height": "adapt",
-        "image_behavior": "none",
-        "desktop_content_position": "bottom-left",
-        "desktop_content_alignment": "left",
-        "show_text_box": false,
+        "desktop_content_position": "left",
+        "content_alignment": "left",
         "color_scheme": "scheme-1",
-        "mobile_content_alignment": "left",
-        "show_text_below": true
+        "full_width": false,
+        "padding_top": 20,
+        "padding_bottom": 4
       }
     }
   },
   "order": [
     "banniere",
+    "actions",
     "titre_accueil",
     "chiffres",
     "featured_collection",
