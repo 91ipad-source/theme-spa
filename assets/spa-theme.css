@@ -5658,7 +5658,15 @@ h1.h2.center {
    -------------------------------------------------------------------------- */
 
 @media screen and (min-width: 750px) {
-  .banner--desktop-transparent.banner--content-align-left .banner__box {
+  /* TROIS CLASSES NE SUFFISAIENT PAS, ET C'EST UNE QUESTION D'ORDRE.
+     Dawn pose « .banner--content-align-left.banner--desktop-transparent
+     .banner__box { max-width: 68rem } » — exactement le meme poids que la
+     regle ci-dessous. A poids egal, c'est la derniere chargee qui gagne, et
+     section-image-banner.css est appelee DANS la section, donc dans le corps
+     du document : apres spa-theme.css, qui est dans l'en-tete. La regle etait
+     donc ecrasee et le texte mordait toujours sur le spa. « .banner » en tete
+     ajoute la classe qui tranche. */
+  .banner.banner--desktop-transparent.banner--content-align-left .banner__box {
     /* 5 rem : la marge laterale que Dawn donne a .page-width au-dela de
        750 px. Pas la gouttiere du theme, qui vaut 4,8 rem et ne s'applique
        pas a ce conteneur-ci. 120 rem : la largeur maximale de la page. */
@@ -5670,6 +5678,19 @@ h1.h2.center {
       68rem,
       calc(var(--banniere-zone-claire) - var(--banniere-decalage) - var(--banniere-respiration))
     );
+  }
+}
+
+/* ENTRE 750 ET 1200 PX, LE TITRE DOIT MAIGRIR AVEC SA COLONNE. La zone claire
+   suit la largeur de la fenetre, mais la marge du conteneur, elle, ne descend
+   pas sous 5 rem : a 780 px de fenetre il ne reste que 254 px pour le texte.
+   « LE BIEN-ETRE, » a 39 px y occupe a lui seul 300 px et deborde, un mot ne
+   se coupant pas. Le titre suit donc la fenetre dans cette tranche, et
+   retrouve l'echelle du theme des que la place revient. */
+@media screen and (min-width: 750px) and (max-width: 1199px) {
+  .banner.banner--desktop-transparent.banner--content-align-left .banner__heading {
+    font-size: clamp(2.2rem, 3.4vw, 3.6rem);
+    line-height: var(--lh-titre);
   }
 }
 
