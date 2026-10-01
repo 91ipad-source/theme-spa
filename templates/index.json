@@ -9,38 +9,6 @@
  */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
-      "blocks": {
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Découvrir le Proto 2",
-            "button_link_1": "shopify://products/spa-roca-proto-lighting-5-personnes",
-            "button_style_secondary_1": false,
-            "button_label_2": "Voir tous nos spas",
-            "button_link_2": "shopify://collections/tous-nos-spas",
-            "button_style_secondary_2": true
-          }
-        }
-      },
-      "block_order": [
-        "button"
-      ],
-      "settings": {
-        "image": "shopify://shop_images/Banniere_Proto2.png",
-        "image_overlay_opacity": 0,
-        "image_height": "adapt",
-        "image_behavior": "none",
-        "desktop_content_position": "bottom-right",
-        "desktop_content_alignment": "right",
-        "show_text_box": false,
-        "color_scheme": "scheme-3",
-        "stack_images_on_mobile": false,
-        "mobile_content_alignment": "right",
-        "show_text_below": false
-      }
-    },
     "titre_accueil": {
       "type": "rich-text",
       "blocks": {
@@ -57,11 +25,23 @@
           "settings": {
             "text": "<p>Showroom et conseil à Fontenay-le-Vicomte (91)</p><p>Spas 2 à 7 places, livrés et installés en Île-de-France et dans le Loiret.</p>"
           }
+        },
+        "boutons": {
+          "type": "button",
+          "settings": {
+            "button_label": "Découvrir nos spas",
+            "button_link": "/collections/tous-nos-spas",
+            "button_style_secondary": false,
+            "button_label_2": "Visiter le showroom",
+            "button_link_2": "/pages/showroom-spa-essonne",
+            "button_style_secondary_2": true
+          }
         }
       },
       "block_order": [
         "titre",
-        "accroche"
+        "accroche",
+        "boutons"
       ],
       "settings": {
         "desktop_content_position": "center",
@@ -69,7 +49,7 @@
         "color_scheme": "scheme-1",
         "full_width": false,
         "padding_top": 40,
-        "padding_bottom": 8
+        "padding_bottom": 24
       }
     },
     "chiffres": {
@@ -347,10 +327,20 @@
         "padding_top": 48,
         "padding_bottom": 52
       }
+    },
+    "banniere": {
+      "type": "spa-store-banner",
+      "settings": {
+        "image": "shopify://shop_images/spas9-banniere-accueil-bien-etre-proto2.webp",
+        "largeur": "plein",
+        "show_on_mobile": false,
+        "image_alt": "Spa Proto 2 ROCA Spa, 5 places, vu de dessus sur une terrasse — « Le bien-être, à la maison », 4 990 € TTC",
+        "link": "/collections/tous-nos-spas"
+      }
     }
   },
   "order": [
-    "image_banner",
+    "banniere",
     "titre_accueil",
     "chiffres",
     "featured_collection",
