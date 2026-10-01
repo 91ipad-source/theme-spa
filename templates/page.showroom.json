@@ -257,17 +257,6 @@
         "padding_bottom": 24
       }
     },
-    "photo_magasin": {
-      "type": "spa-store-banner",
-      "settings": {
-        "image": "shopify://shop_images/Bandeau_SPAS9_Liners_France_magasin.jpg",
-        "image_mobile": "shopify://shop_images/bandeau-magasin-mobile.jpg",
-        "largeur": "plein",
-        "show_on_mobile": true,
-        "image_alt": "Les deux accès de LINERS FRANCE à Fontenay-le-Vicomte : l'entrée magasin à l'avant pour le conseil, l'entrée arrière pour les livraisons et les retraits",
-        "link": ""
-      }
-    },
     "p_retrait": {
       "type": "spa-prose",
       "settings": {
@@ -469,7 +458,6 @@
     "p_visite",
     "p_apporter",
     "p_venir",
-    "photo_magasin",
     "p_retrait",
     "criteres",
     "contact"
