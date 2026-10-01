@@ -295,13 +295,28 @@
       });
     }
 
-    /* Le motif peut arriver par l'URL : /pages/contact?motif=visite#demande */
+    /* Le motif ET le modele peuvent arriver par l'URL :
+       /pages/contact?motif=visite&modele=Pleuxaure#demande — c'est ce que
+       portent les liens « Le voir au showroom » des fiches produits. */
     try {
-      var demande = new URLSearchParams(window.location.search).get('motif');
+      var paires = new URLSearchParams(window.location.search);
+
+      var demande = paires.get('motif');
       if (demande) {
         for (var i = 0; i < motif.options.length; i++) {
           if (motif.options[i].getAttribute('data-cle') === demande) {
             motif.selectedIndex = i;
+            break;
+          }
+        }
+      }
+
+      var modele = paires.get('modele');
+      var liste = racine.querySelector('#ctete-modele');
+      if (modele && liste) {
+        for (var j = 0; j < liste.options.length; j++) {
+          if (liste.options[j].value === modele) {
+            liste.selectedIndex = j;
             break;
           }
         }

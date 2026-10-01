@@ -1,0 +1,43 @@
+{%- comment -%}
+  Les deux chemins qui ne passent pas par le panier, juste sous le prix.
+
+  POURQUOI ILS SONT LÀ, ET PAS PLUS BAS. Un spa à 12 000 € ne s'achète pas
+  toujours en trois clics : beaucoup veulent d'abord un devis incluant la
+  livraison chez eux, ou s'asseoir dedans. Ces deux demandes vivaient en bas
+  de fiche, dans des volets dépliables, pendant que le bouton d'achat
+  occupait le premier écran. Celui qui n'était pas prêt à payer tout de suite
+  n'avait rien à cliquer.
+
+  CE SONT DES LIENS, PAS DES BOUTONS, ET C'EST DÉLIBÉRÉ. L'achat en ligne
+  reste l'action principale et garde seul l'aspect d'un bouton. Deux liens
+  soulignés sous le prix se trouvent sans concurrencer le panier.
+
+  LE MODÈLE VOYAGE AVEC LE CLIC. Les deux liens portent ?modele=<nom> :
+  le formulaire de devis et celui du contact le présélectionnent à
+  l'arrivée. Personne ne devrait avoir à retrouver dans une liste le modèle
+  dont il vient de quitter la fiche.
+
+  LA VISITE NE S'OFFRE QUE POUR CE QUI EST EXPOSÉ. Le métachamp
+  expose_showroom commande ce second lien. Proposer de venir voir un modèle
+  absent du magasin, c'est organiser une déception à trois quarts d'heure de
+  route.
+
+  Paramètre : fiche_produit (obligatoire).
+{%- endcomment -%}
+
+{%- liquid
+  assign nom = fiche_produit.title | remove: 'Spa ' | split: ' - ' | first | strip
+  assign nom_url = nom | url_encode
+  assign expose = fiche_produit.metafields.custom.expose_showroom.value
+-%}
+
+<p class="spa-fiche-actions">
+  <a class="spa-fiche-actions__lien" href="/pages/mon-projet-spa?modele={{ nom_url }}">
+    Demander un devis pour ce spa
+  </a>
+  {%- if expose -%}
+    <a class="spa-fiche-actions__lien" href="/pages/contact?motif=visite&amp;modele={{ nom_url }}#demande">
+      Le voir au showroom
+    </a>
+  {%- endif -%}
+</p>

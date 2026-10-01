@@ -14,6 +14,26 @@
 
   Les prix ne sont pas ecrits en dur : ils viennent des fiches prestation.
   Changer un tarif dans l'admin suffit, le bloc suit.
+
+  LE PANIER EST CONSULTE, PAS SEULEMENT LES CASES. L'exclusion en JavaScript
+  ne voit que les cases de CETTE page. Quelqu'un qui ajoute un spa avec la
+  livraison seule, revient, puis ajoute un second spa avec le pack, se
+  retrouvait avec les deux au panier — et payait deux fois la meme
+  manutention. Le panier est donc lu ici, cote serveur, et une prestation
+  deja couverte par ce qui s'y trouve est desactivee avec sa raison ecrite.
+
+  CE VERROU SE POSE AU CHARGEMENT DE LA PAGE, ET C'EST SA LIMITE. Il ne suit
+  pas une modification faite dans le tiroir du panier sans quitter la fiche :
+  le bloc n'est pas re-rendu. Le cas qui compte — revenir sur une fiche avec
+  un panier deja garni — est couvert ; celui qui vide son panier dans le
+  tiroir et recoche aussitot devra recharger. Le filet reste le double
+  controle : exclusion entre les cases visibles, verrou sur le panier.
+
+  LES CONDITIONS SONT DEPLIABLES. Le pack portait huit lignes de conditions
+  en toutes lettres, juste au-dessus du bouton d'achat : le bloc pesait plus
+  lourd que le prix du spa. Une phrase visible dit ce que la prestation fait,
+  le reste s'ouvre a la demande. Le hors-grutage reste visible, lui, parce
+  que c'est de l'argent.
 {%- endcomment -%}
 
 {%- liquid
@@ -45,6 +65,24 @@
   {%- assign v_livraison = nil -%}
 {%- endif -%}
 
+{%- comment -%}
+  Ce qui est deja au panier. On compare sur le handle du produit et non sur
+  l'identifiant de variante : une prestation re-creee ou dont la variante
+  change garderait son handle, et le verrou tiendrait quand meme.
+{%- endcomment -%}
+{%- liquid
+  assign panier_simple = false
+  assign panier_pack = false
+  for article in cart.items
+    if article.product.handle == 'prestation-pack-livraison-installation-91'
+      assign panier_pack = true
+    endif
+    if article.product.handle == 'prestation-livraison-91' or article.product.handle == 'prestation-mise-en-service-91'
+      assign panier_simple = true
+    endif
+  endfor
+-%}
+
 {%- if v_livraison and v_service and v_pack -%}
   <script src="{{ 'spa-prestations.js' | asset_url }}" defer="defer"></script>
 
@@ -56,72 +94,118 @@
         <a href="{{ pages.contact.url | default: '/pages/contact' }}">Autres départements : nous consulter</a>.
       </p>
 
-      <label class="spa-prestation">
-        <input
-          type="checkbox"
-          class="spa-prestation__case"
-          data-variant-id="{{ presta_livraison.selected_or_first_available_variant.id }}"
-          data-exclusif="simple"
-        >
-        <span class="spa-prestation__corps">
-          <span class="spa-prestation__entete">
-            <span class="spa-prestation__nom">Livraison du spa</span>
-            <span class="spa-prestation__prix">
-              + {{ presta_livraison.selected_or_first_available_variant.price | money }}
-            </span>
-          </span>
-          <span class="spa-prestation__detail">
-            Transport jusqu'à devant chez vous. Le spa reste à déplacer jusqu'à son
-            emplacement par vos soins.
-          </span>
-        </span>
-      </label>
+      {%- comment -%}
+        LE DÉPLIABLE EST HORS DE L'ÉTIQUETTE, ET C'EST OBLIGATOIRE. Un
+        <details> placé dans un <label> fait cocher la case au moindre clic
+        sur son résumé : tout clic dans une étiquette active son champ. Chaque
+        prestation vit donc dans un bloc qui contient l'étiquette ET, à côté
+        d'elle, les conditions.
+      {%- endcomment -%}
 
-      <label class="spa-prestation">
-        <input
-          type="checkbox"
-          class="spa-prestation__case"
-          data-variant-id="{{ presta_service.selected_or_first_available_variant.id }}"
-          data-exclusif="simple"
-        >
-        <span class="spa-prestation__corps">
-          <span class="spa-prestation__entete">
-            <span class="spa-prestation__nom">Mise en service du spa</span>
-            <span class="spa-prestation__prix">
-              + {{ presta_service.selected_or_first_available_variant.price | money }}
+      <div class="spa-prestation-bloc">
+        <label class="spa-prestation{% if panier_pack %} spa-prestation--bloquee{% endif %}">
+          <input
+            type="checkbox"
+            class="spa-prestation__case"
+            data-variant-id="{{ presta_livraison.selected_or_first_available_variant.id }}"
+            data-exclusif="simple"
+            {% if panier_pack %}disabled{% endif %}
+          >
+          <span class="spa-prestation__corps">
+            <span class="spa-prestation__entete">
+              <span class="spa-prestation__nom">Livraison du spa</span>
+              <span class="spa-prestation__prix">
+                + {{ presta_livraison.selected_or_first_available_variant.price | money }}
+              </span>
             </span>
+            <span class="spa-prestation__detail">
+              Transport jusqu'à devant chez vous. Le spa reste à déplacer jusqu'à son
+              emplacement par vos soins.
+            </span>
+            {%- if panier_pack -%}
+              <span class="spa-prestation__verrou">
+                Déjà comprise dans le pack présent dans votre panier.
+              </span>
+            {%- endif -%}
           </span>
-          <span class="spa-prestation__detail">
-            Remplissage, réglages et premières explications d'entretien. Suppose le spa
-            déjà en place et raccordé.
-          </span>
-        </span>
-      </label>
+        </label>
+      </div>
 
-      <label class="spa-prestation spa-prestation--pack">
-        <input
-          type="checkbox"
-          class="spa-prestation__case"
-          data-variant-id="{{ presta_pack.selected_or_first_available_variant.id }}"
-          data-exclusif="pack"
-        >
-        <span class="spa-prestation__corps">
-          <span class="spa-prestation__entete">
-            <span class="spa-prestation__nom">Pack livraison et installation</span>
-            <span class="spa-prestation__prix">
-              + {{ presta_pack.selected_or_first_available_variant.price | money }}
+      <div class="spa-prestation-bloc">
+        <label class="spa-prestation{% if panier_pack %} spa-prestation--bloquee{% endif %}">
+          <input
+            type="checkbox"
+            class="spa-prestation__case"
+            data-variant-id="{{ presta_service.selected_or_first_available_variant.id }}"
+            data-exclusif="simple"
+            {% if panier_pack %}disabled{% endif %}
+          >
+          <span class="spa-prestation__corps">
+            <span class="spa-prestation__entete">
+              <span class="spa-prestation__nom">Mise en service du spa</span>
+              <span class="spa-prestation__prix">
+                + {{ presta_service.selected_or_first_available_variant.price | money }}
+              </span>
             </span>
+            <span class="spa-prestation__detail">
+              Remplissage, réglages et premières explications d'entretien. Suppose le spa
+              déjà en place et raccordé.
+            </span>
+            {%- if panier_pack -%}
+              <span class="spa-prestation__verrou">
+                Déjà comprise dans le pack présent dans votre panier.
+              </span>
+            {%- endif -%}
           </span>
-          <span class="spa-prestation__detail">
-            <strong>Le spa est déposé à l'emplacement prévu</strong>, manutention comprise,
-            puis raccordé, rempli et réglé. Vos accessoires sont montés — escalier et
-            lève‑couverture. L'accès est étudié avec vous avant de confirmer
-            la date. C'est la différence avec la livraison seule, qui s'arrête au seuil.
-            <strong>Hors grutage</strong> : si l'accès impose une grue, comptez un forfait
-            de 1 500 € en Essonne, ajouté au devis après l'étude de l'accès.
+        </label>
+      </div>
+
+      <div class="spa-prestation-bloc">
+        <label class="spa-prestation spa-prestation--pack{% if panier_simple %} spa-prestation--bloquee{% endif %}">
+          <input
+            type="checkbox"
+            class="spa-prestation__case"
+            data-variant-id="{{ presta_pack.selected_or_first_available_variant.id }}"
+            data-exclusif="pack"
+            {% if panier_simple %}disabled{% endif %}
+          >
+          <span class="spa-prestation__corps">
+            <span class="spa-prestation__entete">
+              <span class="spa-prestation__nom">Pack livraison et installation</span>
+              <span class="spa-prestation__prix">
+                + {{ presta_pack.selected_or_first_available_variant.price | money }}
+              </span>
+            </span>
+            <span class="spa-prestation__detail">
+              <strong>Le spa est déposé à l'emplacement prévu</strong>, manutention comprise,
+              puis raccordé, rempli et réglé. <strong>Hors grutage.</strong>
+            </span>
+            {%- if panier_simple -%}
+              <span class="spa-prestation__verrou">
+                Votre panier contient déjà une livraison ou une mise en service&nbsp;: le pack
+                les comprend toutes les deux. Retirez-la du panier pour choisir le pack.
+              </span>
+            {%- endif -%}
           </span>
-        </span>
-      </label>
+        </label>
+
+        <details class="spa-prestation__conditions">
+          <summary>Ce que le pack comprend, et ce qu'il ne comprend pas</summary>
+          <div class="spa-prestation__conditions-corps">
+            <p>
+              Vos accessoires sont montés — escalier et lève‑couverture. L'accès est
+              étudié avec vous avant que la date soit confirmée. C'est la différence avec
+              la livraison seule, qui s'arrête au seuil.
+            </p>
+            <p>
+              <strong>Le grutage n'est jamais compris.</strong> Lorsque l'accès impose une
+              grue, comptez un <strong>forfait de 1 500 € en Essonne</strong>, ajouté au
+              devis après l'étude de l'accès. Ce n'est pas une case à cocher&nbsp;: personne
+              ne peut savoir depuis chez soi si sa livraison imposera une grue.
+            </p>
+          </div>
+        </details>
+      </div>
 
       <p class="spa-prestations__note" data-spa-prestations-erreur hidden></p>
     </fieldset>

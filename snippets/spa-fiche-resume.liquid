@@ -1,0 +1,56 @@
+{%- comment -%}
+  Les quatre repères du premier écran, sous le titre du spa.
+
+  POURQUOI CE RÉSUMÉ EXISTE. Le premier écran d'une fiche portait le nom, le
+  prix, les coloris et l'achat — rien sur ce qu'on achète. Combien de places,
+  quelles assises, quelle emprise au sol : il fallait descendre sous les
+  longs textes pour le savoir, ou ouvrir le comparateur. Ces quatre valeurs
+  sont celles qui éliminent un modèle, et elles arrivent maintenant avant le
+  prix.
+
+  QUATRE, PAS QUATORZE. Le tableau complet est plus bas, au-dessus de la
+  description. Ici on ne garde que ce qui se juge d'un coup d'œil : la
+  capacité, la disposition des assises, l'emprise au sol et la gamme. Tout
+  vient de métachamps validés — rien n'est déduit, rien n'est arrondi.
+
+  Paramètre : fiche_produit (obligatoire).
+{%- endcomment -%}
+
+{%- liquid
+  assign mf = fiche_produit.metafields.custom
+  assign places = mf.places.value
+  assign configuration = mf.configuration.value
+  assign encombrement = mf.encombrement.value
+  assign gamme = mf.gamme.value
+-%}
+
+{%- if places != blank or configuration != blank or encombrement != blank or gamme != blank -%}
+  <ul class="spa-fiche-resume" role="list">
+    {%- if places != blank -%}
+      <li class="spa-fiche-resume__item">
+        <span class="spa-fiche-resume__label">Capacité</span>
+        <span class="spa-fiche-resume__valeur">{{ places | escape }}</span>
+      </li>
+    {%- endif -%}
+    {%- if configuration != blank -%}
+      <li class="spa-fiche-resume__item">
+        <span class="spa-fiche-resume__label">Assises</span>
+        <span class="spa-fiche-resume__valeur">{{ configuration | escape }}</span>
+      </li>
+    {%- endif -%}
+    {%- if encombrement != blank -%}
+      <li class="spa-fiche-resume__item">
+        <span class="spa-fiche-resume__label">Au sol</span>
+        <span class="spa-fiche-resume__valeur spa-fiche-resume__valeur--nombre">
+          {{- encombrement | escape | replace: ' ', '&nbsp;' -}}
+        </span>
+      </li>
+    {%- endif -%}
+    {%- if gamme != blank -%}
+      <li class="spa-fiche-resume__item">
+        <span class="spa-fiche-resume__label">Gamme</span>
+        <span class="spa-fiche-resume__valeur">{{ gamme | escape }}</span>
+      </li>
+    {%- endif -%}
+  </ul>
+{%- endif -%}

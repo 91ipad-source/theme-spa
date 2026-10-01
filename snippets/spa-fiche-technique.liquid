@@ -1,0 +1,191 @@
+{%- comment -%}
+  Le tableau des caractéristiques d'un spa, au-dessus des longs textes.
+
+  POURQUOI CE TABLEAU EXISTE. Les chiffres qui décident d'un achat —
+  encombrement, hauteur, jets, pompes, raccordement — étaient dispersés dans
+  les paragraphes de la description, dans un ordre qui changeait d'une fiche à
+  l'autre. Quelqu'un qui compare deux modèles devait relire deux textes pour
+  retrouver deux nombres. Ils tiennent maintenant au même endroit, dans le
+  même ordre, avec les mêmes libellés sur les onze fiches.
+
+  L'ORDRE EST CELUI D'UNE DÉCISION, PAS CELUI D'UNE FICHE FABRICANT. D'abord
+  qui tient dedans et comment on y est assis, ensuite si ça rentre chez vous,
+  ensuite ce qui masse, et seulement après l'équipement. Un acheteur élimine
+  un spa sur ses dimensions bien avant de compter ses haut-parleurs.
+
+  UNE LIGNE SANS DONNÉE NE S'AFFICHE PAS. Contrairement au comparateur, qui
+  dit « non précisé » parce qu'il met les modèles en regard et qu'un trou y
+  est une information, une fiche n'a pas à afficher une colonne de mentions
+  vides. Ce qui n'est pas confirmé par le fabricant est simplement absent, et
+  l'ordre des lignes restantes ne change pas.
+
+  LES POMPES GARDENT LES TERMES DU FABRICANT. « 2 pompes LX LP300 de 3 CV +
+  1 pompe de circulation LX JA50 + 1 blower chauffant » se lit tel quel : la
+  pompe de massage, la pompe de circulation et le blower sont trois choses
+  différentes, et les confondre dans un « 3 pompes » ferait croire à trois
+  fois le même massage.
+
+  Paramètre : fiche_produit (obligatoire).
+{%- endcomment -%}
+
+{%- liquid
+  assign mf = fiche_produit.metafields.custom
+
+  assign hauteur = ''
+  if mf.hauteur.value != blank
+    assign hauteur = mf.hauteur.value | append: ' cm'
+  endif
+
+  assign volume = ''
+  if mf.volume_eau.value != blank
+    assign volume = mf.volume_eau.value | append: ' L'
+  endif
+
+  assign poids = ''
+  if mf.poids.value != blank
+    assign poids = mf.poids.value | append: ' kg'
+  endif
+
+  assign jets = ''
+  if mf.jets.value != blank
+    assign jets = mf.jets.value | append: ''
+  endif
+
+  assign remplies = 0
+  assign valeurs = mf.places.value | append: mf.configuration.value | append: mf.encombrement.value | append: hauteur | append: jets | append: mf.pompes.value | append: volume | append: poids | append: mf.isolation.value | append: mf.electronique.value | append: mf.raccordement.value | append: mf.equipements.value | append: mf.coloris.value | append: mf.gamme.value
+  if valeurs != blank
+    assign remplies = 1
+  endif
+-%}
+
+{%- if remplies == 1 -%}
+  <div class="spa-fiche-tech">
+    <h2 class="spa-fiche-tech__titre">Caractéristiques</h2>
+
+    <dl class="spa-fiche-tech__liste">
+      {%- comment -%}
+        Chaque ligne suit le même schéma. L'espace insécable avant l'unité
+        évite qu'un « 200 » se retrouve seul en fin de ligne, séparé de ses
+        « cm » : la règle vaut partout sur le site, elle vaut ici aussi.
+      {%- endcomment -%}
+
+      {%- if mf.places.value != blank -%}
+        <div class="spa-fiche-tech__ligne">
+          <dt>Places</dt>
+          <dd>{{ mf.places.value | escape }}</dd>
+        </div>
+      {%- endif -%}
+
+      {%- if mf.configuration.value != blank -%}
+        <div class="spa-fiche-tech__ligne">
+          <dt>Configuration des assises</dt>
+          <dd>{{ mf.configuration.value | escape }}</dd>
+        </div>
+      {%- endif -%}
+
+      {%- if mf.encombrement.value != blank -%}
+        <div class="spa-fiche-tech__ligne">
+          <dt>Dimensions au sol</dt>
+          <dd class="spa-fiche-tech__nombre">{{ mf.encombrement.value | escape | replace: ' ', '&nbsp;' }}</dd>
+        </div>
+      {%- endif -%}
+
+      {%- if hauteur != blank -%}
+        <div class="spa-fiche-tech__ligne">
+          <dt>Hauteur</dt>
+          <dd class="spa-fiche-tech__nombre">{{ hauteur | escape | replace: ' ', '&nbsp;' }}</dd>
+        </div>
+      {%- endif -%}
+
+      {%- if jets != blank -%}
+        <div class="spa-fiche-tech__ligne">
+          <dt>Jets de massage</dt>
+          <dd class="spa-fiche-tech__nombre">{{ jets | escape }}</dd>
+        </div>
+      {%- endif -%}
+
+      {%- if mf.pompes.value != blank -%}
+        <div class="spa-fiche-tech__ligne">
+          <dt>Pompes</dt>
+          <dd>{{ mf.pompes.value | escape }}</dd>
+        </div>
+      {%- endif -%}
+
+      {%- if volume != blank -%}
+        <div class="spa-fiche-tech__ligne">
+          <dt>Volume d'eau</dt>
+          <dd class="spa-fiche-tech__nombre">{{ volume | escape | replace: ' ', '&nbsp;' }}</dd>
+        </div>
+      {%- endif -%}
+
+      {%- if poids != blank -%}
+        <div class="spa-fiche-tech__ligne">
+          <dt>Poids à vide</dt>
+          <dd class="spa-fiche-tech__nombre">{{ poids | escape | replace: ' ', '&nbsp;' }}</dd>
+        </div>
+      {%- endif -%}
+
+      {%- if mf.isolation.value != blank -%}
+        <div class="spa-fiche-tech__ligne">
+          <dt>Isolation</dt>
+          <dd>{{ mf.isolation.value | escape }}</dd>
+        </div>
+      {%- endif -%}
+
+      {%- if mf.electronique.value != blank -%}
+        <div class="spa-fiche-tech__ligne">
+          <dt>Électronique</dt>
+          <dd>{{ mf.electronique.value | escape }}</dd>
+        </div>
+      {%- endif -%}
+
+      {%- if mf.raccordement.value != blank -%}
+        <div class="spa-fiche-tech__ligne">
+          <dt>Raccordement électrique</dt>
+          <dd>{{ mf.raccordement.value | escape }}</dd>
+        </div>
+      {%- endif -%}
+
+      {%- if mf.equipements.value != blank -%}
+        {%- comment -%}
+          Les équipements sont saisis séparés par « · ». Une énumération de
+          six éléments sur une seule ligne ne se lit pas : elle devient une
+          liste. Le séparateur reste le même dans l'administration, seule la
+          mise en forme change.
+        {%- endcomment -%}
+        <div class="spa-fiche-tech__ligne">
+          <dt>Équipements</dt>
+          <dd>
+            <ul class="spa-fiche-tech__equipements" role="list">
+              {%- assign items = mf.equipements.value | split: '·' -%}
+              {%- for item in items -%}
+                {%- assign libelle = item | strip -%}
+                {%- if libelle != blank -%}
+                  <li>{{ libelle | escape }}</li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </dd>
+        </div>
+      {%- endif -%}
+
+      {%- if mf.coloris.value != blank -%}
+        <div class="spa-fiche-tech__ligne">
+          <dt>Coloris disponibles</dt>
+          <dd>{{ mf.coloris.value | escape }}</dd>
+        </div>
+      {%- endif -%}
+
+      {%- if mf.gamme.value != blank -%}
+        <div class="spa-fiche-tech__ligne">
+          <dt>Gamme</dt>
+          <dd>{{ mf.gamme.value | escape }}</dd>
+        </div>
+      {%- endif -%}
+    </dl>
+
+    <p class="spa-fiche-tech__lien">
+      <a href="/pages/comparer-les-spas">Comparer ce modèle aux autres</a>
+    </p>
+  </div>
+{%- endif -%}

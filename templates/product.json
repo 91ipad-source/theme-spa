@@ -104,17 +104,38 @@
           "settings": {
             "share_label": "Partager"
           }
+        },
+        "resume": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'spa-fiche-resume', fiche_produit: product %}"
+          }
+        },
+        "actions": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'spa-fiche-actions', fiche_produit: product %}"
+          }
+        },
+        "technique": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'spa-fiche-technique', fiche_produit: product %}"
+          }
         }
       },
       "block_order": [
         "vendor",
         "title",
+        "resume",
         "price",
+        "actions",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
         "prestations",
         "reassurance",
+        "technique",
         "description",
         "tab_prix",
         "tab_livraison",

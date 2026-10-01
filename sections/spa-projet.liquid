@@ -266,6 +266,35 @@
   </div>
 </div>
 
+{%- comment -%}
+  LE MODÈLE ARRIVE PAR L'URL.
+
+  Les fiches produits mènent ici avec ?modele=<nom> : quelqu'un qui vient de
+  passer dix minutes sur la fiche du Pleuxaure ne devrait pas avoir à le
+  retrouver dans une liste de onze. La correspondance se fait sur la valeur
+  de l'option, qui est le nom court du spa — le même que celui écrit dans le
+  lien de la fiche, puisque les deux sortent du même titre produit.
+
+  Si le nom ne correspond à rien — modèle retiré, lien vieilli —, la liste
+  reste sur « Je ne sais pas encore » et personne ne voit d'erreur.
+{%- endcomment -%}
+<script>
+  (function () {
+    var liste = document.getElementById('projet-modele');
+    if (!liste) return;
+    try {
+      var demande = new URLSearchParams(window.location.search).get('modele');
+      if (!demande) return;
+      for (var i = 0; i < liste.options.length; i++) {
+        if (liste.options[i].value === demande) {
+          liste.selectedIndex = i;
+          return;
+        }
+      }
+    } catch (e) {}
+  })();
+</script>
+
 {%- if bloc_app -%}
   <script>
     (function () {
