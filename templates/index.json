@@ -329,7 +329,7 @@
         "phrase": {
           "type": "text",
           "settings": {
-            "text": "Notre best-seller, le Proto 2 : cinq places, <strong>4 990 € TTC</strong>.",
+            "text": "Le Proto 2, cinq places — <strong>4 990 € TTC</strong>.",
             "text_style": "body"
           }
         },
@@ -357,7 +357,7 @@
         "image_behavior": "none",
         "desktop_content_position": "middle-left",
         "desktop_content_alignment": "left",
-        "show_text_box": false,
+        "show_text_box": true,
         "color_scheme": "scheme-1",
         "mobile_content_alignment": "left",
         "show_text_below": true
