@@ -84,8 +84,20 @@
   --lh-note: 1.45;
 
   /* LA MESURE : la largeur au-dela de laquelle l'oeil rate la ligne
-     suivante en revenant a la marge. On vise soixante-dix a soixante-
-     quinze signes.
+     suivante en revenant a la marge.
+
+     ELLE A ETE ELARGIE DE 36 A 44 EM, ET C'EST UN ARBITRAGE, PAS UNE
+     CORRECTION. La mesure confortable s'arrete vers soixante-quinze
+     signes : 36 em en donnaient soixante-douze, soit le reglage ideal
+     pour du texte suivi. Mais nos pages melent ce texte a des photos
+     et a des cartes qui, elles, font 1 200 px. La colonne s'arretait
+     a 612 px au-dessus d'une grille qui en fait le double, et le texte
+     paraissait abandonne dans l'angle gauche — remarque faite sur les
+     pages Showroom et Contact en ligne, pas sur une theorie.
+
+     44 em font 748 px et quatre-vingt-dix signes. On perd un peu de
+     confort par rapport a l'optimum, on recupere 136 px de vide a
+     droite. Decision du gerant, prise sur capture d'ecran.
 
      ET SURTOUT PAS EN ch. L'unite ch vaut la largeur du zero, qui en
      DM Sans fait 12 px quand le texte en fait 17 — 0,7 em, alors qu'un
@@ -93,13 +105,13 @@
      de 66ch ne donne donc pas soixante-six signes mais QUATRE-VINGT-
      TREIZE : mesure faite au navigateur sur les paragraphes de la page
      A propos, qui s'etalaient sur 792 px. L'unite em, elle, ne ment
-     pas : 36 em font 612 px, soit soixante-douze signes.
+     pas : 44 em font 748 px, soit quatre-vingt-dix signes.
 
      Elle suit le corps du texte : un chapeau de 21 px et un paragraphe
      de 17 px tiennent le meme nombre de signes, ce qui est le seul
      reglage qui compte. Elle remplace un 66ch, un 68ch, deux 62ch,
      trois 68rem, quatre 72rem, un 76rem et deux colonnes sans borne. */
-  --mesure: 36em;
+  --mesure: 44em;
 
   /* Rayons */
   --r-pill: 999px;
@@ -5537,13 +5549,13 @@ h1.h2.center {
 /* --------------------------------------------------------------------------
    49. LE CHAPEAU D'UNE PAGE SUIVIE DE SECTIONS PREND TOUTE LA LARGEUR
    --------------------------------------------------------------------------
-   La mesure de lecture vaut 36 em, soit environ soixante-treize signes par
+   La mesure de lecture vaut 44 em, soit environ quatre-vingt-dix signes par
    ligne. C'est la bonne largeur pour du texte suivi — un article, des
    conditions générales, un chapitre.
 
    Ce n'est pas la bonne pour les deux paragraphes d'introduction d'une page
    dont le corps se poursuit en sections pleine largeur : la colonne s'arrête
-   à 612 px au-dessus d'une grille qui en fait 1100, et le texte paraît
+   à 748 px au-dessus d'une grille qui en fait 1100, et le texte paraît
    abandonné dans l'angle.
 
    Ces chapeaux prennent donc toute la largeur du conteneur : 1100 px sur
@@ -5559,7 +5571,7 @@ h1.h2.center {
    une théorie.
 
    La règle ne vise que les pages réglées sur « pleine largeur ». Les
-   conditions générales, qui ne sont QUE du texte suivi, gardent les 36 em
+   conditions générales, qui ne sont QUE du texte suivi, gardent les 44 em
    de la mesure de lecture : là, la règle ne se discute pas.
    -------------------------------------------------------------------------- */
 .main-page--large .spa-page-corps p,
