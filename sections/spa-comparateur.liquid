@@ -232,7 +232,7 @@
             <tr>
               <th scope="col">Modèle</th>
               <th scope="col"><button type="button" class="spa-comparo__tri" data-comparo-tri="places">Places</button></th>
-              <th scope="col">Configuration</th>
+              <th scope="col" class="spa-comparo__col-config">Configuration</th>
               <th scope="col">Encombrement</th>
               <th scope="col"><button type="button" class="spa-comparo__tri" data-comparo-tri="hauteur">Hauteur</button></th>
               <th scope="col"><button type="button" class="spa-comparo__tri" data-comparo-tri="jets">Jets</button></th>
@@ -267,7 +267,7 @@
                   {%- endunless -%}
                 </th>
                 <td>{{ nb_places | default: '—' }}</td>
-                <td>{{ mf.configuration.value | default: '—' }}</td>
+                <td class="spa-comparo__col-config">{{ mf.configuration.value | default: '—' }}</td>
                 <td>{{ mf.encombrement.value | default: '—' }}</td>
                 <td>{% if mf.hauteur.value %}{{ mf.hauteur.value }} cm{% else %}—{% endif %}</td>
                 <td>{{ mf.jets.value | default: '—' }}</td>

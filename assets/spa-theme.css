@@ -2738,10 +2738,38 @@ a, span, label, summary, button, blockquote, figcaption,
 
 .spa-comparo__table th,
 .spa-comparo__table td {
-  padding: 1.2rem 1.4rem;
+  padding: 1.2rem 0.8rem;
   border-bottom: 1px solid rgba(15, 58, 90, 0.1);
   text-align: left;
   white-space: nowrap;
+}
+
+/* LA SEULE COLONNE QUI A LE DROIT DE REVENIR A LA LIGNE.
+
+   Neuf colonnes sur dix tiennent en un ou deux mots — « 90 cm », « 1 430 L »,
+   « Plug & Play ». La dixieme, la configuration des assises, va jusqu'a
+   « 2 allongees + 3 assises, dont une a infrarouges » : a elle seule, elle
+   poussait le tableau au-dela de la page et forcait un defilement
+   horizontal, qui cache toujours la derniere colonne a qui ne pense pas a
+   faire glisser.
+
+   Elle revient donc a la ligne. Pas de « max-width » ici : sur un tableau en
+   mise en page automatique, une largeur maximale posee sur une cellule est
+   ignoree par le calcul des colonnes — le texte deborde sur la colonne
+   voisine au lieu de se replier. Mesure faite au navigateur : la
+   configuration du Doro Plus passait par-dessus son encombrement.
+
+   Le tableau fait 100 % de la largeur disponible et toutes les autres
+   colonnes sont en « nowrap » : celle-ci est donc la seule a pouvoir ceder,
+   et le navigateur lui donne exactement ce qui reste. Le reste garde
+   « nowrap » — un « 158 × 210 cm » coupe en deux serait illisible.
+
+   DEUX CLASSES DANS LE SELECTEUR, ET C'EST NECESSAIRE. La regle generale
+   « .spa-comparo__table td » pese une classe et un element ; une classe
+   seule ne la bat pas, et le « nowrap » restait. C'est exactement le piege
+   qui avait fait deborder les champs du formulaire de contact. */
+.spa-comparo__table .spa-comparo__col-config {
+  white-space: normal;
 }
 
 .spa-comparo__table thead th {
