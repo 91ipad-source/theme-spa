@@ -5648,10 +5648,13 @@ h1.h2.center {
    fixe ne pouvait pas marcher.
 
    --banniere-zone-claire EST LE SEUL REGLAGE A TOUCHER. Il dit ou commence la
-   courbe, en pourcentage de la largeur de l'image. Mesure a 42 % sur la photo
-   actuelle, volontairement prudent : un texte un peu plus etroit ne se voit
-   pas, un texte qui chevauche le spa se voit tout de suite. Si la photo est
-   remplacee par une autre decoupe, c'est cette valeur qu'on change.
+   courbe, en pourcentage de la largeur de l'image. Mesure a 45 % sur la photo
+   actuelle. La premiere valeur essayee, 42 %, etait prudente et laissait trop
+   d'air a droite du texte : les 45 % viennent d'une mesure faite sur une
+   capture de la page en situation. Dans la bande de hauteur qu'occupe le
+   texte, le spa ne commence jamais avant 45,8 % de la largeur ; la
+   respiration de 2,4 rem fait le reste. Si la photo est remplacee par une
+   autre decoupe, c'est cette valeur qu'on remesure.
 
    La regle ne vise que la combinaison « sans cadre + aligne a gauche », qui
    est exactement le cas d'un texte pose sur la partie claire d'une photo.
@@ -5670,7 +5673,7 @@ h1.h2.center {
     /* 5 rem : la marge laterale que Dawn donne a .page-width au-dela de
        750 px. Pas la gouttiere du theme, qui vaut 4,8 rem et ne s'applique
        pas a ce conteneur-ci. 120 rem : la largeur maximale de la page. */
-    --banniere-zone-claire: 42vw;
+    --banniere-zone-claire: 45vw;
     --banniere-decalage: max(5rem, (100vw - 120rem) / 2);
     --banniere-respiration: 2.4rem;
 
