@@ -12,6 +12,30 @@
   Usage:
   {% render 'price', product: product %}
 {% endcomment %}
+{%- comment -%}
+  POURQUOI LE CODE DEVISE N'EST PLUS AFFICHE ICI.
+
+  Le reglage « Afficher les codes de devise » de Dawn faisait passer le prix
+  par money_with_currency. Or le format « HTML avec devise » de la boutique
+  s'ecrit litteralement « {{amount_with_space_separator}} € EUR » : le prix
+  sortait donc « 11 990 € EUR », symbole et code cote a cote. Sur une
+  boutique qui ne vend qu'en euros et qu'en France, le code n'apprend rien a
+  personne et le doublon se lit comme une faute.
+
+  CE N'EST PAS LE REGLAGE QU'ON A CORRIGE, ET C'EST VOULU.
+  config/settings_data.json est reecrit par Shopify depuis les reglages
+  enregistres du theme : une valeur poussee depuis le depot y est ecrasee a
+  la synchronisation suivante. Le choix est donc fait ici, dans le code, ou
+  il tient.
+
+  CE QUI RESTE A FAIRE AILLEURS. Le panier utilise money_with_currency par
+  d'autres chemins (total, lignes, tiroir). Pour les nettoyer d'un coup, il
+  faut corriger le format de devise de la boutique lui-meme —
+  Parametres > General > Devise > Modifier le formatage — en retirant
+  « EUR » du format « HTML avec devise ». Ce reglage-la n'est pas dans le
+  theme et aucune API ne l'expose.
+{%- endcomment -%}
+
 {%- liquid
   if use_variant
     assign target = product.selected_or_first_available_variant
@@ -29,11 +53,6 @@
   assign money_price = price | money
   assign money_price_min = price_min | money
   assign money_price_max = price_max | money
-  if settings.currency_code_enabled
-    assign money_price = price | money_with_currency
-    assign money_price_min = price_min | money_with_currency
-    assign money_price_max = price_max | money_with_currency
-  endif
 
   if target == product and product.price_varies
     assign money_price = 'products.product.price.from_price_html' | t: price: money_price
@@ -67,11 +86,7 @@
               </span>
               <span>
                 <s class="price-item price-item--regular variant-item__old-price">
-                  {% if settings.currency_code_enabled %}
-                    {{ compare_at_price | money_with_currency }}
-                  {% else %}
-                    {{ compare_at_price | money }}
-                  {% endif %}
+                  {{ compare_at_price | money }}
                 </s>
               </span>
             {%- endunless -%}
@@ -95,11 +110,7 @@
           <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
           <span>
             <s class="price-item price-item--regular">
-              {% if settings.currency_code_enabled %}
-                {{ compare_at_price | money_with_currency }}
-              {% else %}
-                {{ compare_at_price | money }}
-              {% endif %}
+              {{ compare_at_price | money }}
             </s>
           </span>
         {%- endunless -%}
