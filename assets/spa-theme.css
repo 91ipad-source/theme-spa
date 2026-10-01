@@ -1431,41 +1431,55 @@ h3.spa-parcours__heading {
 .spa-expo,
 .rte .spa-expo {
   --spa-expo-gouttiere: 1.6rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 2rem var(--spa-expo-gouttiere);
+  --spa-expo-colonnes: 2;
+  display: grid;
+  grid-template-columns: repeat(var(--spa-expo-colonnes), minmax(0, 1fr));
+  column-gap: var(--spa-expo-gouttiere);
+  row-gap: 0;
   margin: 3.2rem 0 0;
   padding: 0;
   list-style: none;
 }
 
-/* La case est une colonne flex : la vignette en haut, la legende collee en
-   bas par « margin-top: auto ». Sans ca, une vignette dont le nom passe sur
-   deux lignes decale sa legende et la rangee se desaligne. */
+/* LES QUATRE LIGNES SONT CELLES DE LA GRILLE, PAS CELLES DE LA CASE.
+
+   En colonnes flex, chaque case empilait ses propres elements : un nom qui
+   passait sur deux lignes — « Panope FULL Therapeutique » — rendait sa carte
+   plus haute que ses voisines, et la legende d'a cote demarrait vingt pixels
+   plus bas. On alignait les BAS par « margin-top: auto », donc les HAUTS se
+   decalaient : la rangee paraissait bancale.
+
+   La liste declare maintenant quatre lignes par rangee — photo, nom, places,
+   legende — et chaque case les REPREND par « subgrid » au lieu d'en creer de
+   nouvelles. Toutes les photos partagent la meme ligne, tous les noms la
+   suivante, et ainsi de suite : la hauteur d'une ligne est celle de son
+   contenu le plus haut, pour toute la rangee. Un nom sur deux lignes fait
+   grandir la ligne des noms partout, et plus rien ne se decale.
+
+   L'ecart entre deux rangees ne peut pas venir de « row-gap » : il
+   s'appliquerait aussi entre la photo et le nom, quatre fois par carte. Il
+   est donc porte par le bas de la case. */
 .spa-expo li,
 .rte .spa-expo li {
-  --spa-expo-colonnes: 2;
-  display: flex;
-  flex-direction: column;
-  flex: 0 1 calc(
-    (100% - (var(--spa-expo-colonnes) - 1) * var(--spa-expo-gouttiere)) / var(--spa-expo-colonnes)
-  );
-  max-width: calc(
-    (100% - (var(--spa-expo-colonnes) - 1) * var(--spa-expo-gouttiere)) / var(--spa-expo-colonnes)
-  );
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  row-gap: 0;
   margin: 0;
-  padding: 0;
+  padding: 0 0 2.4rem;
   list-style: none;
 }
 
-/* Surtout pas « height: 100% » ici. La case etant etiree a la hauteur de la
-   rangee, la vignette prendrait toute cette hauteur — legende comprise — et
-   rejetterait la legende hors de la case, par-dessus la rangee suivante. */
+/* La carte couvre les trois premieres lignes — photo, nom, places — et les
+   reprend elle aussi : c'est ce qui lui donne exactement la hauteur de ses
+   voisines. Surtout pas « height: 100% », qui lui ferait prendre la rangee
+   entiere, legende comprise. */
 .spa-expo__lien,
 .rte .spa-expo__lien {
-  display: block;
-  flex: 0 0 auto;
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+  align-content: start;
   padding: 1.2rem 1.2rem 1.6rem;
   border-radius: var(--r-md);
   background: var(--mist);
@@ -1506,8 +1520,14 @@ h3.spa-parcours__heading {
   box-sizing: border-box;
 }
 
+/* Le nom se cale sur le BAS de sa ligne. La ligne est dimensionnee par le nom
+   le plus long de la rangee — deux lignes pour « Panope FULL Therapeutique » —
+   et les noms courts y laissent donc un blanc. Cale en haut, ce blanc tombait
+   entre le nom et sa capacite, qui se decollaient l'un de l'autre ; cale en
+   bas, il passe sous la photo, la ou il ne se voit pas. */
 .spa-expo__nom {
   display: block;
+  align-self: end;
   margin-top: 1.2rem;
   font-weight: 600;
   line-height: 1.3;
@@ -1523,7 +1543,6 @@ h3.spa-parcours__heading {
 
 .spa-expo__note {
   display: block;
-  margin-top: auto;
   padding-top: 1rem;
   font-size: 1.3rem;
   line-height: var(--lh-note);
@@ -1542,28 +1561,16 @@ h3.spa-parcours__heading {
   background: var(--mist);
 }
 
-@media screen and (min-width: 750px) {
-  .spa-expo,
-  .rte .spa-expo {
-    --spa-expo-gouttiere: 2rem;
-    gap: 2.4rem var(--spa-expo-gouttiere);
-  }
-
-  .spa-expo li,
-  .rte .spa-expo li {
-    --spa-expo-colonnes: 3;
-  }
-}
-
 /* TROIS COLONNES, PAS QUATRE. Six modeles exposes sur quatre colonnes
    donnaient quatre vignettes puis deux, et une demi-rangee vide a droite.
    Sur trois, les six tombent en deux rangees pleines, et chaque vignette
    gagne 90 px de large : le spa se voit, ce qui est tout l'objet de la page.
-   Le jour ou il y en aura sept, la derniere rangee restera calee a gauche —
-   c'est le reglage juste au-dessus qui s'en charge. */
-@media screen and (min-width: 990px) {
-  .spa-expo li,
-  .rte .spa-expo li {
+   Le jour ou il y en aura sept, la derniere case restera calee a gauche :
+   une grille remplit ses colonnes de gauche a droite, sans centrer le reste. */
+@media screen and (min-width: 750px) {
+  .spa-expo,
+  .rte .spa-expo {
+    --spa-expo-gouttiere: 2rem;
     --spa-expo-colonnes: 3;
   }
 }
