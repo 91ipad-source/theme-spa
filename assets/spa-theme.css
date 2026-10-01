@@ -1481,9 +1481,23 @@ h3.spa-parcours__heading {
   text-decoration: none;
 }
 
+/* « height: auto » N'EST PAS DECORATIF, C'EST CE QUI REND LE CARRE POSSIBLE.
+
+   La balise porte width="600" et height="600", ecrits par Shopify. Ces deux
+   attributs sont des indications de presentation : le navigateur les traite
+   comme « height: 600px » dans sa propre feuille de style. Or aspect-ratio ne
+   s'applique QUE si la hauteur vaut auto. Resultat : la case faisait 600 px
+   de haut pour 260 de large, le spa flottait au milieu d'un rectangle blanc
+   deux fois trop grand, et la rangee de vignettes mesurait 690 px de haut
+   pour 240 px d'image utile.
+
+   Mesure faite au navigateur sur une reconstitution locale de la grille :
+   case 600 px de haut, image 240. Avec « height: auto », la hauteur revient
+   au rapport demande et la case est carree, comme les visuels ROCA. */
 .spa-expo__image {
   display: block;
   width: 100%;
+  height: auto;
   aspect-ratio: 1 / 1;
   object-fit: contain;
   border-radius: calc(var(--r-md) - 0.6rem);
@@ -1541,10 +1555,16 @@ h3.spa-parcours__heading {
   }
 }
 
+/* TROIS COLONNES, PAS QUATRE. Six modeles exposes sur quatre colonnes
+   donnaient quatre vignettes puis deux, et une demi-rangee vide a droite.
+   Sur trois, les six tombent en deux rangees pleines, et chaque vignette
+   gagne 90 px de large : le spa se voit, ce qui est tout l'objet de la page.
+   Le jour ou il y en aura sept, la derniere rangee restera calee a gauche —
+   c'est le reglage juste au-dessus qui s'en charge. */
 @media screen and (min-width: 990px) {
   .spa-expo li,
   .rte .spa-expo li {
-    --spa-expo-colonnes: 4;
+    --spa-expo-colonnes: 3;
   }
 }
 
