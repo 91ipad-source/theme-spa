@@ -5598,3 +5598,50 @@ h1.h2.center {
   margin-top: 0.8rem;
   height: calc(1.3rem * 1.3);
 }
+
+/* --------------------------------------------------------------------------
+   56. BANNIERE D'ACCUEIL : LE TEXTE RESTE DANS LA ZONE CLAIRE DE LA PHOTO
+
+   La photo d'accueil reserve sa moitie gauche au texte : un aplat clair, puis
+   une courbe, puis le spa. Dawn, lui, borne son bloc de texte a 68 rem et le
+   cale sur le conteneur de 120 rem centre — deux mesures qui ignorent
+   completement ou commence le spa. Sur un ecran large, le titre mordait donc
+   dessus.
+
+   LE CALCUL. L'image est servie bord a bord, donc sa zone claire vaut une
+   fraction de la largeur de la fenetre. Le bloc de texte, lui, demarre au
+   bord du conteneur : la gouttiere sur les ecrans etroits, la moitie de ce
+   qui depasse de 120 rem sur les larges. La largeur disponible est donc la
+   zone claire MOINS ce decalage, moins une respiration pour que le texte ne
+   vienne pas lecher la courbe.
+
+   Et elle se resserre quand l'ecran s'elargit : le conteneur reste a 120 rem
+   pendant que la photo s'etire, donc le texte part de plus loin a droite
+   alors que la courbe, elle, avance moins vite. C'est pour cela qu'un chiffre
+   fixe ne pouvait pas marcher.
+
+   --banniere-zone-claire EST LE SEUL REGLAGE A TOUCHER. Il dit ou commence la
+   courbe, en pourcentage de la largeur de l'image. Mesure a 42 % sur la photo
+   actuelle, volontairement prudent : un texte un peu plus etroit ne se voit
+   pas, un texte qui chevauche le spa se voit tout de suite. Si la photo est
+   remplacee par une autre decoupe, c'est cette valeur qu'on change.
+
+   La regle ne vise que la combinaison « sans cadre + aligne a gauche », qui
+   est exactement le cas d'un texte pose sur la partie claire d'une photo.
+   -------------------------------------------------------------------------- */
+
+@media screen and (min-width: 750px) {
+  .banner--desktop-transparent.banner--content-align-left .banner__box {
+    /* 5 rem : la marge laterale que Dawn donne a .page-width au-dela de
+       750 px. Pas la gouttiere du theme, qui vaut 4,8 rem et ne s'applique
+       pas a ce conteneur-ci. 120 rem : la largeur maximale de la page. */
+    --banniere-zone-claire: 42vw;
+    --banniere-decalage: max(5rem, (100vw - 120rem) / 2);
+    --banniere-respiration: 2.4rem;
+
+    max-width: min(
+      68rem,
+      calc(var(--banniere-zone-claire) - var(--banniere-decalage) - var(--banniere-respiration))
+    );
+  }
+}
