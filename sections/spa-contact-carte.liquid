@@ -73,15 +73,17 @@
           {%- if section.settings.telephone != blank -%}
             {%- comment -%}
               Le lien tel: ne garde que les chiffres et le plus : un numéro
-              écrit pour être lu reste lisible à l'écran, mais un composeur
-              n'en veut pas. La conversion vit dans snippets/spa-tel.liquid,
-              en un seul endroit pour tout le thème — c'est là qu'est expliqué
-              le piège du « (0) ».
+              écrit avec des espaces reste lisible à l'écran, mais un
+              composeur n'en veut pas.
             {%- endcomment -%}
-            {%- capture tel_lien -%}
-              {%- render 'spa-tel', numero: section.settings.telephone -%}
-            {%- endcapture -%}
-            <a href="tel:{{ tel_lien | strip }}">{{ section.settings.telephone | escape }}</a><br>
+            {%- assign compose = section.settings.telephone
+              | remove: ' '
+              | remove: '.'
+              | remove: '('
+              | remove: ')'
+              | remove: '-'
+            -%}
+            <a href="tel:{{ compose }}">{{ section.settings.telephone | escape }}</a><br>
           {%- endif -%}
           {%- if section.settings.courriel != blank -%}
             <a href="mailto:{{ section.settings.courriel | escape }}">
