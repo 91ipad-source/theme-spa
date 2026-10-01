@@ -1,0 +1,34 @@
+{%- comment -%}
+  Normalise un numéro de téléphone pour un lien tel:.
+
+  POURQUOI CE SNIPPET EXISTE. Le numéro est saisi pour être lu — « +33 (0)1 60
+  77 37 00 » — et un composeur, lui, ne veut que des chiffres et le plus. La
+  conversion traînait en trois exemplaires dans le thème, avec trois listes de
+  caractères à retirer légèrement différentes. Un seul endroit, désormais.
+
+  LE « (0) » SE RETIRE AVANT LES PARENTHÈSES, ET C'EST TOUT L'ENJEU. Dans la
+  notation internationale française, le zéro entre parenthèses ne sert qu'à
+  l'appel national : il est faux dès qu'on garde le +33. En supprimant les
+  parenthèses avant leur contenu, on obtenait tel:+330160773700 — un numéro
+  que personne ne peut joindre, alors que le texte affiché restait juste.
+  D'où l'ordre ci-dessous : « (0) » d'abord, parenthèses ensuite.
+
+  USAGE. On passe par capture, pour qu'aucune espace du fichier ne se
+  retrouve dans l'attribut :
+
+    {%- capture tel_lien -%}{%- render 'spa-tel', numero: tel -%}{%- endcapture -%}
+    <a href="tel:{{ tel_lien | strip }}">{{ tel }}</a>
+{%- endcomment -%}
+{{- numero
+  | default: ''
+  | strip
+  | remove: ' '
+  | remove: ' '
+  | remove: '.'
+  | remove: '-'
+  | remove: '‑'
+  | remove: '/'
+  | remove: '(0)'
+  | remove: '('
+  | remove: ')'
+-}}

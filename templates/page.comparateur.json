@@ -62,6 +62,8 @@
       ],
       "settings": {
         "title": "Le choix commence par les bons repères",
+        "button_label": "",
+        "button_link": "",
         "heading_size": "h2",
         "image_width": "third",
         "image_ratio": "adapt",
