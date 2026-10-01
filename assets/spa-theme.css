@@ -1568,6 +1568,33 @@ h3.spa-parcours__heading {
   }
 }
 
+/* DEUX LIGNES RESERVEES AU NOM, SOUS 990 PX.
+
+   Les cartes d'une rangee doivent finir a la meme hauteur. Au-dessus de
+   990 px, elles y arrivent seules : les six noms tiennent sur une ligne dans
+   une carte de 353 px. En dessous, la carte retombe a 210 puis 227 px et
+   « Panope FULL Therapeutique » passe sur deux lignes : sa carte depasse ses
+   voisines, et la legende d'a cote demarre vingt pixels plus haut.
+
+   Reserver deux lignes au nom egalise les cartes sans rien deplacer d'autre.
+   La reserve ne s'applique qu'en dessous de 990 px : au-dessus, elle
+   ajouterait une ligne blanche a chaque carte pour rien.
+
+   La limite est connue : un nom sur TROIS lignes — un ecran de 320 px, ou un
+   modele au nom plus long — redecalerait la rangee. Le cas n'existe pas dans
+   la gamme actuelle, et il se verra tout de suite si un modele arrive.
+
+   Mesure au navigateur : a 500 px de large, les deux cartes d'une rangee
+   finissent a la meme hauteur, legendes alignees. */
+@media screen and (max-width: 989px) {
+  .spa-expo__nom,
+  .rte .spa-expo__nom {
+    display: flex;
+    align-items: flex-end;
+    min-height: calc(2 * 1.3em);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .spa-expo__lien,
   .spa-expo__lien:hover,
