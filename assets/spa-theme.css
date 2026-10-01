@@ -5151,6 +5151,24 @@ a, span, label, summary, button, blockquote, figcaption,
   background: var(--deep-soft, #2b3a44);
 }
 
+/* LA PHOTO, ELLE, EST UN PAYSAGE. Pas de max-width etroit ni de ratio
+   impose : une vue du magasin perd tout son sens recadree en vertical, et
+   image_tag ecrit deja width et height, ce qui reserve la place avant
+   l'arrivee du fichier. C'est ce media-ci qui sert de premier ecran a la
+   page showroom, a cote du titre et du bouton de rendez-vous. */
+.spa-contact-carte__photo {
+  width: 100%;
+}
+
+.spa-contact-carte__photo-el {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-lg, 1.2rem);
+  object-fit: cover;
+  background: var(--water);
+}
+
 @media screen and (min-width: 750px) {
   .spa-contact-carte__boite {
     grid-template-columns: 1.2fr 1fr;
@@ -5163,6 +5181,10 @@ a, span, label, summary, button, blockquote, figcaption,
   .spa-contact-carte__video {
     grid-column: 1 / -1;
     max-width: 24rem;
+  }
+
+  .spa-contact-carte__photo {
+    grid-column: 1 / -1;
   }
 }
 
@@ -5179,6 +5201,11 @@ a, span, label, summary, button, blockquote, figcaption,
     width: 24rem;
     max-width: none;
     margin-inline: 0;
+  }
+
+  .spa-contact-carte__photo {
+    grid-column: auto;
+    width: 32rem;
   }
 }
 
@@ -5644,4 +5671,299 @@ h1.h2.center {
       calc(var(--banniere-zone-claire) - var(--banniere-decalage) - var(--banniere-respiration))
     );
   }
+}
+
+/* --------------------------------------------------------------------------
+   50. CONTACT : LES COORDONNEES ET LE FORMULAIRE DANS LE PREMIER ECRAN
+   (section spa-contact-tete)
+
+   La page contact s'ouvrait sur une grande image, puis empilait visite,
+   acces, retrait et livraison AVANT le champ ou ecrire. Deux colonnes
+   reglent le probleme sur ordinateur : a gauche de quoi appeler ou venir,
+   a droite de quoi ecrire.
+
+   SUR TELEPHONE, L'ORDRE N'EST PAS CELUI DU CODE. La grille renvoie
+   l'adresse et l'itineraire APRES le formulaire : on appelle bien plus
+   souvent qu'on ne recopie une adresse, et trois lignes de voirie ne
+   doivent pas repousser le formulaire sous le pli. D'ou les zones nommees
+   plutot qu'un simple empilement.
+   -------------------------------------------------------------------------- */
+
+.spa-ctete {
+  padding-top: var(--pt);
+  padding-bottom: var(--pb);
+}
+
+.spa-ctete__grille {
+  display: grid;
+  gap: 2.4rem;
+  grid-template-areas:
+    'infos'
+    'panneau'
+    'acces';
+}
+
+.spa-ctete__infos {
+  grid-area: infos;
+}
+
+.spa-ctete__acces {
+  grid-area: acces;
+}
+
+.spa-ctete__panneau {
+  grid-area: panneau;
+}
+
+/* Le seuil est a 1100 px et non a 990 : sous cette largeur, le formulaire
+   et ses paires de champs se serrent trop pour rester confortables a cote
+   d'une colonne de coordonnees. */
+@media screen and (min-width: 1100px) {
+  .spa-ctete__grille {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+    grid-template-areas:
+      'infos   panneau'
+      'acces   panneau';
+    align-content: start;
+    gap: 2.4rem 4.8rem;
+  }
+}
+
+.spa-ctete__mention {
+  margin: 0 0 1.2rem;
+  color: var(--sky-deep);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Le numero est la premiere action de la page, et sur un telephone c'est
+   un bouton d'appel : il a donc la taille d'un bouton, pas celle d'un
+   paragraphe. */
+.spa-ctete__tel {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 0 1.6rem;
+  color: var(--deep);
+  font-size: clamp(2.4rem, 3vw, 3rem);
+  font-weight: 700;
+  line-height: var(--lh-titre);
+  text-decoration: none;
+}
+
+.spa-ctete__tel:hover,
+.spa-ctete__tel:focus-visible {
+  color: var(--sky-deep);
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+.spa-ctete__tel-icone {
+  flex: 0 0 auto;
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+.spa-ctete__adresse {
+  margin: 0;
+  color: var(--deep);
+  font-size: 1.6rem;
+  font-style: normal;
+  line-height: var(--lh-texte);
+}
+
+.spa-ctete__itineraire {
+  margin: 0.8rem 0 0;
+  font-size: 1.5rem;
+}
+
+.spa-ctete__texte {
+  margin-top: 1.6rem;
+  color: var(--deep-soft);
+  font-size: 1.5rem;
+}
+
+/* Le panneau du formulaire, comme sur Mon projet spa : un aplat blanc qui
+   dit « ici, on remplit ». */
+.spa-ctete__panneau {
+  padding: 3.2rem;
+  border-radius: var(--r-lg);
+  background: var(--white);
+  box-shadow: 0 2px 18px rgba(15, 58, 90, 0.07);
+  scroll-margin-top: 10rem;
+}
+
+@media screen and (max-width: 749px) {
+  .spa-ctete__panneau {
+    padding: 2rem 1.6rem;
+  }
+}
+
+/* L'ancre historique #ecrivez-nous continue d'exister : des liens de la
+   page la visent. Elle ne doit rien occuper a l'ecran. */
+.spa-ctete__ancre {
+  display: block;
+  height: 0;
+  scroll-margin-top: 10rem;
+}
+
+.spa-ctete__titre {
+  margin: 0 0 0.8rem;
+  font-size: var(--t-bloc);
+  line-height: var(--lh-titre);
+}
+
+.spa-ctete__obligatoires {
+  margin: 0 0 2rem;
+  color: var(--deep-soft);
+  font-size: 1.3rem;
+}
+
+.spa-ctete__paire {
+  display: grid;
+  gap: 0 1.6rem;
+}
+
+@media screen and (min-width: 600px) {
+  .spa-ctete__paire {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* MEME PIEGE DE DAWN QUE SUR MON PROJET SPA : « .field » est un conteneur
+   flex en position relative et « .field__label » y flotte en absolu
+   par-dessus le champ. On demonte le mecanisme plutot que de lutter avec,
+   et on neutralise les deux pseudo-elements qui dessinent l'anneau de
+   bordure — sans quoi ils se caleraient sur le panneau. */
+.spa-ctete .field {
+  position: static;
+  display: block;
+  margin-bottom: 1.6rem;
+}
+
+.spa-ctete .field::before,
+.spa-ctete .field::after {
+  content: none;
+}
+
+/* ATTENTION, PIEGE DE SPECIFICITE. « .spa-ctete .field { display: block } »
+   compte deux classes ; la regle de navigateur « [hidden] { display: none } »
+   n'en compte aucune. Sans la ligne ci-dessous, un champ masque par le motif
+   choisi resterait affiche — le formulaire montrerait les disponibilites a
+   quelqu'un venu demander un devis. C'est la seule raison d'etre de cette
+   regle, et elle doit survivre a toute refonte de la mise en forme. */
+.spa-ctete .field[hidden] {
+  display: none;
+}
+
+.spa-ctete .field__label {
+  position: static;
+  display: block;
+  margin-bottom: 0.6rem;
+  color: var(--deep);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  pointer-events: auto;
+  transition: none;
+}
+
+/* L'asterisque des champs obligatoires : visible, sans soulignement de
+   dictionnaire que les navigateurs ajoutent a <abbr>. */
+.spa-ctete .field__label abbr {
+  color: var(--sky-deep);
+  text-decoration: none;
+}
+
+.spa-ctete .field__input {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  flex-grow: 0;
+  padding: 1.1rem 1.4rem;
+  border: 1px solid rgba(15, 58, 90, 0.18);
+  border-radius: var(--r-md);
+  background: var(--white);
+  color: var(--deep);
+  font-family: var(--font-body);
+  font-size: 1.6rem;
+}
+
+.spa-ctete .field__input:focus-visible {
+  outline: var(--focused-base-outline, 0.3rem solid var(--sky-deep));
+  outline-offset: 0.2rem;
+}
+
+.spa-ctete select.field__input {
+  appearance: none;
+  padding-right: 3.6rem;
+  background-image: linear-gradient(45deg, transparent 50%, var(--deep) 50%),
+    linear-gradient(135deg, var(--deep) 50%, transparent 50%);
+  background-position: calc(100% - 20px) 55%, calc(100% - 14px) 55%;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}
+
+.spa-ctete textarea.field__input {
+  resize: vertical;
+}
+
+.spa-ctete__aide {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--deep-soft);
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
+
+.spa-ctete__photos {
+  margin: 0 0 2rem;
+  padding: 1.4rem 1.6rem;
+  border-radius: var(--r-md);
+  background: var(--mist);
+  font-size: 1.4rem;
+  line-height: var(--lh-note);
+}
+
+.spa-ctete__envoyer {
+  width: 100%;
+}
+
+.spa-ctete__rgpd {
+  margin: 1.2rem 0 0;
+  color: var(--deep-soft);
+  font-size: 1.2rem;
+  line-height: var(--lh-note);
+}
+
+.spa-ctete__ok {
+  padding: 2rem;
+  border-radius: var(--r-md);
+  background: var(--mist);
+}
+
+.spa-ctete__ok h3 {
+  margin: 0 0 0.8rem;
+  font-size: var(--t-sous);
+}
+
+.spa-ctete__ok p {
+  margin: 0 0 1.2rem;
+  font-size: 1.5rem;
+  line-height: var(--lh-texte);
+}
+
+.spa-ctete__ok p:last-child {
+  margin-bottom: 0;
+}
+
+.spa-ctete__erreur {
+  margin: 0 0 2rem;
+  padding: 1.4rem 1.6rem;
+  border-radius: var(--r-md);
+  background: #fdecec;
+  color: #8c1c1c;
+  font-size: 1.4rem;
 }

@@ -1,0 +1,421 @@
+{%- comment -%}
+  Tête de page contact : les coordonnées et le formulaire, côte à côte.
+
+  POURQUOI CETTE SECTION EXISTE. La page contact s'ouvrait sur une grande
+  composition publicitaire, puis enchaînait la visite, l'accès, le retrait et
+  la livraison AVANT le formulaire. Quelqu'un qui veut simplement écrire ou
+  demander un créneau devait traverser une page entière pour trouver le champ
+  où écrire. Tout ce qui sert à joindre SPAS9 tient maintenant dans le premier
+  écran : le téléphone, l'adresse, la mention « sur rendez-vous » et le
+  formulaire lui-même.
+
+  DEUX COLONNES SUR ORDINATEUR, LE CONTACT D'ABORD SUR TÉLÉPHONE. À gauche de
+  quoi appeler ou venir, à droite de quoi écrire. Sous 1100 px la grille se
+  replie en une colonne et l'ordre devient celui d'un téléphone : le numéro
+  cliquable, puis le formulaire, puis l'adresse et l'itinéraire — on appelle
+  bien plus souvent qu'on ne copie une adresse.
+
+  LE MOTIF COMMANDE LES CHAMPS. Un formulaire qui demande le code postal à
+  quelqu'un venu poser une question sur un filtre perd ce visiteur. Un seul
+  choix en haut — conseil, visite, devis, service après-vente — et seuls les
+  champs utiles à ce motif restent affichés. SANS JAVASCRIPT TOUS LES CHAMPS
+  SONT VISIBLES : le formulaire reste complet et envoyable, il est seulement
+  plus long. On ne cache jamais un champ que le serveur attend.
+
+  LE MOTIF ARRIVE AUSSI PAR L'URL. Les boutons « Prendre rendez-vous » du site
+  pointent vers /pages/contact?motif=visite#demande : le motif est
+  présélectionné et le champ des disponibilités apparaît, pour que personne
+  n'ait à redire pourquoi il écrit. La correspondance se fait sur data-cle, pas
+  sur le libellé — on peut donc reformuler un libellé sans casser les liens.
+
+  CE QUE LE FORMULAIRE NE PROMET PAS. Un envoi réussi n'est pas un rendez-vous
+  confirmé. Le message de confirmation le dit, parce qu'un visiteur qui croit
+  son créneau acquis se déplace pour rien.
+
+  LES PIÈCES JOINTES NE PASSENT PAS PAR ICI. Un formulaire de contact Shopify
+  ne transporte pas de fichier. Plutôt que de laisser quelqu'un chercher un
+  bouton qui n'existe pas, le motif « devis » renvoie explicitement vers
+  Mon projet spa, qui dispose du champ photos.
+{%- endcomment -%}
+
+{%- liquid
+  assign spas = collections['tous-nos-spas'].products
+  assign tel_affiche = section.settings.telephone
+-%}
+
+{%- capture tel_lien -%}{%- render 'spa-tel', numero: section.settings.telephone -%}{%- endcapture -%}
+
+<div
+  class="spa-ctete color-{{ section.settings.color_scheme }} gradient"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width">
+    <div class="spa-ctete__grille">
+
+      {%- comment -%} Colonne 1 : de quoi appeler, et de quoi venir. {%- endcomment -%}
+      <div class="spa-ctete__infos">
+        {%- if section.settings.mention != blank -%}
+          <p class="spa-ctete__mention">{{ section.settings.mention | escape }}</p>
+        {%- endif -%}
+
+        {%- if tel_affiche != blank -%}
+          <a class="spa-ctete__tel" href="tel:{{ tel_lien | strip }}">
+            <svg class="spa-ctete__tel-icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path
+                d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.2 2.2z"
+                fill="currentColor"
+              />
+            </svg>
+            <span>{{ tel_affiche | escape }}</span>
+          </a>
+        {%- endif -%}
+
+      </div>
+
+      {%- comment -%}
+        Colonne 1, suite : l'adresse et l'itinéraire. Ils vivent dans leur
+        propre bloc pour une seule raison — sur téléphone, la grille les
+        renvoie APRÈS le formulaire. On appelle beaucoup plus souvent qu'on
+        ne recopie une adresse, et le formulaire ne doit pas être repoussé
+        par trois lignes de voirie.
+      {%- endcomment -%}
+      <div class="spa-ctete__acces">
+        <address class="spa-ctete__adresse">
+          {%- if section.settings.raison_sociale != blank -%}
+            <strong>{{ section.settings.raison_sociale | escape }}</strong><br>
+          {%- endif -%}
+          {%- comment -%}
+            Même traitement qu'ailleurs sur le site : un nom de commune ne se
+            coupe pas en fin de ligne. Le trait d'union devient insécable.
+          {%- endcomment -%}
+          {%- if section.settings.adresse != blank -%}
+            {{ section.settings.adresse | escape | replace: '-', '‑' }}<br>
+          {%- endif -%}
+          {%- if section.settings.courriel != blank -%}
+            <a href="mailto:{{ section.settings.courriel | escape }}">
+              {{- section.settings.courriel | escape -}}
+            </a>
+          {%- endif -%}
+        </address>
+
+        {%- if section.settings.lien_itineraire != blank -%}
+          <p class="spa-ctete__itineraire">
+            <a href="{{ section.settings.lien_itineraire }}" target="_blank" rel="noopener">
+              {{- section.settings.libelle_itineraire | default: 'Itinéraire' | escape -}}
+            </a>
+          </p>
+        {%- endif -%}
+
+        {%- if section.settings.texte != blank -%}
+          <div class="spa-ctete__texte rte">{{ section.settings.texte }}</div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Colonne 2 : de quoi écrire. {%- endcomment -%}
+      <div class="spa-ctete__panneau" id="demande">
+        <span id="ecrivez-nous" class="spa-ctete__ancre" aria-hidden="true"></span>
+        <h2 class="spa-ctete__titre">
+          {{- section.settings.titre_formulaire | default: 'Écrivez-nous' | escape -}}
+        </h2>
+
+        {%- form 'contact', id: 'contact-demande', class: 'spa-ctete__form' -%}
+          {%- if form.posted_successfully? -%}
+            <div class="spa-ctete__ok" role="status">
+              <h3>Message reçu.</h3>
+              <p>
+                Nous vous répondons dès que possible, par e‑mail ou par téléphone selon
+                ce qui est le plus simple pour vous.
+              </p>
+              <p>
+                <strong>Si vous avez demandé une visite, le créneau n'est pas encore
+                réservé&nbsp;:</strong> nous vous rappelons pour le fixer ensemble, afin de sortir
+                les modèles qui vous intéressent avant votre arrivée.
+              </p>
+              <p>
+                Besoin d'une réponse tout de suite&nbsp;?
+                <a href="tel:{{ tel_lien | strip }}">{{ tel_affiche | escape }}</a>
+              </p>
+            </div>
+          {%- else -%}
+            {%- if form.errors -%}
+              <div class="spa-ctete__erreur" role="alert">
+                <p>{{ form.errors | default_errors }}</p>
+              </div>
+            {%- endif -%}
+
+            <p class="spa-ctete__obligatoires">
+              Les champs suivis d'un astérisque&nbsp;(<span aria-hidden="true">*</span>) sont obligatoires.
+            </p>
+
+            <div class="field">
+              <label class="field__label" for="ctete-motif">Votre demande porte sur <abbr title="obligatoire">*</abbr></label>
+              <select class="field__input" id="ctete-motif" name="contact[Motif]" data-ctete-motif required>
+                <option value="Un conseil sur un modèle" data-cle="conseil">Un conseil sur un modèle</option>
+                <option value="Une visite du showroom" data-cle="visite">Une visite du showroom</option>
+                <option value="Un devis de livraison ou d'installation" data-cle="devis">Un devis de livraison ou d'installation</option>
+                <option value="Le service après-vente" data-cle="sav">Le service après‑vente</option>
+              </select>
+            </div>
+
+            <div class="spa-ctete__paire">
+              <div class="field">
+                <label class="field__label" for="ctete-nom">Nom et prénom <abbr title="obligatoire">*</abbr></label>
+                <input
+                  class="field__input"
+                  type="text"
+                  id="ctete-nom"
+                  name="contact[name]"
+                  autocomplete="name"
+                  value="{% if form.name %}{{ form.name | escape }}{% elsif customer %}{{ customer.name | escape }}{% endif %}"
+                  required
+                >
+              </div>
+              <div class="field">
+                <label class="field__label" for="ctete-tel">Téléphone <abbr title="obligatoire">*</abbr></label>
+                <input
+                  class="field__input"
+                  type="tel"
+                  id="ctete-tel"
+                  name="contact[Téléphone]"
+                  autocomplete="tel"
+                  required
+                >
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="ctete-mail">E‑mail <abbr title="obligatoire">*</abbr></label>
+              <input
+                class="field__input"
+                type="email"
+                id="ctete-mail"
+                name="contact[email]"
+                autocomplete="email"
+                value="{% if form.email %}{{ form.email | escape }}{% elsif customer %}{{ customer.email | escape }}{% endif %}"
+                required
+              >
+            </div>
+
+            <div class="field" data-ctete-si="conseil visite devis sav">
+              <label class="field__label" for="ctete-modele">Modèle concerné</label>
+              <select class="field__input" id="ctete-modele" name="contact[Modèle concerné]">
+                <option value="Je ne sais pas encore">Je ne sais pas encore</option>
+                {%- for spa in spas -%}
+                  {%- assign nom = spa.title | remove: 'Spa ' | split: ' - ' | first -%}
+                  <option value="{{ nom | escape }}">{{ nom }}</option>
+                {%- endfor -%}
+              </select>
+            </div>
+
+            <div class="field" data-ctete-si="visite">
+              <label class="field__label" for="ctete-dispo">Vos disponibilités</label>
+              <input
+                class="field__input"
+                type="text"
+                id="ctete-dispo"
+                name="contact[Disponibilités]"
+                placeholder="Samedi matin, ou en semaine après 17 h…"
+              >
+              <span class="spa-ctete__aide">
+                Nous vous rappelons pour fixer le créneau&nbsp;: le showroom est uniquement sur rendez-vous.
+              </span>
+            </div>
+
+            <div class="field" data-ctete-si="devis sav">
+              <label class="field__label" for="ctete-cp">Code postal</label>
+              <input
+                class="field__input"
+                type="text"
+                id="ctete-cp"
+                name="contact[Code postal]"
+                inputmode="numeric"
+                autocomplete="postal-code"
+                pattern="[0-9]{5}"
+                maxlength="5"
+              >
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="ctete-message">Votre demande <abbr title="obligatoire">*</abbr></label>
+              <textarea
+                class="field__input"
+                id="ctete-message"
+                name="contact[body]"
+                rows="5"
+                required
+              >{% if form.body %}{{ form.body }}{% endif %}</textarea>
+            </div>
+
+            <p class="spa-ctete__photos" data-ctete-si="devis">
+              <strong>Des photos à nous montrer&nbsp;?</strong> C'est l'accès qui décide du prix d'une
+              livraison. Le formulaire <a href="/pages/mon-projet-spa">Mon projet spa</a> accepte les
+              photos de l'emplacement et du chemin d'accès&nbsp;; ce formulaire-ci, non.
+            </p>
+
+            <button type="submit" class="button spa-ctete__envoyer">Envoyer ma demande</button>
+
+            <p class="spa-ctete__rgpd">
+              Vos informations servent uniquement à vous répondre. Elles ne sont ni revendues,
+              ni utilisées pour de la prospection.
+            </p>
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var racine = document.querySelector('#shopify-section-{{ section.id }}');
+    if (!racine) return;
+
+    var motif = racine.querySelector('[data-ctete-motif]');
+    var groupes = racine.querySelectorAll('[data-ctete-si]');
+    if (!motif || !groupes.length) return;
+
+    /* La cle du motif courant : c'est data-cle, pas le libelle. Un libelle
+       peut etre reformule sans casser les liens entrants. */
+    function cle() {
+      var opt = motif.options[motif.selectedIndex];
+      return opt ? (opt.getAttribute('data-cle') || '') : '';
+    }
+
+    function appliquer() {
+      var courante = cle();
+      groupes.forEach(function (groupe) {
+        var permis = (groupe.getAttribute('data-ctete-si') || '').split(' ');
+        var garde = permis.indexOf(courante) !== -1;
+        groupe.hidden = !garde;
+        /* Un champ masque ne doit pas bloquer l'envoi ni partir rempli. */
+        groupe.querySelectorAll('input, select, textarea').forEach(function (champ) {
+          champ.disabled = !garde;
+        });
+      });
+    }
+
+    /* Le motif peut arriver par l'URL : /pages/contact?motif=visite#demande */
+    try {
+      var demande = new URLSearchParams(window.location.search).get('motif');
+      if (demande) {
+        for (var i = 0; i < motif.options.length; i++) {
+          if (motif.options[i].getAttribute('data-cle') === demande) {
+            motif.selectedIndex = i;
+            break;
+          }
+        }
+      }
+    } catch (e) {}
+
+    motif.addEventListener('change', appliquer);
+    appliquer();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Contact — tête de page",
+  "tag": "section",
+  "class": "spa-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Coordonnées"
+    },
+    {
+      "type": "text",
+      "id": "mention",
+      "label": "Mention en tête",
+      "default": "Showroom uniquement sur rendez-vous"
+    },
+    {
+      "type": "text",
+      "id": "raison_sociale",
+      "label": "Raison sociale",
+      "default": "SPAS9 | LINERS FRANCE"
+    },
+    {
+      "type": "text",
+      "id": "adresse",
+      "label": "Adresse",
+      "default": "16 rue de l'Orme, 91540 Fontenay-le-Vicomte"
+    },
+    {
+      "type": "text",
+      "id": "telephone",
+      "label": "Téléphone",
+      "default": "+33 (0)1 60 77 37 00",
+      "info": "Écrit pour être lu. Le lien d'appel est composé automatiquement."
+    },
+    {
+      "type": "text",
+      "id": "courriel",
+      "label": "Adresse e-mail affichée",
+      "default": "spas9@linersfrance.fr",
+      "info": "Affichage seulement. Les messages du formulaire arrivent sur l'adresse de la boutique, réglée dans Shopify."
+    },
+    {
+      "type": "url",
+      "id": "lien_itineraire",
+      "label": "Lien d'itinéraire"
+    },
+    {
+      "type": "text",
+      "id": "libelle_itineraire",
+      "label": "Libellé du lien d'itinéraire",
+      "default": "Itinéraire sur Google Maps"
+    },
+    {
+      "type": "richtext",
+      "id": "texte",
+      "label": "Texte sous les coordonnées"
+    },
+    {
+      "type": "header",
+      "content": "Formulaire"
+    },
+    {
+      "type": "text",
+      "id": "titre_formulaire",
+      "label": "Titre du formulaire",
+      "default": "Écrivez-nous"
+    },
+    {
+      "type": "header",
+      "content": "Mise en page"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact — tête de page"
+    }
+  ]
+}
+{% endschema %}

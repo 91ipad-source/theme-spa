@@ -312,7 +312,7 @@
         "bouton_1": "Demander un devis",
         "lien_1": "/pages/mon-projet-spa",
         "bouton_2": "Nous contacter",
-        "lien_2": "/pages/contact",
+        "lien_2": "/pages/contact?motif=devis#demande",
         "color_scheme": "scheme-1",
         "padding_top": 24,
         "padding_bottom": 64

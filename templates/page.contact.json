@@ -9,44 +9,14 @@
  */
 {
   "sections": {
-    "photo": {
-      "type": "spa-store-banner",
-      "settings": {
-        "largeur": "contenu",
-        "image": "shopify://shop_images/SPAS9_Nous_contacter.jpg",
-        "show_on_mobile": true,
-        "image_alt": "Le showroom SPAS9 | LINERS FRANCE à Fontenay-le-Vicomte : spas exposés, produits de traitement, accessoires et filtration"
-      }
-    },
     "entete": {
       "type": "spa-page-entete",
       "settings": {
         "surtitre": "Fontenay-le-Vicomte (91), Essonne",
         "chapeau": "<p>Une hésitation entre deux modèles, un doute sur le passage jusqu'à votre jardin, ou l'envie de comparer ? Écrivez-nous, appelez-nous, ou prenez rendez-vous pour venir : <strong>nos spas sont exposés et vous pouvez vous asseoir dedans</strong>. C'est encore le meilleur moyen de choisir.</p>",
         "color_scheme": "scheme-1",
-        "padding_top": 40,
+        "padding_top": 32,
         "padding_bottom": 8
-      }
-    },
-    "coordonnees": {
-      "type": "spa-contact-carte",
-      "settings": {
-        "surtitre": "Nous joindre",
-        "titre": "Le showroom",
-        "texte": "<p>Nous sommes en Essonne, à une trentaine de minutes du sud de Paris. Un <strong>parking</strong> est à votre disposition devant le magasin. Vous y trouverez nos spas exposés, mais aussi les produits de traitement, les accessoires, la filtration et les pièces détachées pour piscine et spa.</p><p><a href=\"https://www.google.com/maps/search/?api=1&amp;query=16+rue+de+l%27Orme+91540+Fontenay-le-Vicomte\" target=\"_blank\" rel=\"noopener\">Voir sur Google Maps</a></p>",
-        "mention": "Showroom uniquement sur rendez-vous",
-        "ancre": "nous-joindre",
-        "raison_sociale": "SPAS9 | LINERS FRANCE",
-        "adresse": "16 rue de l'Orme, 91540 Fontenay-le-Vicomte",
-        "telephone": "+33 (0)1 60 77 37 00",
-        "courriel": "spas9@linersfrance.fr",
-        "bouton_1": "Écrire au sujet de mon projet",
-        "lien_1": "#ecrivez-nous",
-        "bouton_2": "Tout savoir sur le showroom",
-        "lien_2": "/pages/showroom-spa-essonne",
-        "color_scheme": "scheme-1",
-        "padding_top": 24,
-        "padding_bottom": 40
       }
     },
     "p_reperer": {
@@ -70,7 +40,7 @@
         "padding_top": 24,
         "padding_bottom": 40,
         "titre": "Visiter le showroom",
-        "texte": "<p><strong>Le showroom est uniquement sur rendez-vous.</strong></p><p>Ce n'est pas une contrainte administrative : c'est ce qui nous permet de préparer votre visite. Dites-nous ce que vous cherchez, nous sortons les modèles concernés et un vendeur vous consacre le temps nécessaire, sans que vous tombiez sur une équipe en livraison.</p><p>Pour convenir d'un créneau : <a href=\"tel:+33160773700\">01 60 77 37 00</a> ou le formulaire en bas de cette page. Tout le détail de la visite figure sur notre page <a href=\"/pages/showroom-spa-essonne\">Showroom spa en Essonne</a>.</p>"
+        "texte": "<p><strong>Le showroom est uniquement sur rendez-vous.</strong></p><p>Ce n'est pas une contrainte administrative : c'est ce qui nous permet de préparer votre visite. Dites-nous ce que vous cherchez, nous sortons les modèles concernés et un vendeur vous consacre le temps nécessaire, sans que vous tombiez sur une équipe en livraison.</p><p>Pour convenir d'un créneau : <a href=\"tel:+33160773700\">01 60 77 37 00</a> ou le formulaire en haut de cette page. Tout le détail de la visite figure sur notre page <a href=\"/pages/showroom-spa-essonne\">Showroom spa en Essonne</a>.</p>"
       }
     },
     "p_retrait": {
@@ -97,39 +67,30 @@
         "texte": "<p>Pour vous répondre précisément du premier coup, joignez si possible à votre message :</p><ul><li>votre ville et votre code postal ;</li><li>le modèle de spa qui vous intéresse ;</li><li>quelques photos de l'emplacement prévu et du chemin d'accès ;</li><li>la largeur du passage le plus étroit (portail, allée, angle de mur).</li></ul><p>C'est souvent l'accès qui décide de tout : notre article <a href=\"/blogs/conseils-spa/installer-un-spa-chez-soi\">Installer un spa chez soi</a> détaille les points à vérifier avant de commander.</p>"
       }
     },
-    "p_form": {
-      "type": "spa-prose",
+    "tete": {
+      "type": "spa-contact-tete",
       "settings": {
-        "largeur": "lecture",
-        "encadre": false,
+        "mention": "Showroom uniquement sur rendez-vous",
+        "raison_sociale": "SPAS9 | LINERS FRANCE",
+        "adresse": "16 rue de l'Orme, 91540 Fontenay-le-Vicomte",
+        "telephone": "+33 (0)1 60 77 37 00",
+        "courriel": "spas9@linersfrance.fr",
+        "lien_itineraire": "https://www.google.com/maps/search/?api=1&query=16+rue+de+l%27Orme+91540+Fontenay-le-Vicomte",
+        "libelle_itineraire": "Itinéraire sur Google Maps",
+        "texte": "<p>Un <strong>parking</strong> se trouve devant le magasin. Vous y trouverez nos spas exposés, mais aussi les produits de traitement, les accessoires, la filtration et les pièces détachées pour piscine et spa.</p>",
+        "titre_formulaire": "Écrivez-nous",
         "color_scheme": "scheme-1",
-        "padding_top": 32,
-        "padding_bottom": 0,
-        "titre": "Écrivez-nous",
-        "texte": "<p>Utilisez le formulaire ci-dessous, nous revenons vers vous dès que possible.</p>",
-        "ancre": "ecrivez-nous"
-      }
-    },
-    "form": {
-      "type": "contact-form",
-      "settings": {
-        "heading": "",
-        "heading_size": "h1",
-        "color_scheme": "scheme-1",
-        "padding_top": 8,
-        "padding_bottom": 56
+        "padding_top": 16,
+        "padding_bottom": 48
       }
     }
   },
   "order": [
-    "photo",
     "entete",
-    "coordonnees",
-    "p_reperer",
+    "tete",
     "p_visiter",
+    "p_reperer",
     "p_retrait",
-    "p_devis",
-    "p_form",
-    "form"
+    "p_devis"
   ]
 }

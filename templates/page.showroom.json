@@ -9,16 +9,6 @@
  */
 {
   "sections": {
-    "photo": {
-      "type": "spa-store-banner",
-      "settings": {
-        "image": "shopify://shop_images/spas9-showroom-fontenay-le-vicomte.png",
-        "largeur": "contenu",
-        "show_on_mobile": true,
-        "image_alt": "Le showroom SPAS9 à Fontenay-le-Vicomte : une dizaine de spas exposés, le rayon accessoires et les produits de traitement de l'eau",
-        "link": ""
-      }
-    },
     "entete": {
       "type": "spa-page-entete",
       "blocks": {
@@ -62,7 +52,7 @@
         "titre": "",
         "chapeau": "<p>Notre showroom expose des spas SPAS9 au <strong>16 rue de l'Orme, 91540 Fontenay-le-Vicomte</strong>, à trente minutes du sud de Paris. <strong>Showroom uniquement sur rendez-vous</strong> : dites-nous ce que vous cherchez, nous sortons les modèles concernés et un vendeur vous consacre le temps nécessaire.</p><p><a href=\"tel:+33160773700\"><strong>Appeler le 01 60 77 37 00</strong></a> ou <a href=\"/pages/contact\">demander un rendez-vous</a>.</p>",
         "color_scheme": "scheme-1",
-        "padding_top": 44,
+        "padding_top": 32,
         "padding_bottom": 8
       }
     },
@@ -365,7 +355,7 @@
         "cta_heading": "Vous avez un projet ?",
         "cta_text": "Parlez-nous de vos besoins et nous vous aiderons à comparer les modèles adaptés.",
         "cta_button_label": "Nous contacter",
-        "cta_button_link": "shopify://pages/contact",
+        "cta_button_link": "/pages/contact?motif=visite#demande",
         "padding_top": 16,
         "padding_bottom": 56
       }
@@ -383,7 +373,7 @@
         "telephone": "+33 (0)1 60 77 37 00",
         "courriel": "spas9@linersfrance.fr",
         "bouton_1": "Prendre rendez-vous",
-        "lien_1": "/pages/contact",
+        "lien_1": "/pages/contact?motif=visite#demande",
         "bouton_2": "Découvrir nos spas",
         "lien_2": "/collections/tous-nos-spas",
         "video": "shopify://files/videos/showroom-spas9.mp4",
@@ -392,11 +382,33 @@
         "padding_top": 24,
         "padding_bottom": 64
       }
+    },
+    "visite": {
+      "type": "spa-contact-carte",
+      "settings": {
+        "surtitre": "Préparer votre venue",
+        "titre": "Demander un créneau",
+        "texte": "<p>Dites-nous quels modèles vous voulez voir&nbsp;: nous les sortons avant votre arrivée, et un vendeur vous consacre le temps nécessaire. Un <strong>parking</strong> est à votre disposition devant le magasin.</p>",
+        "mention": "Showroom uniquement sur rendez-vous",
+        "raison_sociale": "SPAS9 | LINERS FRANCE",
+        "adresse": "16 rue de l'Orme, 91540 Fontenay-le-Vicomte",
+        "telephone": "+33 (0)1 60 77 37 00",
+        "courriel": "spas9@linersfrance.fr",
+        "bouton_1": "Demander un rendez-vous",
+        "lien_1": "/pages/contact?motif=visite#demande",
+        "bouton_2": "Voir ce qui est exposé",
+        "lien_2": "#les-modeles",
+        "image": "shopify://shop_images/spas9-showroom-fontenay-le-vicomte.png",
+        "image_alt": "Le showroom SPAS9 à Fontenay-le-Vicomte : une dizaine de spas exposés, le rayon accessoires et les produits de traitement de l'eau",
+        "color_scheme": "scheme-1",
+        "padding_top": 8,
+        "padding_bottom": 24
+      }
     }
   },
   "order": [
-    "photo",
     "entete",
+    "visite",
     "sommaire",
     "ch1",
     "p_comparer",
