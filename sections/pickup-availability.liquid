@@ -17,7 +17,30 @@
             | t: location_name: closest_location.location.name
           }}
         </p>
-        <p class="caption">{{ closest_location.pick_up_time }}</p>
+        {%- comment -%}
+          LE DELAI DE RETRAIT NE S'AFFICHE PLUS, ET CE N'EST PAS UN OUBLI.
+
+          Shopify ecrivait ici « Habituellement prete en 24 heures », depuis le
+          delai choisi dans les reglages de retrait de l'emplacement. La
+          promesse etait fausse : un spa pese de 250 a 430 kg, le retrait se
+          fait sur rendez-vous et APRES confirmation de la disponibilite —
+          c'est ce que dit la page Livraison et retrait, et c'est ce que dit la
+          fiche elle-meme. Annoncer vingt-quatre heures faisait se deplacer des
+          gens pour rien.
+
+          Le reglage Shopify n'offre aucune valeur « non precise » : la liste
+          va d'une heure a cinq jours et plus, sans case vide. La ligne est
+          donc retiree ici plutot que renseignee autrement.
+
+          CETTE SECTION VIENT DE DAWN. Une mise a jour du theme la remplacerait
+          et ramenerait la ligne. Si elle reapparait, c'est ici qu'il faut
+          revenir.
+
+          AU PASSAGE DE LA COMMANDE, LA LIGNE RESTE. Cette page-la appartient a
+          Shopify et ne se modifie pas depuis le theme : son delai suit le
+          reglage de l'emplacement, et seul un autre choix dans ce reglage le
+          changera.
+        {%- endcomment -%}
         <button
           id="ShowPickupAvailabilityDrawer"
           class="pickup-availability-button link link--text underlined-link"
@@ -108,8 +131,12 @@
               <span class="svg-wrapper">
                 {{- 'icon-tick.svg' | inline_asset_content -}}
               </span>
-              {{ 'products.product.pickup_availability.pick_up_available' | t }},
-              {{ availability.pick_up_time | downcase }}
+              {%- comment -%}
+                Meme raison qu'en haut de ce fichier : le delai disparait, la
+                disponibilite reste. La virgule part avec lui, sans quoi la
+                phrase se terminerait dessus.
+              {%- endcomment -%}
+              {{ 'products.product.pickup_availability.pick_up_available' | t }}
             {%- endif -%}
           </p>
 
