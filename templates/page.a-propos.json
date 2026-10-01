@@ -25,8 +25,8 @@
         "c1": {
           "type": "chiffre",
           "settings": {
-            "valeur": "2007",
-            "label": "Année de création"
+            "valeur": "Depuis 2007",
+            "label": "LINERS FRANCE"
           }
         },
         "c2": {
