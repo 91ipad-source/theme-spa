@@ -6551,3 +6551,45 @@ h1.h2.center {
 .grid__item[hidden] {
   display: none;
 }
+
+/* --------------------------------------------------------------------------
+   55. SHOWROOM : LES MODELES EXPOSES (section spa-showroom-modeles)
+
+   La liste elle-meme reutilise .spa-expo, deja dessinee section 15 : elle
+   remplace un bloc de contenu ecrit a la main, pas sa mise en forme. Seuls le
+   titre, la mention et le cas « plus rien d'expose » sont nouveaux.
+   -------------------------------------------------------------------------- */
+
+.spa-showroom-modeles {
+  padding-top: var(--pt);
+  padding-bottom: var(--pb);
+}
+
+.spa-showroom-modeles__titre {
+  margin: 0;
+  font-size: var(--t-section);
+  line-height: var(--lh-titre);
+  text-wrap: balance;
+}
+
+/* La mention vient APRES la liste et doit s'en detacher : c'est la reserve,
+   pas la legende d'une vignette. */
+.spa-showroom-modeles__mention {
+  max-width: var(--mesure);
+  margin: 2.4rem 0 0;
+  font-size: 1.5rem;
+  line-height: var(--lh-texte);
+}
+
+.spa-showroom-modeles__mention p {
+  margin: 0;
+}
+
+.spa-showroom-modeles__vide {
+  margin: 2.4rem 0 0;
+  padding: 1.6rem 2rem;
+  border-radius: var(--r-md);
+  background: var(--mist);
+  font-size: 1.5rem;
+  line-height: var(--lh-texte);
+}

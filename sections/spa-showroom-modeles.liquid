@@ -1,0 +1,177 @@
+{%- comment -%}
+  Les spas visibles au showroom, en cartes.
+
+  POURQUOI CETTE SECTION REMPLACE UN BLOC DE TEXTE. La même liste existait,
+  écrite à la main dans un bloc de contenu : six liens produits, six adresses
+  d'images sur le CDN et six capacités, tous recopiés. Trois façons de se
+  tromper, et aucune de s'en apercevoir.
+
+  — Un modèle retiré de l'exposition restait affiché. Rien ne reliait cette
+    liste au métachamp « Exposé au showroom » qui commande déjà le lien
+    « Le voir au showroom » des vignettes du catalogue : les deux pouvaient
+    se contredire sans que personne ne le voie.
+  — Les photos étaient les AFFICHES, celles qui portent le nom du modèle et
+    ses dimensions dessinés dessus. La carte réécrivait donc en dessous ce que
+    l'image disait déjà. C'est la photo de la fiche qui sert maintenant, celle
+    sans texte.
+  — Les adresses d'images étaient figées, numéro de version compris. Remplacer
+    une photo dans l'administration laissait la vignette sur l'ancienne, ou
+    sur rien du tout.
+
+  LE MÉTACHAMP A LE DERNIER MOT. Une carte dont le produit n'est plus coché
+  « exposé » ne sort pas, même si elle reste enregistrée dans la section. On
+  décoche la case sur la fiche produit, et la page suit — sans toucher au
+  code, et sans qu'un visiteur fasse quarante-cinq minutes de route pour un
+  modèle qui n'est plus là.
+
+  L'ORDRE EST CELUI DES BLOCS, PAS CELUI DE LA COLLECTION. Il va du plus petit
+  format au plus grand, 2 puis 3 puis 5 puis 7 places : c'est ainsi qu'on
+  compare, et aucun tri automatique ne le devinerait.
+
+  CE QUE LA SECTION PROMET, ET CE QU'ELLE NE PROMET PAS. L'exposition évolue
+  au fil des livraisons. La mention sous la liste le dit, et renvoie à la
+  confirmation avant déplacement.
+{%- endcomment -%}
+
+<div
+  class="spa-showroom-modeles color-{{ section.settings.color_scheme }} gradient"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width">
+    {%- if section.settings.titre != blank -%}
+      <h2 class="spa-showroom-modeles__titre">{{ section.settings.titre | escape }}</h2>
+    {%- endif -%}
+
+    {%- comment -%}
+      On compte d'abord, on affiche ensuite : une liste vide vaut mieux dite
+      qu'affichée en creux.
+    {%- endcomment -%}
+    {%- assign exposes = 0 -%}
+    {%- for block in section.blocks -%}
+      {%- if block.settings.produit != blank and block.settings.produit.metafields.custom.expose_showroom.value -%}
+        {%- assign exposes = exposes | plus: 1 -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if exposes == 0 -%}
+      <p class="spa-showroom-modeles__vide">
+        L'exposition est en cours de renouvellement. Appelez-nous&nbsp;: nous vous dirons ce qui
+        est visible cette semaine.
+      </p>
+    {%- else -%}
+      <ul class="spa-expo" role="list">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign produit = block.settings.produit
+            assign expose = produit.metafields.custom.expose_showroom.value
+          -%}
+          {%- if produit != blank and expose -%}
+            {%- liquid
+              assign nom = produit.title | remove: 'Spa ' | split: ' - ' | first
+              assign places = produit.metafields.custom.places.value
+              assign alt = produit.featured_image.alt
+              if alt == blank
+                assign alt = nom | append: ', spa exposé au showroom SPAS9 de Fontenay-le-Vicomte'
+              endif
+            -%}
+            <li {{ block.shopify_attributes }}>
+              <a class="spa-expo__lien" href="{{ produit.url }}">
+                {%- if produit.featured_image != blank -%}
+                  {{
+                    produit.featured_image
+                    | image_url: width: 600
+                    | image_tag:
+                      class: 'spa-expo__image',
+                      widths: '300, 450, 600',
+                      sizes: '(min-width: 990px) 280px, 45vw',
+                      loading: 'lazy',
+                      alt: alt
+                  }}
+                {%- endif -%}
+                <span class="spa-expo__nom">{{ nom | escape }}</span>
+                {%- if places != blank -%}
+                  <span class="spa-expo__places">{{ places | escape }}</span>
+                {%- endif -%}
+              </a>
+              {%- if block.settings.note != blank -%}
+                <span class="spa-expo__note">{{ block.settings.note | escape }}</span>
+              {%- endif -%}
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+
+      {%- if section.settings.mention != blank -%}
+        <p class="spa-showroom-modeles__mention">{{ section.settings.mention }}</p>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Showroom — modèles exposés",
+  "tag": "section",
+  "class": "spa-section",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "text",
+      "id": "titre",
+      "label": "Titre"
+    },
+    {
+      "type": "richtext",
+      "id": "mention",
+      "label": "Mention sous la liste",
+      "info": "Ce qui est exposé change au fil des livraisons. Dites-le ici."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Jeu de couleurs",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 24
+    }
+  ],
+  "blocks": [
+    {
+      "type": "modele",
+      "name": "Modèle exposé",
+      "settings": [
+        {
+          "type": "product",
+          "id": "produit",
+          "label": "Spa",
+          "info": "La carte ne s'affiche que si « Exposé au showroom » est coché sur la fiche produit."
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Ce qu'on vient voir sur celui-ci"
+        }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Showroom — modèles exposés" }]
+}
+{% endschema %}
