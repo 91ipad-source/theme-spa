@@ -16,7 +16,7 @@
           "type": "heading",
           "settings": {
             "heading": "Spas neufs en Île-de-France",
-            "heading_size": "h0",
+            "heading_size": "h1",
             "use_h1": true
           }
         },
@@ -25,31 +25,19 @@
           "settings": {
             "text": "<p>Showroom et conseil à Fontenay-le-Vicomte (91)</p><p>Spas 2 à 7 places, livrés et installés en Île-de-France et dans le Loiret.</p>"
           }
-        },
-        "boutons": {
-          "type": "button",
-          "settings": {
-            "button_label": "Découvrir nos spas",
-            "button_link": "/collections/tous-nos-spas",
-            "button_style_secondary": false,
-            "button_label_2": "Visiter le showroom",
-            "button_link_2": "/pages/showroom-spa-essonne",
-            "button_style_secondary_2": true
-          }
         }
       },
       "block_order": [
         "titre",
-        "accroche",
-        "boutons"
+        "accroche"
       ],
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
         "color_scheme": "scheme-1",
         "full_width": false,
-        "padding_top": 40,
-        "padding_bottom": 24
+        "padding_top": 32,
+        "padding_bottom": 8
       }
     },
     "chiffres": {
@@ -329,13 +317,50 @@
       }
     },
     "banniere": {
-      "type": "spa-store-banner",
+      "type": "image-banner",
+      "blocks": {
+        "titre": {
+          "type": "heading",
+          "settings": {
+            "heading": "Le bien-être, à la maison.",
+            "heading_size": "h1"
+          }
+        },
+        "phrase": {
+          "type": "text",
+          "settings": {
+            "text": "Notre best-seller, le Proto 2 : cinq places, <strong>4 990 € TTC</strong>.",
+            "text_style": "body"
+          }
+        },
+        "actions": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Découvrir nos spas",
+            "button_link_1": "/collections/tous-nos-spas",
+            "button_style_secondary_1": false,
+            "button_label_2": "Visiter le showroom",
+            "button_link_2": "/pages/showroom-spa-essonne",
+            "button_style_secondary_2": true
+          }
+        }
+      },
+      "block_order": [
+        "titre",
+        "phrase",
+        "actions"
+      ],
       "settings": {
-        "image": "shopify://shop_images/spas9-banniere-accueil-bien-etre-proto2.webp",
-        "largeur": "plein",
-        "show_on_mobile": false,
-        "image_alt": "Spa Proto 2 ROCA Spa, 5 places, vu de dessus sur une terrasse — « Le bien-être, à la maison », 4 990 € TTC",
-        "link": ""
+        "image": "shopify://shop_images/Accueil_sans_texte.png",
+        "image_overlay_opacity": 0,
+        "image_height": "adapt",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-left",
+        "desktop_content_alignment": "left",
+        "show_text_box": false,
+        "color_scheme": "scheme-1",
+        "mobile_content_alignment": "left",
+        "show_text_below": true
       }
     }
   },
