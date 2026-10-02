@@ -121,8 +121,8 @@
         "chapeau": "<p>Nous proposons la <strong>livraison de nos spas partout en France</strong>, exclusivement <strong>sur devis</strong>. Aucun tarif forfaitaire ne tiendrait : deux adresses à distance égale peuvent demander deux organisations très différentes.</p>",
         "ancre": "la-livraison",
         "filet": true,
-        "color_scheme": "scheme-1",
-        "padding_top": 64,
+        "color_scheme": "scheme-2",
+        "padding_top": 56,
         "padding_bottom": 8
       }
     },
@@ -131,7 +131,7 @@
       "settings": {
         "largeur": "lecture",
         "encadre": false,
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
         "padding_top": 16,
         "padding_bottom": 24,
         "titre": "Ce qui détermine le tarif",
@@ -143,7 +143,7 @@
       "settings": {
         "largeur": "lecture",
         "encadre": false,
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
         "padding_top": 32,
         "padding_bottom": 24,
         "titre": "Ce que comprend l'installation",
@@ -155,9 +155,9 @@
       "settings": {
         "largeur": "lecture",
         "encadre": true,
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
         "padding_top": 32,
-        "padding_bottom": 40,
+        "padding_bottom": 56,
         "titre": "À la réception de la livraison",
         "texte": "<p>Vérifiez l'état apparent du spa et de son emballage <strong>en présence du transporteur ou de notre équipe</strong>. En cas d'anomalie ou de dommage apparent, <strong>des réserves précises et détaillées doivent être inscrites sur le document de livraison</strong> — c'est ce document qui fera foi. Des photographies du produit et de son emballage facilitent le traitement du dossier.</p><p>Signalez-nous toute anomalie dans les meilleurs délais à <a href=\"mailto:spas9@linersfrance.fr\">spas9@linersfrance.fr</a>.</p><p>Les délais et droits légaux applicables au consommateur restent naturellement applicables. Lorsque le transporteur ne lui a pas effectivement permis de vérifier l'état du produit lors de la livraison, le délai légal applicable à certaines réclamations contre le transporteur peut notamment être porté à 10 jours.</p>"
       }
@@ -315,7 +315,8 @@
         "lien_2": "/pages/contact?motif=devis#demande",
         "color_scheme": "scheme-1",
         "padding_top": 24,
-        "padding_bottom": 64
+        "padding_bottom": 64,
+        "ton": "marine"
       }
     }
   },
