@@ -47,7 +47,16 @@
   endif
 -%}
 
-{%- comment -%} 1. L'ESCALIER — c'est la hauteur qui décide, pas la couleur. {%- endcomment -%}
+{%- comment -%}
+  1. L'ESCALIER — la hauteur décide, puis la forme de la cuve.
+
+  LA CUVE RONDE PASSE AVANT LA HAUTEUR. Sur nos trois escaliers, un seul est
+  donné pour les spas ronds comme pour les spas carrés : le modèle à marches
+  larges. Les deux modèles en composite se posent contre un bord droit. La
+  règle de hauteur s'applique donc d'abord, et la forme la corrige ensuite.
+  Les deux ne se contredisent pas sur la gamme actuelle : le seul spa rond
+  mesure 81 cm, soit précisément la plage des 40 cm du modèle large.
+{%- endcomment -%}
 {%- liquid
   case hauteur
     when 90
@@ -57,6 +66,11 @@
       assign escalier_handle = 'escalier-spa-2-marches-composite-anthracite'
       assign escalier_raison = 'Ses 42 cm sont faits pour les spas de 77 à 81 cm. Le modèle à marches larges de 40 cm convient aussi : plus encombrant devant le spa, et moins cher.'
   endcase
+
+  if ronde
+    assign escalier_handle = 'escalier-spa-2-marches-larges-anthracite'
+    assign escalier_raison = 'C’est celui de nos escaliers qui va aux cuves rondes comme aux cuves carrées, et ses 40 cm conviennent à ce spa. Ses marches de 72 cm laissent descendre les deux pieds côte à côte.'
+  endif
 -%}
 
 {%- comment -%}
