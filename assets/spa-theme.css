@@ -716,6 +716,10 @@ h3.spa-parcours__heading {
   color: var(--white);
 }
 
+/* Le picto est blanc dans la pastille cyan. Le marine y tenait un meilleur
+   contraste (4,9:1 contre 2,4:1), mais le dessin est decoratif — le titre
+   pose a cote dit la meme chose en toutes lettres — et le blanc le rattache
+   au reste du bandeau. Choix du gerant, sur capture d'ecran. */
 .spa-criteres__cta-icone {
   display: grid;
   place-items: center;
@@ -723,7 +727,7 @@ h3.spa-parcours__heading {
   height: 5.6rem;
   border-radius: 50%;
   background: var(--sky);
-  color: var(--deep);
+  color: var(--white);
   flex-shrink: 0;
 }
 
