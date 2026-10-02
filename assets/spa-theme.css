@@ -4992,11 +4992,32 @@ a, span, label, summary, button, blockquote, figcaption,
   padding-bottom: var(--pb, 24px);
 }
 
+/* LE BLANC CASSE NE SUFFISAIT PAS. La carte etait posee sur --coquille,
+   un blanc a peine bleute, borde d'un filet a 8 % : sur un fond blanc, on
+   ne la voyait pas. Elle passe sur l'aplat ciel du reste du site, et le
+   filet disparait — un aplat qui se voit n'a pas besoin d'etre souligne.
+
+   Le survol reste blanc : sur le ciel, la ligne pointee ressort sans qu'on
+   ait a lui ajouter une couleur de plus. */
 .spa-sommaire__carte {
   padding: 2.8rem;
-  border: 1px solid rgba(15, 58, 90, 0.08);
+  border: 0;
   border-radius: var(--r-lg);
-  background: var(--coquille);
+  background: var(--mist);
+}
+
+/* Le numero prend sa pastille blanche. Il tenait sa place par une largeur
+   minimale, ce qui donnait bien a la colonne son bord gauche mais ne se
+   lisait pas comme un reperage. La pastille n'est posee que s'il y a un
+   numero : « Nous contacter » suit des chapitres numerotes sans en porter,
+   et un rond blanc vide serait un bouton qui ne mene nulle part. */
+.spa-sommaire__rang:not(:empty) {
+  display: inline-flex;
+  height: 2.6rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-pill);
+  background: var(--white);
 }
 
 .spa-sommaire__titre {
@@ -5031,7 +5052,11 @@ a, span, label, summary, button, blockquote, figcaption,
 
 .spa-sommaire__rang {
   flex: 0 0 auto;
-  min-width: 2.2ch;
+  /* La case est a la largeur de la pastille, numerotee ou non : c'est elle
+     qui donne a la colonne son bord gauche quand une entree n'a pas de
+     numero. Elle valait 2,2ch, soit la largeur du chiffre, avant que la
+     pastille ne vienne l'elargir. */
+  min-width: 3.4rem;
   color: var(--sky-deep);
   font-size: 1.3rem;
   font-variant-numeric: tabular-nums;
