@@ -133,7 +133,6 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
-        "prestations",
         "reassurance",
         "technique",
         "description",
@@ -141,7 +140,8 @@
         "tab_prix",
         "tab_garantie",
         "tab_showroom",
-        "share"
+        "share",
+        "prestations"
       ],
       "settings": {
         "enable_sticky_info": true,
