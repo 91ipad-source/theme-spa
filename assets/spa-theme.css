@@ -6106,23 +6106,23 @@ h1.h2.center {
 
    La page etait juste : un titre, des coordonnees, un formulaire, quatre
    blocs de texte. Mais tout s'y lisait sur le meme blanc, et rien n'y disait
-   ou regarder en premier. Elle emploie donc les trois aplats de la palette
-   au lieu d'un seul — l'en-tete en marine, la bande de contact en ciel
-   clair, les cartes en blanc par-dessus.
+   ou regarder en premier. La bande de contact passe donc en ciel clair,
+   avec des cartes posees dessus ; l'en-tete, lui, reste blanc — essai fait
+   en marine, juge trop lourd par le gerant sur la page en ligne.
 
-   RIEN N'Y EST DECORATIF POUR LE PLAISIR. L'aplat marine detache le titre
-   du menu qui le surmonte ; la carte sombre met le numero au premier plan,
-   parce que c'est la premiere action de la page ; le filet cyan en tete du
-   formulaire dit « ici, on ecrit » sans ajouter un mot.
+   RIEN N'Y EST DECORATIF POUR LE PLAISIR. La carte sombre met le numero au
+   premier plan, parce que c'est la premiere action de la page ; le filet
+   cyan en tete du formulaire dit « ici, on ecrit » sans ajouter un mot.
 
    La section spa-contact-tete ne sert qu'a cette page : ses regles tiennent
    donc ici, sans prefixe de gabarit.
    -------------------------------------------------------------------------- */
 
-/* L'EN-TETE SUR APLAT FONCE. Le surtitre et le chapeau sont ecrits pour du
-   bleu sur blanc ; sur le marine ils tombent sous le seuil de contraste. La
-   regle vise les deux jeux sombres du theme, pas la seule page contact :
-   c'est la meme correction partout ou on les emploiera. */
+/* UN GARDE-FOU POUR LES DEUX JEUX SOMBRES. Aucune page ne les emploie
+   aujourd'hui sur un en-tete, mais l'editeur de theme permet de les choisir
+   en deux clics — et le surtitre comme le chapeau sont ecrits pour du bleu
+   sur blanc : sur un aplat marine ils tombent sous le seuil de contraste.
+   Quatre regles valent mieux qu'un titre illisible decouvert en ligne. */
 .color-scheme-3 .spa-surtitre,
 .color-scheme-5 .spa-surtitre {
   color: var(--water);
