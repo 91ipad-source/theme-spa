@@ -50,9 +50,9 @@
         "titre": "Lève-couverture hydraulique Rogue",
         "accroche": "Deux fois par bain, on tire une couverture de plusieurs dizaines de kilos et on la pose par terre — où elle ramasse le gravier qui finira par rayer l'acrylique, et où elle retient l'eau jusqu'à ce que la mousse n'isole plus rien. Le vérin la redresse contre le spa : elle ne touche plus le sol, et elle s'égoutte.",
         "libelle_bouton": "Voir le lève-couverture",
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 8
+        "color_scheme": "scheme-2",
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     },
     "product-grid": {
