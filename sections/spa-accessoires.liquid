@@ -1,0 +1,268 @@
+{%- comment -%}
+  CE QUI VA AVEC CE SPA.
+
+  POURQUOI CETTE SECTION EXISTE. Les fiches accessoires expliquent très bien
+  à quels spas elles conviennent — hauteur par hauteur, cote par cote. Mais
+  personne ne lit la fiche d'un escalier avant d'avoir acheté son spa. Le
+  raisonnement manquait donc dans l'autre sens : sur la fiche du Proto 2,
+  rien ne disait quel escalier lui va, ni quelle taille de couverture
+  commander. On laissait le client le découvrir après la livraison, ou se
+  tromper de taille.
+
+  CE N'EST PAS UN CARROUSEL. Dawn sait déjà rapprocher des articles entre
+  eux, mais sans jamais dire POURQUOI ils vont ensemble — et c'est la seule
+  chose qui décide l'achat du second. Ici chaque carte porte sa raison, et
+  cette raison est un fait mesurable tiré des métachamps du spa : la hauteur
+  de la cuve pour l'escalier, l'encombrement pour la couverture, la forme
+  pour le lève-couverture. Aucune suggestion de confort, aucun « les clients
+  ont aussi acheté ».
+
+  CE QUI NE VA PAS EST DIT AUSSI. Trois spas n'ont pas de couverture à leur
+  cote, et le Doro Plus, rond, ne peut recevoir aucun de nos deux
+  lève-couvertures. Le taire reviendrait à laisser commander la taille « la
+  plus proche », qui ne porte pas sur le rebord et n'isole donc rien. La
+  note de bas de bloc le dit avant la commande plutôt qu'au retour.
+
+  POUR AJOUTER UNE CORRESPONDANCE, on ajoute une entrée aux « case »
+  ci-dessous, et rien d'autre : le bloc reste muet pour toute valeur qui n'y
+  figure pas. Mieux vaut ne rien proposer que proposer ce qui ne va pas.
+{%- endcomment -%}
+
+{%- comment -%}
+  La cuve ronde se reconnaît à deux marques dans l'encombrement, et on teste
+  les deux : la valeur enregistrée est « Ø 200 cm (rond) », mais une
+  reformulation qui laisserait tomber la parenthèse ferait proposer au Doro
+  Plus un lève-couverture qui ne se monte pas sur une courbe.
+{%- endcomment -%}
+{%- liquid
+  assign hauteur = product.metafields.custom.hauteur.value
+  assign encombrement = product.metafields.custom.encombrement.value
+
+  assign ronde = false
+  if encombrement contains 'rond'
+    assign ronde = true
+  endif
+  if encombrement contains 'Ø'
+    assign ronde = true
+  endif
+-%}
+
+{%- comment -%} 1. L'ESCALIER — c'est la hauteur qui décide, pas la couleur. {%- endcomment -%}
+{%- liquid
+  case hauteur
+    when 90
+      assign escalier_handle = 'escalier-spa-2-marches-composite-noir'
+      assign escalier_raison = 'Sa marche haute arrive juste sous le rebord d’un spa de 90 cm. C’est le seul de nos trois escaliers à cette hauteur.'
+    when 81, 77
+      assign escalier_handle = 'escalier-spa-2-marches-composite-anthracite'
+      assign escalier_raison = 'Ses 42 cm sont faits pour les spas de 77 à 81 cm. Le modèle à marches larges de 40 cm convient aussi : plus encombrant devant le spa, et moins cher.'
+  endcase
+-%}
+
+{%- comment -%}
+  2. LA COUVERTURE — elle repose sur le rebord : quelques centimètres
+  d'écart suffisent à laisser passer le froid. La correspondance va donc à
+  la cote exacte, et le lien vise directement la bonne taille pour que
+  personne n'ait à la choisir dans une liste.
+{%- endcomment -%}
+{%- liquid
+  case encombrement
+    when '158 × 210 cm'
+      assign taille_couverture = '160 × 210 cm'
+    when '200 × 200 cm'
+      assign taille_couverture = '200 × 200 cm'
+    when '220 × 220 cm'
+      assign taille_couverture = '220 × 220 cm'
+    when '230 × 230 cm'
+      assign taille_couverture = '230 × 230 cm'
+  endcase
+-%}
+
+{%- comment -%}
+  3. LE LÈVE-COUVERTURE — tout sauf une cuve ronde. Le choix entre nos deux
+  modèles dépend de la place derrière le spa, que nous ne connaissons pas :
+  on propose celui qui ne perce pas la jupe, et la raison nomme l'autre.
+{%- endcomment -%}
+{%- liquid
+  unless ronde
+    assign leve_handle = 'leve-couverture-hydraulique-rogue'
+    assign leve_raison = 'Il se monte sans perçage, mais réclame 70 cm libres derrière le spa. Si vous avez moins, prenez le modèle en aluminium : 23 à 38 cm lui suffisent.'
+  endunless
+-%}
+
+{%- comment -%}
+  Le test porte sur la VARIANTE, pas sur le produit — même leçon que dans
+  spa-prestations et spa-complement. Un produit non publié sur la boutique
+  en ligne remonte quand même un objet côté Liquid, mais vide : on
+  afficherait une carte sans prix menant à une page introuvable.
+{%- endcomment -%}
+{%- liquid
+  assign escalier = all_products[escalier_handle]
+  assign leve = all_products[leve_handle]
+  assign couverture = all_products['couverture-isothermique-spa']
+
+  assign escalier_variante = escalier.selected_or_first_available_variant.id
+  assign leve_variante = leve.selected_or_first_available_variant.id
+
+  if taille_couverture != blank
+    for v in couverture.variants
+      if v.title == taille_couverture
+        assign couverture_variante = v
+        break
+      endif
+    endfor
+  endif
+
+  assign cartes = 0
+  if escalier_variante
+    assign cartes = cartes | plus: 1
+  endif
+  if couverture_variante
+    assign cartes = cartes | plus: 1
+  endif
+  if leve_variante
+    assign cartes = cartes | plus: 1
+  endif
+-%}
+
+{%- comment -%}
+  LE TEST PORTE SUR LA VARIANTE RETENUE, ET PAS SUR « taille_couverture ==
+  blank ». Un spa dont la cote ne figure pas dans la correspondance laisse
+  « taille_couverture » non defini, et la comparaison d'une variable non
+  definie avec « blank » ne se comporte pas de la meme facon d'un moteur
+  Liquid a l'autre — le Duo perdait sa note a l'essai. Un booleen calcule
+  une bonne fois leve l'ambiguite, et couvre un cas de plus : si une
+  variante de couverture etait renommee dans l'administration, la cote ne
+  serait plus trouvee et la note s'afficherait, au lieu d'une carte muette.
+{%- endcomment -%}
+{%- liquid
+  assign couverture_absente = true
+  if couverture_variante
+    assign couverture_absente = false
+  endif
+-%}
+
+{%- if cartes > 0 -%}
+  <div
+    class="spa-accs color-{{ section.settings.color_scheme }} gradient"
+    style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+  >
+    <div class="page-width">
+      {%- if section.settings.titre != blank -%}
+        <h2 class="spa-accs__titre">{{ section.settings.titre | escape }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.chapeau != blank -%}
+        <p class="spa-accs__chapeau">{{ section.settings.chapeau | escape }}</p>
+      {%- endif -%}
+
+      <div class="spa-accs__grille">
+        {%- if escalier_variante -%}
+          {%- render 'spa-accs-carte',
+            produit: escalier,
+            lien: escalier.url,
+            prix: escalier.price,
+            raison: escalier_raison
+          -%}
+        {%- endif -%}
+
+        {%- if couverture_variante -%}
+          {%- liquid
+            assign couverture_lien = couverture.url | append: '?variant=' | append: couverture_variante.id
+            assign couverture_raison = 'Elle repose sur le rebord, et quelques centimètres d’écart suffisent à laisser passer le froid. Le lien ouvre directement la bonne cote.'
+          -%}
+          {%- render 'spa-accs-carte',
+            produit: couverture,
+            lien: couverture_lien,
+            precision: taille_couverture,
+            prix: couverture_variante.price,
+            raison: couverture_raison
+          -%}
+        {%- endif -%}
+
+        {%- if leve_variante -%}
+          {%- render 'spa-accs-carte',
+            produit: leve,
+            lien: leve.url,
+            prix: leve.price,
+            raison: leve_raison
+          -%}
+        {%- endif -%}
+      </div>
+
+      {%- comment -%}
+        Ce qui NE va pas, quand il y a quelque chose à en dire. C'est la
+        partie du bloc qui évite un retour.
+      {%- endcomment -%}
+      {%- if ronde -%}
+        <p class="spa-accs__note">
+          <strong>Ce spa est rond</strong>, et c’est ce qui l’écarte de deux de nos
+          accessoires : aucun de nos deux lève-couvertures ne se monte sur une cuve
+          courbe, et notre couverture isothermique ne se fait pas dans cette forme.
+          <a href="/pages/contact">Appelez-nous</a> avant de commander l’un ou l’autre.
+        </p>
+      {%- elsif couverture_absente -%}
+        <p class="spa-accs__note">
+          <strong>Notre couverture isothermique ne se fait pas dans la cote de ce spa</strong>
+          ({{ encombrement }}). Ne prenez pas la taille la plus proche : elle ne reposerait
+          pas sur le rebord, et une couverture qui ne porte pas n’isole pas.
+          <a href="/pages/contact">Appelez-nous</a>, nous verrons ce qui existe.
+        </p>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Accessoires du spa",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "titre",
+      "label": "Titre",
+      "default": "Ce qui va avec ce spa"
+    },
+    {
+      "type": "text",
+      "id": "chapeau",
+      "label": "Chapeau",
+      "default": "Choisis sur les cotes de ce modèle.",
+      "info": "Une phrase. Le détail est porté par chaque carte."
+    },
+    {
+      "type": "header",
+      "content": "Mise en page"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Jeu de couleurs",
+      "default": "scheme-2"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 52
+    }
+  ],
+  "presets": [{ "name": "Accessoires du spa" }]
+}
+{% endschema %}

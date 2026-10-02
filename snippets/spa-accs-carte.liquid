@@ -1,0 +1,47 @@
+{%- comment -%}
+  UNE CARTE DU BLOC « CE QUI VA AVEC CE SPA ».
+
+  Reprend la forme de spa-complement — photo à gauche, nom, prix, raison —
+  mais en trois exemplaires côte à côte plutôt qu'en pièce unique. Le
+  gabarit est séparé pour que les trois cartes ne puissent pas diverger :
+  elles disent la même chose dans le même ordre, seul le contenu change.
+
+  Paramètres :
+    produit    — l'objet produit, pour la photo
+    lien       — l'adresse visée, variante comprise s'il y en a une
+    prix       — en centimes ; celui de la variante quand elle est connue,
+                 sinon celui du produit
+    raison     — pourquoi CE spa appelle CET accessoire
+    precision  — facultatif : la taille retenue, affichée sous le nom
+
+  LE PRIX EST PASSÉ EN PARAMÈTRE plutôt que lu sur le produit : la
+  couverture existe en quatre tailles, et c'est le prix de la taille qui
+  convient qu'il faut montrer, pas le « à partir de » du produit.
+{%- endcomment -%}
+
+<a class="spa-accs__carte" href="{{ lien }}">
+  {%- if produit.featured_image -%}
+    <span class="spa-accs__image">
+      {{
+        produit.featured_image
+        | image_url: width: 360
+        | image_tag:
+          loading: 'lazy',
+          widths: '180, 270, 360',
+          sizes: '100px',
+          alt: produit.featured_image.alt | default: produit.title
+      }}
+    </span>
+  {%- endif -%}
+
+  <span class="spa-accs__corps">
+    <span class="spa-accs__nom">{{ produit.title }}</span>
+
+    {%- if precision != blank -%}
+      <span class="spa-accs__precision">{{ precision }}</span>
+    {%- endif -%}
+
+    <span class="spa-accs__prix">{{ prix | money }}</span>
+    <span class="spa-accs__raison">{{ raison }}</span>
+  </span>
+</a>

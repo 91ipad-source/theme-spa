@@ -6139,6 +6139,128 @@ h1.h2.center {
 }
 
 /* --------------------------------------------------------------------------
+   CE QUI VA AVEC CE SPA (section spa-accessoires)
+
+   Trois cartes au plus, chacune choisie sur une cote du spa affiche et non
+   sur un historique d'achats. Elles reprennent la forme de spa-complement —
+   photo a gauche, nom, prix, raison — parce que c'est la meme promesse :
+   un lien entre deux produits qui dit pourquoi.
+
+   Les cartes sont blanches sur la bande ciel clair de la section, comme
+   partout ailleurs sur le site depuis la refonte des pages longues.
+   -------------------------------------------------------------------------- */
+.spa-accs {
+  padding-top: var(--pt, 48px);
+  padding-bottom: var(--pb, 52px);
+}
+
+.spa-accs__titre {
+  margin: 0 0 0.8rem;
+  font-size: var(--t-section);
+  line-height: var(--lh-titre);
+}
+
+.spa-accs__chapeau {
+  max-width: var(--mesure);
+  margin: 0 0 2.8rem;
+  color: var(--deep-soft);
+  font-size: 1.6rem;
+}
+
+/* Des colonnes qui se comptent toutes seules : trois cartes sur un grand
+   ecran, deux a l'etroit, une sur telephone, sans point de rupture a tenir
+   a jour. 32 rem est la largeur en dessous de laquelle la photo et sa
+   raison cessent de tenir cote a cote.
+
+   auto-FILL et non auto-fit : avec auto-fit, les colonnes vides
+   s'effondrent, et la carte unique du Doro Plus — le seul spa auquel ni
+   couverture ni leve-couverture ne conviennent — s'etirait sur les
+   1 100 px de la page, sa raison tenant sur une seule tres longue ligne.
+   auto-fill garde les pistes vides : une carte seule occupe un tiers. */
+.spa-accs__grille {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(32rem, 1fr));
+  gap: 1.6rem;
+}
+
+.spa-accs__carte {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.6rem;
+  padding: 1.6rem;
+  border-radius: var(--r-md);
+  background: var(--white);
+  color: inherit;
+  text-decoration: none;
+  transition: box-shadow 0.15s ease;
+}
+
+.spa-accs__carte:hover,
+.spa-accs__carte:focus-visible {
+  box-shadow: 0 0.6rem 1.6rem rgba(15, 58, 90, 0.14);
+}
+
+.spa-accs__image {
+  flex: 0 0 9rem;
+  overflow: hidden;
+  border-radius: calc(var(--r-md) - 0.6rem);
+}
+
+.spa-accs__image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.spa-accs__corps {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.spa-accs__nom {
+  font-weight: 600;
+  line-height: 1.3;
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+.spa-accs__precision {
+  color: var(--deep-soft);
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.spa-accs__prix {
+  color: var(--sky-deep);
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.spa-accs__raison {
+  margin-top: 0.4rem;
+  font-size: 1.3rem;
+  line-height: var(--lh-note);
+  opacity: 0.85;
+}
+
+/* La note dit ce qui NE va pas. Elle reste a la mesure du texte : c'est une
+   phrase qu'on lit, pas une carte qu'on balaie. */
+.spa-accs__note {
+  max-width: var(--mesure);
+  margin: 2.4rem 0 0;
+  font-size: 1.4rem;
+  line-height: var(--lh-texte);
+}
+
+.spa-accs__note a {
+  color: var(--sky-deep);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+/* --------------------------------------------------------------------------
    LA CARTE DE CONTACT EN MARINE
 
    Meme carte, meme contenu, un fond fonce : c'est le reglage « Fond de la
