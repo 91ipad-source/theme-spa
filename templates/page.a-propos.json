@@ -646,7 +646,8 @@
         "lien_2": "/collections/tous-nos-spas",
         "color_scheme": "scheme-1",
         "padding_top": 24,
-        "padding_bottom": 64
+        "padding_bottom": 64,
+        "ton": "marine"
       }
     }
   },

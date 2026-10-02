@@ -16,13 +16,27 @@
   qu'il faut recopier à la main est un numéro qu'on n'appelle pas.
 {%- endcomment -%}
 
+{%- comment -%}
+  DEUX FONDS POUR UNE MEME CARTE. Le ciel clair est le reglage ordinaire :
+  une carte de contact posee en bas d'une page longue n'a pas a crier. Le
+  marine est reserve a l'appel a l'action PRINCIPAL d'une page — celui qu'on
+  doit voir avant d'avoir lu quoi que ce soit. Deux cartes marine sur la meme
+  page et aucune des deux ne se detache plus.
+{%- endcomment -%}
+{%- liquid
+  assign boite = 'spa-contact-carte__boite'
+  if section.settings.ton == 'marine'
+    assign boite = boite | append: ' spa-contact-carte__boite--marine'
+  endif
+-%}
+
 <div
   class="spa-contact-carte color-{{ section.settings.color_scheme }} gradient"
   style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
 >
   <div class="page-width">
     <div
-      class="spa-contact-carte__boite"
+      class="{{ boite }}"
       {% if section.settings.ancre != blank %}id="{{ section.settings.ancre | handle }}"{% endif %}
     >
       <div>
@@ -322,6 +336,17 @@
     {
       "type": "header",
       "content": "Mise en page"
+    },
+    {
+      "type": "select",
+      "id": "ton",
+      "label": "Fond de la carte",
+      "options": [
+        { "value": "clair", "label": "Ciel clair" },
+        { "value": "marine", "label": "Marine" }
+      ],
+      "default": "clair",
+      "info": "Le marine met la carte en avant. À réserver à l'appel à l'action principal d'une page : deux cartes marine et plus aucune ne se détache."
     },
     {
       "type": "header",

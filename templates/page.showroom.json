@@ -158,8 +158,8 @@
         "chapeau": "<p>Les <strong>quatre formats de la gamme sont représentés</strong> — 2, 3, 5 et 7 places. Vous pouvez donc comparer un petit format et un spa familial dans la même visite, ce qui est exactement ce qui départage la plupart des projets.</p>",
         "ancre": "les-modeles",
         "filet": true,
-        "color_scheme": "scheme-1",
-        "padding_top": 64,
+        "color_scheme": "scheme-2",
+        "padding_top": 56,
         "padding_bottom": 8
       }
     },
@@ -325,12 +325,12 @@
       "settings": {
         "heading": "",
         "niveau": "h2",
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
         "cta_heading": "Vous avez un projet ?",
         "cta_text": "Parlez-nous de vos besoins et nous vous aiderons à comparer les modèles adaptés.",
         "cta_button_label": "Nous contacter",
         "cta_button_link": "/pages/contact?motif=visite#demande",
-        "padding_top": 16,
+        "padding_top": 48,
         "padding_bottom": 56
       }
     },
@@ -374,9 +374,10 @@
         "lien_2": "#les-modeles",
         "image": "shopify://shop_images/spas9-showroom-fontenay-le-vicomte.png",
         "image_alt": "Le showroom SPAS9 à Fontenay-le-Vicomte : une dizaine de spas exposés, le rayon accessoires et les produits de traitement de l'eau",
-        "color_scheme": "scheme-1",
-        "padding_top": 8,
-        "padding_bottom": 24
+        "color_scheme": "scheme-2",
+        "padding_top": 40,
+        "padding_bottom": 48,
+        "ton": "marine"
       }
     },
     "modeles": {
@@ -436,9 +437,9 @@
       "settings": {
         "titre": "",
         "mention": "<p>L'exposition évolue au fil des livraisons. <strong>Dites-nous quel modèle vous voulez voir</strong> : nous confirmons sa présence avant votre venue, et nous le sortons pour votre visite.</p>",
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
         "padding_top": 24,
-        "padding_bottom": 24
+        "padding_bottom": 56
       }
     }
   },

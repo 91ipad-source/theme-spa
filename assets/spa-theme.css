@@ -6102,6 +6102,86 @@ h1.h2.center {
 }
 
 /* --------------------------------------------------------------------------
+   LA CARTE DE CONTACT EN MARINE
+
+   Meme carte, meme contenu, un fond fonce : c'est le reglage « Fond de la
+   carte » de la section. Il sert a l'appel a l'action principal d'une page
+   longue, celui qu'on doit voir avant d'avoir rien lu — ailleurs, le ciel
+   clair suffit.
+
+   Tout ce qui suit n'est que du contraste : le texte, les coordonnees et les
+   deux boutons sont ecrits pour du bleu sur blanc, et s'effacent tels quels
+   sur le marine. Le bouton principal s'inverse franchement — un bouton
+   marine sur une carte marine n'existe pas.
+   -------------------------------------------------------------------------- */
+.spa-contact-carte__boite--marine {
+  background: linear-gradient(150deg, var(--deep) 0%, var(--sky-deep) 100%);
+  box-shadow: 0 10px 30px rgba(15, 58, 90, 0.18);
+  color: var(--white);
+}
+
+.spa-contact-carte__boite--marine .spa-surtitre {
+  color: var(--water);
+}
+
+/* Le titre porte sa propre couleur, heritee de Dawn (« h1, h2 ... { color:
+   rgb(var(--color-foreground)) } ») : le blanc pose sur la carte ne
+   l'atteint donc pas, il faut le lui ecrire. Sans cette regle, « Demander
+   un creneau » s'affiche en marine sur du marine. */
+.spa-contact-carte__boite--marine .spa-contact-carte__titre {
+  color: var(--white);
+}
+
+.spa-contact-carte__boite--marine .spa-contact-carte__texte {
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.spa-contact-carte__boite--marine .spa-contact-carte__texte strong {
+  color: var(--white);
+}
+
+/* Les liens du texte restent bleus tant qu'on ne leur dit rien : sur le
+   marine, « 2 places » ou « Plug & Play » devenaient presque invisibles.
+   Ils passent au blanc, le soulignement d'un cran plus discret pour que la
+   phrase ne se transforme pas en echelle. */
+.spa-contact-carte__boite--marine .spa-contact-carte__texte a {
+  color: var(--white);
+  text-decoration-color: rgba(255, 255, 255, 0.55);
+}
+
+.spa-contact-carte__boite--marine .spa-contact-carte__texte a:hover {
+  text-decoration-color: var(--white);
+}
+
+.spa-contact-carte__boite--marine .spa-contact-carte__coords,
+.spa-contact-carte__boite--marine .spa-contact-carte__coords a {
+  color: var(--white);
+}
+
+/* La pastille du rendez-vous garde son fond blanc : elle ressort mieux
+   encore sur le marine que sur le ciel clair. */
+
+.spa-contact-carte__boite--marine .btn {
+  background: var(--white);
+  color: var(--deep);
+}
+
+.spa-contact-carte__boite--marine .btn:hover {
+  color: var(--deep);
+}
+
+.spa-contact-carte__boite--marine .btn.ghost {
+  background: transparent;
+  color: var(--white);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.55);
+}
+
+.spa-contact-carte__boite--marine .btn.ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--white);
+}
+
+/* --------------------------------------------------------------------------
    52 bis. LA PAGE CONTACT EN COULEUR
 
    La page etait juste : un titre, des coordonnees, un formulaire, quatre
