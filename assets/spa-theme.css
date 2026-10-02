@@ -410,7 +410,7 @@ a.spa-marquee__item:hover {
    scheme-3 pour la rupture), alignés sur la palette des fiches produits : on ne
    fige donc rien ici, seule la forme de la pastille est reprise.
    -------------------------------------------------------------------------- */
-/* Jaune fluo sur les deux badges, a la demande du client.
+/* Pastille promo en blanc sur le cyan de la marque, pastille epuise en gris.
 
    La couleur passe par les variables de Dawn plutot que par un fond en dur :
    c'est ce qui fait que la forme, le rayon et la bordure continuent de suivre
@@ -421,17 +421,22 @@ a.spa-marquee__item:hover {
    faudra changer le numero ici aussi.
 
    On ne modifie pas les jeux de couleurs eux-memes : scheme-3 habille aussi
-   une section de la page d'accueil, qui n'a rien a faire en jaune.
+   une section de la page d'accueil, qui n'a rien a faire en gris.
 
-   Contraste mesure : 10,6:1 avec le texte marine pour la promo, soit le
-   niveau AAA ; 5,5:1 pour l'epuise, soit AA. Le badge bleu precedent
-   plafonnait a 5,0:1. */
+   LA PASTILLE A ETE JAUNE FLUO AVANT D'ETRE CYAN, ET C'EST UN ARBITRAGE.
+   Le jaune avec un libelle marine tenait 10,6:1, soit le niveau AAA ; le
+   cyan avec un libelle blanc tient 2,4:1, en dessous du seuil de 4,5:1
+   pour un texte de cette taille. Decision du gerant : la coherence avec le
+   bandeau d'appel et son bouton, tous deux en blanc sur cyan, l'emporte.
+   Le chiffre est note ici pour qu'on puisse revenir dessus en connaissance
+   de cause — passer le fond en --sky-deep (11, 110, 146) rend 5,8:1 sans
+   rien changer au blanc. L'epuise, lui, reste a 5,5:1. */
 
-/* Promotion : le jaune appelle, et c'est bien ce qu'on lui demande. */
+/* Promotion : le cyan de la marque, libelle blanc. */
 .badge.color-scheme-4 {
-  --color-badge-background: 233, 255, 61;
-  --color-badge-foreground: 15, 58, 90;
-  --color-badge-border: 15, 58, 90;
+  --color-badge-background: 47, 180, 229;
+  --color-badge-foreground: 255, 255, 255;
+  --color-badge-border: 47, 180, 229;
   font-weight: 700;
 }
 
@@ -754,11 +759,14 @@ h3.spa-parcours__heading {
   line-height: var(--lh-texte);
 }
 
-/* Le bouton est posé sur un fond marine : le cyan du logo s'y détache
-   (4,95:1 avec le libellé marine), là où le marine du thème disparaîtrait. */
+/* Le bouton est posé sur un fond marine : le cyan du logo s'y détache, là où
+   le marine du thème disparaîtrait. Le libellé est blanc, comme le picto de
+   la pastille voisine — 2,4:1, contre 4,95:1 qu'il tenait en marine. Même
+   arbitrage que pour la pastille promo, et même porte de sortie : --sky-deep
+   au lieu de --sky remonterait à 5,8:1. */
 .spa-criteres__bouton {
   --color-button: 47, 180, 229;
-  --color-button-text: 15, 58, 90;
+  --color-button-text: 255, 255, 255;
 
   flex-shrink: 0;
 }
