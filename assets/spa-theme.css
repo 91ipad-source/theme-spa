@@ -6102,6 +6102,178 @@ h1.h2.center {
 }
 
 /* --------------------------------------------------------------------------
+   52 bis. LA PAGE CONTACT EN COULEUR
+
+   La page etait juste : un titre, des coordonnees, un formulaire, quatre
+   blocs de texte. Mais tout s'y lisait sur le meme blanc, et rien n'y disait
+   ou regarder en premier. Elle emploie donc les trois aplats de la palette
+   au lieu d'un seul — l'en-tete en marine, la bande de contact en ciel
+   clair, les cartes en blanc par-dessus.
+
+   RIEN N'Y EST DECORATIF POUR LE PLAISIR. L'aplat marine detache le titre
+   du menu qui le surmonte ; la carte sombre met le numero au premier plan,
+   parce que c'est la premiere action de la page ; le filet cyan en tete du
+   formulaire dit « ici, on ecrit » sans ajouter un mot.
+
+   La section spa-contact-tete ne sert qu'a cette page : ses regles tiennent
+   donc ici, sans prefixe de gabarit.
+   -------------------------------------------------------------------------- */
+
+/* L'EN-TETE SUR APLAT FONCE. Le surtitre et le chapeau sont ecrits pour du
+   bleu sur blanc ; sur le marine ils tombent sous le seuil de contraste. La
+   regle vise les deux jeux sombres du theme, pas la seule page contact :
+   c'est la meme correction partout ou on les emploiera. */
+.color-scheme-3 .spa-surtitre,
+.color-scheme-5 .spa-surtitre {
+  color: var(--water);
+}
+
+.color-scheme-3 .spa-page-entete__chapeau,
+.color-scheme-5 .spa-page-entete__chapeau {
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.color-scheme-3 .spa-page-entete__chapeau strong,
+.color-scheme-5 .spa-page-entete__chapeau strong {
+  color: var(--white);
+}
+
+/* LA CARTE DU TELEPHONE. Elle ne porte que la mention « sur rendez-vous » et
+   le numero : c'est ce qu'on vient chercher en premier, et l'aplat sombre
+   evite d'avoir a le grossir davantage pour qu'il se voie. */
+.spa-ctete__infos {
+  padding: 3.2rem;
+  border-radius: var(--r-lg);
+  background: linear-gradient(150deg, var(--deep) 0%, var(--sky-deep) 100%);
+  box-shadow: 0 10px 30px rgba(15, 58, 90, 0.18);
+  color: var(--white);
+}
+
+.spa-ctete__infos .spa-ctete__mention {
+  color: var(--water);
+}
+
+/* LE NUMERO NE SE COUPE JAMAIS. Il tient sur une ligne a toutes les
+   largeurs, parce que la taille suit le viewport ; et si un telephone
+   plus etroit que 360 px se presente, c'est le pictogramme qui passe a la
+   ligne, pas les chiffres — d'ou le nowrap sur le libelle et le wrap sur
+   le lien qui le porte. */
+.spa-ctete__infos .spa-ctete__tel {
+  flex-wrap: wrap;
+  margin-bottom: 0;
+  color: var(--white);
+  font-size: clamp(2rem, 5.4vw, 3rem);
+}
+
+.spa-ctete__infos .spa-ctete__tel span {
+  white-space: nowrap;
+}
+
+.spa-ctete__infos .spa-ctete__tel:hover,
+.spa-ctete__infos .spa-ctete__tel:focus-visible {
+  color: var(--water);
+}
+
+/* L'icone prend un rond : nue, a 24 px, elle se perdait contre des chiffres
+   de 30.
+
+   LE box-sizing EST INDISPENSABLE ICI. Dawn ne pose pas la regle universelle
+   « * { box-sizing: border-box } » : une <svg> reste donc en content-box, et
+   la marge interieure du rond s'ajoutait a la largeur demandee — 32 px
+   devenaient 46, et le numero passait a la ligne sur les petits telephones.
+   Mesure faite au navigateur, pas devinee. */
+.spa-ctete__infos .spa-ctete__tel-icone {
+  box-sizing: border-box;
+  width: 4rem;
+  height: 4rem;
+  padding: 0.9rem;
+  border-radius: 50%;
+  background: rgba(179, 228, 245, 0.18);
+  color: var(--sky);
+}
+
+/* Les deux cartes de gauche epousent leur contenu. Sans aplat elles
+   pouvaient s'etirer sur toute la hauteur du formulaire sans que cela se
+   voie ; avec un fond, l'etirement produisait un grand rectangle marine
+   vide sous le numero. */
+@media screen and (min-width: 1100px) {
+  .spa-ctete__grille {
+    align-items: start;
+    grid-template-rows: auto 1fr;
+  }
+}
+
+/* L'ADRESSE ET L'ITINERAIRE, en carte blanche sous la precedente. */
+.spa-ctete__acces {
+  padding: 2.8rem 3.2rem;
+  border-left: 4px solid var(--sky);
+  border-radius: var(--r-lg);
+  background: var(--white);
+  box-shadow: 0 2px 18px rgba(15, 58, 90, 0.07);
+}
+
+.spa-ctete__itineraire a {
+  display: inline-flex;
+  padding: 0.8rem 1.8rem;
+  border-radius: var(--r-pill);
+  background: var(--mist);
+  color: var(--sky-deep);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.spa-ctete__itineraire a:hover,
+.spa-ctete__itineraire a:focus-visible {
+  background: var(--water);
+  text-decoration: none;
+}
+
+/* Sous 750 px, la carte garde moins de marge interieure : le numero fait
+   vingt signes, et c'est lui qui decide de la largeur utile. */
+@media screen and (max-width: 749px) {
+  .spa-ctete__infos,
+  .spa-ctete__acces {
+    padding: 2.4rem 2rem;
+  }
+
+  .spa-ctete__infos .spa-ctete__tel-icone {
+    width: 3.2rem;
+    height: 3.2rem;
+    padding: 0.7rem;
+  }
+}
+
+/* Sur les telephones les plus etroits, la marge interieure cede encore un
+   peu : c'est elle, et non la taille des chiffres, qui decidait du passage
+   a la ligne. */
+@media screen and (max-width: 479px) {
+  .spa-ctete__infos {
+    padding: 2.2rem 1.6rem;
+  }
+}
+
+/* LE FORMULAIRE. Le filet cyan en tete tient lieu de signal : il se voit du
+   coin de l'oeil et ne coute pas une ligne de texte. */
+.spa-ctete__panneau {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 14px 40px rgba(15, 58, 90, 0.1);
+}
+
+.spa-ctete__panneau::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 5px;
+  background: linear-gradient(90deg, var(--sky) 0%, var(--sky-deep) 100%);
+}
+
+/* Le bouton d'envoi passe au bleu d'eau : sur cette page, le marine porte
+   deja le bandeau et la carte du telephone. */
+.spa-ctete__envoyer {
+  --color-button: 11, 110, 146;
+}
+/* --------------------------------------------------------------------------
    53. FICHE PRODUIT : LE RESUME, LES DEUX AUTRES CHEMINS, LE TABLEAU
    (snippets spa-fiche-resume, spa-fiche-actions, spa-fiche-technique)
 
