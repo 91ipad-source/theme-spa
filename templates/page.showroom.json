@@ -168,16 +168,6 @@
         "padding_bottom": 8
       }
     },
-    "photo_modeles": {
-      "type": "spa-store-banner",
-      "settings": {
-        "image": "shopify://shop_images/spas9-showroom-spas-exposes.png",
-        "largeur": "contenu",
-        "show_on_mobile": true,
-        "image_alt": "Deux spas exposés dans le showroom SPAS9, dont un grand modèle à liseré blanc",
-        "link": ""
-      }
-    },
     "p_aussi": {
       "type": "spa-prose",
       "settings": {
@@ -191,16 +181,6 @@
         "color_scheme": "scheme-1",
         "padding_top": 32,
         "padding_bottom": 28
-      }
-    },
-    "photo_accessoires": {
-      "type": "spa-store-banner",
-      "settings": {
-        "image": "shopify://shop_images/spas9-showroom-accessoires-produits-traitement.png",
-        "largeur": "contenu",
-        "show_on_mobile": true,
-        "image_alt": "Le rayon accessoires et produits de traitement de l'eau du showroom SPAS9",
-        "link": ""
       }
     },
     "ch3": {
@@ -446,6 +426,46 @@
         "padding_top": 24,
         "padding_bottom": 44
       }
+    },
+    "galerie": {
+      "type": "spa-galerie",
+      "blocks": {
+        "g1": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/spas9-showroom-comparer-les-modeles.png",
+            "legende": "L'allée et les modèles",
+            "image_alt": ""
+          }
+        },
+        "g2": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/spas9-showroom-spas-exposes.png",
+            "legende": "Un spa exposé, éclairage allumé",
+            "image_alt": ""
+          }
+        },
+        "g3": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/spas9-showroom-accessoires-produits-traitement.png",
+            "legende": "Accessoires et traitement de l'eau",
+            "image_alt": ""
+          }
+        }
+      },
+      "block_order": [
+        "g1",
+        "g2",
+        "g3"
+      ],
+      "settings": {
+        "titre": "",
+        "color_scheme": "scheme-1",
+        "padding_top": 8,
+        "padding_bottom": 44
+      }
     }
   },
   "order": [
@@ -457,9 +477,8 @@
     "p_eau",
     "ch2",
     "modeles",
-    "photo_modeles",
     "p_aussi",
-    "photo_accessoires",
+    "galerie",
     "ch3",
     "p_visite",
     "p_apporter",
