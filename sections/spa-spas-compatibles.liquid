@@ -1,0 +1,174 @@
+{%- comment -%}
+  LES SPAS AUXQUELS CET ACCESSOIRE VA.
+
+  Le miroir de la section « Ce qui va avec ce spa ». Celle-là part du spa et
+  nomme l'accessoire ; celle-ci part de l'accessoire et nomme les spas. Les
+  deux disent la même chose, mais personne n'arrive sur les deux pages par
+  le même chemin.
+
+  DEUX FORMES, SELON LA LONGUEUR DE LA RÉPONSE. Un escalier ne va qu'à
+  quatre ou cinq modèles : la liste est courte, elle mérite ses cartes, avec
+  la cote et la hauteur de chaque spa. Un lève-couverture va à neuf spas sur
+  dix : aligner neuf cartes sur la fiche d'un article à 165 € reviendrait à
+  répondre « presque tous » en occupant un écran entier, et à pousser vers
+  un spa quelqu'un qui en a déjà un. Ces accessoires-là n'ont donc qu'une
+  phrase, celle qui dit la règle et nomme l'exception.
+
+  AUCUNE CARTE N'EST ÉCRITE À LA MAIN. Les handles sont déclarés ci-dessous,
+  le reste — titre, photo, prix, places, encombrement, hauteur — est lu sur
+  la fiche du spa. Changer une cote dans l'administration suffit, le bloc
+  suit.
+
+  POUR AJOUTER UN ACCESSOIRE, on ajoute une entrée au « case » : une liste
+  de handles séparés par des virgules, ou une phrase seule. Sans entrée, le
+  bloc ne s'affiche pas — ce qui est le bon défaut pour un consommable comme
+  la cartouche de filtration, dont la compatibilité se lit sur la référence
+  et non sur le modèle de spa.
+{%- endcomment -%}
+
+{%- comment -%}
+  LES DEUX SORTIES SONT INITIALISEES A VIDE, et ce n'est pas une precaution
+  de style. Un accessoire absent du « case » ci-dessous laisse « handles »
+  et « phrase » non definis, et la comparaison d'une variable non definie
+  avec « blank » ne se comporte pas de la meme facon d'un moteur Liquid a
+  l'autre : a l'essai, la cartouche de filtration — qui ne doit rien
+  afficher — heritait de la phrase du cas precedent. Deux chaines vides
+  levent l'ambiguite.
+{%- endcomment -%}
+{%- liquid
+  assign handles = ''
+  assign phrase = ''
+  assign regle = ''
+
+  assign les_90 = 'spa-roca-proto-lighting-5-personnes,spa-roca-europe-infrared-5-personnes,spa-roca-pleuxaure-5-personnes,spa-roca-panope-5-personnes,spa-roca-panope-full-therapeutique-5-personnes'
+  assign les_bas = 'spa-roca-calypso-3-personnes,spa-roca-calypso-web-3-personnes,spa-roca-duo-2-personnes,spa-roca-doto-3-personnes'
+
+  case product.handle
+    when 'escalier-spa-2-marches-composite-noir'
+      assign handles = les_90
+      assign regle = 'La marche haute doit arriver un peu sous le rebord : ces 50 cm sont faits pour les spas de 90 cm de haut.'
+    when 'escalier-spa-lumineux-pompe-a-chaleur'
+      assign handles = les_90
+      assign regle = 'Ses 55 cm sont faits pour les spas de 90 cm de haut. Sur un spa de 77 ou 81 cm, la marche haute dépasserait le rebord.'
+    when 'escalier-spa-2-marches-composite-anthracite'
+      assign handles = les_bas
+      assign regle = 'Ces 42 cm sont faits pour les spas de 77 à 81 cm. Pour le Doro Plus, dont la cuve est ronde, prenez le modèle à marches larges.'
+    when 'escalier-spa-2-marches-larges-anthracite'
+      assign handles = les_bas | append: ',spa-roca-doro-plus-7-personnes'
+      assign regle = 'Ces 40 cm sont faits pour les spas de 77 à 81 cm, et c’est le seul de nos escaliers qui convienne aussi à une cuve ronde.'
+    when 'couverture-isothermique-spa'
+      assign handles = 'spa-roca-calypso-3-personnes,spa-roca-calypso-web-3-personnes,spa-roca-proto-lighting-5-personnes,spa-roca-europe-infrared-5-personnes,spa-roca-pleuxaure-5-personnes,spa-roca-panope-5-personnes,spa-roca-panope-full-therapeutique-5-personnes'
+      assign regle = 'Elle existe en quatre cotes, et une couverture se choisit à la cote près : elle repose sur le rebord. Ces spas ont la leur. Le Duo, le Doto et le Doro Plus, non.'
+    when 'leve-couverture-hydraulique-rogue', 'leve-couverture-07-aluminium'
+      assign phrase = 'Il va à neuf de nos dix spas : ses bras se règlent en hauteur comme en écartement. La seule exception est le Doro Plus, dont la cuve ronde n’offre aucun appui droit — et aucun de nos deux lève-couvertures ne s’y monte.'
+    when 'pack-audio-4-1-spa'
+      assign phrase = 'Il complète l’audio ROCASound 2.0 de neuf de nos dix spas. Le Panopé FULL Thérapeutique est la seule exception : il sort d’usine avec le son 4.1 et son caisson de basses.'
+    when 'pompe-a-chaleur-balboa-clim8zone'
+      assign phrase = 'Elle se raccorde aux dix spas de notre catalogue : tous sont pilotés par une électronique Balboa, comme elle. Le Panopé FULL Thérapeutique est le mieux préparé, avec son by-pass intégré d’usine.'
+  endcase
+-%}
+
+{%- if handles != blank or phrase != blank -%}
+  <div
+    class="spa-accs color-{{ section.settings.color_scheme }} gradient"
+    style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+  >
+    <div class="page-width">
+      {%- if section.settings.titre != blank -%}
+        <h2 class="spa-accs__titre">{{ section.settings.titre | escape }}</h2>
+      {%- endif -%}
+
+      {%- if regle != blank -%}
+        <p class="spa-accs__chapeau">{{ regle }}</p>
+      {%- endif -%}
+
+      {%- if handles != blank -%}
+        <div class="spa-accs__grille">
+          {%- assign liste = handles | split: ',' -%}
+          {%- for h in liste -%}
+            {%- liquid
+              assign spa = all_products[h]
+              assign spa_variante = spa.selected_or_first_available_variant.id
+              assign spa_places = spa.metafields.custom.places.value
+              assign spa_cote = spa.metafields.custom.encombrement.value
+              assign spa_hauteur = spa.metafields.custom.hauteur.value
+            -%}
+
+            {%- comment -%}
+              Le test porte sur la variante : un spa retiré de la vente
+              remonte un objet vide côté Liquid, et on afficherait une carte
+              sans prix menant à une page introuvable. C'est exactement ce
+              qui serait arrivé au Némésis, archivé en cours de route.
+            {%- endcomment -%}
+            {%- if spa_variante -%}
+              {%- capture spa_fait -%}
+                {{ spa_cote }}{% if spa_hauteur != blank %}, hauteur {{ spa_hauteur }} cm{% endif %}
+              {%- endcapture -%}
+              {%- assign spa_fait = spa_fait | strip -%}
+              {%- render 'spa-accs-carte',
+                produit: spa,
+                lien: spa.url,
+                precision: spa_places,
+                prix: spa.price,
+                raison: spa_fait
+              -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if phrase != blank -%}
+        <p class="spa-accs__note">
+          {{ phrase }} <a href="/collections/tous-nos-spas">Voir tous nos spas</a>.
+        </p>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Spas compatibles",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "titre",
+      "label": "Titre",
+      "default": "Les spas auxquels il va"
+    },
+    {
+      "type": "header",
+      "content": "Mise en page"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Jeu de couleurs",
+      "default": "scheme-2"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 52
+    }
+  ],
+  "presets": [{ "name": "Spas compatibles" }]
+}
+{% endschema %}
