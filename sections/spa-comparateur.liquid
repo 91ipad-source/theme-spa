@@ -18,14 +18,17 @@
   LES POMPES SE COMPTENT, ELLES NE SE RACONTENT PAS. Le métachamp « Pompes »
   décrit le matériel en toutes lettres — « 2 pompes LX LP300 de 3 CV + 1
   pompe de circulation LX JA50 ». C'est ce qu'il faut sur une fiche, et c'est
-  illisible dans une colonne de tableau. Un second métachamp, « Pompes de
-  massage », porte le seul chiffre qui se compare.
+  illisible dans une colonne de tableau. Un second métachamp, « Nombre de
+  pompes », porte le chiffre qui se compare.
 
-  LA POMPE DE CIRCULATION N'Y EST PAS COMPTÉE, et c'est le point à retenir :
-  elle fait tourner l'eau pour la filtrer, elle n'alimente aucun jet. La
-  compter donnerait trois pompes au Panopé contre une au Duo, alors que
-  l'écart de massage est de deux à une. Le face-à-face affiche les deux
-  lignes : le nombre d'abord, le détail complet ensuite.
+  LA POMPE DE CIRCULATION Y EST COMPTÉE. Une pompe est une pompe : c'est du
+  matériel installé, de l'entretien et une pièce de rechange de plus, même si
+  elle fait tourner l'eau pour la filtrer au lieu d'alimenter les jets. Un
+  blower, en revanche, n'en est pas une et n'y entre pas — le Panopé FULL en
+  a un, il reste à trois.
+
+  Le face-à-face affiche les deux lignes : le nombre d'abord, le détail
+  complet ensuite, pour qui veut savoir ce que recouvre le chiffre.
 
   CE QUI N'EST PAS RENSEIGNÉ EST DIT COMME TEL. La cellule affiche « non
   précisé » plutôt qu'un chiffre plausible : sur une fiche technique, une
@@ -170,7 +173,7 @@
             data-gamme="{{ mf.gamme.value | escape }}"
             data-hauteur="{{ mf.hauteur.value }}"
             data-jets="{{ mf.jets.value }}"
-            data-pompes="{{ mf.pompes_massage.value }}"
+            data-pompes="{{ mf.pompes_nombre.value }}"
             data-volume="{{ mf.volume_eau.value }}"
             data-prix="{{ produit.price }}"
             data-dispo="{% if produit.available %}1{% else %}0{% endif %}"
@@ -222,10 +225,11 @@
                 {%- comment -%}
                   LE NOMBRE, PAS LA PHRASE. Le champ « Pompes » decrit le
                   materiel en toutes lettres — utile sur la fiche, illisible
-                  dans une colonne. Ce qui se compare, c'est un chiffre.
+                  dans une colonne. Ce qui se compare, c'est un chiffre, et la
+                  pompe de circulation y compte comme les autres.
                 {%- endcomment -%}
-                {%- if mf.pompes_massage.value != blank -%}
-                  <div><dt>Pompes</dt><dd>{{ mf.pompes_massage.value }}</dd></div>
+                {%- if mf.pompes_nombre.value != blank -%}
+                  <div><dt>Pompes</dt><dd>{{ mf.pompes_nombre.value }}</dd></div>
                 {%- endif -%}
               </dl>
 
@@ -279,7 +283,7 @@
                 data-gamme="{{ mf.gamme.value | escape }}"
                 data-hauteur="{{ mf.hauteur.value }}"
                 data-jets="{{ mf.jets.value }}"
-                data-pompes="{{ mf.pompes_massage.value }}"
+                data-pompes="{{ mf.pompes_nombre.value }}"
                 data-volume="{{ mf.volume_eau.value }}"
                 data-prix="{{ produit.price }}"
                 data-dispo="{% if produit.available %}1{% else %}0{% endif %}"
@@ -295,7 +299,7 @@
                 <td>{{ mf.encombrement.value | default: '—' }}</td>
                 <td>{% if mf.hauteur.value %}{{ mf.hauteur.value }} cm{% else %}—{% endif %}</td>
                 <td>{{ mf.jets.value | default: '—' }}</td>
-                <td>{{ mf.pompes_massage.value | default: '—' }}</td>
+                <td>{{ mf.pompes_nombre.value | default: '—' }}</td>
                 <td>{% if mf.volume_eau.value %}{{ mf.volume_eau.value }} L{% else %}—{% endif %}</td>
                 <td>{{ mf.gamme.value | default: '—' }}</td>
                 <td class="spa-comparo__prix-cell">{{ produit.price | money }}</td>
@@ -357,7 +361,7 @@
               "volume": {{ mf.volume_eau.value | json }},
               "poids": {{ mf.poids.value | json }},
               "raccordement": {{ mf.raccordement.value | json }},
-              "pompes_massage": {{ mf.pompes_massage.value | json }},
+              "pompes_nombre": {{ mf.pompes_nombre.value | json }},
               "pompes": {{ mf.pompes.value | json }},
               "electronique": {{ mf.electronique.value | json }},
               "equipements": {{ mf.equipements.value | json }},
@@ -531,7 +535,7 @@
       { cle: 'volume', libelle: 'Volume d’eau', unite: ' L' },
       { cle: 'poids', libelle: 'Poids à vide', unite: ' kg' },
       { cle: 'raccordement', libelle: 'Raccordement électrique' },
-      { cle: 'pompes_massage', libelle: 'Pompes de massage' },
+      { cle: 'pompes_nombre', libelle: 'Nombre de pompes' },
       { cle: 'pompes', libelle: 'Détail des pompes' },
       { cle: 'electronique', libelle: 'Électronique' },
       { cle: 'equipements', libelle: 'Équipements' },
