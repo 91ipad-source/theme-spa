@@ -50,10 +50,12 @@
       "settings": {
         "surtitre": "Fontenay-le-Vicomte (91)",
         "titre": "",
-        "chapeau": "<p>Notre showroom expose des spas SPAS9 au <strong>16 rue de l'Orme, 91540 Fontenay-le-Vicomte</strong>, à trente minutes du sud de Paris. <strong>Showroom uniquement sur rendez-vous</strong> : dites-nous ce que vous cherchez, nous sortons les modèles concernés et un vendeur vous consacre le temps nécessaire.</p><p><a href=\"tel:+33160773700\"><strong>Appeler le 01 60 77 37 00</strong></a> ou <a href=\"/pages/contact\">demander un rendez-vous</a>.</p>",
+        "chapeau": "<p>Nos spas sont exposés à <strong>Fontenay-le-Vicomte (91)</strong>, à trente minutes du sud de Paris. <strong>Uniquement sur rendez-vous</strong> : dites-nous ce que vous cherchez, et nous sortons les modèles concernés avant votre arrivée.</p>",
         "color_scheme": "scheme-1",
         "padding_top": 32,
-        "padding_bottom": 8
+        "padding_bottom": 24,
+        "image": "shopify://shop_images/spas9-showroom-fontenay-le-vicomte.png",
+        "image_alt": "Le showroom SPAS9 à Fontenay-le-Vicomte : spas exposés, espace conseil et coin détente"
       }
     },
     "sommaire": {
@@ -115,7 +117,7 @@
         "ancre": "pourquoi-venir",
         "filet": true,
         "color_scheme": "scheme-1",
-        "padding_top": 64,
+        "padding_top": 40,
         "padding_bottom": 8
       }
     },
@@ -146,7 +148,7 @@
         "ancre": "",
         "color_scheme": "scheme-1",
         "padding_top": 24,
-        "padding_bottom": 40
+        "padding_bottom": 28
       }
     },
     "ch2": {
@@ -159,7 +161,7 @@
         "ancre": "les-modeles",
         "filet": true,
         "color_scheme": "scheme-2",
-        "padding_top": 56,
+        "padding_top": 40,
         "padding_bottom": 8
       }
     },
@@ -185,7 +187,7 @@
         "ancre": "",
         "color_scheme": "scheme-1",
         "padding_top": 32,
-        "padding_bottom": 40
+        "padding_bottom": 28
       }
     },
     "photo_accessoires": {
@@ -208,7 +210,7 @@
         "ancre": "organiser-la-visite",
         "filet": true,
         "color_scheme": "scheme-1",
-        "padding_top": 64,
+        "padding_top": 40,
         "padding_bottom": 8
       }
     },
@@ -239,7 +241,7 @@
         "ancre": "",
         "color_scheme": "scheme-1",
         "padding_top": 24,
-        "padding_bottom": 40
+        "padding_bottom": 28
       }
     },
     "p_venir": {
@@ -269,7 +271,7 @@
         "ancre": "",
         "color_scheme": "scheme-1",
         "padding_top": 32,
-        "padding_bottom": 40
+        "padding_bottom": 28
       }
     },
     "criteres": {
@@ -330,8 +332,8 @@
         "cta_text": "Parlez-nous de vos besoins et nous vous aiderons à comparer les modèles adaptés.",
         "cta_button_label": "Nous contacter",
         "cta_button_link": "/pages/contact?motif=visite#demande",
-        "padding_top": 48,
-        "padding_bottom": 56
+        "padding_top": 40,
+        "padding_bottom": 48
       }
     },
     "contact": {
@@ -354,7 +356,7 @@
         "video_poster": "shopify://shop_images/showroom-spas9-poster.jpg",
         "color_scheme": "scheme-1",
         "padding_top": 24,
-        "padding_bottom": 64
+        "padding_bottom": 56
       }
     },
     "visite": {
@@ -376,7 +378,7 @@
         "image_alt": "Le showroom SPAS9 à Fontenay-le-Vicomte : une dizaine de spas exposés, le rayon accessoires et les produits de traitement de l'eau",
         "color_scheme": "scheme-2",
         "padding_top": 40,
-        "padding_bottom": 48,
+        "padding_bottom": 40,
         "ton": "marine"
       }
     },
@@ -439,7 +441,7 @@
         "mention": "<p>L'exposition évolue au fil des livraisons. <strong>Dites-nous quel modèle vous voulez voir</strong> : nous confirmons sa présence avant votre venue, et nous le sortons pour votre visite.</p>",
         "color_scheme": "scheme-2",
         "padding_top": 24,
-        "padding_bottom": 56
+        "padding_bottom": 44
       }
     }
   },

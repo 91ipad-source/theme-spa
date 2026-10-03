@@ -31,17 +31,49 @@
   style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
 >
   <div class="page-width">
-    {%- if section.settings.surtitre != blank -%}
-      <p class="spa-surtitre">{{ section.settings.surtitre | escape }}</p>
-    {%- endif -%}
+    {%- comment -%}
+      LA PHOTO EST FACULTATIVE, et le reste de l'en-tête ne change pas selon
+      qu'elle est là ou non. Sans photo, le texte occupe la largeur comme
+      avant — c'est le cas de toutes les pages sauf le Showroom. Avec photo,
+      les deux se répartissent en deux colonnes à partir de 990 px, et se
+      réempilent en dessous. Les chiffres clés restent pleine largeur dans
+      les deux cas : ils se lisent comme une bande, pas comme une colonne.
+    {%- endcomment -%}
+    <div class="spa-page-entete__duo{% if section.settings.image != blank %} spa-page-entete__duo--photo{% endif %}">
+      <div class="spa-page-entete__texte">
+        {%- if section.settings.surtitre != blank -%}
+          <p class="spa-surtitre">{{ section.settings.surtitre | escape }}</p>
+        {%- endif -%}
 
-    {%- if titre != blank -%}
-      <h1 class="spa-page-entete__titre">{{ titre | escape }}</h1>
-    {%- endif -%}
+        {%- if titre != blank -%}
+          <h1 class="spa-page-entete__titre">{{ titre | escape }}</h1>
+        {%- endif -%}
 
-    {%- if section.settings.chapeau != blank -%}
-      <div class="spa-page-entete__chapeau rte">{{ section.settings.chapeau }}</div>
-    {%- endif -%}
+        {%- if section.settings.chapeau != blank -%}
+          <div class="spa-page-entete__chapeau rte">{{ section.settings.chapeau }}</div>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.image != blank -%}
+        {%- liquid
+          assign alt_photo = section.settings.image_alt
+          if alt_photo == blank
+            assign alt_photo = section.settings.image.alt
+          endif
+        -%}
+        <div class="spa-page-entete__photo">
+          {{
+            section.settings.image
+            | image_url: width: 1400
+            | image_tag:
+              loading: 'eager',
+              widths: '500, 800, 1100, 1400',
+              sizes: '(min-width: 990px) 46vw, 100vw',
+              alt: alt_photo
+          }}
+        </div>
+      {%- endif -%}
+    </div>
 
     {%- if chiffres > 0 -%}
       <ul class="spa-chiffres" role="list">
@@ -84,6 +116,18 @@
       "id": "chapeau",
       "label": "Chapeau",
       "info": "Deux ou trois phrases. C'est ce que lira quelqu'un qui ne lit rien d'autre."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Photo",
+      "info": "Facultative. Avec elle, le texte et la photo se partagent le premier écran sur ordinateur."
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Description de la photo",
+      "info": "Vide : la description enregistrée dans la bibliothèque est reprise."
     },
     {
       "type": "header",
