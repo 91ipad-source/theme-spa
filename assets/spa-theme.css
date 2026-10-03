@@ -764,9 +764,20 @@ h3.spa-parcours__heading {
    la pastille voisine — 2,4:1, contre 4,95:1 qu'il tenait en marine. Même
    arbitrage que pour la pastille promo, et même porte de sortie : --sky-deep
    au lieu de --sky remonterait à 5,8:1. */
+/* SUR FOND MARINE, LE BOUTON EST BLANC. Celui-ci etait cyan a texte blanc :
+   2,39:1 de contraste, mesure — sous le plancher de 4,5:1 qu'un texte doit
+   tenir, et sous les 3:1 demandes meme a un grand titre. Et c'etait le seul
+   bouton de cette forme sur tout le site : les cartes de contact, sur le meme
+   fond marine, portent un bouton blanc a texte marine depuis le debut.
+
+   Blanc sur marine : 11,84:1. Une seule facon de faire un bouton sur fond
+   sombre, et elle se lit.
+
+   Pour revenir au cyan, deux lignes suffisent — mais alors avec un texte
+   MARINE (4,95:1) et non blanc. */
 .spa-criteres__bouton {
-  --color-button: 47, 180, 229;
-  --color-button-text: 255, 255, 255;
+  --color-button: 255, 255, 255;
+  --color-button-text: 15, 58, 90;
 
   flex-shrink: 0;
 }
@@ -6610,9 +6621,9 @@ h1.h2.center {
 
 /* Le bouton d'envoi passe au bleu d'eau : sur cette page, le marine porte
    deja le bandeau et la carte du telephone. */
-.spa-ctete__envoyer {
-  --color-button: 11, 110, 146;
-}
+/* Le bouton d'envoi reprend le marine de tous les autres boutons pleins. Il
+   etait en « sky-deep », seul de son espece sur tout le site — un reste
+   d'avant l'unification. */
 /* --------------------------------------------------------------------------
    53. FICHE PRODUIT : LE RESUME, LES DEUX AUTRES CHEMINS, LE TABLEAU
    (snippets spa-fiche-resume, spa-fiche-actions, spa-fiche-technique)
@@ -7600,4 +7611,116 @@ h1.h2.center {
   width: 1px;
   height: 1px;
   overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   61. LES BOUTONS, UNE SEULE FOIS POUR TOUT LE SITE
+
+   MESURE AVANT DECISION. Les 31 boutons de huit pages ont ete releves dans
+   une fenetre de 1 280 px : 14 aspects differents. Deux familles coexistent,
+   « .btn » ecrite pour cette boutique et « .button » heritee de Dawn, et
+   elles ne se ressemblent sur rien.
+
+                       .btn            .button (Dawn)
+     hauteur           48 px           47 px
+     corps             16 px           15 px
+     graisse           600             400
+     interlettrage     normal          1 px
+     coins             pastille        CARRES
+
+   Des boutons a coins carres et a graisse normale voisinaient donc, sur la
+   meme page, avec des pastilles en demi-gras. C'est le genre d'ecart qu'on ne
+   sait pas nommer en regardant une page, mais qui la fait paraitre assemblee
+   plutot que dessinee.
+
+   UNE SEULE DEFINITION, DEUX FAMILLES. La geometrie et la typographie sont
+   posees ici pour les deux, une bonne fois. Les couleurs, elles, restent
+   propres a chaque emploi — un bouton sur fond marine n'a rien a faire en
+   marine — et c'est la seule chose qu'une section a encore le droit de
+   changer.
+
+   LA HAUTEUR NE VIENT PLUS DE LA MARGE INTERIEURE mais de « min-height ».
+   Une marge verticale fixe donne 48 px a un libelle d'une ligne et 80 px a
+   un libelle de deux : c'est ce qui faisait coexister des boutons de 41, 48,
+   52 et 80 px. Avec une hauteur minimale et un centrage, un libelle long
+   grandit le bouton au lieu de le deformer, et un libelle court ne descend
+   jamais sous la cible tactile de 44 px.
+   -------------------------------------------------------------------------- */
+.btn,
+.button,
+.shopify-challenge__button,
+.customer button {
+  display: inline-flex;
+  min-height: 4.8rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 2.8rem;
+  border-radius: var(--r-pill);
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0.06em;
+  text-align: center;
+}
+
+/* Le contour : 2 px des deux cotes. Dawn dessine le sien avec un
+   pseudo-element, cette boutique avec une ombre intérieure ; les deux
+   valaient 1 px d'un cote et 2 de l'autre. */
+.btn.ghost {
+  box-shadow: inset 0 0 0 2px currentColor;
+}
+
+/* Le petit bouton garde son role — il est plus discret, pas d'une autre
+   famille : meme dessin, un cran en dessous, et toujours au-dessus des 44 px
+   qu'un pouce reclame. */
+.btn.small {
+  min-height: 4.4rem;
+  padding: 0.6rem 2rem;
+  font-size: 1.4rem;
+}
+
+/* --------------------------------------------------------------------------
+   62. LES CARTES PRODUIT : LES PRIX SUR UNE MEME LIGNE
+
+   MESURE. Dans une rangee de quatre cartes, le prix se trouvait a huit
+   hauteurs differentes pour huit cartes. Deux causes, et il faut les deux
+   pour que ce soit propre.
+
+   LA PREMIERE : LE TITRE. « Spa Duo - 2 personnes » tient sur une ligne,
+   « Spa Panope FULL Therapeutique - 5 personnes » en prend trois. Le prix,
+   pose juste dessous, descend d'autant. Le bloc d'information devient donc
+   une colonne souple et le prix est pousse en bas : le titre peut prendre
+   la place qu'il veut, le prix reste a sa ligne.
+
+   LA SECONDE : LA PHOTO. Les dix photos de spas font 1254 x 1254, sauf deux
+   qui font 1271 x 1238 et 1272 x 1236. Avec le reglage « s'adapte », chaque
+   carte prend la proportion de SA photo : un pour cent d'ecart suffit a
+   decaler la suite. Le reglage passe a « carre » dans les deux grilles, ce
+   qui recadre ces deux photos d'une dizaine de pixels et rend les boites
+   identiques.
+
+   Les deux ensemble donnent des prix alignes quelle que soit la longueur du
+   nom, et des cartes qui commencent toutes a la meme hauteur.
+   -------------------------------------------------------------------------- */
+.product-grid .card-wrapper,
+.product-grid .card,
+.product-grid .card__content {
+  height: 100%;
+}
+
+.product-grid .card__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-grid .card__information {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
+/* Le prix descend en bas de la carte, et tout ce qui le suit avec lui. */
+.product-grid .card__information .price {
+  margin-top: auto;
 }
