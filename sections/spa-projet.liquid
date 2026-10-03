@@ -44,44 +44,30 @@
   style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
 >
   <div class="page-width">
+    {%- comment -%}
+      TROIS BLOCS, ET L'ORDRE CHANGE SELON L'ÉCRAN.
+
+      Sur téléphone, la colonne de gauche passait AVANT le formulaire : le
+      titre, l'introduction, les trois étapes de préparation, ce qu'on reçoit,
+      le numéro — un écran et demi à faire défiler avant d'atteindre le
+      premier champ. Quelqu'un venu demander un devis n'a pas à lire comment
+      s'y préparer pour trouver où écrire.
+
+      Le titre et l'introduction restent en tête : ils disent où l'on est. Le
+      formulaire vient tout de suite après. Les conseils de préparation et le
+      « ce que vous recevez » descendent sous le formulaire, où ils gardent
+      tout leur sens : on les lit en remplissant, ou juste après.
+
+      Sur ordinateur rien ne bouge — deux colonnes, les conseils à gauche du
+      formulaire — parce que la grille remet chaque bloc à sa place.
+    {%- endcomment -%}
     <div class="spa-projet__grille">
-      <div class="spa-projet__aside">
+      <div class="spa-projet__tete">
         <h2 class="spa-projet__titre">{{ section.settings.titre | escape }}</h2>
 
         {%- if section.settings.intro != blank -%}
           <div class="spa-projet__intro rte">{{ section.settings.intro }}</div>
         {%- endif -%}
-
-        <h3 class="spa-projet__sous-titre">Ce qu'il faut préparer</h3>
-        <ol class="spa-projet__etapes">
-          <li>
-            <span class="spa-projet__num" aria-hidden="true">1</span>
-            <strong>Mesurez le passage</strong>
-            Portail, allée, angle de mur : le point le plus étroit décide de tout, pas la place finale.
-          </li>
-          <li>
-            <span class="spa-projet__num" aria-hidden="true">2</span>
-            <strong>Photographiez</strong>
-            L'emplacement prévu et le chemin depuis la rue. Deux photos nous évitent un déplacement.
-          </li>
-          <li>
-            <span class="spa-projet__num" aria-hidden="true">3</span>
-            <strong>Regardez le support</strong>
-            Dalle béton, terrasse bois, gravier : un spa rempli pèse une à deux tonnes.
-          </li>
-        </ol>
-
-        <h3 class="spa-projet__sous-titre">Ce que vous recevez</h3>
-        <p class="spa-projet__reponse">
-          Un devis détaillé, poste par poste : le spa, les équipements inclus, la livraison,
-          l'installation, et le grutage s'il est nécessaire. Ce qui ne peut pas être chiffré à
-          distance est indiqué « sur devis » plutôt qu'estimé au hasard.
-        </p>
-
-        <p class="spa-projet__contact">
-          <strong>Réponse sous 48 heures ouvrées.</strong><br>
-          Une question d'ici là : <a href="tel:+33160773700">01 60 77 37 00</a>
-        </p>
       </div>
 
       <div class="spa-projet__panneau">
@@ -271,6 +257,39 @@
             -%}
           {%- endform -%}
         </div>
+      </div>
+
+      <div class="spa-projet__aside">
+        <h3 class="spa-projet__sous-titre">Ce qu'il faut préparer</h3>
+        <ol class="spa-projet__etapes">
+          <li>
+            <span class="spa-projet__num" aria-hidden="true">1</span>
+            <strong>Mesurez le passage</strong>
+            Portail, allée, angle de mur : le point le plus étroit décide de tout, pas la place finale.
+          </li>
+          <li>
+            <span class="spa-projet__num" aria-hidden="true">2</span>
+            <strong>Photographiez</strong>
+            L'emplacement prévu et le chemin depuis la rue. Deux photos nous évitent un déplacement.
+          </li>
+          <li>
+            <span class="spa-projet__num" aria-hidden="true">3</span>
+            <strong>Regardez le support</strong>
+            Dalle béton, terrasse bois, gravier : un spa rempli pèse une à deux tonnes.
+          </li>
+        </ol>
+
+        <h3 class="spa-projet__sous-titre">Ce que vous recevez</h3>
+        <p class="spa-projet__reponse">
+          Un devis détaillé, poste par poste : le spa, les équipements inclus, la livraison,
+          l'installation, et le grutage s'il est nécessaire. Ce qui ne peut pas être chiffré à
+          distance est indiqué « sur devis » plutôt qu'estimé au hasard.
+        </p>
+
+        <p class="spa-projet__contact">
+          <strong>Réponse sous 48 heures ouvrées.</strong><br>
+          Une question d'ici là : <a href="tel:+33160773700">01 60 77 37 00</a>
+        </p>
       </div>
     </div>
   </div>

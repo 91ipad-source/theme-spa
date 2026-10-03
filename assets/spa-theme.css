@@ -3036,23 +3036,60 @@ a, span, label, summary, button, blockquote, figcaption,
   gap: 3.2rem;
 }
 
-/* Les colonnes sont presque a egalite. Le formulaire de l'application
-   Forms s'affiche sur une seule colonne et ne s'elargit pas au-dela d'une
-   certaine mesure : lui reserver une colonne large ne fait qu'ouvrir un
-   vide a sa droite. Autant rendre la place a la colonne de gauche, qui
-   porte du texte.
+/* Sur telephone, le titre et l'introduction se collent au formulaire : c'est
+   une seule idee, « voici la page, voici le champ ». Les conseils, eux,
+   gardent leur distance en dessous. */
+@media screen and (max-width: 989px) {
+  .spa-projet__tete {
+    margin-bottom: -1.2rem;
+  }
+}
 
-   L'aside est colle en haut : le formulaire fait une quinzaine de champs,
-   et sans cela la colonne de gauche se termine au tiers de la page, laissant
-   un grand blanc pendant tout le defilement. */
+/* L'ORDRE DU HTML EST CELUI DU TELEPHONE : titre, formulaire, conseils.
+
+   La colonne de gauche passait avant le formulaire — titre, introduction,
+   trois etapes de preparation, ce qu'on recoit, le numero. Un ecran et demi
+   a faire defiler avant le premier champ, sur un telephone. Quelqu'un venu
+   demander un devis n'a pas a lire comment s'y preparer pour trouver ou
+   ecrire.
+
+   Sur ordinateur, la grille remet chaque bloc a sa place : le titre et les
+   conseils a gauche, le formulaire a droite sur les deux rangees. Rien ne
+   bouge visuellement, et le HTML reste dans l'ordre qui sert le telephone —
+   c'est toujours ce sens-la qu'il faut privilegier, un lecteur d'ecran suit
+   le HTML, pas la grille.
+
+   Les colonnes sont presque a egalite. Le formulaire de l'application Forms
+   s'affiche sur une seule colonne et ne s'elargit pas au-dela d'une certaine
+   mesure : lui reserver une colonne large ne fait qu'ouvrir un vide a sa
+   droite. Autant rendre la place a la colonne de gauche, qui porte du texte.
+
+   L'aside est colle en haut : le formulaire fait une quinzaine de champs, et
+   sans cela la colonne de gauche se termine au tiers de la page, laissant un
+   grand blanc pendant tout le defilement. Sa rangee prend « 1fr » pour que le
+   collage ait de quoi glisser. */
 @media screen and (min-width: 990px) {
   .spa-projet__grille {
     align-items: start;
-    gap: 4.8rem;
+    gap: 2.4rem 4.8rem;
     grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      'tete formulaire'
+      'conseils formulaire';
+  }
+
+  .spa-projet__tete {
+    grid-area: tete;
+  }
+
+  .spa-projet__panneau {
+    grid-area: formulaire;
   }
 
   .spa-projet__aside {
+    grid-area: conseils;
+    align-self: start;
     position: sticky;
     top: 2.4rem;
   }
