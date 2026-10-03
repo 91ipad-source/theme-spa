@@ -4,15 +4,28 @@
 
   POURQUOI CETTE SECTION EXISTE. Un visiteur qui hésite entre trois spas n'a
   aujourd'hui qu'une solution : ouvrir trois onglets et faire l'aller-retour.
-  Les chiffres qui décident — encombrement, hauteur, nombre de jets, volume
-  d'eau — sont pourtant les mêmes d'une fiche à l'autre ; il n'y a aucune
-  raison de les faire chercher.
+  Les chiffres qui décident — encombrement, hauteur, nombre de jets, nombre
+  de pompes, volume d'eau — sont pourtant les mêmes d'une fiche à l'autre ;
+  il n'y a aucune raison de les faire chercher.
 
   D'OÙ VIENNENT LES DONNÉES. Uniquement des métachamps produit : places,
-  configuration, encombrement, hauteur, jets, volume d'eau, poids,
-  raccordement electrique, pompes et gamme. Rien n'est écrit en dur ici. Une valeur corrigée dans la fiche
-  produit se répercute donc sur le comparateur sans toucher au code, et un
-  spa ajouté à la collection y apparaît tout seul.
+  configuration, encombrement, hauteur, jets, pompes de massage, volume
+  d'eau, poids, raccordement électrique et gamme. Rien n'est écrit en dur
+  ici. Une valeur corrigée dans la fiche produit se répercute donc sur le
+  comparateur sans toucher au code, et un spa ajouté à la collection y
+  apparaît tout seul.
+
+  LES POMPES SE COMPTENT, ELLES NE SE RACONTENT PAS. Le métachamp « Pompes »
+  décrit le matériel en toutes lettres — « 2 pompes LX LP300 de 3 CV + 1
+  pompe de circulation LX JA50 ». C'est ce qu'il faut sur une fiche, et c'est
+  illisible dans une colonne de tableau. Un second métachamp, « Pompes de
+  massage », porte le seul chiffre qui se compare.
+
+  LA POMPE DE CIRCULATION N'Y EST PAS COMPTÉE, et c'est le point à retenir :
+  elle fait tourner l'eau pour la filtrer, elle n'alimente aucun jet. La
+  compter donnerait trois pompes au Panopé contre une au Duo, alors que
+  l'écart de massage est de deux à une. Le face-à-face affiche les deux
+  lignes : le nombre d'abord, le détail complet ensuite.
 
   CE QUI N'EST PAS RENSEIGNÉ EST DIT COMME TEL. La cellule affiche « non
   précisé » plutôt qu'un chiffre plausible : sur une fiche technique, une
@@ -157,6 +170,7 @@
             data-gamme="{{ mf.gamme.value | escape }}"
             data-hauteur="{{ mf.hauteur.value }}"
             data-jets="{{ mf.jets.value }}"
+            data-pompes="{{ mf.pompes_massage.value }}"
             data-volume="{{ mf.volume_eau.value }}"
             data-prix="{{ produit.price }}"
             data-dispo="{% if produit.available %}1{% else %}0{% endif %}"
@@ -205,6 +219,14 @@
                 {%- if mf.jets.value != blank -%}
                   <div><dt>Jets</dt><dd>{{ mf.jets.value }}</dd></div>
                 {%- endif -%}
+                {%- comment -%}
+                  LE NOMBRE, PAS LA PHRASE. Le champ « Pompes » decrit le
+                  materiel en toutes lettres — utile sur la fiche, illisible
+                  dans une colonne. Ce qui se compare, c'est un chiffre.
+                {%- endcomment -%}
+                {%- if mf.pompes_massage.value != blank -%}
+                  <div><dt>Pompes</dt><dd>{{ mf.pompes_massage.value }}</dd></div>
+                {%- endif -%}
               </dl>
 
               {%- if mf.configuration.value != blank -%}
@@ -236,6 +258,7 @@
               <th scope="col">Encombrement</th>
               <th scope="col"><button type="button" class="spa-comparo__tri" data-comparo-tri="hauteur">Hauteur</button></th>
               <th scope="col"><button type="button" class="spa-comparo__tri" data-comparo-tri="jets">Jets</button></th>
+              <th scope="col"><button type="button" class="spa-comparo__tri" data-comparo-tri="pompes">Pompes</button></th>
               <th scope="col"><button type="button" class="spa-comparo__tri" data-comparo-tri="volume">Volume</button></th>
               <th scope="col">Gamme</th>
               <th scope="col"><button type="button" class="spa-comparo__tri" data-comparo-tri="prix">Prix</button></th>
@@ -256,6 +279,7 @@
                 data-gamme="{{ mf.gamme.value | escape }}"
                 data-hauteur="{{ mf.hauteur.value }}"
                 data-jets="{{ mf.jets.value }}"
+                data-pompes="{{ mf.pompes_massage.value }}"
                 data-volume="{{ mf.volume_eau.value }}"
                 data-prix="{{ produit.price }}"
                 data-dispo="{% if produit.available %}1{% else %}0{% endif %}"
@@ -271,6 +295,7 @@
                 <td>{{ mf.encombrement.value | default: '—' }}</td>
                 <td>{% if mf.hauteur.value %}{{ mf.hauteur.value }} cm{% else %}—{% endif %}</td>
                 <td>{{ mf.jets.value | default: '—' }}</td>
+                <td>{{ mf.pompes_massage.value | default: '—' }}</td>
                 <td>{% if mf.volume_eau.value %}{{ mf.volume_eau.value }} L{% else %}—{% endif %}</td>
                 <td>{{ mf.gamme.value | default: '—' }}</td>
                 <td class="spa-comparo__prix-cell">{{ produit.price | money }}</td>
@@ -332,6 +357,7 @@
               "volume": {{ mf.volume_eau.value | json }},
               "poids": {{ mf.poids.value | json }},
               "raccordement": {{ mf.raccordement.value | json }},
+              "pompes_massage": {{ mf.pompes_massage.value | json }},
               "pompes": {{ mf.pompes.value | json }},
               "electronique": {{ mf.electronique.value | json }},
               "equipements": {{ mf.equipements.value | json }},
@@ -505,7 +531,8 @@
       { cle: 'volume', libelle: 'Volume d’eau', unite: ' L' },
       { cle: 'poids', libelle: 'Poids à vide', unite: ' kg' },
       { cle: 'raccordement', libelle: 'Raccordement électrique' },
-      { cle: 'pompes', libelle: 'Pompes' },
+      { cle: 'pompes_massage', libelle: 'Pompes de massage' },
+      { cle: 'pompes', libelle: 'Détail des pompes' },
       { cle: 'electronique', libelle: 'Électronique' },
       { cle: 'equipements', libelle: 'Équipements' },
       { cle: 'coloris', libelle: 'Coloris' },
