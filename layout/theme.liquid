@@ -36,15 +36,20 @@
 
       Les familles sont rebranchées sur les variables de Dawn dans
       spa-theme.css.
+
+      ELLE N'ARRIVE PLUS DE GOOGLE. Les fichiers sont dans le thème, et les
+      déclarations dans snippets/spa-polices.liquid, qui explique pourquoi.
+      Une feuille de style distante bloquait l'affichage le temps de deux
+      poignées de main chiffrées, sur deux domaines tiers, avant le premier
+      pixel.
+
+      LA PRÉCHARGE NE PORTE QUE SUR LE ROMAIN LATIN : c'est le seul fichier
+      qu'une page en français télécharge à coup sûr. L'italique et latin-ext
+      attendent qu'un caractère de leur plage apparaisse, et précharger les
+      trois autres ferait descendre 75 Ko dont la page n'a pas l'usage.
     {%- endcomment -%}
-    {% comment %}theme-check-disable RemoteAsset{% endcomment %}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,900;1,9..40,400&display=swap"
-    >
-    {% comment %}theme-check-enable RemoteAsset{% endcomment %}
+    <link rel="preload" as="font" href="{{ 'dm-sans-latin.woff2' | asset_url }}" type="font/woff2" crossorigin>
+    {% render 'spa-polices' %}
 
     {%- comment -%}
       Le nom affiche dans l'onglet est la signature de marque, plus complete que
