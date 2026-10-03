@@ -47,6 +47,25 @@
   if alt == blank
     assign alt = image.alt
   endif
+
+  comment
+    PREMIER ECRAN : CHARGEE TOUT DE SUITE, ET EN PRIORITE.
+
+    Par defaut une image de bandeau est differee — c'est le bon reglage pour
+    le bandeau magasin, qui vit au-dessus du pied de page et que personne ne
+    voit avant d'avoir fait defiler. Mais la meme section sert de banniere
+    d'accueil : la, l'image est le plus gros element du premier ecran, donc
+    celui que Google chronometre. Differee, elle n'est meme pas demandee
+    avant que le navigateur ait lu le reste de la page ; le visiteur arrive
+    sur un rectangle vide. Le reglage ci-dessous inverse les deux consignes
+    pour ce cas-la, et pour lui seul.
+  endcomment
+  assign chargement = 'lazy'
+  assign priorite = 'auto'
+  if section.settings.premier_ecran
+    assign chargement = 'eager'
+    assign priorite = 'high'
+  endif
 -%}
 
 {%- if image != blank -%}
@@ -63,13 +82,24 @@
 
     <picture>
       {%- if image_mobile != blank -%}
+        {%- comment -%}
+          AUCUNE LARGEUR PLUS GRANDE QUE LE FICHIER. Un telephone a trois
+          pixels pour un point demande 1 170 px de large ; si on les lui
+          propose alors que l'image en fait 1 000, Shopify agrandit — on
+          paie des octets pour du flou. La liste est donc filtree sur la
+          taille reelle du fichier, et c'est elle qui ferme le jeu.
+        {%- endcomment -%}
+        {%- assign largeurs_mobile = '400,600,800,1100' | split: ',' -%}
         <source
           media="(max-width: 749px)"
           srcset="
-            {{ image_mobile | image_url: width: 400 }} 400w,
-            {{ image_mobile | image_url: width: 600 }} 600w,
-            {{ image_mobile | image_url: width: 800 }} 800w,
-            {{ image_mobile | image_url: width: 1100 }} 1100w
+            {%- for l in largeurs_mobile -%}
+              {%- assign n = l | plus: 0 -%}
+              {%- if n < image_mobile.width -%}
+                {{ image_mobile | image_url: width: n }} {{ n }}w,
+              {%- endif -%}
+            {%- endfor -%}
+            {{ image_mobile | image_url: width: image_mobile.width }} {{ image_mobile.width }}w
           "
           sizes="100vw"
           width="{{ image_mobile.width }}"
@@ -80,7 +110,8 @@
         image
         | image_url: width: 3000
         | image_tag:
-          loading: 'lazy',
+          loading: chargement,
+          fetchpriority: priorite,
           widths: '750, 1100, 1500, 2000, 2600, 3000',
           sizes: '100vw',
           alt: alt,
@@ -131,6 +162,13 @@
       "id": "show_on_mobile",
       "label": "Afficher sur téléphone",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "premier_ecran",
+      "label": "Image du premier écran",
+      "default": false,
+      "info": "À cocher uniquement pour une bannière placée tout en haut d'une page. L'image est alors chargée immédiatement et en priorité. Laissé décoché, le chargement est différé — ce qu'il faut pour un bandeau de bas de page."
     },
     {
       "type": "text",

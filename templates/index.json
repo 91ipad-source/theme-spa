@@ -320,8 +320,10 @@
       "type": "spa-store-banner",
       "settings": {
         "image": "shopify://shop_images/spas9-accueil-bandeau-proto2.jpg",
+        "image_mobile": "shopify://shop_images/spas9-accueil-bandeau-proto2-mobile.jpg",
         "largeur": "plein",
         "show_on_mobile": true,
+        "premier_ecran": true,
         "image_alt": "Le bien-être, à la maison — notre best-seller le Proto 2, spa 5 places, 4 990 € TTC",
         "link": ""
       }

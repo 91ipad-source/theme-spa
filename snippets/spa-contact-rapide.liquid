@@ -15,6 +15,13 @@
   WhatsApp renseigné, la barre passe à deux boutons au lieu d'en afficher un
   qui ne mène nulle part.
 
+  ET OÙ ELLE NE S'AFFICHE PAS DU TOUT. Sur les deux pages qui portent un
+  formulaire — Contact et Mon projet spa. Une barre collée en bas recouvre
+  les derniers champs pendant qu'on les remplit, et c'est là que le clavier
+  du téléphone remonte déjà la moitié de l'écran. Son troisième bouton,
+  « Rendez-vous », mènerait d'ailleurs à la page en cours. Sur ces deux
+  pages, le formulaire est l'action : rien ne doit passer devant.
+
   ACCESSIBILITÉ. Les libellés sont lisibles sous l'icône, pas seulement
   suggérés par un pictogramme. Le contenu de la page reçoit une marge basse
   égale à la hauteur de la barre pour que rien ne reste caché dessous, et la
@@ -29,9 +36,24 @@
   if lien_rdv == blank
     assign lien_rdv = '/pages/contact'
   endif
+
+  comment
+    Le handle est normalise avant d'etre teste : hors d'une page — sur une
+    fiche produit, un article — « page » n'est pas defini, et comparer une
+    variable non definie avec « blank » ne donne pas le meme resultat d'un
+    moteur Liquid a l'autre. Les virgules encadrent la recherche pour qu'un
+    handle ne puisse pas valider par simple inclusion dans un autre.
+  endcomment
+  assign ici = page.handle | default: ''
+  assign cherche = ',' | append: ici | append: ','
+  assign pages_formulaire = ',contact,mon-projet-spa,'
+  assign sur_formulaire = false
+  if ici != blank and pages_formulaire contains cherche
+    assign sur_formulaire = true
+  endif
 -%}
 
-{%- if settings.spa_contact_rapide and tel != blank -%}
+{%- if settings.spa_contact_rapide and tel != blank and sur_formulaire == false -%}
   <div class="spa-rapide" role="group" aria-label="Nous contacter">
     {%- capture tel_lien -%}{%- render 'spa-tel', numero: tel -%}{%- endcapture -%}
     <a class="spa-rapide__lien" href="tel:{{ tel_lien | strip }}">

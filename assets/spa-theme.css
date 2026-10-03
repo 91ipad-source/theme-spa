@@ -3341,8 +3341,11 @@ a, span, label, summary, button, blockquote, figcaption,
     grid-auto-columns: 1fr;
   }
 
-  /* La hauteur de la barre, plus la zone sure des iPhone. */
-  body {
+  /* La hauteur de la barre, plus la zone sure des iPhone. La marge est
+     conditionnee a la presence de la barre : Contact et Mon projet spa ne
+     la portent pas — elle recouvrirait le formulaire — et y laisseraient
+     sinon un vide de 64 px sous le pied de page. */
+  body:has(.spa-rapide) {
     padding-bottom: calc(6.4rem + env(safe-area-inset-bottom, 0px));
   }
 }
@@ -7227,4 +7230,97 @@ h1.h2.center {
   background: var(--mist);
   font-size: 1.5rem;
   line-height: var(--lh-texte);
+}
+
+/* --------------------------------------------------------------------------
+   58. CIBLES TACTILES : CE QU'ON DOIT POUVOIR TOUCHER AVEC UN POUCE
+
+   MESURE, PAS IMPRESSION. Chaque page a été rendue dans une fenêtre de
+   390 px — un iPhone courant — et la boîte de tous ses liens et boutons a
+   été relevée. Les recommandations d'Apple et de Google demandent 44 px de
+   côté ; le critère WCAG 2.5.8, 24 px au minimum. Le numéro de téléphone
+   des cartes de contact mesurait 163 × 18, l'adresse e-mail 164 × 18 : en
+   dessous même du plancher, et ce sont les deux actions qui font vivre ce
+   magasin.
+
+   DEUX TRAITEMENTS, SELON CE QUI ENTOURE LE LIEN.
+
+   Un lien seul sur sa ligne — un numéro, une adresse, un titre de carte —
+   reçoit une vraie hauteur. Les coordonnées, elles, passent en bloc : leurs
+   lignes se suivent de près, et agrandir deux zones voisines sans les
+   écarter ferait se chevaucher deux cibles, ce qui est pire que des cibles
+   trop petites.
+
+   Un lien pris dans un paragraphe n'est pas touché. WCAG l'exempte
+   explicitement, et lui donner 44 px de haut disloquerait l'interligne de
+   tout le texte courant.
+
+   POURQUOI « pointer: coarse » ET PAS UNE LARGEUR. C'est le doigt qui pose
+   le problème, pas la taille de l'écran : une tablette large se touche
+   aussi. À la souris, rien ne change.
+   -------------------------------------------------------------------------- */
+
+@media (pointer: coarse) {
+  /* Les coordonnées : chaque ligne devient sa propre cible, et les cibles
+     ne se touchent pas. */
+  .spa-contact-carte__coords a,
+  .spa-ctete__adresse a,
+  .spa-sav__moyens a {
+    display: flex;
+    min-height: 4.4rem;
+    align-items: center;
+  }
+
+  /* Ceux-la sont deja des boites alignees : il ne leur manque que la
+     hauteur. On ne touche pas a leur « display », sous peine de les etaler
+     sur toute la largeur. */
+  .spa-ctete__tel,
+  .spa-ctete__itineraire a,
+  .spa-comparo__vue {
+    min-height: 4.4rem;
+  }
+
+  .spa-budget__note a {
+    display: inline-flex;
+    min-height: 4.4rem;
+    align-items: center;
+  }
+
+  /* Le titre d'une carte de réalisation et les liens d'un tableau restent
+     en ligne : une marge intérieure verticale sur un élément « inline »
+     agrandit la zone sensible sans toucher à l'interligne. C'est invisible,
+     et c'est exactement ce qu'on cherche ici. */
+  .spa-realisations__nom a {
+    padding-block: 1.1rem;
+  }
+
+  .spa-tableau th a,
+  .spa-tableau td a {
+    padding: 1.3rem 0.8rem;
+    margin: 0 -0.8rem;
+  }
+
+  /* La fiche produit : le devis et les deux chemins de conseil. Le bouton
+     de devis manquait trois pixels, le lien vers le showroom vingt et un —
+     et ce sont les deux actions de ceux qui ne commandent pas en ligne. */
+  .spa-fiche-actions__devis {
+    min-height: 4.4rem;
+  }
+
+  .spa-fiche-actions__lien,
+  .spa-fiche-tech__lien a {
+    display: inline-flex;
+    min-height: 4.4rem;
+    align-items: center;
+  }
+
+  /* Un paragraphe de texte libre qui ne contient qu'un lien n'est pas du
+     texte courant : c'est un appel a l'action ecrit depuis l'administration
+     — « Ouvrir l'itineraire dans Google Maps », « Preparer l'installation ».
+     Meme marge interieure invisible. « only-child » garantit au passage
+     qu'il n'y a qu'un lien par paragraphe, donc aucune zone qui en
+     recouvre une autre. */
+  .rte p > a:only-child {
+    padding-block: 1.3rem;
+  }
 }
