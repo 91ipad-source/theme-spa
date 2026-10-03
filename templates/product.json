@@ -171,6 +171,19 @@
         "padding_bottom": 12
       }
     },
+    "rappel": {
+      "type": "spa-rappel",
+      "settings": {
+        "titre": "Vous préférez qu'on vous rappelle ?",
+        "intro": "<p>Laissez votre prénom et votre numéro : nous vous rappelons pour parler de ce modèle, de votre emplacement et de l'accès. Sans engagement.</p>",
+        "delai": "Nous rappelons sous 48 heures ouvrées.",
+        "bouton": "Être rappelé",
+        "confirmation": "Nous vous rappelons sous 48 heures ouvrées, au numéro que vous venez de laisser. Si vous nous avez indiqué un modèle, nous préparons les cotes et les conditions d'accès avant d'appeler.",
+        "color_scheme": "scheme-1",
+        "padding_top": 8,
+        "padding_bottom": 48
+      }
+    },
     "disclosures": {
       "type": "disclosures",
       "settings": {
@@ -210,6 +223,7 @@
   "order": [
     "main",
     "accessoires",
+    "rappel",
     "disclosures",
     "related-products"
   ]

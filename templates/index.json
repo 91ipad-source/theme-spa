@@ -191,6 +191,19 @@
         "padding_bottom": 48
       }
     },
+    "rappel": {
+      "type": "spa-rappel",
+      "settings": {
+        "titre": "Vous préférez qu'on vous rappelle ?",
+        "intro": "<p>Laissez votre prénom et votre numéro : nous vous rappelons pour comprendre votre projet et vous orienter vers les modèles adaptés. Sans engagement.</p>",
+        "delai": "Nous rappelons sous 48 heures ouvrées.",
+        "bouton": "Être rappelé",
+        "confirmation": "Nous vous rappelons sous 48 heures ouvrées, au numéro que vous venez de laisser.",
+        "color_scheme": "scheme-1",
+        "padding_top": 8,
+        "padding_bottom": 48
+      }
+    },
     "showroom": {
       "type": "image-with-text",
       "blocks": {
@@ -364,6 +377,7 @@
     "featured_collection",
     "criteres",
     "parcours",
+    "rappel",
     "showroom",
     "avis",
     "articles",

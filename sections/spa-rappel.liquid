@@ -1,0 +1,267 @@
+{%- comment -%}
+  LE RAPPEL EN TROIS CHAMPS.
+
+  POURQUOI UN DEUXIÈME FORMULAIRE. Celui de la page Contact demande le motif,
+  le nom, l'e-mail, le modèle et la demande elle-même. C'est le bon
+  formulaire pour qui a une question à poser. Ce n'est pas le bon pour qui
+  veut simplement être rappelé : écrire un paragraphe pour obtenir un appel,
+  c'est le prix qu'on ne paie pas. Trois champs, un bouton, et on raccroche.
+
+  LE PRÉNOM, LE NUMÉRO, LE MODÈLE. Rien d'autre. Pas d'adresse e-mail
+  demandée — c'est tout l'intérêt — et pas de message : la case « modèle »
+  dit déjà de quoi on parlera, et le reste se dira de vive voix.
+
+  SHOPIFY EXIGE POURTANT UNE ADRESSE, ET VOICI COMMENT ON FAIT. Un formulaire
+  de contact Shopify refuse l'envoi sans « contact[email] ». Ce n'est pas
+  contournable depuis un thème. Le champ est donc rempli, caché, avec
+  l'adresse de la boutique elle-même.
+
+  CONSÉQUENCE À CONNAÎTRE : dans la notification reçue, « Répondre » renvoie
+  vers votre propre adresse, pas vers le visiteur. C'est voulu — le visiteur
+  n'a pas donné d'e-mail, il a donné un numéro. On le rappelle, on ne lui
+  écrit pas. Le numéro est le premier champ de la notification pour cette
+  raison.
+
+  LE MODÈLE EST PRÉ-REMPLI SUR UNE FICHE SPA. Quelqu'un qui demande un rappel
+  depuis la fiche du Proto 2 n'a pas à redire lequel : la liste s'ouvre sur
+  celui qu'il regarde. Ailleurs, elle s'ouvre sur « Je ne sais pas encore ».
+
+  LE PIÈGE À ROBOTS. Un formulaire sans e-mail attire les envois
+  automatiques. Un champ invisible, que seul un robot remplit, bloque
+  l'envoi. Il est posé en JavaScript, donc il ne protège que les robots qui
+  l'exécutent — c'est la grande majorité, et le reste se trie à la lecture.
+  Aucun envoi légitime n'est jamais bloqué : un humain ne voit pas ce champ.
+
+  UN SEUL FORMULAIRE DE CONTACT PAR PAGE. Après un envoi, Shopify recharge la
+  page et met « posted_successfully » à vrai pour tous les formulaires de
+  contact qui s'y trouvent. Deux formulaires sur une même page afficheraient
+  donc deux confirmations pour un seul envoi. Cette section n'est pas à poser
+  sur la page Contact ni sur Mon projet spa, qui ont déjà le leur.
+{%- endcomment -%}
+
+{%- liquid
+  assign id_form = 'rappel-' | append: section.id
+  assign spas = collections['tous-nos-spas'].products
+
+  comment
+    Le modèle regardé, s'il y en a un. Hors d'une fiche produit, « product »
+    n'est pas défini : le filtre default rend une chaîne vide et la
+    comparaison qui suit redevient sûre.
+  endcomment
+  assign modele_vu = product.title | default: ''
+  assign sur_fiche = false
+  if modele_vu != blank and product.type == 'Spa'
+    assign sur_fiche = true
+  endif
+-%}
+
+<div
+  class="spa-rappel color-{{ section.settings.color_scheme }} gradient"
+  style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width">
+    <div class="spa-rappel__carte">
+      <div class="spa-rappel__texte">
+        {%- if section.settings.titre != blank -%}
+          <h2 class="spa-rappel__titre">{{ section.settings.titre | escape }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.intro != blank -%}
+          <div class="spa-rappel__intro rte">{{ section.settings.intro }}</div>
+        {%- endif -%}
+
+        {%- if section.settings.delai != blank -%}
+          <p class="spa-rappel__delai">
+            <svg class="spa-rappel__delai-icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path
+                d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm1-13h-2v6l5 3 1-1.6-4-2.4V7z"
+                fill="currentColor"
+              />
+            </svg>
+            {{ section.settings.delai | escape }}
+          </p>
+        {%- endif -%}
+      </div>
+
+      {%- form 'contact', id: id_form, class: 'spa-rappel__form' -%}
+        {%- if form.posted_successfully? -%}
+          <div class="spa-rappel__ok" role="status">
+            <h3>C'est noté.</h3>
+            <p>{{ section.settings.confirmation }}</p>
+          </div>
+        {%- else -%}
+          {%- if form.errors -%}
+            <div class="spa-rappel__erreur" role="alert">
+              <p>{{ form.errors | default_errors }}</p>
+            </div>
+          {%- endif -%}
+
+          {%- comment -%}
+            L'adresse exigée par Shopify, et le piège à robots. Les deux sont
+            cachés, pour deux raisons opposées : la première ne regarde pas le
+            visiteur, le second ne doit pas être vu de lui.
+          {%- endcomment -%}
+          <input type="hidden" name="contact[email]" value="{{ shop.email }}">
+          <input type="hidden" name="contact[body]" value="Demande de rappel téléphonique depuis {{ request.path }}">
+          <div class="spa-rappel__piege" aria-hidden="true">
+            <label for="{{ id_form }}-site">Ne remplissez pas ce champ</label>
+            <input type="text" id="{{ id_form }}-site" name="contact[Site web]" tabindex="-1" autocomplete="off">
+          </div>
+
+          <div class="spa-rappel__champs">
+            <div class="field">
+              <label class="field__label" for="{{ id_form }}-prenom">
+                Prénom <abbr title="obligatoire">*</abbr>
+              </label>
+              <input
+                class="field__input"
+                type="text"
+                id="{{ id_form }}-prenom"
+                name="contact[name]"
+                autocomplete="given-name"
+                required
+              >
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="{{ id_form }}-tel">
+                Téléphone <abbr title="obligatoire">*</abbr>
+              </label>
+              <input
+                class="field__input"
+                type="tel"
+                id="{{ id_form }}-tel"
+                name="contact[Téléphone]"
+                autocomplete="tel"
+                inputmode="tel"
+                required
+              >
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="{{ id_form }}-modele">Modèle</label>
+              <select class="field__input" id="{{ id_form }}-modele" name="contact[Modèle]">
+                {%- unless sur_fiche -%}
+                  <option value="Je ne sais pas encore">Je ne sais pas encore</option>
+                {%- endunless -%}
+                {%- for spa in spas -%}
+                  {%- assign nom = spa.title | remove: 'Spa ' | split: ' - ' | first -%}
+                  <option
+                    value="{{ nom | escape }}"
+                    {% if sur_fiche and spa.id == product.id %}selected{% endif %}
+                  >
+                    {{- nom -}}
+                  </option>
+                {%- endfor -%}
+                {%- if sur_fiche -%}
+                  <option value="Je ne sais pas encore">Je ne sais pas encore</option>
+                {%- endif -%}
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="button spa-rappel__envoyer">
+            {{ section.settings.bouton | default: 'Être rappelé' | escape }}
+          </button>
+
+          <p class="spa-rappel__rgpd">
+            Votre numéro sert uniquement à vous rappeler. Il n'est ni revendu, ni utilisé pour
+            de la prospection.
+          </p>
+        {%- endif -%}
+
+        {%- render 'spa-conversion-formulaire',
+          envoye: form.posted_successfully?,
+          form_id: id_form,
+          nom: 'rappel'
+        -%}
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var f = document.getElementById({{ id_form | json }});
+    if (!f) return;
+    f.addEventListener('submit', function (ev) {
+      var piege = f.querySelector('[name="contact[Site web]"]');
+      if (piege && piege.value !== '') ev.preventDefault();
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Rappel téléphonique",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Trois champs : prénom, téléphone, modèle. À ne pas poser sur Contact ni sur Mon projet spa, qui ont déjà un formulaire : après un envoi, les deux afficheraient leur confirmation."
+    },
+    {
+      "type": "text",
+      "id": "titre",
+      "label": "Titre",
+      "default": "Vous préférez qu'on vous rappelle ?"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Texte",
+      "default": "<p>Laissez votre prénom et votre numéro : nous vous rappelons pour en parler de vive voix, sans engagement.</p>"
+    },
+    {
+      "type": "text",
+      "id": "delai",
+      "label": "Délai annoncé",
+      "default": "Nous rappelons sous 48 heures ouvrées."
+    },
+    {
+      "type": "text",
+      "id": "bouton",
+      "label": "Bouton",
+      "default": "Être rappelé"
+    },
+    {
+      "type": "textarea",
+      "id": "confirmation",
+      "label": "Message de confirmation",
+      "default": "Nous vous rappelons sous 48 heures ouvrées, au numéro que vous venez de laisser."
+    },
+    {
+      "type": "header",
+      "content": "Mise en page"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Jeu de couleurs",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 48
+    }
+  ],
+  "presets": [{ "name": "Rappel téléphonique" }]
+}
+{% endschema %}

@@ -3198,18 +3198,32 @@ a, span, label, summary, button, blockquote, figcaption,
    etiquette en flux normal au-dessus du champ, et les deux pseudo-elements
    qui dessinent l'anneau de bordure de Dawn neutralises — sans quoi, le
    conteneur n'etant plus positionne, ils se caleraient sur le panneau. */
-.spa-projet .field {
+/* TROIS FORMULAIRES, UN SEUL DEMONTAGE.
+
+   Le meme traitement etait ecrit deux fois, pour Mon projet spa et pour la
+   page Contact ; un troisieme formulaire, le rappel en trois champs, l'aurait
+   ecrit une troisieme. Les trois selecteurs partagent desormais le meme bloc,
+   et un formulaire de plus n'aura qu'a s'ajouter a la liste. */
+.spa-projet .field,
+.spa-ctete .field,
+.spa-rappel .field {
   position: static;
   display: block;
   margin-bottom: 1.6rem;
 }
 
 .spa-projet .field::before,
-.spa-projet .field::after {
+.spa-projet .field::after,
+.spa-ctete .field::before,
+.spa-ctete .field::after,
+.spa-rappel .field::before,
+.spa-rappel .field::after {
   content: none;
 }
 
-.spa-projet .field__label {
+.spa-projet .field__label,
+.spa-ctete .field__label,
+.spa-rappel .field__label {
   position: static;
   display: block;
   margin-bottom: 0.6rem;
@@ -3221,7 +3235,18 @@ a, span, label, summary, button, blockquote, figcaption,
   transition: none;
 }
 
-.spa-projet .field__input {
+/* L'asterisque des champs obligatoires : visible, sans le soulignement de
+   dictionnaire que les navigateurs ajoutent a <abbr>. */
+.spa-projet .field__label abbr,
+.spa-ctete .field__label abbr,
+.spa-rappel .field__label abbr {
+  color: var(--sky-deep);
+  text-decoration: none;
+}
+
+.spa-projet .field__input,
+.spa-ctete .field__input,
+.spa-rappel .field__input {
   width: 100%;
   height: auto;
   min-height: 0;
@@ -3235,12 +3260,16 @@ a, span, label, summary, button, blockquote, figcaption,
   font-size: 1.6rem;
 }
 
-.spa-projet .field__input:focus-visible {
+.spa-projet .field__input:focus-visible,
+.spa-ctete .field__input:focus-visible,
+.spa-rappel .field__input:focus-visible {
   outline: var(--focused-base-outline, 0.3rem solid var(--sky-deep));
   outline-offset: 0.2rem;
 }
 
-.spa-projet select.field__input {
+.spa-projet select.field__input,
+.spa-ctete select.field__input,
+.spa-rappel select.field__input {
   appearance: none;
   padding-right: 3.6rem;
   background-image: linear-gradient(45deg, transparent 50%, var(--deep) 50%),
@@ -3250,7 +3279,9 @@ a, span, label, summary, button, blockquote, figcaption,
   background-repeat: no-repeat;
 }
 
-.spa-projet textarea.field__input {
+.spa-projet textarea.field__input,
+.spa-ctete textarea.field__input,
+.spa-rappel textarea.field__input {
   resize: vertical;
 }
 
@@ -6042,16 +6073,6 @@ h1.h2.center {
    par-dessus le champ. On demonte le mecanisme plutot que de lutter avec,
    et on neutralise les deux pseudo-elements qui dessinent l'anneau de
    bordure — sans quoi ils se caleraient sur le panneau. */
-.spa-ctete .field {
-  position: static;
-  display: block;
-  margin-bottom: 1.6rem;
-}
-
-.spa-ctete .field::before,
-.spa-ctete .field::after {
-  content: none;
-}
 
 /* ATTENTION, PIEGE DE SPECIFICITE. « .spa-ctete .field { display: block } »
    compte deux classes ; la regle de navigateur « [hidden] { display: none } »
@@ -6063,57 +6084,6 @@ h1.h2.center {
   display: none;
 }
 
-.spa-ctete .field__label {
-  position: static;
-  display: block;
-  margin-bottom: 0.6rem;
-  color: var(--deep);
-  font-size: 1.4rem;
-  font-weight: 700;
-  letter-spacing: 0;
-  pointer-events: auto;
-  transition: none;
-}
-
-/* L'asterisque des champs obligatoires : visible, sans soulignement de
-   dictionnaire que les navigateurs ajoutent a <abbr>. */
-.spa-ctete .field__label abbr {
-  color: var(--sky-deep);
-  text-decoration: none;
-}
-
-.spa-ctete .field__input {
-  width: 100%;
-  height: auto;
-  min-height: 0;
-  flex-grow: 0;
-  padding: 1.1rem 1.4rem;
-  border: 1px solid rgba(15, 58, 90, 0.18);
-  border-radius: var(--r-md);
-  background: var(--white);
-  color: var(--deep);
-  font-family: var(--font-body);
-  font-size: 1.6rem;
-}
-
-.spa-ctete .field__input:focus-visible {
-  outline: var(--focused-base-outline, 0.3rem solid var(--sky-deep));
-  outline-offset: 0.2rem;
-}
-
-.spa-ctete select.field__input {
-  appearance: none;
-  padding-right: 3.6rem;
-  background-image: linear-gradient(45deg, transparent 50%, var(--deep) 50%),
-    linear-gradient(135deg, var(--deep) 50%, transparent 50%);
-  background-position: calc(100% - 20px) 55%, calc(100% - 14px) 55%;
-  background-size: 6px 6px, 6px 6px;
-  background-repeat: no-repeat;
-}
-
-.spa-ctete textarea.field__input {
-  resize: vertical;
-}
 
 .spa-ctete__aide {
   display: block;
@@ -7330,6 +7300,13 @@ h1.h2.center {
     align-items: center;
   }
 
+  /* Le depliant des conditions du pack manquait deux pixels. */
+  .spa-prestation__conditions > summary {
+    display: flex;
+    min-height: 4.4rem;
+    align-items: center;
+  }
+
   /* Un paragraphe de texte libre qui ne contient qu'un lien n'est pas du
      texte courant : c'est un appel a l'action ecrit depuis l'administration
      — « Ouvrir l'itineraire dans Google Maps », « Preparer l'installation ».
@@ -7422,4 +7399,168 @@ h1.h2.center {
   flex: 0 0 auto;
   width: 2.4rem;
   height: 2.4rem;
+}
+
+/* --------------------------------------------------------------------------
+   60. LE RAPPEL EN TROIS CHAMPS (section spa-rappel)
+
+   Une carte, deux colonnes sur grand ecran : a gauche pourquoi laisser son
+   numero, a droite les trois champs. Sous 990 px tout s'empile, et les trois
+   champs se suivent — on ne met pas trois champs cote a cote sur un
+   telephone, chacun n'y aurait plus que cent pixels.
+
+   LA CARTE N'EST PAS UN BLOC DE PLUS. Elle est volontairement plus claire
+   que ce qui l'entoure et bornee en largeur : ce formulaire arrive apres une
+   fiche produit entiere, il doit se lire comme une respiration, pas comme un
+   chapitre supplementaire.
+   -------------------------------------------------------------------------- */
+.spa-rappel {
+  padding-top: var(--pt, 40px);
+  padding-bottom: var(--pb, 48px);
+}
+
+.spa-rappel__carte {
+  display: grid;
+  gap: 2.4rem;
+  max-width: 96rem;
+  margin-inline: auto;
+  padding: 2.8rem 2.4rem;
+  border-radius: var(--r-lg);
+  background: var(--mist);
+}
+
+@media screen and (min-width: 990px) {
+  .spa-rappel__carte {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+    gap: 4rem;
+    align-items: start;
+    padding: 3.2rem 3.6rem;
+  }
+}
+
+.spa-rappel__titre {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-size: var(--t-bloc);
+  line-height: var(--lh-titre);
+}
+
+.spa-rappel__intro {
+  color: var(--deep-soft);
+  font-size: 1.6rem;
+  line-height: var(--lh-texte);
+}
+
+.spa-rappel__intro p:last-child {
+  margin-bottom: 0;
+}
+
+/* Le delai est une promesse chiffree : il porte l'icone et le gras, parce
+   que c'est la seule chose que le visiteur cherche a savoir avant de laisser
+   son numero. */
+.spa-rappel__delai {
+  display: flex;
+  align-items: start;
+  gap: 0.8rem;
+  margin: 1.6rem 0 0;
+  color: var(--sky-deep);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* Dawn ne pose pas de box-sizing universel : sans cette ligne l'icone
+   deborde de sa boite et pousse le texte. */
+.spa-rappel__delai-icone {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  width: 2rem;
+  height: 2rem;
+  /* Alignee sur la PREMIERE ligne, pas au milieu du bloc : sur telephone la
+     phrase passe sur deux lignes, et une icone centree se retrouverait entre
+     les deux. */
+  margin-top: 0.3rem;
+}
+
+.spa-rappel__champs {
+  display: grid;
+  gap: 1.6rem;
+}
+
+@media screen and (min-width: 750px) {
+  .spa-rappel__champs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .spa-rappel__champs .field:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Les champs eux-memes viennent du bloc commun aux trois formulaires. Il ne
+   reste ici que la hauteur : une cible tactile de 48 px, puisque ce
+   formulaire est fait pour etre rempli au pouce. */
+.spa-rappel .field__input {
+  min-height: 4.8rem;
+}
+
+.spa-rappel__envoyer {
+  width: 100%;
+  margin-top: 2rem;
+  min-height: 4.8rem;
+}
+
+@media screen and (min-width: 750px) {
+  .spa-rappel__envoyer {
+    width: auto;
+    min-width: 24rem;
+  }
+}
+
+.spa-rappel__rgpd {
+  margin: 1.2rem 0 0;
+  color: var(--deep-soft);
+  font-size: 1.3rem;
+  line-height: 1.5;
+}
+
+.spa-rappel__ok {
+  padding: 2rem 2.2rem;
+  border-left: 4px solid var(--sky);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+  background: var(--white);
+}
+
+.spa-rappel__ok h3 {
+  margin: 0 0 0.8rem;
+  font-family: var(--font-display);
+  font-size: var(--t-sous);
+  line-height: var(--lh-titre);
+}
+
+.spa-rappel__ok p {
+  margin: 0;
+  color: var(--deep-soft);
+  line-height: var(--lh-texte);
+}
+
+.spa-rappel__erreur {
+  margin-bottom: 1.6rem;
+  padding: 1.4rem 1.6rem;
+  border-left: 4px solid #b3261e;
+  border-radius: var(--r-md);
+  background: var(--white);
+  font-size: 1.4rem;
+}
+
+/* LE PIEGE A ROBOTS N'EST PAS « display: none ». Un robot un peu serieux
+   ignore les champs ainsi masques ; il remplit en revanche ceux qui sont
+   seulement hors de l'ecran. On le sort donc du cadre, sans le retirer du
+   flux de saisie — tout en le retirant du parcours au clavier par tabindex,
+   pour qu'il ne pose aucun probleme a qui navigue sans souris. */
+.spa-rappel__piege {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
