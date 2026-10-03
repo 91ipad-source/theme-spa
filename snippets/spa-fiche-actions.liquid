@@ -8,9 +8,16 @@
   occupait le premier écran. Celui qui n'était pas prêt à payer tout de suite
   n'avait rien à cliquer.
 
-  CE SONT DES LIENS, PAS DES BOUTONS, ET C'EST DÉLIBÉRÉ. L'achat en ligne
-  reste l'action principale et garde seul l'aspect d'un bouton. Deux liens
-  soulignés sous le prix se trouvent sans concurrencer le panier.
+  LE DEVIS EST UN BOUTON, L'ACHAT EN RESTE UN AUTRE, ET C'EST LE CONTOUR QUI
+  LES DÉPARTAGE. Les deux demandes ont d'abord été posées en liens soulignés,
+  pour ne pas concurrencer le panier. À l'usage, c'était trop discret : sur
+  un spa à cinq chiffres, la demande de devis est au moins aussi fréquente
+  que l'achat en ligne, et elle n'avait pas le poids visuel de ce qu'elle
+  vaut. Le devis prend donc un bouton à contour, l'achat garde le bouton
+  plein. On lit tout de suite lequel engage un paiement. Décision du gérant.
+
+  LA VISITE RESTE UN LIEN. Trois boutons côte à côte ne hiérarchisent plus
+  rien, et celui-là ne s'affiche que pour les modèles exposés.
 
   LE MODÈLE VOYAGE AVEC LE CLIC. Les deux liens portent ?modele=<nom> :
   le formulaire de devis et celui du contact le présélectionnent à
@@ -32,8 +39,8 @@
 -%}
 
 <p class="spa-fiche-actions">
-  <a class="spa-fiche-actions__lien" href="/pages/mon-projet-spa?modele={{ nom_url }}">
-    Demander un devis pour ce spa
+  <a class="btn ghost spa-fiche-actions__devis" href="/pages/mon-projet-spa?modele={{ nom_url }}">
+    Demander un devis
   </a>
   {%- if expose -%}
     <a class="spa-fiche-actions__lien" href="/pages/contact?motif=visite&amp;modele={{ nom_url }}#demande">
