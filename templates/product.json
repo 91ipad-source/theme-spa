@@ -122,6 +122,12 @@
           "settings": {
             "custom_liquid": "{% render 'spa-fiche-technique', fiche_produit: product %}"
           }
+        },
+        "offre": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'spa-offre' %}"
+          }
         }
       },
       "block_order": [
@@ -129,6 +135,7 @@
         "title",
         "resume",
         "price",
+        "offre",
         "actions",
         "variant_picker",
         "quantity_selector",

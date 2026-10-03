@@ -172,10 +172,13 @@
 
       <div class="spa-accs__grille">
         {%- if escalier_variante -%}
+          {%- capture escalier_offert %}{% render 'spa-offre', article: escalier_handle %}{% endcapture -%}
+          {%- assign escalier_offert = escalier_offert | strip -%}
           {%- render 'spa-accs-carte',
             produit: escalier,
             lien: escalier.url,
             prix: escalier.price,
+            offert: escalier_offert,
             raison: escalier_raison
           -%}
         {%- endif -%}
@@ -185,20 +188,37 @@
             assign couverture_lien = couverture.url | append: '?variant=' | append: couverture_variante.id
             assign couverture_raison = 'Elle repose sur le rebord, et quelques centimètres d’écart suffisent à laisser passer le froid. Le lien ouvre directement la bonne cote.'
           -%}
+          {%- capture couverture_offerte %}{% render 'spa-offre', article: 'couverture-isothermique-spa' %}{% endcapture -%}
+          {%- assign couverture_offerte = couverture_offerte | strip -%}
           {%- render 'spa-accs-carte',
             produit: couverture,
             lien: couverture_lien,
             precision: taille_couverture,
             prix: couverture_variante.price,
+            offert: couverture_offerte,
             raison: couverture_raison
           -%}
         {%- endif -%}
 
+        {%- comment -%}
+          L'OFFRE EST CONSULTEE POUR LES TROIS CARTES, meme celles qui n'y
+          figurent pas. Le leve-couverture n'est pas offert : la capture
+          rend une chaine vide, et la carte affiche son prix. Mais elle
+          rend une chaine, et c'est ce qui compte — ne rien passer du tout
+          laissait la variable non definie, et une variable non definie ne
+          se compare pas a « blank » de la meme facon d'un moteur Liquid a
+          l'autre. A l'essai, la carte perdait son prix sans rien afficher
+          a la place. Le jour ou l'offre s'etendra, il n'y aura rien a
+          changer ici non plus.
+        {%- endcomment -%}
         {%- if leve_variante -%}
+          {%- capture leve_offert %}{% render 'spa-offre', article: leve_handle %}{% endcapture -%}
+          {%- assign leve_offert = leve_offert | strip -%}
           {%- render 'spa-accs-carte',
             produit: leve,
             lien: leve.url,
             prix: leve.price,
+            offert: leve_offert,
             raison: leve_raison
           -%}
         {%- endif -%}

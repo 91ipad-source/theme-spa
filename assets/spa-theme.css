@@ -6171,6 +6171,56 @@ h1.h2.center {
 }
 
 /* --------------------------------------------------------------------------
+   L'OFFRE EN COURS (snippet spa-offre)
+
+   Une ligne sous le prix de la fiche spa, et une mention qui remplace le
+   prix sur les cartes d'accessoires concernees. Les deux sortent du meme
+   fichier : voir snippets/spa-offre.liquid.
+   -------------------------------------------------------------------------- */
+.spa-offre {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.8rem 1.2rem;
+  margin: 1.2rem 0 0;
+  padding: 1.2rem 1.6rem;
+  border-radius: var(--r-md);
+  background: var(--mist);
+  font-size: 1.5rem;
+  line-height: var(--lh-note);
+}
+
+/* La pastille reprend le cyan des autres etiquettes du site, libelle blanc.
+   Elle porte la date : c'est ce qui fait agir, pas le mot « offert ». */
+.spa-offre__pastille {
+  flex: 0 0 auto;
+  padding: 0.5rem 1.2rem;
+  border-radius: var(--r-pill);
+  background: var(--sky);
+  color: var(--white);
+  font-size: 1.3rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.spa-offre__texte {
+  flex: 1 1 18rem;
+}
+
+/* Sur une carte d'accessoire, la mention prend la place du prix. Elle en
+   garde le poids typographique pour que la colonne reste alignee d'une
+   carte a l'autre. */
+.spa-offert {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  border-radius: var(--r-pill);
+  background: var(--sky);
+  color: var(--white);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
    CE QUI VA AVEC CE SPA (section spa-accessoires)
 
    Trois cartes au plus, chacune choisie sur une cote du spa affiche et non

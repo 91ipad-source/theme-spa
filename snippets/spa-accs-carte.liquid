@@ -13,6 +13,7 @@
                  sinon celui du produit
     raison     — pourquoi CE spa appelle CET accessoire
     precision  — facultatif : la taille retenue, affichée sous le nom
+    offert     — facultatif : la mention d'offre, affichée A LA PLACE du prix
 
   LE PRIX EST PASSÉ EN PARAMÈTRE plutôt que lu sur le produit : la
   couverture existe en quatre tailles, et c'est le prix de la taille qui
@@ -41,7 +42,16 @@
       <span class="spa-accs__precision">{{ precision }}</span>
     {%- endif -%}
 
-    <span class="spa-accs__prix">{{ prix | money }}</span>
+    {%- comment -%}
+      L'OFFRE REMPLACE LE PRIX, elle ne s'ajoute pas a cote. Un prix barre
+      suivi de « offert » ferait croire a une remise ; ici l'article ne se
+      paie pas, et c'est ce qu'il faut lire d'un coup d'oeil.
+    {%- endcomment -%}
+    {%- if offert != blank -%}
+      {{ offert }}
+    {%- else -%}
+      <span class="spa-accs__prix">{{ prix | money }}</span>
+    {%- endif -%}
     <span class="spa-accs__raison">{{ raison }}</span>
   </span>
 </a>

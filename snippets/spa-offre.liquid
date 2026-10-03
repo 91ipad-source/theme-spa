@@ -1,0 +1,78 @@
+{%- comment -%}
+  L'OFFRE EN COURS, DÉCLARÉE UNE SEULE FOIS.
+
+  POURQUOI CE FICHIER EXISTE. L'offre était annoncée dans le bandeau
+  d'en-tête, à peu près reprise sur la page Budget, et ignorée partout
+  ailleurs — y compris par le bloc « Ce qui va avec ce spa », qui proposait
+  d'acheter 185 € l'escalier annoncé offert deux lignes plus haut. Un
+  visiteur qui lit les deux ne sait plus ce qu'il paie.
+
+  TOUT EST ICI, ET NULLE PART AILLEURS. La date de fin, les articles
+  concernés et la phrase. Quand l'offre change, on change ce fichier ; quand
+  elle s'arrête, la date suffit : passé le 31 octobre, le bloc se tait de
+  lui-même, sur la fiche du spa comme sur les cartes d'accessoires. Reste à
+  retirer le bandeau d'en-tête, qui est un réglage de thème et que ce fichier
+  ne commande pas — c'est le seul geste manuel.
+
+  DEUX EMPLOIS, UN SEUL FICHIER :
+    {% render 'spa-offre' %}
+      → la phrase, sous le prix d'une fiche spa.
+    {% render 'spa-offre', article: 'escalier-...' %}
+      → « Offert » si cet accessoire fait partie de l'offre, sinon rien.
+      C'est ce que le bloc accessoires affiche à la place du prix.
+
+  CE QUE L'OFFRE COUVRE. Les trois escaliers standard et les deux
+  lève-couvertures — le bloc accessoires n'en propose jamais d'autres, et
+  chacun est choisi sur une cote du spa affiché.
+
+  CE QU'ELLE NE COUVRE PAS, ET POURQUOI. L'escalier lumineux à 390 €, qui
+  loge une pompe à chaleur, est un autre produit que l'escalier d'accès. Et
+  la couverture isothermique n'y est plus : l'offre a porté sur elle avant
+  de porter sur le lève-couverture. Étendre l'une ou l'autre est une
+  décision commerciale, pas une correction — une entrée à ajouter ci-dessus.
+{%- endcomment -%}
+
+{%- liquid
+  assign offre_fin = 20261031
+  assign offre_libelle = '31 octobre'
+  assign offre_articles = 'leve-couverture-hydraulique-rogue,leve-couverture-07-aluminium,escalier-spa-2-marches-composite-noir,escalier-spa-2-marches-composite-anthracite,escalier-spa-2-marches-larges-anthracite'
+
+  comment
+    La date du jour est comparée en nombre et non en chaîne : « 20261103 »
+    et « 2026-11-03 » ne se comparent pas de la même façon d'un moteur
+    Liquid à l'autre, et c'est exactement le genre d'écart qui laisserait
+    l'offre affichée une semaine de trop.
+  endcomment
+  assign aujourdhui = 'now' | date: '%Y%m%d' | plus: 0
+
+  assign offre_en_cours = false
+  if aujourdhui <= offre_fin
+    assign offre_en_cours = true
+  endif
+
+  comment
+    LE PARAMETRE EST NORMALISE AVANT D'ETRE TESTE. Appele sans « article »,
+    ce fichier doit rendre la phrase ; appele avec, la mention. Or une
+    variable non transmise n'est pas definie, et « non defini != blank » ne
+    vaut pas la meme chose d'un moteur Liquid a l'autre : a l'essai, la
+    phrase sous le prix ne sortait pas du tout. Le filtre default rend une
+    chaine vide dans tous les cas, et la comparaison redevient sure.
+  endcomment
+  assign cible = article | default: ''
+-%}
+
+{%- if offre_en_cours -%}
+  {%- if cible != blank -%}
+    {%- if offre_articles contains cible -%}
+      <span class="spa-offert">Offert jusqu’au {{ offre_libelle }}</span>
+    {%- endif -%}
+  {%- else -%}
+    <p class="spa-offre">
+      <span class="spa-offre__pastille">Jusqu’au {{ offre_libelle }}</span>
+      <span class="spa-offre__texte">
+        le <strong>lève‑couverture</strong> et l’<strong>escalier adapté à votre
+        spa</strong> sont offerts.
+      </span>
+    </p>
+  {%- endif -%}
+{%- endif -%}
