@@ -4966,6 +4966,38 @@ a, span, label, summary, button, blockquote, figcaption,
   padding-bottom: var(--pb, 8px);
 }
 
+/* L'EN-TETE A PHOTO. Sans photo, « __duo » ne fait rien : c'est un simple
+   conteneur, et toutes les pages du site sauf le Showroom restent telles
+   qu'elles etaient. La grille ne s'arme qu'avec la classe --photo.
+
+   Le seuil est a 990 px et non 750 : entre les deux, le texte et la photo
+   tiendraient cote a cote, mais la colonne de texte tomberait sous les
+   trente-cinq signes par ligne. Mieux vaut une photo sous le texte qu'un
+   paragraphe en colonne de journal. */
+.spa-page-entete__duo--photo {
+  display: grid;
+  gap: 2.8rem;
+  align-items: center;
+}
+
+@media screen and (min-width: 990px) {
+  .spa-page-entete__duo--photo {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 4.8rem;
+  }
+}
+
+/* height: auto AVANT tout : Shopify ecrit width et height sur la balise, et
+   ces attributs sont lus comme une hauteur fixe. Sans cette ligne, la photo
+   s'ecrase a la hauteur du fichier d'origine. Deja rencontre sur les
+   vignettes du showroom. */
+.spa-page-entete__photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-lg);
+}
+
 .spa-page-entete__titre {
   max-width: 18ch;
   margin: 0;
@@ -6566,8 +6598,17 @@ h1.h2.center {
 .spa-fiche-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem 2rem;
-  margin: 1.2rem 0 0;
+  align-items: center;
+  gap: 1.2rem 2rem;
+  margin: 1.6rem 0 0;
+}
+
+/* Le bouton de devis est un cran plus petit que le bouton d'achat, et il est
+   a contour plutot que plein. Les deux sont visibles ; un seul engage un
+   paiement, et ca se lit sans avoir a relire les libelles. */
+.spa-fiche-actions__devis {
+  padding: 1.3rem 2.4rem;
+  font-size: 1.5rem;
 }
 
 .spa-fiche-actions__lien {

@@ -223,7 +223,7 @@
         "bouton"
       ],
       "settings": {
-        "image": "shopify://shop_images/spas9-showroom-comparer-les-modeles.png",
+        "image": "shopify://shop_images/spas9-showroom-spas-exposes.png",
         "height": "adapt",
         "desktop_image_width": "medium",
         "layout": "image_first",
@@ -332,8 +332,8 @@
         "boutons": {
           "type": "button",
           "settings": {
-            "button_label": "Découvrir nos spas",
-            "button_link": "/collections/tous-nos-spas",
+            "button_label": "Découvrir le Proto 2",
+            "button_link": "/products/spa-roca-proto-lighting-5-personnes",
             "button_style_secondary": false,
             "button_label_2": "Visiter le showroom",
             "button_link_2": "/pages/showroom-spa-essonne",
