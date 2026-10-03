@@ -259,6 +259,16 @@
                 ni utilisées pour de la prospection.
               </p>
             {%- endif -%}
+
+            {%- comment -%}
+              Même compteur que la page Contact, nom différent : c'est lui
+              qui distingue une demande de devis d'une simple question.
+            {%- endcomment -%}
+            {%- render 'spa-conversion-formulaire',
+              envoye: form.posted_successfully?,
+              form_id: 'projet-spa',
+              nom: 'projet'
+            -%}
           {%- endform -%}
         </div>
       </div>

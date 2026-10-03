@@ -1,0 +1,116 @@
+{%- comment -%}
+  L'ENVOI D'UN FORMULAIRE, COMPTÉ UNE FOIS ET UNE SEULE.
+
+  CE QUI N'ALLAIT PAS. L'événement de conversion vivait dans la section Dawn
+  « contact-form ». Or aucun gabarit de ce thème n'utilise cette section : la
+  page Contact porte « spa-contact-tete », la page Mon projet spa porte
+  « spa-projet ». L'événement était donc écrit, commenté, correct — et
+  attaché à un formulaire que personne ne voyait. Tous les messages
+  réellement envoyés depuis le site partaient sans rien déclencher.
+
+  Ce fichier répare cela en un seul endroit, et les deux formulaires le
+  rendent. Un troisième formulaire, demain, n'aura qu'à faire de même.
+
+  DEUX ÉVÉNEMENTS, PAS UN.
+
+  - La conversion Google Ads, sur l'identifiant du compte. C'est elle qui
+    rattache un message à une annonce.
+  - « generate_lead », l'événement standard de Google Analytics 4, avec le
+    nom du formulaire. C'est lui qui permet de répondre à « combien de
+    demandes par la page Contact, combien par le devis ». La conversion
+    Ads ne le dit pas : elle ne porte qu'un identifiant.
+
+  OÙ EST LA BALISE. « gtag » n'est ici qu'une file d'attente : il empile
+  l'événement dans dataLayer. C'est la balise Google — gtag.js, compte
+  AW-988988697 — qui l'envoie réellement, et elle est chargée par
+  l'application Google & YouTube, donc par « content_for_header ». Elle
+  n'apparaît nulle part dans les fichiers du thème : ne concluez pas de son
+  absence dans le code qu'elle n'est pas là, vérifiez avec Tag Assistant sur
+  le site en ligne.
+
+  CE QUE CE FICHIER SAIT, ET CE QU'IL NE SAIT PAS. Tout ce qui suit parle
+  d'événements DÉCLENCHÉS. Qu'ils soient ensuite comptés comme conversions
+  dépend de choses que le navigateur ne constate pas : le consentement, les
+  bloqueurs, la fenêtre d'attribution. Un événement déclenché n'est pas une
+  conversion comptée — la réception se vérifie dans Google Ads, jamais ici.
+  Et aucun des deux ne prouve qu'un message est arrivé dans la boîte aux
+  lettres : cela ne se vérifie qu'en envoyant un vrai message.
+
+  UNE SEULE FOIS PAR ENVOI. Shopify recharge la page après l'envoi, avec
+  « form.posted_successfully? » à vrai. Mais cette page se recharge aussi :
+  touche F5, retour arrière, lien partagé. Le verrou en sessionStorage
+  retient que l'événement est parti ; le clic sur « Envoyer » efface la clé,
+  pour que le deuxième message d'un même onglet compte lui aussi. Un champ
+  obligatoire vide ne déclenche pas « submit » : le navigateur bloque avant,
+  et la clé reste.
+
+  S'il est indisponible — navigation privée, cookies bloqués — on envoie
+  quand même : ne rien déclencher coûte plus cher que de déclencher une fois
+  de trop.
+
+  COMMENT ON L'APPELLE :
+    {% render 'spa-conversion-formulaire',
+        envoye: form.posted_successfully?,
+        form_id: 'contact-demande',
+        nom: 'contact' %}
+{%- endcomment -%}
+
+{%- liquid
+  comment
+    Les trois paramètres sont normalisés avant d'être lus. Un paramètre non
+    transmis n'est pas défini, et le comparer à « blank » ne donne pas le
+    même résultat d'un moteur Liquid à l'autre. Une ligne de commentaire ne
+    commence jamais par un guillemet non plus : dans un bloc « liquid »,
+    chaque ligne est lue comme une balise, et le premier mot en tient lieu.
+  endcomment
+  assign envoye_ok = false
+  if envoye
+    assign envoye_ok = true
+  endif
+  assign id_form = form_id | default: ''
+  assign nom_form = nom | default: 'contact'
+  assign cle = 'spas9:conversion-' | append: nom_form
+  assign etiquette_ads = 'AW-988988697/FiMqCOG794IdEJmKy9cD'
+-%}
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function () {
+    window.dataLayer.push(arguments);
+  };
+</script>
+
+{%- if envoye_ok -%}
+  <script>
+    (function () {
+      var cle = {{ cle | json }};
+      var dejaEnvoyee = false;
+
+      try {
+        dejaEnvoyee = sessionStorage.getItem(cle) === '1';
+        sessionStorage.setItem(cle, '1');
+      } catch (e) {
+        dejaEnvoyee = false;
+      }
+
+      if (!dejaEnvoyee) {
+        gtag('event', 'conversion', { send_to: {{ etiquette_ads | json }} });
+        gtag('event', 'generate_lead', { formulaire: {{ nom_form | json }} });
+      }
+    })();
+  </script>
+{%- endif -%}
+
+{%- if id_form != blank -%}
+  <script>
+    (function () {
+      var f = document.getElementById({{ id_form | json }});
+      if (!f) return;
+      f.addEventListener('submit', function () {
+        try {
+          sessionStorage.removeItem({{ cle | json }});
+        } catch (e) {}
+      });
+    })();
+  </script>
+{%- endif -%}

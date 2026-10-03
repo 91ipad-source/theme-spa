@@ -259,6 +259,16 @@
               ni utilisées pour de la prospection.
             </p>
           {%- endif -%}
+
+          {%- comment -%}
+            L'envoi est compté ici, dans le formulaire qui sert réellement.
+            Le fichier appelé explique pourquoi il a fallu le déplacer.
+          {%- endcomment -%}
+          {%- render 'spa-conversion-formulaire',
+            envoye: form.posted_successfully?,
+            form_id: 'contact-demande',
+            nom: 'contact'
+          -%}
         {%- endform -%}
       </div>
 

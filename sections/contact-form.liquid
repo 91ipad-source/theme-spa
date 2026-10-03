@@ -31,76 +31,6 @@
     -%}
     {%- form 'contact', id: 'ContactForm', class: contact_form_class -%}
       {%- if form.posted_successfully? -%}
-        {%- comment -%}
-          CONVERSION GOOGLE ADS.
-
-          Shopify recharge la page apres l'envoi du formulaire, avec
-          « form.posted_successfully? » a vrai. Le script ne s'execute donc
-          qu'une fois, au retour, et seulement si le message est parti.
-
-          OU EST LA BALISE. « gtag » n'est ici qu'une file d'attente : il
-          empile l'evenement dans dataLayer. C'est la balise Google —
-          gtag.js, compte AW-988988697 — qui l'envoie reellement, et elle
-          est chargee par l'application Google & YouTube, donc par
-          « content_for_header ». Elle n'apparait nulle part dans les
-          fichiers du theme : ne concluez pas de son absence dans le code
-          qu'elle n'est pas la, verifiez avec Tag Assistant sur le site en
-          ligne.
-
-          Si elle venait a disparaitre, cet evenement partirait dans le
-          vide sans provoquer la moindre erreur : rien dans la console, un
-          formulaire qui fonctionne, et plus rien qui remonte.
-
-          CE QUE CE FICHIER SAIT, ET CE QU'IL NE SAIT PAS. Tout ce qui suit
-          parle d'evenements DECLENCHES. Qu'ils soient ensuite comptes comme
-          conversions par Google depend de choses que le navigateur ne
-          constate pas : le consentement, les bloqueurs, la fenetre
-          d'attribution, le fait que la visite vienne ou non d'une annonce.
-          Un evenement declenche n'est donc pas une conversion comptee — la
-          reception se verifie dans Google Ads, jamais ici.
-
-          UNE SEULE FOIS PAR ENVOI. Shopify renvoie vers la page de
-          confirmation apres l'envoi ; « form.posted_successfully? » y est
-          vrai. Mais cette page se recharge : touche F5, retour arriere,
-          lien partage. A chaque fois, l'evenement serait renvoye pour un
-          seul et meme message.
-
-          D'ou le verrou ci-dessous : sessionStorage retient que
-          l'evenement est parti. La cle est effacee a chaque nouvel envoi,
-          par le script pose en bas du formulaire — sans quoi le deuxieme
-          message d'un meme onglet ne declencherait rien.
-
-          S'il est indisponible — navigation privee, cookies bloques — on
-          envoie quand meme : ne rien declencher coute plus cher que de
-          declencher une fois de trop.
-
-          Identifiant de conversion fourni par le compte Google Ads :
-          AW-988988697/FiMqCOG794IdEJmKy9cD
-        {%- endcomment -%}
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          window.gtag = window.gtag || function () {
-            window.dataLayer.push(arguments);
-          };
-
-          (function () {
-            var cle = 'spas9:conversion-contact';
-            var dejaEnvoyee = false;
-
-            try {
-              dejaEnvoyee = sessionStorage.getItem(cle) === '1';
-              sessionStorage.setItem(cle, '1');
-            } catch (e) {
-              dejaEnvoyee = false;
-            }
-
-            if (!dejaEnvoyee) {
-              gtag('event', 'conversion', {
-                'send_to': 'AW-988988697/FiMqCOG794IdEJmKy9cD'
-              });
-            }
-          })();
-        </script>
         <h2 class="form-status form-status-list form__message" tabindex="-1" autofocus>
           {{- 'icon-success.svg' | inline_asset_content -}}
           {{ 'templates.contact.form.post_success' | t }}
@@ -203,35 +133,24 @@
       </div>
 
       {%- comment -%}
-        LE VERROU SE LIBERE A CHAQUE NOUVEL ENVOI.
+        L'ENVOI EST COMPTE AILLEURS, ET POUR TOUT LE THEME.
 
-        Sans ceci, la cle posee plus haut ne serait jamais effacee : le
-        premier message de l'onglet declencherait l'evenement, le deuxieme
-        rien du tout. En voulant empecher les envois en double, on
-        supprimerait des envois legitimes.
+        Cette section est celle de Dawn. Aucun gabarit de ce thème ne
+        l'utilise : la page Contact porte « spa-contact-tete », la page Mon
+        projet spa porte « spa-projet ». L'événement de conversion vivait
+        pourtant ici — il était donc attaché au seul formulaire que personne
+        ne voyait, et tous les messages réellement envoyés depuis le site
+        partaient sans rien déclencher.
 
-        Le clic sur « Envoyer » efface donc la cle. Consequence voulue :
-
-        - un nouvel envoi reinitialise le verrou, l'evenement repart ;
-        - la page de reussite qui suit declenche l'evenement ;
-        - un simple rechargement de cette page reste bloque, puisqu'il ne
-          passe pas par « submit ».
-
-        L'evenement « submit » n'est pas emis quand un champ obligatoire est
-        vide : le navigateur bloque avant. La cle ne s'efface donc que sur
-        un envoi reellement parti.
-
-        Ce bloc est hors du « if form.posted_successfully? » : il doit
-        s'executer a chaque affichage du formulaire, pas seulement au
-        retour d'un envoi.
+        Il vit maintenant dans un fichier unique, que les trois formulaires
+        rendent. Tout y est expliqué, y compris le verrou qui empêche de
+        compter deux fois un même envoi.
       {%- endcomment -%}
-      <script>
-        document.getElementById('ContactForm').addEventListener('submit', function () {
-          try {
-            sessionStorage.removeItem('spas9:conversion-contact');
-          } catch (e) {}
-        });
-      </script>
+      {%- render 'spa-conversion-formulaire',
+        envoye: form.posted_successfully?,
+        form_id: 'ContactForm',
+        nom: 'contact'
+      -%}
     {%- endform -%}
   </div>
 </div>

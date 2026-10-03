@@ -1,0 +1,103 @@
+{%- comment -%}
+  LES CONTACTS QUI NE PASSENT PAS PAR UN FORMULAIRE.
+
+  Un spa ne se commande pas en ligne : la vraie conversion de ce site est un
+  appel, un message WhatsApp ou un formulaire. Les formulaires sont comptés
+  par spa-conversion-formulaire. Les deux autres ne l'étaient pas du tout —
+  et ce sont probablement les plus nombreux, puisqu'une barre fixe propose
+  « Appeler » en bas de chaque écran de téléphone.
+
+  TROIS ÉVÉNEMENTS DISTINCTS, ET C'EST LE POINT. « clic_telephone »,
+  « clic_whatsapp », « clic_email » : trois noms séparés, chacun avec
+  l'endroit de la page d'où part le clic. Tout compter sous un seul nom
+  reviendrait à savoir qu'on est contacté sans savoir comment, donc sans
+  savoir quoi améliorer.
+
+  CE QU'UN CLIC PROUVE, ET CE QU'IL NE PROUVE PAS. Il prouve qu'un composeur
+  s'est ouvert. Pas que l'appel a été passé, pas qu'il a été décroché, pas
+  qu'il a duré. Aucun code posé sur une page web ne peut le savoir : le
+  téléphone sort du navigateur. Le seul recoupement possible est le journal
+  d'appels de la ligne, ou un numéro de renvoi dédié. À lire comme une
+  intention de contact, jamais comme un contact abouti.
+
+  LES CONVERSIONS GOOGLE ADS SONT LAISSÉES VIDES, EXPRÈS. Une conversion Ads
+  a besoin d'une étiquette créée dans le compte — une par action. Les
+  inventer ici ferait remonter des clics téléphone sous l'étiquette du
+  formulaire, et deux choses différentes seraient comptées comme une seule.
+  Créez l'action dans Google Ads, puis collez son identifiant complet
+  (« AW-988988697/XXXXXXXX ») dans la table ci-dessous. Tant qu'il est vide,
+  seul l'événement Analytics part — ce qui suffit déjà à compter.
+
+  OÙ EST LA BALISE. « gtag » n'est ici qu'une file d'attente vers dataLayer.
+  C'est gtag.js, chargée par l'application Google & YouTube, qui envoie. Si
+  elle disparaissait, ces événements partiraient dans le vide sans la
+  moindre erreur. Vérification avec Tag Assistant, sur le site en ligne.
+
+  PAS DE DOUBLON SUR UN MÊME LIEN. Un visiteur qui tape deux fois sur
+  « Appeler » compte une fois : la seconde tape, à moins de deux secondes,
+  est ignorée. Un vrai second appel, plus tard, compte à nouveau.
+{%- endcomment -%}
+
+<script>
+  (function () {
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function () {
+      window.dataLayer.push(arguments);
+    };
+
+    /* Collez ici l'identifiant complet de l'action, une fois creee dans
+       Google Ads. Laisse vide, seul l'evenement Analytics part. */
+    var ADS = {
+      clic_telephone: '',
+      clic_whatsapp: '',
+      clic_email: ''
+    };
+
+    /* L'endroit du clic, pour savoir ce qui travaille vraiment : la barre
+       fixe du telephone, l'en-tete, le pied de page, une carte de contact,
+       une fiche produit. */
+    var ENDROITS = [
+      ['.spa-rapide', 'barre mobile'],
+      ['.spa-ctete', 'page contact'],
+      ['.spa-contact-carte', 'carte de contact'],
+      ['.spa-sav__contact', 'page SAV'],
+      ['.spa-projet', 'page devis'],
+      ['header, .header-wrapper, .shopify-section-group-header-group', 'en-tete'],
+      ['footer, .shopify-section-group-footer-group', 'pied de page']
+    ];
+
+    function endroit(el) {
+      for (var i = 0; i < ENDROITS.length; i++) {
+        if (el.closest(ENDROITS[i][0])) return ENDROITS[i][1];
+      }
+      return 'corps de page';
+    }
+
+    var dernier = { nom: '', quand: 0 };
+
+    document.addEventListener('click', function (ev) {
+      var a = ev.target.closest && ev.target.closest('a[href]');
+      if (!a) return;
+
+      var href = a.getAttribute('href') || '';
+      var nom = '';
+      if (href.indexOf('tel:') === 0) nom = 'clic_telephone';
+      else if (href.indexOf('wa.me') > -1 || href.indexOf('whatsapp.com') > -1) nom = 'clic_whatsapp';
+      else if (href.indexOf('mailto:') === 0) nom = 'clic_email';
+      if (!nom) return;
+
+      var maintenant = Date.now();
+      if (dernier.nom === nom && maintenant - dernier.quand < 2000) return;
+      dernier = { nom: nom, quand: maintenant };
+
+      gtag('event', nom, {
+        emplacement: endroit(a),
+        page: location.pathname
+      });
+
+      if (ADS[nom]) {
+        gtag('event', 'conversion', { send_to: ADS[nom] });
+      }
+    }, true);
+  })();
+</script>
