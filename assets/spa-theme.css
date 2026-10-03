@@ -115,9 +115,28 @@
 
   /* Rayons */
   --r-pill: 999px;
-  --r-xl: 40px;
-  --r-lg: 28px;
-  --r-md: 18px;
+
+  /* L'arrondi des boutons : discret, et le meme partout. La pastille
+     integrale faisait du bouton la forme la plus ronde de la page, devant
+     les cartes elles-memes ; un arrondi mesure le remet a sa place. */
+  --r-bouton: 10px;
+
+  /* LES ARRONDIS, D'UN CRAN PLUS SOBRES. 40, 28 et 18 px donnaient des
+     encadres tres ronds : sur un grand panneau, un rayon de 28 px se voit
+     comme un parti pris, et le parti pris mange la photographie et le texte.
+     30, 20 et 14 gardent la douceur et rendent le cadre discret. Trois
+     valeurs pour tout le site, et un seul endroit pour en changer. */
+  --r-xl: 30px;
+  --r-lg: 20px;
+  --r-md: 14px;
+
+  /* DEUX OMBRES, ET PAS UNE DE PLUS. Le fichier en comptait une quinzaine,
+     toutes differentes — 0,07 ici, 0,18 la, 10 px de decalage d'un cote et
+     14 de l'autre. Une ombre se remarque a peine, mais quinze ombres mal
+     accordees font une page qui flotte. Celle qui porte un panneau pose sur
+     la page, celle qui souleve un element au survol. */
+  --ombre-panneau: 0 6px 20px rgba(15, 58, 90, 0.09);
+  --ombre-survol: 0 8px 22px rgba(15, 58, 90, 0.12);
 
   /* Grille */
   --max: 1240px;
@@ -197,6 +216,29 @@ h6,
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: 0.02em;
+}
+
+/* LES CAPITALES NE SERVENT PLUS QU'AU TITRE DE PAGE.
+
+   Tous les titres etaient en capitales. Sur un titre court — « SHOWROOM SPA
+   EN ESSONNE » — c'est une signature. Sur « DE VOTRE PREMIER APPEL A LA MISE
+   EN SERVICE », c'est un mur : l'oeil ne dispose plus de la silhouette des
+   mots, seulement d'une suite de rectangles de meme hauteur, et la lecture
+   ralentit de moitie. Le nom d'un spa y perdait aussi : « SPA PANOPE FULL
+   THERAPEUTIQUE - 5 PERSONNES » occupait trois lignes de capitales dans une
+   carte de catalogue.
+
+   Le h1 les garde : c'est une ligne par page, courte par construction — le
+   titre est borne a dix-huit caracteres plus bas dans ce fichier. Tout le
+   reste se lit comme on l'ecrit.
+
+   Les petits reperes, eux, gardent leurs capitales : un surtitre, une
+   etiquette de tableau, un intitule de champ. Chacun porte sa propre regle,
+   plus bas, et aucune n'est touchee — c'est exactement l'emploi ou les
+   capitales servent, sur deux ou trois mots qu'on ne lit pas, qu'on repere. */
+h1,
+.h0,
+.h1 {
   text-transform: uppercase;
 }
 
@@ -1500,7 +1542,7 @@ h3.spa-parcours__heading {
 .spa-expo__lien:hover,
 .spa-expo__lien:focus-visible {
   transform: translateY(-0.3rem);
-  box-shadow: 0 1rem 2.4rem rgba(15, 58, 90, 0.12);
+  box-shadow: var(--ombre-survol);
   text-decoration: none;
 }
 
@@ -1687,6 +1729,29 @@ h3.spa-parcours__heading {
 /* La pastille porte deja sa propre separation visuelle. */
 .spa-card-spec--gamme::before {
   display: none;
+}
+
+/* DEUX LIGNES RESERVEES AU NOM, UNE RANGEE AUX REPERES.
+
+   Dans une grille, un nom d'une ligne et un nom de trois ne donnent pas la
+   meme carte : tout ce qui suit descend d'autant, et l'oeil n'a plus de ligne
+   de lecture. « Spa Duo - 2 personnes » tient sur une ligne, « Spa Panope
+   FULL Therapeutique - 5 personnes » en prend trois.
+
+   Le nom se voit donc reserver deux lignes — ni plus ni moins, c'est la
+   mesure de la majorite des noms — et les reperes une rangee. Un nom plus
+   long deborde sur une troisieme ligne plutot que d'etre coupe : mieux vaut
+   une carte un peu plus haute qu'un nom tronque, et le prix, cale en bas,
+   reste a sa ligne dans tous les cas.
+
+   « em » et non « rem » : la hauteur suit le corps du titre, quel que soit
+   le reglage de taille du theme. */
+.product-grid .card__heading {
+  min-height: calc(2 * 1.1em);
+}
+
+.product-grid .spa-card-specs {
+  min-height: 2.4rem;
 }
 
 /* Les vignettes sont centrees ou alignees a gauche selon un reglage de Dawn.
@@ -1915,7 +1980,7 @@ h3.spa-parcours__heading {
 
 .spa-complement__carte:hover,
 .spa-complement__carte:focus-visible {
-  box-shadow: 0 0.6rem 1.6rem rgba(15, 58, 90, 0.14);
+  box-shadow: var(--ombre-survol);
 }
 
 /* Fond blanc sous l'image : les visuels fournisseur sont detoures sur un
@@ -2151,7 +2216,7 @@ img {
      meme qu'on corrige ici. Avec le repli, le panneau prend la couleur
      du jeu de couleurs quand elle existe, et du blanc sinon. */
   background: rgb(var(--color-background, 255, 255, 255));
-  box-shadow: 0 0.8rem 2.4rem rgba(15, 58, 90, 0.18);
+  box-shadow: var(--ombre-panneau);
 }
 
 /* Le trait de Dawn ferait doublon avec l'ombre. */
@@ -3187,7 +3252,7 @@ a, span, label, summary, button, blockquote, figcaption,
   padding: 3.2rem;
   border-radius: var(--r-lg);
   background: var(--white);
-  box-shadow: 0 2px 18px rgba(15, 58, 90, 0.07);
+  box-shadow: var(--ombre-panneau);
 }
 
 /* Le bloc de l'application occupe toute la largeur du panneau. Ces regles
@@ -6075,7 +6140,7 @@ h1.h2.center {
   padding: 3.2rem;
   border-radius: var(--r-lg);
   background: var(--white);
-  box-shadow: 0 2px 18px rgba(15, 58, 90, 0.07);
+  box-shadow: var(--ombre-panneau);
   scroll-margin-top: 10rem;
 }
 
@@ -6309,7 +6374,7 @@ h1.h2.center {
 
 .spa-accs__carte:hover,
 .spa-accs__carte:focus-visible {
-  box-shadow: 0 0.6rem 1.6rem rgba(15, 58, 90, 0.14);
+  box-shadow: var(--ombre-survol);
 }
 
 .spa-accs__image {
@@ -6387,7 +6452,7 @@ h1.h2.center {
    -------------------------------------------------------------------------- */
 .spa-contact-carte__boite--marine {
   background: linear-gradient(150deg, var(--deep) 0%, var(--sky-deep) 100%);
-  box-shadow: 0 10px 30px rgba(15, 58, 90, 0.18);
+  box-shadow: var(--ombre-panneau);
   color: var(--white);
 }
 
@@ -6496,7 +6561,7 @@ h1.h2.center {
   padding: 3.2rem;
   border-radius: var(--r-lg);
   background: linear-gradient(150deg, var(--deep) 0%, var(--sky-deep) 100%);
-  box-shadow: 0 10px 30px rgba(15, 58, 90, 0.18);
+  box-shadow: var(--ombre-panneau);
   color: var(--white);
 }
 
@@ -6560,7 +6625,7 @@ h1.h2.center {
   border-left: 4px solid var(--sky);
   border-radius: var(--r-lg);
   background: var(--white);
-  box-shadow: 0 2px 18px rgba(15, 58, 90, 0.07);
+  box-shadow: var(--ombre-panneau);
 }
 
 .spa-ctete__itineraire a {
@@ -6608,7 +6673,7 @@ h1.h2.center {
 .spa-ctete__panneau {
   position: relative;
   overflow: hidden;
-  box-shadow: 0 14px 40px rgba(15, 58, 90, 0.1);
+  box-shadow: var(--ombre-panneau);
 }
 
 .spa-ctete__panneau::before {
@@ -7348,8 +7413,12 @@ h1.h2.center {
     align-items: center;
   }
 
-  /* Le depliant des conditions du pack manquait deux pixels. */
-  .spa-prestation__conditions > summary {
+  /* Les depliants : celui des conditions du pack manquait deux pixels, ceux
+     des foires aux questions en manquaient vingt-sept. Un resume sur lequel
+     on clique est un bouton, quelle que soit sa balise. */
+  .spa-prestation__conditions > summary,
+  .accordion > summary,
+  .accordion summary {
     display: flex;
     min-height: 4.4rem;
     align-items: center;
@@ -7373,12 +7442,18 @@ h1.h2.center {
    pas concurrencer le prix du spa — c'est lui qu'on vient lire — mais elles
    doivent etre lues avant que la page ne se referme.
    -------------------------------------------------------------------------- */
+/* FOND BLANC ET CONTOUR LEGER, ET C'EST VOULU. Ce bloc etait sur le meme
+   aplat bleu que l'encadre de l'offre, juste au-dessus : deux paves de la
+   meme couleur se disputaient le regard alors qu'ils n'ont pas le meme poids.
+   L'offre est une annonce, le prix de la pose est une information. Le contour
+   la pose sans la crier. */
 .spa-presta-resume {
   max-width: 46rem;
   margin: 1.2rem 0 0;
   padding: 1.2rem 1.4rem;
+  border: 1px solid rgba(15, 58, 90, 0.14);
   border-radius: var(--r-md);
-  background: var(--mist);
+  background: var(--white);
   color: var(--deep-soft);
   font-size: 1.4rem;
   line-height: var(--lh-texte);
@@ -7655,7 +7730,7 @@ h1.h2.center {
   align-items: center;
   justify-content: center;
   padding: 0.8rem 2.8rem;
-  border-radius: var(--r-pill);
+  border-radius: var(--r-bouton);
   font-family: var(--font-body);
   font-size: 1.5rem;
   font-weight: 600;
@@ -7678,6 +7753,53 @@ h1.h2.center {
   min-height: 4.4rem;
   padding: 0.6rem 2rem;
   font-size: 1.4rem;
+}
+
+/* --------------------------------------------------------------------------
+   63. LA FICHE SPA : L'EQUILIBRE PHOTO / INFORMATIONS, ET LE PRIX
+
+   SOIXANTE / QUARANTE. Dawn propose trois repartitions — 65/35, 55/45 et
+   50/50 — et le theme etait sur la premiere. A 65 %, la photo ecrase une
+   colonne de droite qui porte pourtant le prix, l'offre, les coloris et
+   l'achat : la colonne paraissait etroite et tout y semblait a l'etroit.
+   Le reglage passe au cran du milieu, redefini a 60/40. La photo reste le
+   premier element de la page, la colonne respire.
+
+   LE PRIX EST LE CHIFFRE QU'ON VIENT CHERCHER. Il faisait 18 px, soit la
+   taille d'un paragraphe un peu appuye. Il passe a 30 px et en demi-gras :
+   sur une page qui demande cinq mille euros, le prix n'a pas a se chercher.
+   Le prix barre, lui, reste discret — il accompagne, il ne se lit pas en
+   premier.
+   -------------------------------------------------------------------------- */
+@media screen and (min-width: 990px) {
+  .product--medium:not(.product--no-media) .product__media-wrapper {
+    max-width: 60%;
+    width: calc(60% - var(--grid-desktop-horizontal-spacing) / 2);
+  }
+
+  .product--medium:not(.product--no-media) .product__info-wrapper {
+    max-width: 40%;
+    width: calc(40% - var(--grid-desktop-horizontal-spacing) / 2);
+  }
+}
+
+.product__info-wrapper .price--large {
+  font-size: 2.6rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+@media screen and (min-width: 750px) {
+  .product__info-wrapper .price--large {
+    font-size: 3rem;
+  }
+}
+
+/* Le prix barre garde sa taille de texte courant : c'est une reference, pas
+   une annonce. */
+.product__info-wrapper .price--large .price-item--regular {
+  font-size: 1.6rem;
+  font-weight: 400;
 }
 
 /* --------------------------------------------------------------------------
