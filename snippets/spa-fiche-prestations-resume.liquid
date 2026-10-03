@@ -1,0 +1,50 @@
+{%- comment -%}
+  LE PRIX DE LA POSE, ANNONCÉ À CÔTÉ DU PRIX DU SPA.
+
+  CE QUI N'ALLAIT PAS. Les trois prestations vivent en bas de la colonne —
+  c'est le bon endroit pour les cocher, juste avant de payer. Mais leur prix
+  n'était annoncé nulle part avant. Quelqu'un qui lit « 4 990 € » en haut de
+  la fiche et qui referme la page ne sait pas s'il manque 200 € ou 1 500 €
+  pour voir le spa fonctionner chez lui. Sur un achat de ce montant, c'est la
+  question qui fait partir.
+
+  Deux lignes sous le prix y répondent, et renvoient au bloc qui permet de
+  choisir. Ce n'est pas le détail des prestations : c'est l'ordre de grandeur,
+  tout de suite.
+
+  LES PRIX NE SONT PAS ÉCRITS EN DUR. Ils viennent des fiches prestation,
+  comme dans le bloc du bas. Un tarif changé dans l'administration se propage
+  aux deux endroits, et ils ne peuvent pas diverger.
+
+  LES MÊMES VERROUS QUE LE BLOC DU BAS, pour la même raison : rien ne
+  s'affiche si une prestation n'a pas de variante publiée — on annoncerait un
+  prix vide — et rien ne s'affiche hors d'une fiche de spa : une livraison à
+  650 € sous un escalier à 175 € est absurde.
+{%- endcomment -%}
+
+{%- liquid
+  assign presta_livraison = all_products['prestation-livraison-91']
+  assign presta_service = all_products['prestation-mise-en-service-91']
+  assign presta_pack = all_products['prestation-pack-livraison-installation-91']
+
+  assign v_livraison = presta_livraison.selected_or_first_available_variant.id
+  assign v_service = presta_service.selected_or_first_available_variant.id
+  assign v_pack = presta_pack.selected_or_first_available_variant.id
+
+  assign montrer = false
+  if product.type == 'Spa' and v_livraison and v_service and v_pack
+    assign montrer = true
+  endif
+-%}
+
+{%- if montrer -%}
+  <p class="spa-presta-resume">
+    <span class="spa-presta-resume__titre">Livraison et installation, en option&nbsp;:</span>
+    livraison {{ presta_livraison.selected_or_first_available_variant.price | money }},
+    mise en service {{ presta_service.selected_or_first_available_variant.price | money }},
+    ou le <strong>pack complet {{ presta_pack.selected_or_first_available_variant.price | money }}</strong>,
+    spa déposé à son emplacement et mis en route.
+    <a class="spa-presta-resume__lien" href="#prestations">Choisir plus bas</a>
+    — ou <strong>retrait gratuit</strong> au showroom.
+  </p>
+{%- endif -%}

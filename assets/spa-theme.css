@@ -6123,6 +6123,15 @@ h1.h2.center {
   line-height: 1.4;
 }
 
+/* UNE REGLE D'AUTEUR BAT TOUJOURS CELLE DU NAVIGATEUR, meme a specificite
+   egale : « display: block » ci-dessus annulait purement et simplement
+   l'attribut « hidden ». L'aide « facultatif » s'affichait donc sous tous les
+   motifs, y compris ceux ou le message reste obligatoire — soit exactement
+   le contraire de ce qu'elle annonce. */
+.spa-ctete__aide[hidden] {
+  display: none;
+}
+
 .spa-ctete__photos {
   margin: 0 0 2rem;
   padding: 1.4rem 1.6rem;
@@ -7300,6 +7309,13 @@ h1.h2.center {
     margin: 0 -0.8rem;
   }
 
+  /* « Tout afficher », sous une rangee de cartes : c'est une classe de Dawn,
+     et c'est toujours un lien seul sous son bloc, jamais un lien pris dans
+     une phrase. Meme marge interieure invisible. */
+  a.link.underlined-link {
+    padding-block: 1.1rem;
+  }
+
   /* La fiche produit : le devis et les deux chemins de conseil. Le bouton
      de devis manquait trois pixels, le lien vers le showroom vingt et un —
      et ce sont les deux actions de ceux qui ne commandent pas en ligne. */
@@ -7323,4 +7339,87 @@ h1.h2.center {
   .rte p > a:only-child {
     padding-block: 1.3rem;
   }
+}
+
+/* --------------------------------------------------------------------------
+   59. FICHE SPA : LE PRIX DE LA POSE, ANNONCE SOUS LE PRIX DU SPA
+
+   Deux lignes grises sous le prix, discretes mais chiffrees. Elles ne doivent
+   pas concurrencer le prix du spa — c'est lui qu'on vient lire — mais elles
+   doivent etre lues avant que la page ne se referme.
+   -------------------------------------------------------------------------- */
+.spa-presta-resume {
+  max-width: 46rem;
+  margin: 1.2rem 0 0;
+  padding: 1.2rem 1.4rem;
+  border-radius: var(--r-md);
+  background: var(--mist);
+  color: var(--deep-soft);
+  font-size: 1.4rem;
+  line-height: var(--lh-texte);
+}
+
+.spa-presta-resume__titre {
+  color: var(--deep);
+  font-weight: 700;
+}
+
+.spa-presta-resume strong {
+  color: var(--deep);
+}
+
+.spa-presta-resume__lien {
+  color: var(--sky-deep);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+/* Le panneau « Ce que le prix comprend » : la phrase de l'offre en cours s'y
+   detache du reste, sans quoi elle se lirait comme une clause de plus. */
+.spa-offre-tarif {
+  padding: 1rem 1.2rem;
+  border-left: 3px solid var(--sky);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+  background: var(--mist);
+}
+
+/* L'action du premier ecran, sous le chapeau d'un en-tete de page. Le bouton
+   et le numero se lisent sur une ligne, et passent l'un sous l'autre quand la
+   place manque — le numero ne doit jamais se couper en deux. */
+.spa-page-entete__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.2rem 2rem;
+  margin: 2rem 0 0;
+}
+
+.spa-page-entete__tel {
+  display: inline-flex;
+  min-height: 4.4rem;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--deep);
+  font-size: 2rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.spa-page-entete__tel:hover,
+.spa-page-entete__tel:focus-visible {
+  color: var(--sky-deep);
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+/* Dawn ne pose pas de box-sizing universel : sans cette ligne, une icone de
+   3,2 rem avec sa marge interieure en mesure 4,6, et le numero passe a la
+   ligne suivante. */
+.spa-page-entete__tel-icone {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  width: 2.4rem;
+  height: 2.4rem;
 }

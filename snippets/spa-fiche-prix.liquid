@@ -1,0 +1,66 @@
+{%- comment -%}
+  « CE QUE LE PRIX COMPREND », ÉCRIT EN LIQUID PLUTÔT QU'À LA MAIN.
+
+  POURQUOI CE PANNEAU A QUITTÉ L'ÉDITEUR DE THÈME. Il était un bloc de texte
+  libre, et un texte libre ne sait pas qu'une offre est en cours. Il annonçait
+  donc l'escalier et le lève-couverture comme des options payantes, deux
+  écrans sous le bandeau qui les offre et une ligne sous la phrase qui le
+  répète. Un visiteur qui lit les deux ne sait plus ce qu'il paie.
+
+  Depuis ce fichier, la phrase vient de snippets/spa-offre.liquid, qui porte
+  la date de fin. Le 1er novembre, elle disparaît toute seule : personne n'a
+  à se souvenir de revenir ici.
+
+  CE QU'ON PERD, ET C'EST ASSUMÉ. Le texte ne se modifie plus depuis
+  l'éditeur de thème. Il se modifie ici, où il est lisible, et où il est le
+  seul de son espèce.
+
+  LA SECONDE CORRECTION. Ce panneau disait que la livraison et l'installation
+  se choisissent « juste au-dessus du bouton d'ajout au panier ». C'était vrai
+  avant que le bloc des prestations ne descende en bas de la colonne. Il
+  renvoie maintenant à son ancre, ce qui restera vrai où qu'il aille.
+
+  LE BALISAGE EST CELUI DE DAWN, au mot près : product__accordion / details /
+  summary / accordion__content. Un panneau qui s'ouvre comme les trois autres
+  et qui leur ressemble n'a pas à savoir qu'il est écrit autrement.
+{%- endcomment -%}
+
+<div class="product__accordion accordion quick-add-hidden">
+  <details id="Details-spa-prix">
+    <summary>
+      <div class="summary__title">
+        {% render 'icon-accordion', icon: 'price_tag' %}
+        <h2 class="h4 accordion__title inline-richtext">Ce que le prix comprend</h2>
+      </div>
+      {{- 'icon-caret.svg' | inline_asset_content -}}
+    </summary>
+    <div class="accordion__content rte" id="ProductAccordion-spa-prix">
+      <p>
+        Le prix affiché est celui du <strong>spa complet, prêt à fonctionner</strong>&nbsp;: la
+        cuve, sa structure et sa jupe dans le coloris de votre choix, l'hydromassage, la
+        filtration et l'ozonateur avec le ou les filtres déjà montés, l'électronique Balboa et
+        son panneau de commande, l'éclairage et l'audio selon le modèle.
+        <strong>TVA de 20&nbsp;% comprise</strong>&nbsp;: tous nos prix sont TTC.
+      </p>
+
+      <p>
+        La livraison et l'installation se choisissent à part,
+        <a href="#prestations">plus bas sur cette page</a>. Le
+        <strong>retrait au showroom est gratuit</strong>, sur rendez-vous. Le
+        <strong>grutage n'est jamais compris</strong>&nbsp;: lorsque l'accès impose une grue,
+        comptez un <strong>forfait de 1 500&nbsp;€ en Essonne</strong>, ajouté au devis après
+        l'étude de l'accès. Ce n'est pas une case à cocher&nbsp;: personne ne peut savoir depuis
+        chez soi si sa livraison imposera une grue.
+      </p>
+
+      <p>
+        Les accessoires — couverture, escalier, lève-couverture, pompe à chaleur — sont des
+        options. Aucun n'est nécessaire pour se baigner.
+      </p>
+
+      {%- render 'spa-offre', forme: 'tarif' -%}
+
+      <p><a href="/pages/combien-coute-un-spa">Le budget, poste par poste</a></p>
+    </div>
+  </details>
+</div>

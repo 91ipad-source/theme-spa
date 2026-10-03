@@ -86,7 +86,11 @@
 {%- if v_livraison and v_service and v_pack -%}
   <script src="{{ 'spa-prestations.js' | asset_url }}" defer="defer"></script>
 
-  <spa-prestations class="spa-prestations">
+  {%- comment -%}
+    L'ANCRE SERT AU PANNEAU « CE QUE LE PRIX COMPREND », qui renvoie ici
+    plutot que de decrire un emplacement qui a deja change une fois.
+  {%- endcomment -%}
+  <spa-prestations class="spa-prestations" id="prestations">
     <fieldset class="spa-prestations__groupe">
       <legend class="spa-prestations__titre">Livraison et installation</legend>
       <p class="spa-prestations__zone">

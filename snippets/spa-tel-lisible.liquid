@@ -1,0 +1,52 @@
+{%- comment -%}
+  LE NUMÉRO TEL QU'ON LE LIT, À PARTIR DU NUMÉRO TEL QU'ON LE COMPOSE.
+
+  Le réglage général du thème porte le numéro au format international et sans
+  espaces — « +33160773700 » — parce que c'est ce dont un composeur a besoin.
+  Affiché tel quel, il se lit comme une référence produit. Ce fichier lui rend
+  ses groupes de deux chiffres.
+
+  Le pendant de spa-tel.liquid, qui fait le chemin inverse : celui-là nettoie
+  un numéro écrit pour être lu, celui-ci met en forme un numéro écrit pour
+  être composé. Les deux ensemble permettent de ne stocker le numéro qu'une
+  fois.
+
+  CE QU'IL SAIT FAIRE, ET CE QU'IL NE SAIT PAS. Les numéros français à dix
+  chiffres, écrits « +33… », « 0033… », « (0)… » ou déjà en local. Tout le
+  reste ressort tel quel, sans être abîmé : mieux vaut un numéro étranger
+  affiché brut qu'un numéro français coupé n'importe où.
+
+    {% render 'spa-tel-lisible', numero: settings.spa_telephone %}
+{%- endcomment -%}
+
+{%- liquid
+  assign brut = numero | default: ''
+  assign brut = brut | strip | remove: ' ' | remove: '.' | remove: '-' | remove: '(' | remove: ')'
+
+  if brut contains '+33'
+    assign local = brut | remove_first: '+33'
+  elsif brut contains '0033'
+    assign local = brut | remove_first: '0033'
+  else
+    assign local = brut
+  endif
+
+  assign tete = local | slice: 0
+  unless tete == '0'
+    assign local = local | prepend: '0'
+  endunless
+
+  assign lisible = ''
+  assign taille = local | size
+  if taille == 10
+    assign a = local | slice: 0, 2
+    assign b = local | slice: 2, 2
+    assign c = local | slice: 4, 2
+    assign d = local | slice: 6, 2
+    assign e = local | slice: 8, 2
+    assign lisible = a | append: ' ' | append: b | append: ' ' | append: c | append: ' ' | append: d | append: ' ' | append: e
+  else
+    assign lisible = numero
+  endif
+-%}
+{{- lisible -}}

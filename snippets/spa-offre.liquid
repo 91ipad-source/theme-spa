@@ -14,12 +14,17 @@
   retirer le bandeau d'en-tête, qui est un réglage de thème et que ce fichier
   ne commande pas — c'est le seul geste manuel.
 
-  DEUX EMPLOIS, UN SEUL FICHIER :
+  TROIS EMPLOIS, UN SEUL FICHIER :
     {% render 'spa-offre' %}
       → la phrase, sous le prix d'une fiche spa.
     {% render 'spa-offre', article: 'escalier-...' %}
       → « Offert » si cet accessoire fait partie de l'offre, sinon rien.
       C'est ce que le bloc accessoires affiche à la place du prix.
+    {% render 'spa-offre', forme: 'tarif' %}
+      → la phrase à lire dans « Ce que le prix comprend », où l'on vient
+      justement vérifier ce qu'on paie. Ce panneau annonçait l'escalier et
+      le lève-couverture comme des options payantes deux écrans sous le
+      bandeau qui les donne : c'est la contradiction que cet emploi ferme.
 
   CE QUE L'OFFRE COUVRE. Les trois escaliers standard et les deux
   lève-couvertures — le bloc accessoires n'en propose jamais d'autres, et
@@ -59,10 +64,17 @@
     chaine vide dans tous les cas, et la comparaison redevient sure.
   endcomment
   assign cible = article | default: ''
+  assign forme_demandee = forme | default: ''
 -%}
 
 {%- if offre_en_cours -%}
-  {%- if cible != blank -%}
+  {%- if forme_demandee == 'tarif' -%}
+    <p class="spa-offre-tarif">
+      <strong>Jusqu’au {{ offre_libelle }}</strong>, le <strong>lève‑couverture</strong> et
+      l’<strong>escalier adapté à votre spa</strong> sont offerts&nbsp;: ces deux-là ne sont
+      pas à ajouter.
+    </p>
+  {%- elsif cible != blank -%}
     {%- if offre_articles contains cible -%}
       <span class="spa-offert">Offert jusqu’au {{ offre_libelle }}</span>
     {%- endif -%}

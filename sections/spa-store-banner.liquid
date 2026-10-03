@@ -42,7 +42,21 @@
   assign largeur = section.settings.largeur | default: 'plein'
 
   assign image = section.settings.image
+
+  comment
+    LE BOOLEEN EST CALCULE, PAS DEDUIT AU VOL. Un reglage d'image absent du
+    gabarit — le cas de tous les bandeaux poses avant que ce reglage
+    n'existe — ne vaut pas la meme chose selon le moteur Liquid : ici on
+    exige en plus une largeur, puisque c'est elle qu'on compare juste apres
+    pour borner le jeu de largeurs. Un fichier sans dimensions connues
+    n'aurait pas de version telephone, ce qui est le bon defaut.
+  endcomment
   assign image_mobile = section.settings.image_mobile
+  assign a_mobile = false
+  if image_mobile != blank and image_mobile.width
+    assign a_mobile = true
+  endif
+
   assign alt = section.settings.image_alt
   if alt == blank
     assign alt = image.alt
@@ -81,7 +95,7 @@
     {%- endif -%}
 
     <picture>
-      {%- if image_mobile != blank -%}
+      {%- if a_mobile -%}
         {%- comment -%}
           AUCUNE LARGEUR PLUS GRANDE QUE LE FICHIER. Un telephone a trois
           pixels pour un point demande 1 170 px de large ; si on les lui

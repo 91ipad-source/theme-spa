@@ -52,6 +52,49 @@
         {%- if section.settings.chapeau != blank -%}
           <div class="spa-page-entete__chapeau rte">{{ section.settings.chapeau }}</div>
         {%- endif -%}
+
+        {%- comment -%}
+          L'ACTION, SOUS LE CHAPEAU, SANS AVOIR À DESCENDRE.
+
+          Sur la page Showroom, le bloc de prise de rendez-vous arrivait après
+          la photo et la bande de chiffres. Or quelqu'un qui ouvre cette page
+          veut souvent une seule chose, et il la veut tout de suite. Le bouton
+          et le numéro sont donc ici, dans le premier écran ; le bloc complet
+          reste plus bas pour ceux qui lisent d'abord.
+
+          Le numéro ne vient pas d'un réglage de cette section : il est lu sur
+          le réglage global du thème, comme partout ailleurs. Un numéro qui
+          change ne doit pas se changer à sept endroits.
+        {%- endcomment -%}
+        {%- liquid
+          assign tel = settings.spa_telephone | strip
+          assign montrer_tel = false
+          if section.settings.montrer_tel and tel != blank
+            assign montrer_tel = true
+          endif
+        -%}
+        {%- if section.settings.bouton != blank or montrer_tel -%}
+          <p class="spa-page-entete__actions">
+            {%- if section.settings.bouton != blank -%}
+              <a class="btn" href="{{ section.settings.lien | default: '/pages/contact' }}">
+                {{- section.settings.bouton | escape -}}
+              </a>
+            {%- endif -%}
+
+            {%- if montrer_tel -%}
+              {%- capture tel_lien -%}{%- render 'spa-tel', numero: tel -%}{%- endcapture -%}
+              <a class="spa-page-entete__tel" href="tel:{{ tel_lien | strip }}">
+                <svg class="spa-page-entete__tel-icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path
+                    d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.2 2.2z"
+                    fill="currentColor"
+                  />
+                </svg>
+                {%- render 'spa-tel-lisible', numero: tel -%}
+              </a>
+            {%- endif -%}
+          </p>
+        {%- endif -%}
       </div>
 
       {%- if section.settings.image != blank -%}
@@ -116,6 +159,25 @@
       "id": "chapeau",
       "label": "Chapeau",
       "info": "Deux ou trois phrases. C'est ce que lira quelqu'un qui ne lit rien d'autre."
+    },
+    {
+      "type": "text",
+      "id": "bouton",
+      "label": "Bouton sous le chapeau",
+      "info": "Laisser vide pour n'afficher aucun bouton. Exemple : Prendre rendez-vous"
+    },
+    {
+      "type": "url",
+      "id": "lien",
+      "label": "Lien du bouton",
+      "info": "Par défaut, la page Contact."
+    },
+    {
+      "type": "checkbox",
+      "id": "montrer_tel",
+      "label": "Afficher le numéro de téléphone",
+      "default": false,
+      "info": "Le numéro est celui du réglage général du thème, pas un numéro propre à cette page."
     },
     {
       "type": "image_picker",

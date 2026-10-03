@@ -170,16 +170,24 @@
                   required
                 >
               </div>
+              {%- comment -%}
+                UN SEUL MOYEN DE CONTACT OBLIGATOIRE, ET CE N'EST PAS UN CHOIX :
+                Shopify exige l'adresse e-mail pour accepter un formulaire de
+                contact, et refuse l'envoi sans elle. Demander en plus le
+                téléphone revenait à exiger deux fois la même chose — et un
+                champ obligatoire de plus est un formulaire de moins envoyé.
+                Il reste là, il reste utile, il n'arrête plus personne.
+              {%- endcomment -%}
               <div class="field">
-                <label class="field__label" for="ctete-tel">Téléphone <abbr title="obligatoire">*</abbr></label>
+                <label class="field__label" for="ctete-tel">Téléphone</label>
                 <input
                   class="field__input"
                   type="tel"
                   id="ctete-tel"
                   name="contact[Téléphone]"
                   autocomplete="tel"
-                  required
                 >
+                <span class="spa-ctete__aide">Le plus simple pour vous rappeler.</span>
               </div>
             </div>
 
@@ -235,15 +243,34 @@
               >
             </div>
 
+            {%- comment -%}
+              POUR UNE VISITE, LE MESSAGE NE SERT À RIEN. Le motif est choisi,
+              le modèle est choisi, les disponibilités sont demandées juste
+              au-dessus : tout est dit. Exiger en plus un paragraphe, c'est
+              demander à quelqu'un de rédiger pour obtenir un créneau. Le
+              champ reste, et reçoit souvent une précision utile — mais il
+              n'empêche plus l'envoi.
+
+              Le verrou est posé en JavaScript plus bas, et l'astérisque suit.
+              Sans JavaScript, le champ reste obligatoire : c'est le réglage
+              le plus sûr des deux, puisqu'il n'empêche aucun envoi valide.
+            {%- endcomment -%}
             <div class="field">
-              <label class="field__label" for="ctete-message">Votre demande <abbr title="obligatoire">*</abbr></label>
+              <label class="field__label" for="ctete-message">
+                Votre demande
+                <abbr title="obligatoire" data-ctete-etoile>*</abbr>
+              </label>
               <textarea
                 class="field__input"
                 id="ctete-message"
                 name="contact[body]"
                 rows="5"
+                data-ctete-message
                 required
               >{% if form.body %}{{ form.body }}{% endif %}</textarea>
+              <span class="spa-ctete__aide" data-ctete-aide-message hidden>
+                Facultatif&nbsp;: dites-nous ce que vous aimeriez voir, si vous le savez déjà.
+              </span>
             </div>
 
             <p class="spa-ctete__photos" data-ctete-si="devis">
@@ -285,6 +312,10 @@
     var groupes = racine.querySelectorAll('[data-ctete-si]');
     if (!motif || !groupes.length) return;
 
+    var message = racine.querySelector('[data-ctete-message]');
+    var etoile = racine.querySelector('[data-ctete-etoile]');
+    var aide = racine.querySelector('[data-ctete-aide-message]');
+
     /* La cle du motif courant : c'est data-cle, pas le libelle. Un libelle
        peut etre reformule sans casser les liens entrants. */
     function cle() {
@@ -303,6 +334,13 @@
           champ.disabled = !garde;
         });
       });
+
+      /* Pour une visite, le message devient facultatif : le motif, le modele
+         et les disponibilites disent deja tout. */
+      var visite = courante === 'visite';
+      if (message) message.required = !visite;
+      if (etoile) etoile.hidden = visite;
+      if (aide) aide.hidden = !visite;
     }
 
     /* Le motif ET le modele peuvent arriver par l'URL :

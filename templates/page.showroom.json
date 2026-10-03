@@ -54,6 +54,9 @@
         "color_scheme": "scheme-1",
         "padding_top": 32,
         "padding_bottom": 24,
+        "bouton": "Prendre rendez-vous",
+        "lien": "/pages/contact?motif=visite#demande",
+        "montrer_tel": true,
         "image": "shopify://shop_images/spas9-showroom-fontenay-le-vicomte.png",
         "image_alt": "Le showroom SPAS9 à Fontenay-le-Vicomte : spas exposés, espace conseil et coin détente"
       }
