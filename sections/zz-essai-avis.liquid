@@ -1,0 +1,21 @@
+<div>essai</div>
+
+{% schema %}
+{
+  "name": "Essai avis",
+  "settings": [
+    {
+      "type": "select",
+      "id": "widget_format",
+      "label": "Format du widget",
+      "info": "Trustindex sert des widgets de tailles très différentes par le même script : impossible de deviner lequel depuis le thème. Préférez « Large » : le cadre, lui, fait défiler ce qui dépasse à l'intérieur de lui-même — une fenêtre dans la fenêtre, que personne n'aime manipuler.",
+      "options": [
+        { "value": "cadre", "label": "Cadre — hauteur bornée, mais défilement interne" },
+        { "value": "pastille", "label": "Pastille — se place à côté de la note" },
+        { "value": "large", "label": "Large — dans la page, sans défilement" }
+      ],
+      "default": "large"
+    }
+  ]
+}
+{% endschema %}
