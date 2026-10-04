@@ -201,8 +201,22 @@
 
       C'est ce qui rend la hauteur maitrisable. Avec le script, la section
       fait ce que le widget decide ; avec le cadre, elle fait exactement le
-      nombre de pixels indique dans les reglages, et ce qui depasse defile
-      a l'interieur du cadre au lieu d'allonger la page.
+      nombre de pixels indique dans les reglages.
+
+      ET C'EST PRECISEMENT LE PROBLEME DE CE FORMAT, constate en ligne le
+      4 octobre 2026 : ce qui depasse ne disparait pas, il DEFILE DANS LE
+      CADRE. Le visiteur se retrouve avec une barre de defilement verticale
+      et une horizontale a l'interieur d'une page qui defile deja. On ne
+      regle pas cela depuis le theme : le contenu du cadre vient d'un autre
+      domaine, sa largeur minimale et sa hauteur reelle appartiennent a
+      Trustindex. Le reglage automatique de hauteur ci-dessous ne corrige
+      rien tant que le message n'arrive pas, et il n'arrive pas toujours.
+
+      Le format « Large » n'a pas ce defaut par construction : le widget est
+      insere DANS la page, il y prend sa largeur et sa hauteur, et il n'y a
+      plus de fenetre dans la fenetre. C'est lui qui est en service sur
+      l'accueil. Le cadre reste disponible pour un emplacement ou la hauteur
+      doit absolument etre bornee — en sachant ce qu'on y perd.
 
       Le cadre est isole : « sandbox » n'autorise que ce dont le widget a
       besoin — executer son script, lire son propre stockage, et ouvrir un
@@ -369,13 +383,13 @@
       "type": "select",
       "id": "widget_format",
       "label": "Format du widget",
-      "info": "Trustindex sert des widgets de tailles très différentes par le même script : impossible de deviner lequel depuis le thème.",
+      "info": "Trustindex sert des widgets de tailles très différentes par le même script : impossible de deviner lequel depuis le thème. Préférez « Large » : le cadre, lui, fait défiler ce qui dépasse à l'intérieur de lui-même — une fenêtre dans la fenêtre, que personne n'aime manipuler.",
       "options": [
-        { "value": "cadre", "label": "Cadre — hauteur fixe, réglable ci-dessous" },
+        { "value": "cadre", "label": "Cadre — hauteur bornée, mais défilement interne" },
         { "value": "pastille", "label": "Pastille — se place à côté de la note" },
-        { "value": "large", "label": "Large — hauteur décidée par Trustindex" }
+        { "value": "large", "label": "Large — s'insère dans la page, sans défilement interne" }
       ],
-      "default": "cadre"
+      "default": "large"
     },
     {
       "type": "number",
