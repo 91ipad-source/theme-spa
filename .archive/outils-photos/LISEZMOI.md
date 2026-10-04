@@ -1,5 +1,18 @@
 # Remettre au blanc le fond des photos de spas
 
+> **L'AFFAIRE EST CLOSE — 4 octobre 2026.** Cédric a refait les photos
+> lui-même : 43 nouvelles images sur blanc pur, remplaçant celles des fiches
+> Doto, Calypso Web, Pleuxaure, Panopé et Panopé FULL. Mesuré sur les 43 :
+> fond à 254 partout, y compris sur les gros plans que cet outil ne savait
+> pas traiter. **Cet outil n'a donc jamais été appliqué.** Il reste ici pour
+> le jour où le problème se représentera sur une nouvelle série de photos —
+> et surtout pour la leçon en tête de `traiter.py`, qui vaut pour n'importe
+> quel détourage.
+>
+> `medias.py` liste les fichiers du 3 octobre. Les 43 remplacés n'existent
+> plus sous ces noms : `telecharger.py` échouera dessus, ce qui est le bon
+> comportement. Relire la liste depuis l'API avant de s'en resservir.
+
 Au 3 octobre 2026, les 89 photos des dix spas venaient de deux sources :
 des **rendus détourés sur blanc pur** (Duo, Doto, Calypso, Proto 2) et de
 **vraies photos de studio sur fond gris** (Calypso Web, Pleuxaure, Panopé,
@@ -59,3 +72,32 @@ l'historique Git de ce dossier.
 Shopify ne synchronise que `assets`, `blocks`, `config`, `layout`, `locales`,
 `sections`, `snippets` et `templates`. Un dossier commençant par un point est
 ignoré.
+
+## Les textes alternatifs, et pourquoi ils se perdent
+
+Les 43 nouvelles photos sont arrivées **sans texte alternatif** : remplacer
+une photo par une autre ne transporte rien, et Shopify n'en invente pas. Elles
+ont été réécrites une par une le 4 octobre, à partir de planches de contrôle,
+dans la forme des autres : `Spa <Nom> ROCA Spa <N> places, <ce qu'on voit>`.
+
+C'est le piège à retenir pour la prochaine fois : **téléverser une série de
+photos efface silencieusement tout le travail de texte alternatif**, qui ne se
+voit nulle part dans l'administration tant qu'on ne l'ouvre pas photo par
+photo. La requête qui les contrôle toutes d'un coup :
+
+    { products(first: 15, query: "product_type:Spa AND status:active") {
+        nodes { handle media(first: 25) { nodes { ... on MediaImage { alt } } } } } }
+
+## La règle du survol
+
+Dawn affiche la **deuxième** photo d'une fiche au survol de sa vignette. Une
+vue de trois quarts y est plus parlante qu'une cuve vue de dessus : on y lit
+la hauteur, l'habillage et l'encombrement. Les dix fiches la respectaient au
+3 octobre ; le remplacement des photos a remis le Panopé dans l'ordre du
+téléversement, et il a été reclassé le 4.
+
+**Le Spa Europe Infrared fait exception** : sa vue de trois quarts en eau
+(`SpaEuropeImage22sept.2026_15_27_02_2.png`) a été retirée de la fiche le
+3 ou 4 octobre, et aucune autre de ses photos n'en est une. Son survol montre
+donc une vue de face. Le fichier reste servi par le CDN ; il suffirait de le
+rattacher à la fiche et de le mettre en deuxième position.
