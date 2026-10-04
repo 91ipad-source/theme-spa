@@ -1,5 +1,8 @@
 # Remettre au blanc le fond des photos de spas
 
+> Pour l'échelle des produits dans leur cadre — un autre problème, un
+> autre outil, celui-là bel et bien appliqué — voir `echelle/`.
+
 > **L'AFFAIRE EST CLOSE — 4 octobre 2026.** Cédric a refait les photos
 > lui-même : 43 nouvelles images sur blanc pur, remplaçant celles des fiches
 > Doto, Calypso Web, Pleuxaure, Panopé et Panopé FULL. Mesuré sur les 43 :
