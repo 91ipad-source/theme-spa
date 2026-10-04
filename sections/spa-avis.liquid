@@ -356,6 +356,26 @@
   </div>
 </div>
 
+{%- comment -%}
+  CINQUANTE CARACTERES PAR LIBELLE D'OPTION, PAS UN DE PLUS.
+
+  Shopify plafonne les libelles d'option a 50 caracteres. Au-dela, il refuse
+  le FICHIER ENTIER a la synchronisation — pas le reglage, pas le schema :
+  le fichier. Et sans rien dire : le depot change, la boutique garde la
+  version precedente, et on croit avoir deploye quelque chose qui n'est
+  jamais parti.
+
+  C'est arrive ici le 4 octobre 2026 sur « Large — s'insere dans la page,
+  sans defilement interne », 54 caracteres. Le fichier est reste douze
+  heures a sa version du 21 septembre pendant que tout le reste du meme
+  commit partait normalement. Le message ne se lit qu'en poussant le fichier
+  a l'API sur un theme non publie :
+
+    themeFilesUpsert → FILE_VALIDATION_ERROR
+    « Invalid schema: setting with id="widget_format" option label est trop
+      long (max. 50 caracteres) »
+{%- endcomment -%}
+
 {% schema %}
 {
   "name": "Avis clients",
@@ -391,7 +411,7 @@
       "options": [
         { "value": "cadre", "label": "Cadre — hauteur bornée, mais défilement interne" },
         { "value": "pastille", "label": "Pastille — se place à côté de la note" },
-        { "value": "large", "label": "Large — s'insère dans la page, sans défilement interne" }
+        { "value": "large", "label": "Large — dans la page, sans défilement" }
       ],
       "default": "large"
     },
