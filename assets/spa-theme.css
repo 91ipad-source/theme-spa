@@ -7922,15 +7922,35 @@ h1.h2.center {
    Les deux ensemble donnent des prix alignes quelle que soit la longueur du
    nom, et des cartes qui commencent toutes a la meme hauteur.
    -------------------------------------------------------------------------- */
+/* LA CHAINE EST EN FLEX, PAS EN POURCENTAGE, ET C'EST UNE CORRECTION.
+
+   La premiere version posait « height: 100% » sur la carte. Mesure le
+   4 octobre sur le catalogue : les cases de la grille faisaient bien toutes
+   591 px dans une rangee, mais les cartes a l'interieur 519, 519 et 591 —
+   la regle ne s'appliquait pas, et les prix retombaient a neuf hauteurs
+   differentes pour dix cartes.
+
+   La raison est une regle de CSS qu'on oublie vite : un « height: 100% »
+   se resout sur la hauteur DECLAREE du parent. Or la case ne declare
+   aucune hauteur : elle en recoit une parce qu'elle s'etire dans une
+   rangee flex. Il n'y a donc rien contre quoi calculer le pourcentage, et
+   la carte retombe sur la hauteur de son contenu.
+
+   La chaine est donc en flex de bout en bout — la case, l'enveloppe, la
+   carte, son contenu. Chaque maillon s'etire dans le precedent sans avoir
+   besoin de connaitre sa hauteur, et le prix, pousse en bas par sa marge
+   automatique, tombe sur la meme ligne pour toute la rangee. */
+.product-grid .grid__item {
+  display: flex;
+}
+
 .product-grid .card-wrapper,
 .product-grid .card,
 .product-grid .card__content {
-  height: 100%;
-}
-
-.product-grid .card__content {
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
+  min-width: 0;
 }
 
 .product-grid .card__information {
