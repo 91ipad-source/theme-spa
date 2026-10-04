@@ -1,0 +1,167 @@
+{% comment %}
+  LE BANDEAU SHOWROOM, AVANT LE PIED DE PAGE.
+
+  CE QU'IL REMPLACE. Un montage pleine largeur : cinq photos, deux logos,
+  deux mentions manuscrites, six pictogrammes et des vagues bleues, le tout
+  dans une seule image. Il apparaissait sur toutes les pages, juste avant le
+  pied de page, et c'était de loin l'élément le plus chargé du site — sur
+  une fiche produit sobre, il arrivait comme une autre marque.
+
+  Le texte y était par ailleurs incrusté dans l'image : ni Google ni un
+  lecteur d'écran n'en lisaient un mot, et sur téléphone les mentions
+  tombaient à quatre pixels de haut.
+
+  CE QU'IL FAIT. Une photo, une phrase, un bouton. Le texte est du vrai
+  texte, modifiable depuis l'éditeur de thème et lu par tout le monde.
+
+  LA PHOTO NE PORTE PAS LE MESSAGE, elle l'accompagne. C'est pour cela
+  qu'elle occupe la plus petite des deux colonnes : à cette hauteur-là, une
+  photo de showroom ne raconte rien de plus en étant deux fois plus large,
+  alors qu'une phrase, si.
+{% endcomment %}
+
+{%- liquid
+  assign image = section.settings.image
+  assign alt = section.settings.image_alt
+  if alt == blank
+    assign alt = image.alt
+  endif
+
+  comment
+    Le titre sert d'etiquette a la section pour les lecteurs d'ecran. Sans
+    titre, l'etiquette n'aurait rien a pointer : on retombe alors sur une
+    region anonyme, ce qui vaut mieux qu'une region etiquetee par du vide.
+  endcomment
+  assign id_titre = 'BandeauShowroom-' | append: section.id
+-%}
+
+{%- if section.settings.titre != blank or image != blank -%}
+  <div
+    class="spa-bandeau-showroom color-{{ section.settings.color_scheme }} gradient"
+    style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;"
+  >
+    <div class="page-width">
+      <section
+        class="spa-bshow{% if image == blank %} spa-bshow--sans-photo{% endif %}"
+        {% if section.settings.titre != blank %}aria-labelledby="{{ id_titre }}"{% endif %}
+      >
+        {%- if image != blank -%}
+          <div class="spa-bshow__media">
+            {{
+              image
+              | image_url: width: 1200
+              | image_tag:
+                loading: 'lazy',
+                widths: '400, 600, 800, 1000, 1200',
+                sizes: '(min-width: 750px) 42vw, 100vw',
+                alt: alt,
+                class: 'spa-bshow__photo'
+            }}
+          </div>
+        {%- endif -%}
+
+        <div class="spa-bshow__texte">
+          {%- if section.settings.lieu != blank -%}
+            <p class="spa-bshow__lieu">{{ section.settings.lieu | escape }}</p>
+          {%- endif -%}
+
+          {%- if section.settings.titre != blank -%}
+            <h2 class="spa-bshow__titre" id="{{ id_titre }}">{{ section.settings.titre | escape }}</h2>
+          {%- endif -%}
+
+          {%- if section.settings.bouton != blank and section.settings.lien != blank -%}
+            <a class="btn spa-bshow__bouton" href="{{ section.settings.lien }}">
+              {{- section.settings.bouton | escape -}}
+              <span class="spa-bshow__fleche" aria-hidden="true">&rarr;</span>
+            </a>
+          {%- endif -%}
+        </div>
+      </section>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Bandeau showroom",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Une photo, une phrase, un bouton — à placer juste avant le pied de page. Le texte ci-dessous est du vrai texte : il est lu par Google et par les lecteurs d'écran, contrairement à un texte incrusté dans une image."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Photo"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Texte alternatif",
+      "info": "Laisser vide pour reprendre celui de la médiathèque."
+    },
+    {
+      "type": "text",
+      "id": "lieu",
+      "label": "Surtitre",
+      "info": "Les traits d'union y sont insécables : sans cela « rendez-vous » se coupe en deux sur téléphone, et le site n'accepte aucun mot coupé en fin de ligne.",
+      "default": "Fontenay‑le‑Vicomte · Sur rendez‑vous"
+    },
+    {
+      "type": "text",
+      "id": "titre",
+      "label": "Phrase",
+      "default": "Venez comparer nos spas en showroom.",
+      "info": "Une phrase, pas deux : elle doit tenir sur deux lignes à côté de la photo."
+    },
+    {
+      "type": "text",
+      "id": "bouton",
+      "label": "Bouton",
+      "default": "Visiter le showroom"
+    },
+    {
+      "type": "url",
+      "id": "lien",
+      "label": "Lien du bouton"
+    },
+    {
+      "type": "header",
+      "content": "Mise en page"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Jeu de couleurs",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bandeau showroom"
+    }
+  ]
+}
+{% endschema %}

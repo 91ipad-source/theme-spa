@@ -8044,3 +8044,112 @@ h1.h2.center {
 .article-card .article-card__footer {
   margin-top: auto;
 }
+
+/* --------------------------------------------------------------------------
+   66. LE BANDEAU SHOWROOM (section spa-bandeau-showroom)
+
+   Deux colonnes : la photo sur 42 %, le texte sur 58 %. Le rapport n'est pas
+   decoratif — la photo ne porte pas le message, elle l'accompagne, et une
+   photo de showroom ne raconte rien de plus en etant deux fois plus large,
+   alors qu'une phrase, si.
+
+   LA PHOTO N'A PAS DE HAUTEUR PROPRE : c'est le texte qui donne sa hauteur a
+   la rangee, et la photo s'y etire en recadrant. D'ou le « height: 100% »
+   explicite — « image_tag » ecrit width et height dans la balise, et sans
+   lui le navigateur les lit comme une hauteur fixe. Le cadrage est pose a
+   56 % du haut : les spas sont au milieu de ces photos, le plafond en haut.
+
+   Sur telephone, les deux colonnes s'empilent et la photo prend une bande
+   de 15,5 rem. Assez pour qu'on voie de quoi il s'agit, pas assez pour
+   repousser le bouton sous le pli.
+   -------------------------------------------------------------------------- */
+.spa-bandeau-showroom {
+  padding-top: var(--pt, 40px);
+  padding-bottom: var(--pb, 40px);
+}
+
+.spa-bshow {
+  display: grid;
+  overflow: hidden;
+  max-width: 112rem;
+  min-height: 23rem;
+  margin: 0 auto;
+  border-radius: var(--r-md);
+  background: var(--mist);
+}
+
+.spa-bshow__media {
+  position: relative;
+  min-width: 0;
+  height: 15.5rem;
+}
+
+.spa-bshow__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 56%;
+}
+
+.spa-bshow__texte {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2.4rem;
+}
+
+.spa-bshow__lieu {
+  margin: 0 0 1.2rem;
+  color: var(--deep-soft);
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.085em;
+  text-transform: uppercase;
+}
+
+.spa-bshow__titre {
+  margin: 0 0 2rem;
+  color: var(--deep);
+  font-family: var(--font-display);
+  font-size: var(--t-section);
+  font-weight: 700;
+  line-height: var(--lh-titre);
+  text-wrap: balance;
+}
+
+/* La fleche dit « cela ouvre une autre page ». Elle est posee en marge
+   gauche plutot qu'avec un « gap », pour que le bouton garde exactement la
+   meme boite que tous les autres du site. */
+.spa-bshow__fleche {
+  margin-left: 1.2rem;
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+@media screen and (min-width: 750px) {
+  .spa-bshow {
+    grid-template-columns: 42% 58%;
+  }
+
+  .spa-bshow__media {
+    height: auto;
+  }
+
+  .spa-bshow__texte {
+    padding: 2.8rem 3.2rem;
+  }
+}
+
+/* Sans photo, le texte reprend toute la largeur et se centre : un bandeau a
+   une seule colonne calee a gauche aurait l'air d'avoir perdu son image. */
+.spa-bshow--sans-photo {
+  grid-template-columns: 1fr;
+}
+
+.spa-bshow--sans-photo .spa-bshow__texte {
+  align-items: center;
+  text-align: center;
+}
