@@ -7433,7 +7433,31 @@ h1.h2.center {
   .spa-sav__moyens a {
     display: flex;
     min-height: 4.4rem;
+    /* Le saut de ligne masqué plus bas tenait aussi les deux cibles à
+       distance. Sans lui elles se toucheraient bord à bord, et un pouce qui
+       vise le numéro attraperait le courriel. */
+    margin-block: 0.3rem;
     align-items: center;
+  }
+
+  /* LE SAUT DE LIGNE DEVIENT UN TROU. Les coordonnées sont écrites en texte
+     courant, séparées par des <br> : c'est la bonne façon d'écrire une
+     adresse, et c'est ce que lit un lecteur d'écran. Mais dès que le
+     numéro et le courriel passent en bloc, juste au-dessus, ils vont déjà
+     à la ligne tout seuls — et le <br> voisin ajoute une ligne vide de
+     18 px par-dessus. Sur le téléphone, cela creusait un trou entre le
+     numéro et le courriel, plus large que l'écart entre les deux cibles.
+
+     On masque donc le saut de ligne qui touche un lien, et lui seul : ceux
+     qui séparent la rue de la ville restent, puisque là ils font leur
+     travail. */
+  .spa-contact-carte__coords a + br,
+  .spa-ctete__adresse a + br,
+  .spa-sav__moyens a + br,
+  .spa-contact-carte__coords br:has(+ a),
+  .spa-ctete__adresse br:has(+ a),
+  .spa-sav__moyens br:has(+ a) {
+    display: none;
   }
 
   /* Ceux-la sont deja des boites alignees : il ne leur manque que la
