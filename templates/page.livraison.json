@@ -15,7 +15,7 @@
         "largeur": "contenu",
         "image": "shopify://shop_images/SPAS9_depot_stock.png",
         "show_on_mobile": true,
-        "image_alt": "Spas ROCA Spa en stock sur palettes dans le dépôt SPAS9 | LINERS FRANCE, à Fontenay-le-Vicomte"
+        "image_alt": "Spas ROCA Spa en stock sur palettes dans le dépôt SPAS9, à Fontenay-le-Vicomte"
       }
     },
     "entete": {
@@ -282,7 +282,7 @@
         "padding_top": 16,
         "padding_bottom": 24,
         "titre": "Comment se passe un retrait",
-        "texte": "<p><strong>LINERS FRANCE – SPAS9</strong><br>16 rue de l'Orme<br>91540 Fontenay-le-Vicomte</p><p>Le retrait s'effectue <strong>sur rendez-vous, dès confirmation de la disponibilité de votre spa</strong>. Avant tout déplacement, attendez notre confirmation : c'est elle qui garantit que votre commande est prête à être enlevée.</p><p>Prévoyez un véhicule adapté au transport du spa. Selon les modèles, le poids à vide peut atteindre plusieurs centaines de kilogrammes.</p>"
+        "texte": "<p><strong>SPAS9, la marque spa de LINERS FRANCE</strong><br>16 rue de l'Orme<br>91540 Fontenay-le-Vicomte</p><p>Le retrait s'effectue <strong>sur rendez-vous, dès confirmation de la disponibilité de votre spa</strong>. Avant tout déplacement, attendez notre confirmation : c'est elle qui garantit que votre commande est prête à être enlevée.</p><p>Prévoyez un véhicule adapté au transport du spa. Selon les modèles, le poids à vide peut atteindre plusieurs centaines de kilogrammes.</p>"
       }
     },
     "p_retours": {
@@ -305,7 +305,7 @@
         "texte": "<p>Envoyez-nous quelques photos du chemin depuis la rue et la largeur du passage le plus étroit. Nous vous disons ce qui passe, ce qui demande une manutention particulière, et à quel prix — avant la commande, pas au pied du portail.</p>",
         "mention": "Showroom uniquement sur rendez-vous",
         "ancre": "nous-contacter",
-        "raison_sociale": "SPAS9 | LINERS FRANCE",
+        "raison_sociale": "SPAS9, la marque spa de LINERS FRANCE",
         "adresse": "16 rue de l'Orme, 91540 Fontenay-le-Vicomte",
         "telephone": "+33 (0)1 60 77 37 00",
         "courriel": "spas9@linersfrance.fr",

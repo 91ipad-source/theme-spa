@@ -15,7 +15,7 @@
         "largeur": "contenu",
         "image": "shopify://shop_images/SPAS9_depot_stock.png",
         "show_on_mobile": true,
-        "image_alt": "Spas ROCA Spa en stock dans le dépôt SPAS9 | LINERS FRANCE à Fontenay-le-Vicomte, point de départ des livraisons en Île-de-France"
+        "image_alt": "Spas ROCA Spa en stock dans le dépôt SPAS9 à Fontenay-le-Vicomte, point de départ des livraisons en Île-de-France"
       }
     },
     "entete": {
@@ -282,7 +282,7 @@
         "texte": "<p>Le plus simple reste de nous envoyer <strong>trois photos</strong> : l'emplacement prévu, le chemin depuis la rue, et le point le plus étroit du parcours. Avec ça, nous vous disons rapidement ce qui passe, ce qui demande une grue, et ce que ça coûte.</p><p><a href=\"/blogs/conseils-spa/installer-un-spa-chez-soi\">Préparer l'installation</a></p>",
         "mention": "Showroom uniquement sur rendez-vous",
         "ancre": "votre-acces",
-        "raison_sociale": "SPAS9 | LINERS FRANCE",
+        "raison_sociale": "SPAS9, la marque spa de LINERS FRANCE",
         "adresse": "16 rue de l'Orme, 91540 Fontenay-le-Vicomte",
         "telephone": "+33 (0)1 60 77 37 00",
         "courriel": "spas9@linersfrance.fr",
