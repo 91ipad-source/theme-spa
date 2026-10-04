@@ -431,8 +431,8 @@
         "g1": {
           "type": "photo",
           "settings": {
-            "image": "shopify://shop_images/spas9-showroom-comparer-les-modeles.png",
-            "legende": "L'allée et les modèles",
+            "image": "shopify://shop_images/spas9-showroom-accueil-conseil.png",
+            "legende": "Le bureau conseil",
             "image_alt": ""
           }
         },
