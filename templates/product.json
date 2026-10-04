@@ -56,11 +56,11 @@
           "settings": {
             "layout": "horizontal",
             "icon_1": "truck",
-            "heading_1": "Livré et installé en Île-de-France et dans le Loiret",
+            "heading_1": "Livraison et installation",
             "icon_2": "price_tag",
-            "heading_2": "Carte bancaire ou chèque, réglés à la commande",
+            "heading_2": "Paiement à la commande",
             "icon_3": "map_pin",
-            "heading_3": "Showroom à Fontenay-le-Vicomte (91)"
+            "heading_3": "Showroom en Essonne"
           }
         },
         "description": {
