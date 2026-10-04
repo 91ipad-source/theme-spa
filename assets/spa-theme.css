@@ -7521,6 +7521,33 @@ h1.h2.center {
     align-items: center;
   }
 
+  /* LE CATALOGUE SUR TELEPHONE : « Trier », et « Tout supprimer » dans le
+     tiroir de filtres. Mesures : 68 x 30 et 113 x 24.
+
+     POURQUOI ILS AVAIENT ECHAPPE AU PREMIER RELEVE. Celui-ci mesurait les
+     pages telles qu'elles s'ouvrent. Or « Tout supprimer » n'existe qu'une
+     fois le tiroir deplie : cibles fermees, il ne figure dans aucune liste.
+     Le banc ouvre desormais tous les <details> avant de mesurer.
+
+     Le creux de « Trier » se prend vers l'exterieur — marge negative egale
+     a la marge interieure — pour que l'etiquette reste calee sur la
+     gouttiere de la page pendant que la zone sensible, elle, grandit. */
+  .mobile-facets__open-wrapper {
+    display: inline-flex;
+    min-height: 4.4rem;
+    align-items: center;
+    margin-inline-start: -1.2rem;
+    padding-inline: 1.2rem;
+    border-radius: var(--r-md);
+  }
+
+  .mobile-facets__clear {
+    display: inline-flex;
+    min-height: 4.4rem;
+    align-items: center;
+    padding-inline: 1.2rem;
+  }
+
   /* Un paragraphe de texte libre qui ne contient qu'un lien n'est pas du
      texte courant : c'est un appel a l'action ecrit depuis l'administration
      — « Ouvrir l'itineraire dans Google Maps », « Preparer l'installation ».
