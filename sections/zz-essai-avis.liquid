@@ -1,21 +1,14 @@
-<div>essai</div>
+{%- comment -%}
+  FICHIER D'ESSAI, A SUPPRIMER. Sans effet : il n'est appele par aucun
+  gabarit et ne dessine rien.
 
-{% schema %}
-{
-  "name": "Essai avis",
-  "settings": [
-    {
-      "type": "select",
-      "id": "widget_format",
-      "label": "Format du widget",
-      "info": "Trustindex sert des widgets de tailles très différentes par le même script : impossible de deviner lequel depuis le thème. Préférez « Large » : le cadre, lui, fait défiler ce qui dépasse à l'intérieur de lui-même — une fenêtre dans la fenêtre, que personne n'aime manipuler.",
-      "options": [
-        { "value": "cadre", "label": "Cadre — hauteur bornée, mais défilement interne" },
-        { "value": "pastille", "label": "Pastille — se place à côté de la note" },
-        { "value": "large", "label": "Large — dans la page, sans défilement" }
-      ],
-      "default": "large"
-    }
-  ]
-}
-{% endschema %}
+  Il a servi le 4 octobre 2026 a obtenir de Shopify le message d'erreur qui
+  expliquait pourquoi « sections/spa-avis.liquid » etait refuse en silence a
+  la synchronisation : un libelle d'option de 54 caracteres, la ou Shopify
+  en plafonne 50.
+
+  Il n'existe que sur ce theme-ci, celui de la branche de travail, jamais en
+  ligne. L'API ne permet pas de supprimer un fichier de theme : il se
+  supprime depuis l'administration, Boutique en ligne > Themes > Modifier le
+  code.
+{%- endcomment -%}
