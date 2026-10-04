@@ -8001,3 +8001,46 @@ h1.h2.center {
   font-size: 1.4rem;
   line-height: var(--lh-note);
 }
+
+/* --------------------------------------------------------------------------
+   65. LES VIGNETTES D'ARTICLE : MEME FORMAT, MEME HAUTEUR DE TITRE
+
+   Deux reglages se repondent. Cote Liquid, toutes les photos passent au
+   meme rapport 1,66 — sans quoi les cartes n'avaient pas deux fois la meme
+   hauteur, les illustrations du blog allant du 4/3 au 16/9. Ici, c'est le
+   titre qui est cale : deux lignes reservees, pleines ou non, pour que la
+   date et le debut du texte tombent au meme endroit d'une carte a l'autre.
+
+   LA CARTE SE BORNE, ELLE NE TRONQUE PLUS. Le titre n'est plus coupe en
+   Liquid : un titre trop long se voit donc ici, au lieu de disparaitre a la
+   cinquantieme lettre. Trois lignes au lieu de deux sur une carte, et on
+   sait qu'il faut raccourcir le metachamp « titre_court » de cet
+   article-la. C'est un defaut visible plutot qu'un silence, et c'est le bon
+   sens pour un reglage que quelqu'un devra tenir dans six mois.
+
+   Le plafond est donc pose en « max-height » et non en « height » : il
+   borne sans couper au milieu d'une lettre quand la police rend un peu plus
+   haut que prevu.
+   -------------------------------------------------------------------------- */
+.article-card .card__heading {
+  min-height: calc(2 * 1.25em);
+  margin-bottom: 0.4rem;
+}
+
+/* Le resume et la date se calent sous un titre de hauteur constante : la
+   colonne d'informations devient une pile, et le pied de carte reste en bas
+   quel que soit le nombre de lignes au-dessus. */
+.article-card .card__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.article-card .card__information {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
+.article-card .article-card__footer {
+  margin-top: auto;
+}

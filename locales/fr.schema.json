@@ -1417,7 +1417,7 @@
         "image_height": {
           "label": "Hauteur de l’image",
           "options__1": {
-            "label": "Adapter à l'image"
+            "label": "Format paysage commun"
           },
           "options__2": {
             "label": "Petit"
@@ -1427,7 +1427,8 @@
           },
           "options__4": {
             "label": "Grand"
-          }
+          },
+          "info": "« Format paysage commun » donne à toutes les vignettes la même proportion, celle de l'accueil, et recadre ce qui dépasse. Les trois autres imposent une hauteur fixe en pixels."
         }
       }
     },

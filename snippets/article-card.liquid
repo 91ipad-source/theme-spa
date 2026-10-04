@@ -22,6 +22,29 @@
     if media_aspect_ratio != null
       assign ratio = media_aspect_ratio
     endif
+
+    comment
+      LE TITRE DE CARTE N'EST PLUS COUPE A LA CINQUANTIEME LETTRE.
+
+      Dawn ecrivait « article.title | truncate: 50 ». Ce filtre compte des
+      caracteres, pas des mots : il tranche au milieu de celui qui depasse.
+      Onze des treize articles du blog y passaient — « Installer un spa en
+      interieur : veranda, sous-s... », « Quel spa pour une loveroom ? Le
+      Proto 2, cinq p... ». Un titre coupe au milieu d'un mot donne une page
+      inachevee, et c'est la premiere chose qu'on voit d'un article.
+
+      Le remede n'est pas de couper mieux, c'est de ne pas couper. Un titre
+      d'article est ecrit pour la page de l'article, ou il a toute la place
+      et ou il porte le referencement : « Comment choisir son spa : les 7
+      criteres qui comptent vraiment » est un bon titre de page et un mauvais
+      titre de vignette. La carte lit donc un metachamp « titre_court »
+      quand il est renseigne, et le titre entier sinon.
+
+      Rien n'est tronque ici : c'est la feuille de style qui borne la carte
+      a deux lignes. Un titre trop long se voit donc dans l'apercu au lieu
+      de disparaitre en silence, et se corrige la ou il est ecrit.
+    endcomment
+    assign titre_carte = article.metafields.custom.titre_court.value | default: article.title
   -%}
   <div class="article-card-wrapper card-wrapper underline-links-hover">
     {% comment %} <article aria-labelledby="Article-{{ article.id }}"> {% endcomment %}
@@ -77,7 +100,7 @@
           <div class="card__information">
             <h3 class="card__heading{% if show_excerpt %} h2{% endif %}">
               <a href="{{ article.url }}" class="full-unstyled-link">
-                {{ article.title | truncate: 50 | escape }}
+                {{ titre_carte | escape }}
               </a>
             </h3>
             <div class="article-card__info caption-with-letter-spacing h5">
@@ -116,7 +139,7 @@
         <div class="card__information">
           <h3 class="card__heading{% if show_excerpt %} h2{% endif %}">
             <a href="{{ article.url }}" class="full-unstyled-link">
-              {{ article.title | truncate: 50 | escape }}
+              {{ titre_carte | escape }}
             </a>
           </h3>
           <div class="article-card__info caption-with-letter-spacing h5">

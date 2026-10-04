@@ -97,10 +97,27 @@
             style="--animation-order: {{ forloop.index }};"
           {% endif %}
         >
+          {%- comment -%}
+            LE MEME FORMAT POUR TOUTES LES VIGNETTES, COMME SUR L'ACCUEIL.
+
+            Dawn passait ici « article.image.aspect_ratio » : chaque carte
+            prenait la proportion de SA photo. Les illustrations du blog vont
+            de 4/3 a 16/9 selon leur origine, si bien que les vignettes
+            n'avaient pas deux fois la meme hauteur et que les titres ne
+            tombaient jamais sur la meme ligne.
+
+            1,66 est la valeur qu'emploie deja la section « Articles en
+            vedette » de l'accueil. Les deux pages montrent donc les memes
+            cartes, et une photo plus carree ou plus large est recadree au
+            lieu de decaler sa voisine.
+
+            Les trois hauteurs fixes du reglage — petite, moyenne, grande —
+            continuent de l'emporter si on les choisit.
+          {%- endcomment -%}
           {%- render 'article-card',
             article: article,
             media_height: section.settings.image_height,
-            media_aspect_ratio: article.image.aspect_ratio,
+            media_aspect_ratio: 1.66,
             show_image: section.settings.show_image,
             show_date: section.settings.show_date,
             show_author: section.settings.show_author,
