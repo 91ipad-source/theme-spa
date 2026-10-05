@@ -318,6 +318,62 @@
         "padding_bottom": 64,
         "ton": "marine"
       }
+    },
+    "faq": {
+      "type": "spa-faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Quelle alimentation électrique prévoir pour un spa ?",
+            "reponse": "<p>Cela dépend de la gamme. Un spa <strong>Plug &amp; Play</strong> se raccorde sur une <strong>prise dédiée de 16 A</strong> : aucune ligne à tirer depuis le tableau, aucun électricien nécessaire. Les gammes <strong>Chronos et Full Therapeutic</strong> exigent une <strong>ligne directe protégée par un disjoncteur de 32 A</strong>, posée par un électricien habilité depuis le tableau général jusqu'à l'emplacement du spa.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Quelle différence entre un spa Plug & Play et un spa à raccordement dédié ?",
+            "reponse": "<p>Le branchement, et donc les travaux. Le <strong>Plug &amp; Play</strong> se branche sur une prise 16 A et fonctionne le jour même, sans tranchée ni intervention d'électricien. Le <strong>raccordement dédié en 32 A</strong> demande une ligne posée avant la livraison, mais il alimente des spas plus puissants, à deux pompes et davantage de jets. C'est le point qui fait reporter le plus d'installations : faites poser la ligne dès la commande, pas la veille.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Quelle préparation du sol faut-il prévoir avant la livraison ?",
+            "reponse": "<p>L'emplacement doit être <strong>plan, stable et suffisamment résistant</strong> pour supporter le poids du spa rempli et occupé — plusieurs tonnes pour un 5 places. Il faut aussi vérifier la largeur et la hauteur des passages, les portails et les angles, les escaliers ou différences de niveau, et la distance entre le stationnement du camion et l'emplacement final.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Peut-on installer un spa en intérieur ?",
+            "reponse": "<p>Oui, à condition que le spa franchisse les portes et que la pièce supporte l'humidité et la charge. Les modèles de <strong>77 cm de hauteur</strong> — Calypso et Calypso Web — passent une porte d'entrée standard, ce qui les rend installables en véranda ou en pièce dédiée. <a href=\"/blogs/conseils/installer-un-spa-en-interieur\">Les points à vérifier avant de commander</a>.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "Combien coûte l'installation d'un spa ?",
+            "reponse": "<p>En <strong>Essonne</strong>, les tarifs sont publics et s'ajoutent au panier depuis chaque fiche : <strong>650 €</strong> la livraison seule, <strong>450 €</strong> la mise en service, <strong>1 450 €</strong> le pack complet — transport, dépose à l'emplacement, raccordement et mise en eau. Ailleurs, la prestation est établie sur devis. Le grutage n'est jamais compris : comptez un forfait de 1 500 € en Essonne lorsque l'accès l'impose.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ],
+      "settings": {
+        "titre": "Questions fréquentes sur la livraison",
+        "niveau": "h2",
+        "chapeau": "",
+        "ancre": "questions-frequentes",
+        "color_scheme": "scheme-1",
+        "padding_top": 24,
+        "padding_bottom": 40
+      }
     }
   },
   "order": [
@@ -336,6 +392,7 @@
     "ch3",
     "p_retrait",
     "p_retours",
+    "faq",
     "contact"
   ]
 }

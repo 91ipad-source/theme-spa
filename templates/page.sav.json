@@ -33,10 +33,59 @@
         "padding_top": 16,
         "padding_bottom": 48
       }
+    },
+    "faq": {
+      "type": "spa-faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "SPAS9 assure-t-il le service après-vente des spas qu'il vend ?",
+            "reponse": "<p>Oui. En cas de panne, appelez le <strong>01 60 77 37 00</strong> ou écrivez à spas9@linersfrance.fr : <strong>nous rappelons sous 48 heures ouvrées</strong>. Le service après-vente est assuré par SPAS9 en Île-de-France et dans le Loiret, et <strong>100 % des pièces détachées sont disponibles</strong>.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Quelle est la garantie d'un spa ?",
+            "reponse": "<p><strong>10 ans sur la structure</strong>, <strong>5 ans sur l'acrylique de la cuve</strong> et <strong>2 ans sur l'électronique et les pompes</strong>. S'y ajoutent la garantie légale de conformité et la garantie des vices cachés, qui s'appliquent indépendamment de toute garantie commerciale.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Que faire si mon spa tombe en panne ?",
+            "reponse": "<p>Appelez-nous avec le <strong>modèle</strong> et, si possible, le <strong>code affiché par le panneau de commande</strong> : beaucoup de pannes se règlent au téléphone. Si une intervention est nécessaire, nous convenons d'un créneau ; si une pièce doit être commandée, nous vous disons le délai avant de nous déplacer.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Où trouver les pièces détachées d'un spa ?",
+            "reponse": "<p>Au showroom de <strong>Fontenay-le-Vicomte</strong>, qui tient en stock les filtres de rechange, les produits de traitement de l'eau et les pièces détachées. <a href=\"/pages/showroom-spa-essonne\">Horaires et accès du showroom</a>.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ],
+      "settings": {
+        "titre": "Questions fréquentes sur le SAV",
+        "niveau": "h2",
+        "chapeau": "",
+        "ancre": "questions-frequentes",
+        "color_scheme": "scheme-1",
+        "padding_top": 24,
+        "padding_bottom": 40
+      }
     }
   },
   "order": [
     "main",
-    "sav"
+    "sav",
+    "faq"
   ]
 }
