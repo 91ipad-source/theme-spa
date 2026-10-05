@@ -366,6 +366,7 @@
               "electronique": {{ mf.electronique.value | json }},
               "equipements": {{ mf.equipements.value | json }},
               "coloris": {{ mf.coloris.value | json }},
+              "habillage": {{ mf.habillage.value | json }},
               "gamme": {{ mf.gamme.value | json }}
             }{%- unless forloop.last -%},{%- endunless -%}
           {%- endfor -%}
@@ -540,6 +541,7 @@
       { cle: 'electronique', libelle: 'Électronique' },
       { cle: 'equipements', libelle: 'Équipements' },
       { cle: 'coloris', libelle: 'Coloris' },
+      { cle: 'habillage', libelle: 'Habillage' },
       { cle: 'gamme', libelle: 'Gamme' }
     ];
 

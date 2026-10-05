@@ -176,6 +176,21 @@
         </div>
       {%- endif -%}
 
+      {%- comment -%}
+        L'HABILLAGE SUIT L'ACRYLIQUE, IL NE SE CHOISIT PAS A PART. C'est le
+        fournisseur qui apparie les deux : sur la gamme Plug & Play, deux
+        coloris de cuve sur trois viennent avec une jupe noire et le
+        troisieme avec une jupe grise ; sur Chronos, la jupe est noire quel
+        que soit le coloris. D'ou cette ligne juste sous les coloris, et non
+        un second selecteur : il n'y a rien a y choisir.
+      {%- endcomment -%}
+      {%- if mf.habillage.value != blank -%}
+        <div class="spa-fiche-tech__ligne">
+          <dt>Habillage</dt>
+          <dd>{{ mf.habillage.value | escape }}</dd>
+        </div>
+      {%- endif -%}
+
       {%- if mf.gamme.value != blank -%}
         <div class="spa-fiche-tech__ligne">
           <dt>Gamme</dt>
