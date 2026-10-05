@@ -8002,8 +8002,36 @@ h1.h2.center {
    carte, son contenu. Chaque maillon s'etire dans le precedent sans avoir
    besoin de connaitre sa hauteur, et le prix, pousse en bas par sa marge
    automatique, tombe sur la meme ligne pour toute la rangee. */
+/* LA CASE EST UNE COLONNE, ET CE DETAIL N'EN EST PAS UN.
+
+   En rangee — « display: flex » seul — l'axe principal est horizontal, et
+   un element flex y prend par defaut la largeur de SON CONTENU, pas celle
+   de la case. Sur ordinateur cela ne se voyait pas : quatre colonnes de
+   267 px, le contenu remplit. Sur telephone, une seule colonne de 360 px :
+   les cartes tombaient a 277, 282, 300, 304, 331 ou 360 px selon leur
+   photo et leur titre, toutes calees a gauche, avec jusqu'a 83 px de vide
+   a droite. C'est exactement l'effet « les spas ne sont pas centres ».
+
+   En colonne, l'axe principal devient vertical et « align-items: stretch »,
+   qui est la valeur par defaut, donne a chaque enfant toute la largeur. La
+   case se remplit sans qu'on ait a nommer qui la remplit.
+
+   ET C'EST BIEN LA LE POINT. Dawn glisse un <product-component> entre la
+   case et la carte. La regle qui suit nommait .card-wrapper, .card et
+   .card__content — jamais cet element-la. Le « flex: 1 1 auto » n'atteignait
+   donc pas le seul enfant direct de la case, le seul qui comptait. On vise
+   desormais l'enfant direct quel qu'il soit : le jour ou Shopify ajoute une
+   enveloppe de plus, la regle tient toujours. */
 .product-grid .grid__item {
   display: flex;
+  flex-direction: column;
+}
+
+.product-grid .grid__item > * {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-width: 0;
 }
 
 .product-grid .card-wrapper,
