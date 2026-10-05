@@ -1,0 +1,398 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "entete": {
+      "type": "spa-page-entete",
+      "blocks": {
+        "c1": {
+          "type": "chiffre",
+          "settings": {
+            "valeur": "10 modèles",
+            "label": "De 2 à 7 places"
+          }
+        },
+        "c2": {
+          "type": "chiffre",
+          "settings": {
+            "valeur": "4 formats",
+            "label": "Exposés au showroom"
+          }
+        },
+        "c3": {
+          "type": "chiffre",
+          "settings": {
+            "valeur": "1 450 €",
+            "label": "Livraison et installation"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
+      "settings": {
+        "surtitre": "Essonne (91)",
+        "titre": "Vente et installation de spa en Essonne",
+        "chapeau": "<p>SPAS9 vend, livre et installe des spas dans tout le département depuis son showroom de <strong>Fontenay‑le‑Vicomte</strong>. Dix modèles de 2 à 7 places, quatre formats exposés en permanence, et des tarifs de livraison <strong>publics et affichés</strong> — l'Essonne est le seul département où ils le sont.</p>",
+        "color_scheme": "scheme-1",
+        "padding_top": 44,
+        "padding_bottom": 8
+      }
+    },
+    "sommaire": {
+      "type": "spa-sommaire",
+      "blocks": {
+        "s1": {
+          "type": "entree",
+          "settings": {
+            "rang": "01",
+            "libelle": "Voir avant d’acheter",
+            "ancre": "showroom-91"
+          }
+        },
+        "s2": {
+          "type": "entree",
+          "settings": {
+            "rang": "02",
+            "libelle": "Choisir son format",
+            "ancre": "modeles-91"
+          }
+        },
+        "s3": {
+          "type": "entree",
+          "settings": {
+            "rang": "03",
+            "libelle": "Nos installations",
+            "ancre": "realisations-91"
+          }
+        },
+        "s4": {
+          "type": "entree",
+          "settings": {
+            "rang": "04",
+            "libelle": "Livraison et tarifs",
+            "ancre": "livraison-91"
+          }
+        },
+        "s5": {
+          "type": "entree",
+          "settings": {
+            "rang": "",
+            "libelle": "Questions fréquentes",
+            "ancre": "questions-frequentes"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "s5"
+      ],
+      "settings": {
+        "titre": "Sur cette page",
+        "color_scheme": "scheme-1",
+        "padding_top": 32,
+        "padding_bottom": 16
+      }
+    },
+    "ch1": {
+      "type": "spa-chapitre",
+      "settings": {
+        "numero": "01",
+        "surtitre": "Voir avant d’acheter",
+        "titre": "Le showroom est dans le département",
+        "chapeau": "<p>C'est la différence concrète entre acheter un spa en Essonne et l'acheter ailleurs : vous pouvez entrer dans les modèles avant de signer.</p>",
+        "ancre": "showroom-91",
+        "filet": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 8
+      }
+    },
+    "p_showroom": {
+      "type": "spa-prose",
+      "settings": {
+        "surtitre": "",
+        "titre": "",
+        "texte": "<p>Notre showroom se trouve au <strong>16 rue de l'Orme, ZAC de la Nozolle, 91540 Fontenay‑le‑Vicomte</strong>, à une trentaine de minutes du sud de Paris. <strong>Quatre formats y sont exposés côte à côte</strong> — 2, 3, 5 et 7 places — ce qui permet de comparer un petit format et un spa familial dans la même visite.</p><p>La visite se fait <strong>uniquement sur rendez‑vous</strong>, avec un parking devant le magasin. En voiture, A6 direction Lyon, <strong>sortie n° 9 Villabé</strong>, puis six kilomètres. En transports, la gare de Ballancourt‑sur‑Essonne sur le <strong>RER D</strong> est à moins de trois kilomètres.</p><p>Les spas exposés ne sont pas remplis : vous pouvez vous y installer et juger la profondeur d'assise et le maintien de la nuque, mais il n'y a pas d'essai en eau. <a href=\"/pages/showroom-spa-essonne\">Tout savoir sur le showroom et préparer votre visite</a>.</p>",
+        "html": "",
+        "largeur": "lecture",
+        "encadre": false,
+        "ancre": "",
+        "color_scheme": "scheme-1",
+        "padding_top": 16,
+        "padding_bottom": 24
+      }
+    },
+    "ch2": {
+      "type": "spa-chapitre",
+      "settings": {
+        "numero": "02",
+        "surtitre": "Choisir son format",
+        "titre": "Dix modèles, quatre formats",
+        "chapeau": "<p>Le premier critère qui élimine un modèle n'est ni le prix ni les jets : c'est l'encombrement au sol, et juste après, la largeur du passage qui mène au jardin.</p>",
+        "ancre": "modeles-91",
+        "filet": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 8
+      }
+    },
+    "p_formats": {
+      "type": "spa-prose",
+      "settings": {
+        "surtitre": "",
+        "titre": "",
+        "texte": "<p>La gamme va du <a href=\"/collections/spa-2-places\">2 places</a> de 135 × 200 cm au <a href=\"/collections/spa-7-places\">7 places</a> rond de deux mètres de diamètre, en passant par le <a href=\"/collections/spa-3-places\">3 places</a> et le <a href=\"/collections/spa-5-places\">5 places</a>, qui est le format le plus demandé.</p><p>Trois gammes se distinguent par le raccordement : les spas <a href=\"/collections/gamme-plug-play\">Plug &amp; Play</a> se branchent sur une simple prise 16 A, sans tranchée ni ligne dédiée ; les gammes <a href=\"/collections/gamme-chronos\">Chronos</a> et <a href=\"/collections/gamme-full-therapeutic\">Full Therapeutic</a> demandent une ligne dédiée 32 A, donc un électricien.</p><p>Les prix vont de <strong>4 290 € à 11 990 € TTC</strong>, spa complet et prêt à fonctionner. <a href=\"/collections/tous-nos-spas\">Voir les dix modèles</a> ou <a href=\"/pages/comparer-les-spas\">les comparer ligne à ligne</a>.</p>",
+        "html": "",
+        "largeur": "lecture",
+        "encadre": false,
+        "ancre": "",
+        "color_scheme": "scheme-1",
+        "padding_top": 16,
+        "padding_bottom": 24
+      }
+    },
+    "ch3": {
+      "type": "spa-chapitre",
+      "settings": {
+        "numero": "03",
+        "surtitre": "Nos installations",
+        "titre": "Ce que nous avons installé en Essonne",
+        "chapeau": "<p>Quatre chantiers récents dans le département. Trois sur quatre posaient un problème d'accès, et c'est presque toujours là que tout se joue.</p>",
+        "ancre": "realisations-91",
+        "filet": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 8
+      }
+    },
+    "realisations": {
+      "type": "spa-realisations",
+      "blocks": {
+        "draveil": {
+          "type": "realisation",
+          "settings": {
+            "image": "shopify://shop_images/f2528d3e-cf1e-42b9-8368-34329addd4c1_2.jpg",
+            "image_2": "shopify://shop_images/26ae5369-23e9-4e2e-a7e2-867fd504e70d_4_f12a6e9f-d919-4559-becf-764e284caaa1.jpg",
+            "produit": "spa-roca-proto-lighting-5-personnes",
+            "titre": "",
+            "commune": "Draveil",
+            "annee": "2025",
+            "couleur": "Odyssey",
+            "difficulte": "Un spa de 200 × 200 cm, un seul accès au jardin de 120 cm de large entre le mur et la clôture. Mesuré avant la commande, livré sans surprise."
+          }
+        },
+        "mennecy": {
+          "type": "realisation",
+          "settings": {
+            "image": "shopify://shop_images/IMG_3359.jpg",
+            "image_2": "shopify://shop_images/IMG_3185_2_12c45807-1191-4eb9-9344-1bd6b6ed417c.jpg",
+            "produit": "spa-roca-panope-full-therapeutique-5-personnes",
+            "titre": "",
+            "commune": "Mennecy",
+            "annee": "2026",
+            "couleur": "Midnight Opal",
+            "difficulte": "Un mètre de large entre la descente de garage et le mur, pour le plus grand spa de la gamme. C'est le couloir qui décide, pas le jardin."
+          }
+        },
+        "milly": {
+          "type": "realisation",
+          "settings": {
+            "image": "shopify://shop_images/1d833186-52dc-4109-b0b4-c374bfc9d6af.jpg",
+            "produit": "spa-roca-doto-3-personnes",
+            "titre": "",
+            "commune": "Milly-la-Forêt",
+            "annee": "2026",
+            "couleur": "Odyssey",
+            "difficulte": "Passage étroit entre la maison et le portail. Posé sur chant, le Doto ne présente que ses 81 cm de hauteur : il passe là où sa largeur au sol l'interdirait."
+          }
+        },
+        "corbeil": {
+          "type": "realisation",
+          "settings": {
+            "image": "shopify://shop_images/508a245b-0c9f-432d-ad5e-6ee094dc77e1.jpg",
+            "image_2": "shopify://shop_images/f482f724-9aff-4677-96ba-77892f21f439.jpg",
+            "produit": "spa-roca-panope-full-therapeutique-5-personnes",
+            "titre": "",
+            "commune": "Corbeil-Essonnes",
+            "annee": "2025",
+            "couleur": "Odyssey",
+            "difficulte": "Accès dégagé, livraison conforme à la date annoncée. La plupart des installations ressemblent à celle-ci — ce sont les autres qui font des histoires."
+          }
+        }
+      },
+      "block_order": [
+        "draveil",
+        "mennecy",
+        "milly",
+        "corbeil"
+      ],
+      "settings": {
+        "titre": "",
+        "intro": "",
+        "colonnes": "2",
+        "lien_libelle": "Voir toutes nos réalisations",
+        "lien": "/pages/nos-realisations",
+        "color_scheme": "scheme-1",
+        "padding_top": 16,
+        "padding_bottom": 32
+      }
+    },
+    "ch4": {
+      "type": "spa-chapitre",
+      "settings": {
+        "numero": "04",
+        "surtitre": "Livraison et tarifs",
+        "titre": "Les seuls tarifs publics de la région",
+        "chapeau": "<p>En Essonne, la livraison et l'installation ne se devisent pas : elles s'ajoutent au panier depuis la fiche du spa, au prix affiché. C'est le seul département où c'est le cas.</p>",
+        "ancre": "livraison-91",
+        "filet": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 8
+      }
+    },
+    "p_tarifs": {
+      "type": "spa-prose",
+      "settings": {
+        "surtitre": "",
+        "titre": "",
+        "texte": "<p>Trois prestations, au choix :</p><ul><li><strong>Livraison seule — 650 € TTC.</strong> Le spa est transporté jusque devant chez vous. La prestation s'arrête au seuil.</li><li><strong>Mise en service seule — 450 € TTC.</strong> Remplissage, réglages et premières explications d'entretien, sur un spa déjà en place et raccordé.</li><li><strong>Pack livraison et installation — 1 450 € TTC.</strong> Transport, dépose à l'emplacement, raccordement et mise en eau. Nous repartons en vous laissant un spa prêt à l'usage.</li></ul><p>Comptez <strong>entre quinze et trente jours</strong> entre la commande et l'installation. Le <strong>retrait au dépôt est gratuit</strong> pour les spas en stock, sur rendez‑vous.</p><p>Le <strong>grutage n'est jamais compris</strong> : lorsque l'accès impose une grue, comptez un forfait de <strong>1 500 € en Essonne</strong>, ajouté au devis après l'étude de l'accès. Personne ne peut savoir depuis chez soi si sa livraison imposera une grue — d'où les photos demandées avant toute date. <a href=\"/pages/livraison-et-retrait\">Les modalités complètes</a>, et <a href=\"/pages/livraison-spa-ile-de-france\">la livraison dans les autres départements</a>.</p>",
+        "html": "",
+        "largeur": "lecture",
+        "encadre": false,
+        "ancre": "",
+        "color_scheme": "scheme-1",
+        "padding_top": 16,
+        "padding_bottom": 24
+      }
+    },
+    "p_communes": {
+      "type": "spa-prose",
+      "settings": {
+        "surtitre": "",
+        "titre": "Les communes où nous intervenons",
+        "texte": "<p>Nous livrons et installons dans <strong>tout le département</strong>. Parmi les installations récentes : <strong>Draveil, Mennecy, Milly‑la‑Forêt et Corbeil‑Essonnes</strong>.</p><p>Nous intervenons également à Évry‑Courcouronnes, Massy, Palaiseau, Savigny‑sur‑Orge, Sainte‑Geneviève‑des‑Bois, Brétigny‑sur‑Orge, Arpajon, Montgeron, Yerres, Athis‑Mons, Étampes et Dourdan — ainsi que dans les communes voisines.</p>",
+        "html": "",
+        "largeur": "lecture",
+        "encadre": true,
+        "ancre": "",
+        "color_scheme": "scheme-1",
+        "padding_top": 24,
+        "padding_bottom": 28
+      }
+    },
+    "faq": {
+      "type": "spa-faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Où acheter un spa en Essonne ?",
+            "reponse": "<p>SPAS9 dispose d'un showroom au <strong>16 rue de l'Orme, ZAC de la Nozolle, 91540 Fontenay‑le‑Vicomte</strong>, où quatre formats de spa sont exposés en permanence. La visite se fait sur rendez‑vous, et dix modèles de 2 à 7 places sont disponibles, de 4 290 € à 11 990 € TTC.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Combien coûte la livraison et l'installation d'un spa en Essonne ?",
+            "reponse": "<p>Le <strong>pack livraison et installation revient à 1 450 € TTC</strong> : transport, dépose à l'emplacement, raccordement et mise en eau. La livraison seule coûte 650 € et la mise en service seule 450 €. Si l'accès impose une grue, comptez un forfait supplémentaire de 1 500 € en Essonne.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Quel délai entre la commande et l'installation d'un spa ?",
+            "reponse": "<p>Comptez <strong>entre quinze et trente jours</strong>. L'étude de l'accès se fait avant de fixer une date : quelques photos du chemin depuis la rue et la largeur du passage le plus étroit suffisent.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Faut-il une grue pour livrer un spa en Essonne ?",
+            "reponse": "<p>Pas systématiquement. Ce qui décide, c'est la largeur du passage le plus étroit entre la rue et l'emplacement — un spa de 200 × 200 cm est déjà passé par un accès de 120 cm à Draveil. Quand la grue s'impose, le forfait est de <strong>1 500 € en Essonne</strong>.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "Peut-on venir chercher son spa soi-même ?",
+            "reponse": "<p>Oui, le <strong>retrait est gratuit</strong> pour tous les spas en stock, sur rendez‑vous et après confirmation de la disponibilité, au dépôt de Fontenay‑le‑Vicomte. Prévoyez un véhicule adapté : le poids à vide se compte en centaines de kilos.</p>"
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "question": "Quelle alimentation électrique prévoir pour un spa ?",
+            "reponse": "<p>Cela dépend de la gamme. Les spas <strong>Plug &amp; Play</strong> se branchent sur une <strong>prise 16 A</strong>, sans tranchée ni ligne dédiée. Les gammes Chronos et Full Therapeutic demandent une <strong>ligne dédiée 32 A</strong>, donc l'intervention d'un électricien avant la livraison.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6"
+      ],
+      "settings": {
+        "titre": "Questions fréquentes — spa en Essonne",
+        "niveau": "h2",
+        "chapeau": "",
+        "ancre": "questions-frequentes",
+        "color_scheme": "scheme-1",
+        "padding_top": 24,
+        "padding_bottom": 40
+      }
+    },
+    "contact": {
+      "type": "spa-contact-carte",
+      "settings": {
+        "surtitre": "Parlons-en",
+        "titre": "Votre projet de spa en Essonne",
+        "texte": "<p>Décrivez-nous votre extérieur et votre accès, ou venez voir les modèles au showroom. Nous vous orientons vers ceux qui conviennent — et seulement ceux-là.</p>",
+        "mention": "Showroom uniquement sur rendez-vous",
+        "raison_sociale": "SPAS9, la marque spa de LINERS FRANCE",
+        "adresse": "16 rue de l'Orme, ZAC de la Nozolle, 91540 Fontenay-le-Vicomte",
+        "telephone": "+33 (0)1 60 77 37 00",
+        "courriel": "spas9@linersfrance.fr",
+        "bouton_1": "Prendre rendez-vous",
+        "lien_1": "/pages/contact?motif=visite#demande",
+        "bouton_2": "Découvrir nos spas",
+        "lien_2": "/collections/tous-nos-spas",
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "ton": "marine"
+      }
+    }
+  },
+  "order": [
+    "entete",
+    "sommaire",
+    "ch1",
+    "p_showroom",
+    "ch2",
+    "p_formats",
+    "ch3",
+    "realisations",
+    "ch4",
+    "p_tarifs",
+    "p_communes",
+    "faq",
+    "contact"
+  ]
+}
