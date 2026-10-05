@@ -1,0 +1,234 @@
+{%- comment -%}
+  UNE FOIRE AUX QUESTIONS QUI SE BALISE TOUTE SEULE.
+
+  CE QU'ELLE REMPLACE, ET POURQUOI. Le site balise déjà deux pages en
+  FAQPage, mais à la main : les questions sont écrites dans le gabarit de la
+  page, et recopiées à l'identique dans snippets/spa-faq-schema.liquid. Ce
+  fichier porte d'ailleurs l'avertissement en tête — « si vous modifiez une
+  réponse, il faut la modifier ici aussi ».
+
+  Un contrôle des quatorze réponses le 5 octobre a trouvé la dérive qu'on
+  pouvait prévoir : « lève-couverture » avec un trait d'union ordinaire d'un
+  côté, insécable de l'autre. Une broutille, mais elle était là au bout de
+  quelques semaines, et personne ne l'avait vue.
+
+  Ici, la question et la réponse sont saisies UNE FOIS, dans l'éditeur de
+  thème. L'accordéon affiché et le balisage envoyé à Google sortent du même
+  bloc. Ils ne peuvent plus diverger : il n'y a plus qu'une source.
+
+  UNE SEULE FAQPage PAR PAGE. C'est la règle de Google, et elle est stricte.
+  Les deux pages déjà balisées à la main — « À propos » et « Combien coûte
+  un spa » — ne doivent donc PAS recevoir cette section tant qu'elles
+  passent par spa-faq-schema.liquid. Le jour où leur contenu sera repris
+  ici, il faudra retirer le bloc correspondant du snippet.
+
+  LE TEXTE BALISÉ EST LE TEXTE AFFICHÉ, débarrassé de ses balises HTML. Pas
+  de résumé, pas de reformulation : Google contrôle la correspondance, et
+  une réponse balisée absente de l'écran est une violation de ses consignes,
+  pas une astuce.
+
+  L'ACCORDÉON EST AUTORISÉ. Le texte reste dans le HTML et s'ouvre au clic ;
+  c'est explicitement admis. Ce qui ne l'est pas, c'est un texte absent de
+  la page ou masqué sans moyen de l'afficher.
+{%- endcomment -%}
+
+{{ 'spa-theme.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign questions = section.blocks | where: 'type', 'question'
+  assign ancre = section.settings.ancre | handle
+-%}
+
+{%- if questions.size > 0 -%}
+  <div class="spa-prose color-{{ section.settings.color_scheme }} gradient">
+    <div class="page-width section-{{ section.id }}-padding">
+      <div class="spa-prose__col rte"{% if ancre != blank %} id="{{ ancre }}"{% endif %}>
+        {%- if section.settings.titre != blank -%}
+          {%- comment -%}
+            Le niveau de titre est un reglage, pour la meme raison que dans
+            « Parcours en etapes » : posee seule, la section ouvre sa propre
+            partie et merite un h2 ; glissee dans un chapitre, un h2
+            refermerait le chapitre en cours et rattacherait a la FAQ tout
+            ce qui suit.
+          {%- endcomment -%}
+          {%- assign niveau = section.settings.niveau | default: 'h2' -%}
+          <{{ niveau }} class="spa-chapitre__titre">{{ section.settings.titre | escape }}</{{ niveau }}>
+        {%- endif -%}
+
+        {%- if section.settings.chapeau != blank -%}
+          {{ section.settings.chapeau }}
+        {%- endif -%}
+
+        <div class="spa-faq">
+          {%- for block in questions -%}
+            {%- if block.settings.question == blank -%}{% continue %}{%- endif -%}
+            <details class="spa-faq__item" {{ block.shopify_attributes }}>
+              <summary class="spa-faq__question">{{ block.settings.question | escape }}</summary>
+              <div class="spa-faq__reponse">{{ block.settings.reponse }}</div>
+            </details>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%}
+    LE BALISAGE, CONSTRUIT DEPUIS LES MEMES BLOCS.
+
+    Les balises HTML sont retirees de la reponse : le champ est un texte
+    enrichi, il contient des <p> et parfois des <strong>. Les fermetures de
+    paragraphe et les sauts de ligne deviennent des espaces AVANT le retrait,
+    faute de quoi deux paragraphes se colleraient en un seul mot. Les espaces
+    doubles qui en resultent sont ensuite reduits — trois passes suffisent
+    pour tout ce qu'un champ de ce genre peut contenir.
+  {%- endcomment -%}
+  {%- capture questions_json -%}
+    {%- for block in questions -%}
+      {%- if block.settings.question == blank or block.settings.reponse == blank -%}
+        {% continue %}
+      {%- endif -%}
+      {%- liquid
+        assign texte = block.settings.reponse
+        assign texte = texte | replace: '</p>', ' ' | replace: '<br>', ' ' | replace: '<br/>', ' ' | replace: '<br />', ' '
+        assign texte = texte | replace: '</li>', ' ' | strip_html | strip_newlines
+        assign texte = texte | replace: '  ', ' ' | replace: '  ', ' ' | replace: '  ', ' ' | strip
+      -%}
+      {%- if texte == blank -%}{% continue %}{%- endif -%}
+      ,{
+        "@type": "Question",
+        "name": {{ block.settings.question | strip | json }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ texte | json }}
+        }
+      }
+    {%- endfor -%}
+  {%- endcapture -%}
+  {%- assign questions_json = questions_json | strip | remove_first: ',' -%}
+
+  {%- if questions_json != blank -%}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "@id": {{ request.origin | append: request.path | append: '#' | append: ancre | json }},
+        "mainEntity": [{{ questions_json }}]
+      }
+    </script>
+  {%- endif -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Questions fréquentes",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Chaque question saisie ici est affichée dans un dépliant ET déclarée à Google dans le même mouvement : il n'y a rien à recopier ailleurs. Attention : une page ne doit porter qu'une seule section de ce type, et les pages « À propos » et « Combien coûte un spa » sont déjà balisées autrement."
+    },
+    {
+      "type": "text",
+      "id": "titre",
+      "label": "Titre",
+      "default": "Questions fréquentes"
+    },
+    {
+      "type": "select",
+      "id": "niveau",
+      "label": "Niveau du titre",
+      "options": [
+        { "value": "h2", "label": "Titre de section (h2)" },
+        { "value": "h3", "label": "Sous-titre, dans un chapitre (h3)" }
+      ],
+      "default": "h2",
+      "info": "h3 quand la section est glissée à l'intérieur d'un chapitre : sinon elle le referme et le texte qui suit change de rattachement."
+    },
+    {
+      "type": "richtext",
+      "id": "chapeau",
+      "label": "Introduction",
+      "info": "Facultatif. Une phrase au-dessus des questions."
+    },
+    {
+      "type": "text",
+      "id": "ancre",
+      "label": "Ancre",
+      "info": "Pour pointer cette section depuis un lien : #questions-frequentes.",
+      "default": "questions-frequentes"
+    },
+    {
+      "type": "header",
+      "content": "Mise en page"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Jeu de couleurs",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge haute",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Marge basse",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "info": "Écrite comme un visiteur la poserait, point d'interrogation compris."
+        },
+        {
+          "type": "richtext",
+          "id": "reponse",
+          "label": "Réponse",
+          "info": "Courte et factuelle : c'est ce qu'un moteur de réponse citera. Les chiffres et les noms de lieux y sont précieux."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Questions fréquentes",
+      "blocks": [{ "type": "question" }, { "type": "question" }, { "type": "question" }]
+    }
+  ]
+}
+{% endschema %}

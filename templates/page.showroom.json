@@ -95,13 +95,22 @@
             "libelle": "Nous trouver",
             "ancre": "nous-trouver"
           }
+        },
+        "s5": {
+          "type": "entree",
+          "settings": {
+            "rang": "",
+            "libelle": "Questions fréquentes",
+            "ancre": "questions-frequentes"
+          }
         }
       },
       "block_order": [
         "s1",
         "s2",
         "s3",
-        "s4"
+        "s4",
+        "s5"
       ],
       "settings": {
         "titre": "Sur cette page",
@@ -487,6 +496,78 @@
         "padding_top": 8,
         "padding_bottom": 44
       }
+    },
+    "faq": {
+      "type": "spa-faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Où voir un spa avant de l'acheter en Essonne ?",
+            "reponse": "<p>SPAS9 expose ses spas au <strong>16 rue de l'Orme, ZAC de la Nozolle, 91540 Fontenay-le-Vicomte</strong>, dans l'Essonne, à une trentaine de minutes du sud de Paris. La visite se fait uniquement sur rendez-vous et un parking est disponible devant le magasin.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Faut-il prendre rendez-vous pour visiter le showroom ?",
+            "reponse": "<p>Oui, le showroom se visite <strong>uniquement sur rendez-vous</strong>. Appelez le 01 60 77 37 00 ou écrivez-nous : nous sortons les modèles qui vous intéressent avant votre arrivée, et un vendeur vous consacre le temps nécessaire.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Quels modèles de spa sont exposés au showroom ?",
+            "reponse": "<p>Les <strong>quatre formats de la gamme</strong> sont représentés : 2, 3, 5 et 7 places. Vous pouvez donc comparer un petit format et un spa familial au cours de la même visite. Le showroom propose aussi les produits de traitement de l'eau, les filtres de rechange, les accessoires et les pièces détachées.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Les spas exposés sont-ils remplis d'eau ?",
+            "reponse": "<p>Non. Vous pouvez entrer dans les spas et vous y installer pour juger la profondeur d'assise et le maintien de la nuque, mais <strong>il n'y a pas d'essai en eau</strong>.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "Combien de temps dure une visite du showroom ?",
+            "reponse": "<p>Comptez <strong>trois quarts d'heure</strong> pour une première visite utile : d'abord votre projet, puis la comparaison des deux ou trois modèles retenus.</p>"
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "question": "Comment venir au showroom depuis Paris ?",
+            "reponse": "<p>En voiture, prenez l'<strong>A6 en direction de Lyon, sortie n° 9 Villabé</strong>, puis comptez six kilomètres jusqu'à Fontenay-le-Vicomte. En transports, la gare de <strong>Ballancourt-sur-Essonne</strong>, sur le RER D, est à moins de trois kilomètres — environ cinquante minutes depuis Paris Gare de Lyon.</p>"
+          }
+        },
+        "q7": {
+          "type": "question",
+          "settings": {
+            "question": "Peut-on retirer son spa directement au showroom ?",
+            "reponse": "<p>Oui, le <strong>retrait est gratuit</strong> pour tous les spas en stock, sur rendez-vous et après confirmation de la disponibilité. Il s'effectue par l'entrée arrière du bâtiment. Prévoyez un véhicule adapté : selon les modèles, le poids à vide se compte en centaines de kilos.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7"
+      ],
+      "settings": {
+        "titre": "Questions fréquentes sur le showroom",
+        "niveau": "h2",
+        "chapeau": "",
+        "ancre": "questions-frequentes",
+        "color_scheme": "scheme-1",
+        "padding_top": 24,
+        "padding_bottom": 40
+      }
     }
   },
   "order": [
@@ -505,6 +586,7 @@
     "p_apporter",
     "p_venir",
     "p_retrait",
+    "faq",
     "criteres",
     "contact"
   ]
