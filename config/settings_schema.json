@@ -1522,5 +1522,39 @@
         "info": "S'affiche déjà tapé dans la conversation. Laisser vide pour ouvrir une conversation vierge."
       }
     ]
+  },
+  {
+    "name": "Référencement local",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Les coordonnées du showroom, déclarées aux moteurs de recherche et aux moteurs de réponse. Pour les relever : Google Maps, clic droit sur le magasin, le premier élément du menu copie les deux nombres. Collez la latitude dans le premier champ et la longitude dans le second. Tant que l'un des deux est vide, rien n'est déclaré — mieux vaut aucune coordonnée qu'une coordonnée fausse."
+      },
+      {
+        "type": "text",
+        "id": "geo_latitude",
+        "label": "Latitude",
+        "placeholder": "48.5481"
+      },
+      {
+        "type": "text",
+        "id": "geo_longitude",
+        "label": "Longitude",
+        "placeholder": "2.4057"
+      },
+      {
+        "type": "text",
+        "id": "geo_prix_min",
+        "label": "Prix du spa le moins cher",
+        "info": "Sert à déclarer une fourchette de prix aux moteurs. Chiffre seul, sans symbole.",
+        "placeholder": "4290"
+      },
+      {
+        "type": "text",
+        "id": "geo_prix_max",
+        "label": "Prix du spa le plus cher",
+        "placeholder": "11990"
+      }
+    ]
   }
 ]

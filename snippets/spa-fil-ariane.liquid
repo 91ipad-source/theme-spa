@@ -1,0 +1,103 @@
+{%- comment -%}
+  LE FIL D'ARIANE, EN DONNÉES STRUCTURÉES SEULEMENT.
+
+  CE QUE ÇA FAIT. Dans un résultat Google, la ligne verte sous le titre
+  cesse d'être une URL brute — « spas9.fr › collections › tous-nos-spas ›
+  products › spa-roca-proto… » — et devient un chemin lisible : « Accueil ›
+  Tous nos spas › Spa Proto 2 ». Les moteurs de réponse s'en servent pour
+  comprendre comment le site est organisé, ce qu'aucune URL ne leur dit.
+
+  POURQUOI AUCUN FIL D'ARIANE VISIBLE N'EST AJOUTÉ. Le site a déjà sa
+  navigation : l'en-tête, le sommaire des pages longues, les liens de
+  retour en bas des fiches. Un fil d'Ariane de plus en haut de chaque page
+  ajouterait une quatrième façon de remonter, et Google n'exige pas qu'il
+  soit affiché — il demande seulement qu'il soit vrai. C'est le cas ici :
+  chaque niveau déclaré existe et mène quelque part.
+
+  LE PARENT D'UN PRODUIT EST CHOISI, PAS INVENTÉ.
+
+  Quand on arrive depuis une collection, l'URL la porte et c'est elle le
+  parent : c'est le chemin que le visiteur a réellement pris. Sinon on
+  prend la collection à laquelle le produit appartient vraiment, « Tous nos
+  spas » ou « Accessoires » — jamais une page inventée pour faire joli. Un
+  produit qui n'est dans aucune collection publiée (les trois prestations)
+  n'a que deux niveaux, et c'est exact.
+
+  LE DERNIER NIVEAU N'A PAS D'« item ». C'est la page courante : Google
+  accepte qu'elle n'ait pas de lien, et un lien vers soi-même n'apprend
+  rien à personne.
+{%- endcomment -%}
+
+{%- liquid
+  assign fil = ''
+
+  case request.page_type
+    when 'product'
+      comment
+        La collection d'ou l'on vient, sinon celle a laquelle le produit
+        appartient. « default_sort_by » distingue une vraie collection de
+        l'objet vide que Liquid rend hors contexte.
+      endcomment
+      assign parent = null
+      if collection != blank and collection.handle != blank
+        assign parent = collection
+      else
+        for c in product.collections
+          if c.handle == 'tous-nos-spas' or c.handle == 'accessoires'
+            assign parent = c
+            break
+          endif
+        endfor
+      endif
+      if parent != null
+        assign fil = fil | append: parent.title | append: '|' | append: parent.url | append: '§'
+      endif
+      assign fil = fil | append: product.title | append: '|§'
+
+    when 'collection'
+      assign fil = fil | append: collection.title | append: '|§'
+
+    when 'article'
+      assign fil = fil | append: blog.title | append: '|' | append: blog.url | append: '§'
+      assign fil = fil | append: article.title | append: '|§'
+
+    when 'blog'
+      assign fil = fil | append: blog.title | append: '|§'
+
+    when 'page'
+      assign fil = fil | append: page.title | append: '|§'
+  endcase
+
+  assign niveaux = fil | split: '§'
+-%}
+
+{%- if niveaux.size > 0 -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": {{ request.origin | append: '/' | json }}
+        }
+        {%- for niveau in niveaux -%}
+          {%- assign parts = niveau | split: '|' -%}
+          {%- assign nom = parts[0] | strip -%}
+          {%- assign adresse = parts[1] | strip -%}
+          {%- if nom == blank %}{% continue %}{% endif -%}
+          ,{
+            "@type": "ListItem",
+            "position": {{ forloop.index | plus: 1 }},
+            "name": {{ nom | json }}
+            {%- if adresse != blank -%}
+              ,"item": {{ request.origin | append: adresse | json }}
+            {%- endif -%}
+          }
+        {%- endfor -%}
+      ]
+    }
+  </script>
+{%- endif -%}

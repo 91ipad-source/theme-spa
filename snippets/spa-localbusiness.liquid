@@ -36,8 +36,25 @@
     "@context": "https://schema.org",
     "@type": "Store",
     "@id": {{ request.origin | append: '/#localbusiness' | json }},
-    "name": "SPAS9 | LINERS FRANCE",
-    "alternateName": ["SPAS9", "Liners France"],
+    {%- comment -%}
+      LE NOM EST « SPAS9 », ET RIEN D'AUTRE.
+
+      Il portait « SPAS9 | LINERS FRANCE ». Un tube vertical est un
+      separateur de nom de fichier, pas un nom : il ne se prononce pas, un
+      lecteur d'ecran l'annonce « barre verticale », et un moteur de reponse
+      qui cite l'enseigne recopie ce champ mot pour mot.
+
+      Le lien avec la societe mere n'est pas perdu pour autant : il est
+      declare plus bas, en « parentOrganization », qui est l'endroit prevu
+      pour cela. Dire « SPAS9 est la marque spa de LINERS FRANCE » est le
+      role d'une relation entre deux entites, pas d'un nom a rallonge.
+
+      « SPAS9 | LINERS FRANCE » reste en nom alternatif : c'est sous cette
+      forme que le site a pu etre indexe, et la garder evite que Google
+      traite l'ancien et le nouveau comme deux enseignes differentes.
+    {%- endcomment -%}
+    "name": "SPAS9",
+    "alternateName": ["SPAS9 | LINERS FRANCE", "Liners France"],
     "description": "Vente et installation de spas en Île-de-France. Showroom sur rendez-vous à Fontenay-le-Vicomte (91), spas de 2 à 7 places, conseil, livraison et mise en service.",
     {%- comment -%}
       L'URL de l'entite est la racine du site, pas la page contact : c'est
@@ -61,6 +78,65 @@
       "addressRegion": "Île-de-France",
       "addressCountry": "FR"
     },
+    {%- comment -%}
+      LES COORDONNEES, LA CARTE ET LA FOURCHETTE DE PRIX.
+
+      Les deux nombres viennent des reglages du theme, releves a la main sur
+      Google Maps. Tant que l'un des deux manque, la cle « geo » disparait
+      entierement : une latitude approximative pose le magasin a cote de la
+      route sur toutes les cartes qui lisent ce balisage, et vaut moins que
+      pas de coordonnees du tout.
+
+      « hasMap » pointe la meme adresse Google que le bouton « Comment
+      venir » de la page showroom : un seul endroit ou la verifier.
+
+      « priceRange » est lu par Google pour les commerces. On le construit
+      a partir de deux reglages plutot que de parcourir les produits : le
+      balisage est pose dans l'en-tete, sur toutes les pages, et faire une
+      boucle sur le catalogue a chaque chargement pour deux nombres qui
+      bougent deux fois par an serait payer cher une information stable.
+    {%- endcomment -%}
+    {%- comment -%}
+      LA VIRGULE DÉCIMALE EST LE PIÈGE. Google Maps rend « 48.5481 », mais un
+      clavier français et une habitude de tableur donnent « 48,5481 » — qui
+      n'est pas un nombre pour schema.org et casse silencieusement la
+      coordonnée. On la convertit donc avant toute chose.
+
+      Puis on vérifie que ce qui reste EST un nombre : « plus: 0 » rend 0
+      pour toute chaîne qui n'en est pas une. Un relevé collé de travers —
+      les deux nombres dans le même champ, une lettre, un espace insécable —
+      fait disparaître la clé plutôt que de publier une position fausse.
+      Zéro n'est pas une valeur acceptable ici : c'est au large du golfe de
+      Guinée, à 5 000 km de Fontenay-le-Vicomte.
+    {%- endcomment -%}
+    {%- liquid
+      assign lat = settings.geo_latitude | strip | replace: ',', '.'
+      assign lon = settings.geo_longitude | strip | replace: ',', '.'
+      assign lat_ok = false
+      assign lon_ok = false
+      assign essai = lat | plus: 0
+      if essai != 0
+        assign lat_ok = true
+      endif
+      assign essai = lon | plus: 0
+      if essai != 0
+        assign lon_ok = true
+      endif
+
+      assign prix_min = settings.geo_prix_min | strip
+      assign prix_max = settings.geo_prix_max | strip
+    -%}
+    {%- if lat_ok and lon_ok %}
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": {{ lat | json }},
+        "longitude": {{ lon | json }}
+      },
+    {% endif -%}
+    {%- if prix_min != blank and prix_max != blank %}
+      "priceRange": {{ prix_min | append: '-' | append: prix_max | append: ' EUR' | json }},
+    {% endif -%}
+    "hasMap": "https://www.google.com/maps/search/?api=1&query=16+rue+de+l%27Orme+91540+Fontenay-le-Vicomte",
     "areaServed": [
       {
         "@type": "AdministrativeArea",

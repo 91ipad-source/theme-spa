@@ -570,6 +570,7 @@
 {%- endcomment -%}
 {% render 'spa-localbusiness' %}
 {% render 'spa-faq-schema' %}
+{% render 'spa-fil-ariane' %}
 
 {%- if request.page_type == 'index' -%}
   {% assign potential_action_target = request.origin | append: routes.search_url | append: '?q={search_term_string}' %}
