@@ -1293,6 +1293,16 @@ h3.spa-parcours__heading {
     padding-bottom: 0;
     text-align: center;
     justify-items: center;
+    /* LES TITRES SUR UNE MEME LIGNE.
+
+       Chaque etape est une grille d'une colonne et trois rangees — la
+       pastille, le titre, le detail. Etiree a la hauteur de la plus haute
+       des etapes, elle repartissait le surplus ENTRE ses rangees : une
+       etape au texte court voyait son titre descendre, et la frise perdait
+       sa ligne d'horizon. Sur le showroom l'ecart etait de 11 px, sur
+       A propos de 12. `start` renvoie le surplus tout en bas, la ou il ne
+       separe rien. */
+    align-content: start;
   }
 
   /* Le filet se couche : d'un centre de pastille à l'autre, derrière les
@@ -5378,6 +5388,27 @@ a, span, label, summary, button, blockquote, figcaption,
 .spa-prose__col > ol {
   margin: 0 0 1.6rem;
   padding-left: 2.2rem;
+}
+
+/* LA PUCE SORT DU TEXTE.
+
+   Dawn pose `list-style-position: inside` sur tout ce qui porte .rte, et le
+   corps d'un bloc de prose en fait partie. La puce entre alors dans le flux
+   du texte : la seconde ligne d'un element revient se caler sous elle, plus
+   a gauche que le premier mot de la ligne precedente. Sur une liste dont
+   chaque element tient sur une ligne, cela ne se voit pas. Des qu'un element
+   se replie — c'est le cas de « Ce qu'il est utile d'apporter » sur
+   telephone — la liste perd son bord gauche et le bloc se delite.
+
+   `outside` rend a la puce sa place dans la gouttiere : les 2,2 rem de
+   marge interieure ci-dessus deviennent le renfoncement suspendu, et toutes
+   les lignes d'un meme element s'alignent sur la premiere.
+
+   La regle est en descendance et non en enfant direct : les listes ecrites
+   dans le champ HTML libre sont parfois enveloppees d'un div. */
+.spa-prose__col ul,
+.spa-prose__col ol {
+  list-style-position: outside;
 }
 
 .spa-prose__col li {

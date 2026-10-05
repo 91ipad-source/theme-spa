@@ -198,18 +198,41 @@
       }
     },
     "p_visite": {
-      "type": "spa-prose",
+      "type": "spa-parcours",
+      "blocks": {
+        "e1": {
+          "type": "etape",
+          "settings": {
+            "titre": "Le rendez-vous",
+            "texte": "Dites-nous les modèles qui vous intéressent : ils sont sortis et accessibles avant votre arrivée."
+          }
+        },
+        "e2": {
+          "type": "etape",
+          "settings": {
+            "titre": "Votre projet d'abord",
+            "texte": "Combien de personnes, où le spa sera posé, par où il devra passer. Dix modèles tombent à deux ou trois."
+          }
+        },
+        "e3": {
+          "type": "etape",
+          "settings": {
+            "titre": "L'essai, assis dedans",
+            "texte": "Profondeur d'assise, maintien de la nuque, place pour les jambes : ce qu'aucune fiche ne dit."
+          }
+        }
+      },
+      "block_order": [
+        "e1",
+        "e2",
+        "e3"
+      ],
       "settings": {
-        "surtitre": "",
-        "titre": "Comment se passe une visite",
-        "texte": "<p>On commence par votre projet, pas par le catalogue : combien de personnes utiliseront réellement le spa chaque semaine, où vous comptez l'installer, et par où il devra passer. C'est cette conversation qui réduit dix modèles à deux ou trois.</p><p>Ensuite, vous comparez ces modèles-là sur place.</p>",
-        "html": "",
-        "largeur": "lecture",
-        "encadre": false,
-        "ancre": "",
-        "color_scheme": "scheme-1",
-        "padding_top": 16,
-        "padding_bottom": 24
+        "niveau": "h3",
+        "heading": "Comment se passe une visite",
+        "color_scheme": "scheme-2",
+        "padding_top": 40,
+        "padding_bottom": 40
       }
     },
     "p_apporter": {
@@ -217,7 +240,7 @@
       "settings": {
         "surtitre": "",
         "titre": "Ce qu'il est utile d'apporter",
-        "texte": "<p>Quelques photos de l'emplacement prévu, quelques photos du chemin d'accès depuis la rue, et la largeur du passage le plus étroit — portail, allée, angle de mur.</p><p>Avec ça, nous vous disons dès la visite ce qui passe et ce qui ne passe pas, au lieu de le découvrir au moment de la livraison.</p>",
+        "texte": "<p>Trois choses, et nous vous disons dès la visite ce qui passe et ce qui ne passe pas — au lieu de le découvrir le jour de la livraison.</p><ul><li>Des photos de l'emplacement prévu.</li><li>Des photos du chemin d'accès, depuis la rue.</li><li>La largeur du passage le plus étroit : portail, allée, angle de mur.</li></ul>",
         "html": "",
         "largeur": "lecture",
         "encadre": true,
