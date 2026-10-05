@@ -282,7 +282,7 @@
         "padding_top": 16,
         "padding_bottom": 24,
         "titre": "Comment se passe un retrait",
-        "texte": "<p><strong>SPAS9, la marque spa de LINERS FRANCE</strong><br>16 rue de l'Orme<br>91540 Fontenay-le-Vicomte</p><p>Le retrait s'effectue <strong>sur rendez-vous, dès confirmation de la disponibilité de votre spa</strong>. Avant tout déplacement, attendez notre confirmation : c'est elle qui garantit que votre commande est prête à être enlevée.</p><p>Prévoyez un véhicule adapté au transport du spa. Selon les modèles, le poids à vide peut atteindre plusieurs centaines de kilogrammes.</p>"
+        "texte": "<p><strong>SPAS9, la marque spa de LINERS FRANCE</strong><br>16 rue de l'Orme<br>ZAC de la Nozolle<br>91540 Fontenay-le-Vicomte</p><p>Le retrait s'effectue <strong>sur rendez-vous, dès confirmation de la disponibilité de votre spa</strong>. Avant tout déplacement, attendez notre confirmation : c'est elle qui garantit que votre commande est prête à être enlevée.</p><p>Prévoyez un véhicule adapté au transport du spa. Selon les modèles, le poids à vide peut atteindre plusieurs centaines de kilogrammes.</p>"
       }
     },
     "p_retours": {
@@ -306,7 +306,7 @@
         "mention": "Showroom uniquement sur rendez-vous",
         "ancre": "nous-contacter",
         "raison_sociale": "SPAS9, la marque spa de LINERS FRANCE",
-        "adresse": "16 rue de l'Orme, 91540 Fontenay-le-Vicomte",
+        "adresse": "16 rue de l'Orme, ZAC de la Nozolle, 91540 Fontenay-le-Vicomte",
         "telephone": "+33 (0)1 60 77 37 00",
         "courriel": "spas9@linersfrance.fr",
         "bouton_1": "Demander un devis",
