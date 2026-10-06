@@ -67,7 +67,7 @@
         <div class="spa-realisations__intro rte">{{ section.settings.intro }}</div>
       {%- endif -%}
 
-      <ul class="spa-realisations__liste" role="list">
+      <ul class="spa-realisations__liste{% if colonnes == 1 %} spa-realisations__liste--seule{% endif %}" role="list">
         {%- for block in section.blocks -%}
           {%- if block.settings.image != blank -%}
             {%- liquid

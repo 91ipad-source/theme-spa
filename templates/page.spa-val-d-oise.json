@@ -1,0 +1,342 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "entete": {
+      "type": "spa-page-entete",
+      "blocks": {
+        "c1": {
+          "type": "chiffre",
+          "settings": {
+            "valeur": "10 modèles",
+            "label": "De 2 à 7 places"
+          }
+        },
+        "c2": {
+          "type": "chiffre",
+          "settings": {
+            "valeur": "Dès 4 290 €",
+            "label": "Spa complet, prêt à fonctionner"
+          }
+        },
+        "c3": {
+          "type": "chiffre",
+          "settings": {
+            "valeur": "Sur devis",
+            "label": "Livraison et installation"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
+      "settings": {
+        "surtitre": "Val‑d'Oise (95)",
+        "titre": "Vente et installation de spa dans le Val‑d'Oise",
+        "chapeau": "<p>SPAS9 livre et installe des spas dans tout le département du Val‑d'Oise. Le profil y ressemble à celui de la grande couronne sud&nbsp;: des pavillons, des accès généralement praticables, des terrains souvent de plain‑pied — <strong>la configuration la plus simple pour recevoir un spa</strong>.</p>",
+        "montrer_tel": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 44,
+        "padding_bottom": 8
+      }
+    },
+    "sommaire": {
+      "type": "spa-sommaire",
+      "blocks": {
+        "s1": {
+          "type": "entree",
+          "settings": {
+            "rang": "01",
+            "libelle": "Votre accès",
+            "ancre": "acces-95"
+          }
+        },
+        "s2": {
+          "type": "entree",
+          "settings": {
+            "rang": "02",
+            "libelle": "Quel modèle passe",
+            "ancre": "modeles-95"
+          }
+        },
+        "s3": {
+          "type": "entree",
+          "settings": {
+            "rang": "03",
+            "libelle": "Voir avant d’acheter",
+            "ancre": "showroom-95"
+          }
+        },
+        "s4": {
+          "type": "entree",
+          "settings": {
+            "rang": "04",
+            "libelle": "Livraison et tarifs",
+            "ancre": "livraison-95"
+          }
+        },
+        "s5": {
+          "type": "entree",
+          "settings": {
+            "rang": "",
+            "libelle": "Questions fréquentes",
+            "ancre": "questions-frequentes"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "s5"
+      ],
+      "settings": {
+        "titre": "Sur cette page",
+        "color_scheme": "scheme-1",
+        "padding_top": 32,
+        "padding_bottom": 16
+      }
+    },
+    "ch1": {
+      "type": "spa-chapitre",
+      "settings": {
+        "numero": "01",
+        "surtitre": "Votre accès",
+        "titre": "Des accès praticables, et un détail qui coince",
+        "chapeau": "<p>Cergy, Pontoise, Argenteuil, Enghien‑les‑Bains&nbsp;: pavillons, accès généralement praticables, terrains de plain‑pied.</p>",
+        "ancre": "acces-95",
+        "filet": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 8
+      }
+    },
+    "p_acces": {
+      "type": "spa-prose",
+      "settings": {
+        "surtitre": "",
+        "titre": "",
+        "texte": "<p>Le Val‑d'Oise est l'un des départements où la livraison se passe le plus souvent sans grue&nbsp;: le camion se gare devant, le spa entre à plat, et l'installation se termine dans la journée. C'est le cas de figure pour lequel les délais annoncés — quinze à trente jours — sont les plus faciles à tenir.</p><p>Le détail qui coince, quand il coince, n'est pas la largeur mais <strong>la marche</strong>. Un seuil de terrasse, deux marches vers le jardin, un ressaut de garage&nbsp;: un spa de plusieurs centaines de kilos sur roulettes ne franchit pas une marche tout seul. Ce n'est jamais rédhibitoire, mais cela se prévoit — et cela figure sur le devis plutôt que sur la facture.</p><p>Second point, commun à tout le département&nbsp;: <strong>l'électricité</strong>. Si vous visez un spa des gammes Chronos ou Full Thérapeutique, il faut une ligne dédiée 32 A, donc un électricien, et donc un délai qui lui est propre. Les modèles <a href=\"/collections/gamme-plug-play\">Plug &amp; Play</a> s'affranchissent de cette étape&nbsp;: une prise 16 A suffit.</p>",
+        "html": "",
+        "largeur": "lecture",
+        "encadre": false,
+        "ancre": "",
+        "color_scheme": "scheme-1",
+        "padding_top": 16,
+        "padding_bottom": 24
+      }
+    },
+    "ch3": {
+      "type": "spa-chapitre",
+      "settings": {
+        "numero": "02",
+        "surtitre": "Quel modèle passe",
+        "titre": "Le passage le plus étroit décide",
+        "chapeau": "<p>Le premier critère qui élimine un modèle n'est ni le prix ni les jets&nbsp;: c'est la largeur du passage qui mène à l'emplacement.</p>",
+        "ancre": "modeles-95",
+        "filet": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 8
+      }
+    },
+    "p_modeles": {
+      "type": "spa-prose",
+      "settings": {
+        "surtitre": "",
+        "titre": "",
+        "texte": "<p>Dans le Val‑d'Oise, l'accès laisse généralement passer toute la gamme. <strong>Le critère qui tranche devient alors l'électricité</strong>&nbsp;: un <a href=\"/collections/gamme-plug-play\">Plug &amp; Play</a> s'installe le jour de la livraison, un Chronos ou un Full Thérapeutique attend que votre électricien ait tiré la ligne 32 A. Entre les deux, il y a parfois trois semaines d'écart.</p><p>Le point le plus étroit du parcours élimine les modèles un par un, et il le fait avant le prix. Les dix spas, rangés par largeur&nbsp;:</p><ul><li><strong>135 cm</strong> — <a href=\"/products/spa-roca-duo-2-personnes\">Duo</a>, 2 places, 135 × 200 cm. Le plus étroit de la gamme, dès 4&nbsp;290&nbsp;€.</li><li><strong>158 cm</strong> — <a href=\"/products/spa-roca-calypso-3-personnes\">Calypso</a> et <a href=\"/products/spa-roca-calypso-web-3-personnes\">Calypso Web</a>, 3 places, 158 × 210 cm.</li><li><strong>170 cm</strong> — <a href=\"/products/spa-roca-doto-3-personnes\">Doto</a>, 3 places, 170 × 210 cm.</li><li><strong>200 cm</strong> — <a href=\"/products/spa-roca-proto-lighting-5-personnes\">Proto 2</a> et <a href=\"/products/spa-roca-europe-infrared-5-personnes\">Europe Infrared</a>, 5 places, 200 × 200 cm&nbsp;; <a href=\"/products/spa-roca-doro-plus-7-personnes\">Doro Plus</a>, 7 places, rond de 200 cm de diamètre.</li><li><strong>220 cm</strong> — <a href=\"/products/spa-roca-pleuxaure-5-personnes\">Pleuxaure</a>, 5 places, 220 × 220 cm.</li><li><strong>230 cm</strong> — <a href=\"/products/spa-roca-panope-5-personnes\">Panopé</a> et <a href=\"/products/spa-roca-panope-full-therapeutique-5-personnes\">Panopé Full Thérapeutique</a>, 5 places, 230 × 230 cm.</li></ul><p><strong>Quand la largeur ne passe pas, il reste la hauteur.</strong> Posé sur chant, un spa ne présente plus que sa hauteur de cuve&nbsp;: <strong>77 cm</strong> pour le Calypso, qui franchit ainsi une porte d'entrée standard, <strong>81 cm</strong> pour le Duo, le Doto et le Doro Plus. Les cinq places font 90 cm et ne se rattrapent pas ainsi.</p><p>Les prix vont de <strong>4&nbsp;290&nbsp;€ à 11&nbsp;990&nbsp;€ TTC</strong>, spa complet et prêt à fonctionner. <a href=\"/pages/comparer-les-spas\">Comparer les dix modèles ligne à ligne</a>.</p>",
+        "html": "",
+        "largeur": "lecture",
+        "encadre": false,
+        "ancre": "",
+        "color_scheme": "scheme-1",
+        "padding_top": 16,
+        "padding_bottom": 24
+      }
+    },
+    "ch4": {
+      "type": "spa-chapitre",
+      "settings": {
+        "numero": "03",
+        "surtitre": "Voir avant d’acheter",
+        "titre": "Le showroom est en Essonne",
+        "chapeau": "<p>Il n'y a qu'un seul endroit où voir les spas, et c'est le même pour tout le monde&nbsp;: aucun modèle n'est vendu sans qu'on puisse s'y asseoir d'abord.</p>",
+        "ancre": "showroom-95",
+        "filet": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 8
+      }
+    },
+    "p_showroom": {
+      "type": "spa-prose",
+      "settings": {
+        "surtitre": "",
+        "titre": "",
+        "texte": "<p>Les spas s'achètent au showroom de <strong>Fontenay‑le‑Vicomte</strong>, en Essonne, au <strong>16 rue de l'Orme, ZAC de la Nozolle, 91540 Fontenay‑le‑Vicomte</strong>. <strong>Quatre formats y sont exposés côte à côte</strong> — 2, 3, 5 et 7 places — ce qui permet de comparer un petit format et un spa familial dans la même visite.</p><p>La visite se fait <strong>uniquement sur rendez‑vous</strong>, avec un parking devant le magasin. En voiture, A6 direction Lyon, <strong>sortie n° 9 Villabé</strong>, puis six kilomètres. En transports, la gare de Ballancourt‑sur‑Essonne sur le <strong>RER D</strong> est à moins de trois kilomètres.</p><p>Les spas exposés ne sont pas remplis&nbsp;: vous pouvez vous y installer et juger la profondeur d'assise et le maintien de la nuque, mais il n'y a pas d'essai en eau. <a href=\"/pages/showroom-spa-essonne\">Préparer votre visite</a>.</p>",
+        "html": "",
+        "largeur": "lecture",
+        "encadre": false,
+        "ancre": "",
+        "color_scheme": "scheme-1",
+        "padding_top": 16,
+        "padding_bottom": 24
+      }
+    },
+    "ch5": {
+      "type": "spa-chapitre",
+      "settings": {
+        "numero": "04",
+        "surtitre": "Livraison et tarifs",
+        "titre": "Sur devis, et dit avant",
+        "chapeau": "<p>Le devis se fait après l'étude de l'accès, jamais avant&nbsp;: c'est elle qui détermine la manutention, et la manutention fait le prix.</p>",
+        "ancre": "livraison-95",
+        "filet": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 8
+      }
+    },
+    "p_tarifs": {
+      "type": "spa-prose",
+      "settings": {
+        "surtitre": "",
+        "titre": "",
+        "texte": "<p>La livraison et l'installation dans le Val‑d'Oise sont <strong>établies sur devis</strong>&nbsp;: le prix dépend de la distance, de l'accès et de la manutention nécessaire. L'Essonne, où se trouvent le showroom et le dépôt, est le seul département dont les tarifs sont affichés directement sur les fiches produit.</p><p>Le devis couvre le transport, le passage jusqu'à l'emplacement, le raccordement et la mise en eau&nbsp;; le <strong>grutage est chiffré à part</strong>. <p>Comptez <strong>entre quinze et trente jours</strong> entre la commande et l'installation. Le <strong>retrait au dépôt est gratuit</strong> pour les spas en stock, sur rendez‑vous, quel que soit votre département. <a href=\"/pages/livraison-spa-ile-de-france\">La livraison département par département</a>, et <a href=\"/pages/livraison-et-retrait\">les modalités complètes</a>.</p>",
+        "html": "",
+        "largeur": "lecture",
+        "encadre": false,
+        "ancre": "",
+        "color_scheme": "scheme-1",
+        "padding_top": 16,
+        "padding_bottom": 24
+      }
+    },
+    "p_communes": {
+      "type": "spa-prose",
+      "settings": {
+        "surtitre": "",
+        "titre": "Les communes où nous intervenons",
+        "texte": "<p>Nous livrons et installons <strong>dans tout le département</strong>. Parmi les communes desservies&nbsp;: Cergy, Pontoise, Argenteuil, Enghien‑les‑Bains et Sarcelles.</p><p>Également Franconville, Garges‑lès‑Gonesse, Goussainville, Ermont, Taverny, Bezons, Villiers‑le‑Bel, Montmorency, Saint‑Ouen‑l’Aumône, Eaubonne, Soisy‑sous‑Montmorency, L’Isle‑Adam, Beaumont‑sur‑Oise, Osny, Domont, Saint‑Gratien — ainsi que les communes voisines.</p>",
+        "html": "",
+        "largeur": "lecture",
+        "encadre": true,
+        "ancre": "",
+        "color_scheme": "scheme-1",
+        "padding_top": 24,
+        "padding_bottom": 28
+      }
+    },
+    "faq": {
+      "type": "spa-faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Livrez-vous les spas dans le Val-d'Oise ?",
+            "reponse": "<p>Oui, dans <strong>tout le département</strong>, au départ de notre dépôt de Fontenay‑le‑Vicomte en Essonne. Nous desservons notamment Cergy, Pontoise, Argenteuil, Enghien‑les‑Bains et Sarcelles. Comptez <strong>entre quinze et trente jours</strong> entre la commande et l'installation, l'étude de l'accès se faisant avant toute date.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Combien coûte la livraison d'un spa dans le Val-d'Oise ?",
+            "reponse": "<p>Sur devis. Le prix dépend de la distance depuis notre dépôt de Fontenay‑le‑Vicomte, de la largeur du passage le plus étroit, et du grutage s'il est nécessaire. <strong>Seule l'Essonne a des tarifs publics</strong> — 1&nbsp;450&nbsp;€ le pack livraison et installation — parce que c'est le département du dépôt. Pour le Val‑d'Oise, envoyez votre adresse et trois photos de l'accès&nbsp;: vous recevez un chiffre ferme.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Quel délai entre la commande et l'installation d'un spa ?",
+            "reponse": "<p><strong>Entre quinze et trente jours.</strong> L'étude de l'accès se fait avant de fixer une date&nbsp;: quelques photos du chemin depuis la rue et la largeur du passage le plus étroit suffisent. Si une ligne électrique 32 A est à créer, prévoyez en plus le délai de votre électricien.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Quel spa choisir pour une famille de cinq personnes ?",
+            "reponse": "<p>Quatre modèles de 5 places, du plus compact au plus grand&nbsp;: le <a href=\"/products/spa-roca-proto-lighting-5-personnes\">Proto 2</a> et l'<a href=\"/products/spa-roca-europe-infrared-5-personnes\">Europe Infrared</a> en 200 × 200 cm, le <a href=\"/products/spa-roca-pleuxaure-5-personnes\">Pleuxaure</a> en 220 × 220 cm, et le <a href=\"/products/spa-roca-panope-5-personnes\">Panopé</a> en 230 × 230 cm. Le Proto 2 est le plus demandé, à 4&nbsp;990&nbsp;€ TTC.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "Faut-il une prise spéciale pour un spa ?",
+            "reponse": "<p>Cela dépend de la gamme. Les spas <strong>Plug &amp; Play</strong> se branchent sur une <strong>prise 16 A</strong>, sans tranchée ni ligne dédiée. Les gammes Chronos et Full Thérapeutique demandent une <strong>ligne dédiée 32 A</strong>, donc l'intervention d'un électricien avant la livraison.</p>"
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "question": "Où voir les spas quand on habite dans le Val-d'Oise ?",
+            "reponse": "<p>Au showroom de Fontenay‑le‑Vicomte, en Essonne, où <strong>quatre formats sont exposés côte à côte</strong> — 2, 3, 5 et 7 places. C'est le seul endroit où les voir&nbsp;: nous n'avons pas de point de vente dans le Val‑d'Oise. La visite se fait sur rendez‑vous, A6 sortie n° 9 Villabé, ou gare de Ballancourt‑sur‑Essonne sur le RER D.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6"
+      ],
+      "settings": {
+        "titre": "Questions fréquentes — spa dans le Val‑d'Oise",
+        "niveau": "h2",
+        "chapeau": "",
+        "ancre": "questions-frequentes",
+        "color_scheme": "scheme-1",
+        "padding_top": 24,
+        "padding_bottom": 40
+      }
+    },
+    "contact": {
+      "type": "spa-contact-carte",
+      "settings": {
+        "surtitre": "Parlons-en",
+        "titre": "Votre projet de spa dans le Val‑d'Oise",
+        "texte": "<p>Décrivez-nous votre extérieur et votre accès, ou venez voir les modèles au showroom. Le plus simple reste <strong>trois photos</strong>&nbsp;: l'emplacement prévu, le chemin depuis la rue, et le point le plus étroit du parcours.</p>",
+        "mention": "Showroom uniquement sur rendez-vous",
+        "raison_sociale": "SPAS9, la marque spa de LINERS FRANCE",
+        "adresse": "16 rue de l'Orme, ZAC de la Nozolle, 91540 Fontenay-le-Vicomte",
+        "telephone": "+33 (0)1 60 77 37 00",
+        "courriel": "spas9@linersfrance.fr",
+        "bouton_1": "Demander un devis",
+        "lien_1": "/pages/contact?motif=devis#demande",
+        "bouton_2": "Découvrir nos spas",
+        "lien_2": "/collections/tous-nos-spas",
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "ton": "marine"
+      }
+    }
+  },
+  "order": [
+    "entete",
+    "sommaire",
+    "ch1",
+    "p_acces",
+    "ch3",
+    "p_modeles",
+    "ch4",
+    "p_showroom",
+    "ch5",
+    "p_tarifs",
+    "p_communes",
+    "faq",
+    "contact"
+  ]
+}

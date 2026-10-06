@@ -4689,6 +4689,20 @@ a, span, label, summary, button, blockquote, figcaption,
   .spa-realisations__liste {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  /* UNE SEULE REALISATION.
+
+     Le cas n'existait pas tant que la section ne servait qu'a la page
+     « Nos realisations », qui en montre six. Les pages departementales en
+     citent une seule : sans cette regle, la fiche occupe la moitie gauche
+     d'une rangee de deux et laisse un vide a droite.
+
+     La regle au-dessus de 1200 px plafonnait deja une colonne unique a
+     46rem ; celle-ci fait la meme chose des 750 px, et ne peut toucher
+     que les listes d'une seule fiche. */
+  .spa-realisations__liste--seule {
+    grid-template-columns: minmax(0, 46rem);
+  }
 }
 
 /* TROIS COLONNES SEULEMENT A PARTIR DE 1200 PX.
