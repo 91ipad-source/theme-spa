@@ -378,9 +378,20 @@
         "padding_bottom": 40,
         "ton": "marine"
       }
+    },
+    "photo": {
+      "type": "spa-store-banner",
+      "settings": {
+        "largeur": "contenu",
+        "image": "shopify://shop_images/showroom-spa-essonne-fontenay-le-vicomte.jpg",
+        "show_on_mobile": true,
+        "premier_ecran": true,
+        "image_alt": "L'allée du showroom SPAS9 à Fontenay-le-Vicomte, spas exposés de chaque côté et rayon des produits de traitement de l'eau"
+      }
     }
   },
   "order": [
+    "photo",
     "entete",
     "sommaire",
     "ch1",
