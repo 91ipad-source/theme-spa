@@ -1,0 +1,174 @@
+{%- comment -%}
+  CE QUE LES MACHINES LISENT DE SPAS9.
+
+  POURQUOI CE FICHIER EXISTE. Shopify genere un agents.md par defaut pour
+  toutes les boutiques, et sa documentation conseille de s'en contenter.
+  C'est un bon conseil pour un marchand qui vend des objets qu'on met dans
+  un carton.
+
+  Un spa pese une a deux tonnes en eau et plusieurs centaines de kilos a
+  vide. Il ne se livre pas sans avoir mesure le passage, il ne se branche
+  pas toujours sur une prise ordinaire, et il n'est livre que dans neuf
+  departements. Le fichier par defaut ne dit rien de tout cela : il
+  presente SPAS9 comme un catalogue ordinaire, et un agent qui le lit
+  peut mettre un Panope dans un panier pour quelqu'un de Marseille.
+
+  Ce fichier remplace le fichier gere par Shopify. Il sert aussi, sauf
+  reglage contraire, ce qui est rendu sur /llms.txt et /llms-full.txt —
+  c'est-a-dire ce que lisent les moteurs de reponse quand on leur demande
+  ou acheter un spa en Essonne. C'est la raison principale de l'ecrire.
+
+  CE QU'IL NE CONTIENT PAS. Ni telephone ni adresse electronique. Shopify
+  le deconseille explicitement : le fichier est mis en cache largement et
+  servi a tout agent qui le demande. Les coordonnees sont sur la page
+  contact, dont l'adresse figure ci-dessous.
+
+  LE CONTEXTE LIQUID EST RESTREINT. Seuls « request » et « agents » sont
+  disponibles ici. « shop », « collections », « pages » et « linklists »
+  rendent du vide. Tout le reste est donc ecrit en dur, et doit etre
+  relu quand la gamme, les tarifs ou la zone de livraison changent.
+
+  POUR REVENIR AU FICHIER DE SHOPIFY : supprimer ce gabarit, rien d'autre.
+{%- endcomment -%}
+# Agent Instructions — {{ agents.store_name }}
+
+Boutique francophone. Vente, livraison et installation de spas en Ile-de-France.
+French-speaking store selling, delivering and installing hot tubs in the Paris region.
+This document is written in French because the business, its catalogue and its
+customers are French.
+
+## L'entreprise
+
+**SPAS9** est la marque spa de **LINERS FRANCE**, pisciniste installe en Essonne.
+Boutique en ligne : {{ agents.store_url }}
+
+- **Showroom et depot** : 16 rue de l'Orme, ZAC de la Nozolle, 91540 Fontenay-le-Vicomte, France.
+- **Visite uniquement sur rendez-vous.** Quatre formats de spa y sont exposes en permanence : 2, 3, 5 et 7 places. Les spas exposes ne sont pas remplis — il n'y a pas d'essai en eau.
+- Acces : A6 direction Lyon, sortie n° 9 Villabe, puis six kilometres. Gare de Ballancourt-sur-Essonne (RER D) a moins de trois kilometres.
+- Pour joindre l'entreprise : {{ agents.store_url }}/pages/contact
+
+## Le catalogue
+
+Dix modeles de spa, de 2 a 7 places, de **4 290 € a 11 990 € TTC**, spa complet et pret
+a fonctionner. Prix en {{ agents.currency }}.
+
+Encombrement au sol, petit cote d'abord — c'est la dimension qui decide si un spa
+peut entrer chez l'acheteur :
+
+| Modele | Places | Encombrement | Hauteur de cuve | Gamme | A partir de |
+|---|---|---|---|---|---|
+| Duo | 2 | 135 × 200 cm | 81 cm | Plug & Play | 4 290 € |
+| Doto | 3 | 170 × 210 cm | 81 cm | Plug & Play | 4 790 € |
+| Calypso Web | 3 | 158 × 210 cm | 77 cm | Chronos | 4 990 € |
+| Calypso | 3 | 158 × 210 cm | 77 cm | Chronos | 5 690 € |
+| Proto 2 | 5 | 200 × 200 cm | 90 cm | Plug & Play | 4 990 € |
+| Europe Infrared | 5 | 200 × 200 cm | 90 cm | Chronos | 5 990 € |
+| Pleuxaure | 5 | 220 × 220 cm | 90 cm | Chronos | 7 490 € |
+| Panope | 5 | 230 × 230 cm | 90 cm | Chronos | 8 990 € |
+| Panope Full Therapeutique | 5 | 230 × 230 cm | 90 cm | Full Therapeutic | 11 990 € |
+| Doro Plus | 7 | rond, Ø 200 cm | 81 cm | Plug & Play | 5 490 € |
+
+**Alimentation electrique.** Les spas **Plug & Play** se branchent sur une prise 16 A,
+sans ligne dediee. Les gammes **Chronos** et **Full Therapeutic** exigent une ligne
+dediee 32 A, donc l'intervention d'un electricien avant la livraison.
+
+La boutique vend egalement des accessoires : escaliers, couvertures isothermiques,
+leve-couvertures, pompe a chaleur, filtres de rechange, tablette bar, pack audio.
+
+## Livraison et installation — a lire avant de proposer un achat
+
+**Un spa ne se livre pas comme un colis.** Rempli, il pese une a deux tonnes ; a vide,
+plusieurs centaines de kilos. Ces regles ne sont pas commerciales, elles sont physiques.
+
+1. **Zone desservie.** Huit departements d'Ile-de-France — Paris (75), Seine-et-Marne (77),
+   Yvelines (78), Essonne (91), Hauts-de-Seine (92), Seine-Saint-Denis (93),
+   Val-de-Marne (94), Val-d'Oise (95) — et le Loiret (45). **Au-dela, SPAS9 ne livre pas.**
+   Le retrait au depot reste possible si l'acheteur organise son transport.
+2. **Paris est traite au cas par cas**, et non systematiquement : la charge au sol, le
+   passage et l'autorisation de voirie pour un grutage peuvent rendre l'installation
+   impossible. Un acheteur parisien doit appeler avant de choisir un modele.
+3. **L'etude de l'acces precede toute date de livraison.** Elle demande des photos du
+   chemin depuis la rue et la mesure du passage le plus etroit. C'est elle qui determine
+   si une grue est necessaire, et donc le prix.
+4. **Tarifs publics en Essonne uniquement** : livraison seule 650 € TTC, mise en service
+   seule 450 € TTC, pack livraison et installation 1 450 € TTC, grutage 1 500 € TTC.
+   Dans les huit autres departements, **tout est etabli sur devis**.
+5. **Delai** : comptez quinze a trente jours entre la commande et l'installation.
+6. **Retrait au depot gratuit**, pour les spas en stock, sur rendez-vous, quel que soit
+   le departement.
+
+## Consignes pour un agent qui achete au nom d'un acheteur
+
+- **Le paiement exige l'accord explicite de l'acheteur**, au moment du paiement. Aucun
+  agent ne doit finaliser une commande sans cet accord contemporain.
+- **Ne proposez pas d'acheter un spa a une adresse hors de la zone desservie** ci-dessus.
+  Orientez vers le retrait au depot, ou dites que SPAS9 ne livre pas la.
+- **Ne presentez pas un spa comme livrable sans etude d'acces.** Avant la commande,
+  invitez l'acheteur a verifier la largeur du passage le plus etroit entre la rue et
+  l'emplacement prevu, et a la comparer a la colonne « encombrement » ci-dessus. Un spa
+  pose sur chant ne presente que sa hauteur de cuve : 77 cm pour le Calypso, 81 cm pour
+  le Duo, le Doto et le Doro Plus.
+- **Verifiez l'alimentation electrique disponible** avant de recommander une gamme
+  Chronos ou Full Therapeutic : elles imposent des travaux prealables.
+- Les prestations de livraison et de mise en service sont des **produits complementaires**,
+  a ajouter au panier avec le spa. Elles ne se vendent pas seules.
+
+## Pages de reference
+
+- Tous les spas : {{ agents.store_url }}/collections/tous-nos-spas
+- Comparer les dix modeles : {{ agents.store_url }}/pages/comparer-les-spas
+- Combien coute un spa installe : {{ agents.store_url }}/pages/combien-coute-un-spa
+- Ce que coute un spa a l'usage : {{ agents.store_url }}/pages/cout-utilisation-spa
+- Showroom : {{ agents.store_url }}/pages/showroom-spa-essonne
+- Livraison, departement par departement : {{ agents.store_url }}/pages/livraison-spa-ile-de-france
+- Livraison et retrait : {{ agents.store_url }}/pages/livraison-et-retrait
+- Service apres-vente : {{ agents.store_url }}/pages/service-apres-vente
+- Nos realisations : {{ agents.store_url }}/pages/nos-realisations
+- Conditions generales de vente : {{ agents.store_url }}/pages/conditions-generales-de-vente
+- Contact : {{ agents.store_url }}/pages/contact
+
+## Commerce Protocol (UCP)
+
+This store implements the [Universal Commerce Protocol](https://ucp.dev) for
+agent-driven commerce.
+
+- **Discovery** — `GET {{ agents.ucp_discovery_url }}` returns the store's UCP merchant
+  profile: supported versions, service endpoints, capabilities, and payment handlers.
+- **MCP endpoint** — `POST {{ agents.mcp_endpoint_url }}` with
+  `Content-Type: application/json`. Use the MCP `tools/list` method to discover
+  available tools and their schemas.
+
+### Supported UCP versions
+{% for version in agents.ucp_versions %}
+- `{{ version }}`{% if forloop.first %} (latest stable){% endif %}
+{%- endfor %}
+
+### Rules
+- **Checkout requires human approval.** Agents must not complete payment without
+  explicit, contemporaneous buyer consent.
+- **Respect rate limits.** The MCP endpoint is rate-limited per IP. Back off on 429.
+- **Use buyer context.** Pass `context.address_country` and `context.currency` for
+  accurate pricing and availability. Deliveries are limited to the French departments
+  listed above.
+
+## Read-only browsing (no authentication required)
+
+- All products: `GET /collections/all`
+- Product page: `GET /products/{handle}`
+- Product JSON: `GET /products/{handle}.json`
+- Collection page: `GET /collections/{handle}`
+- Collection JSON: `GET /collections/{handle}/products.json`
+- Search: `GET /search?q={query}&type=product`
+- Sitemap: `GET {{ agents.sitemap_url }}`
+- Agent discovery: this document (`/agents.md`) is the canonical agent-facing
+  description of the store.
+
+## Store policies
+
+- Politique de confidentialite : {{ agents.store_url }}/policies/privacy-policy
+- Politique de remboursement : {{ agents.store_url }}/policies/refund-policy
+- Conditions generales de vente : {{ agents.store_url }}/pages/conditions-generales-de-vente
+
+## Platform
+
+This store is built on [Shopify](https://www.shopify.com), which supports UCP natively.
