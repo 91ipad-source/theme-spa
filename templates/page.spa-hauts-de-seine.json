@@ -126,7 +126,7 @@
       "settings": {
         "surtitre": "",
         "titre": "",
-        "texte": "<p>Un spa arrive sur un camion. Dans les Hauts‑de‑Seine, <strong>le point le plus souvent bloquant est le stationnement</strong>&nbsp;: rue étroite, stationnement payant des deux côtés, sens unique, ou simplement aucune place disponible devant chez vous un mardi matin. C'est la première chose que nous regardons, avant même la largeur du portail.</p><p>Vient ensuite le passage entre la rue et le jardin. Les jardins y sont plus petits qu'en grande couronne, et les accès souvent latéraux. <strong>Mesurez le point le plus serré</strong>&nbsp;: c'est lui qui décide, et pas la place dont vous disposez à l'arrivée.</p><p>Quand le jardin est petit, le format suit. Le <a href=\"/products/spa-roca-duo-2-personnes\">Duo</a> fait 135 × 200 cm pour deux places allongées, et il se branche sur une simple <strong>prise 16 A</strong> — ni tranchée, ni ligne dédiée, ni électricien. C'est le modèle qui demande le moins de travaux, et c'est rarement un hasard s'il part beaucoup en petite couronne.</p>",
+        "texte": "<p>Un spa arrive sur un camion. Dans les Hauts‑de‑Seine, <strong>le point le plus souvent bloquant est le stationnement</strong>&nbsp;: rue étroite, stationnement payant des deux côtés, sens unique, ou simplement aucune place disponible devant chez vous un mardi matin. C'est la première chose que nous regardons, avant même la largeur du portail.</p><p>Vient ensuite le passage entre la rue et le jardin. Les jardins y sont plus petits qu'en grande couronne, et les accès souvent latéraux. <strong>Mesurez le point le plus serré</strong>&nbsp;: c'est lui qui décide, et pas la place dont vous disposez à l'arrivée.</p><p>Quand le jardin est petit, le format suit. Le <a href=\"/products/spa-roca-duo-2-personnes\">Duo</a> fait 135 × 200 cm pour deux places allongées, et il se branche sur une simple <strong>prise 16 A</strong> — ni tranchée, ni ligne dédiée à faire poser. C'est le modèle qui demande le moins de travaux, et c'est rarement un hasard s'il part beaucoup en petite couronne.</p>",
         "html": "",
         "largeur": "lecture",
         "encadre": false,
@@ -259,7 +259,7 @@
           "type": "question",
           "settings": {
             "question": "Quel est le plus petit spa pour un petit jardin ?",
-            "reponse": "<p>Le <a href=\"/products/spa-roca-duo-2-personnes\">Duo</a>, 2 places, <strong>135 × 200 cm</strong>, à partir de 4&nbsp;290&nbsp;€ TTC. C'est le plus étroit de la gamme et il se branche sur une <strong>prise 16 A</strong>, sans travaux électriques. Juste au-dessus, le <a href=\"/products/spa-roca-calypso-3-personnes\">Calypso</a> fait 158 × 210 cm pour trois places.</p>"
+            "reponse": "<p>Le <a href=\"/products/spa-roca-duo-2-personnes\">Duo</a>, 2 places, <strong>135 × 200 cm</strong>, à partir de 4&nbsp;290&nbsp;€ TTC. C'est le plus étroit de la gamme et il se branche sur une <strong>prise 16 A</strong>, sans ligne dédiée à faire poser. Juste au-dessus, le <a href=\"/products/spa-roca-calypso-3-personnes\">Calypso</a> fait 158 × 210 cm pour trois places.</p>"
           }
         },
         "q4": {

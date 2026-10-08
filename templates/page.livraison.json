@@ -185,7 +185,7 @@
         "padding_top": 16,
         "padding_bottom": 24,
         "titre": "Spas Plug & Play",
-        "texte": "<p>Les modèles <strong>Plug &amp; Play</strong> se raccordent sur une <strong>prise dédiée de 16 A</strong>. Aucune ligne n'est à tirer depuis le tableau, et aucun électricien n'a besoin d'intervenir avant notre venue.</p><p>L'installation électrique utilisée doit dans tous les cas être adaptée, conforme et protégée conformément à la réglementation applicable et aux préconisations du fabricant.</p>"
+        "texte": "<p>Les modèles <strong>Plug &amp; Play</strong> se raccordent sur une <strong>prise dédiée de 16 A</strong>. <strong>Aucune ligne dédiée n'est à tirer depuis le tableau</strong> : c'est ce qui évite d'attendre le passage d'un électricien avant notre venue.</p><p>L'installation électrique utilisée doit dans tous les cas être adaptée, conforme et protégée conformément à la réglementation applicable et aux préconisations du fabricant.</p>"
       }
     },
     "p_elec_dediee": {
@@ -326,14 +326,14 @@
           "type": "question",
           "settings": {
             "question": "Quelle alimentation électrique prévoir pour un spa ?",
-            "reponse": "<p>Cela dépend de la gamme. Un spa <strong>Plug &amp; Play</strong> se raccorde sur une <strong>prise dédiée de 16 A</strong> : aucune ligne à tirer depuis le tableau, aucun électricien nécessaire. Les gammes <strong>Chronos et Full Therapeutic</strong> exigent une <strong>ligne directe protégée par un disjoncteur de 32 A</strong>, posée par un électricien habilité depuis le tableau général jusqu'à l'emplacement du spa.</p>"
+            "reponse": "<p>Cela dépend de la gamme. Un spa <strong>Plug &amp; Play</strong> se raccorde sur une <strong>prise dédiée de 16 A</strong> : aucune ligne dédiée à tirer depuis le tableau. La prise doit toutefois partir du tableau sur un circuit conforme et protégé par un dispositif différentiel 30 mA ; si ce n'est pas le cas, elle doit être mise aux normes avant la livraison. Les gammes <strong>Chronos et Full Therapeutic</strong> exigent une <strong>ligne directe protégée par un disjoncteur de 32 A</strong>, posée par un électricien habilité depuis le tableau général jusqu'à l'emplacement du spa.</p>"
           }
         },
         "q2": {
           "type": "question",
           "settings": {
             "question": "Quelle différence entre un spa Plug & Play et un spa à raccordement dédié ?",
-            "reponse": "<p>Le branchement, et donc les travaux. Le <strong>Plug &amp; Play</strong> se branche sur une prise 16 A et fonctionne le jour même, sans tranchée ni intervention d'électricien. Le <strong>raccordement dédié en 32 A</strong> demande une ligne posée avant la livraison, mais il alimente des spas plus puissants, à deux pompes et davantage de jets. C'est le point qui fait reporter le plus d'installations : faites poser la ligne dès la commande, pas la veille.</p>"
+            "reponse": "<p>Le branchement, et donc les travaux. Le <strong>Plug &amp; Play</strong> se branche sur une prise 16 A et fonctionne le jour même, sans tranchée ni ligne dédiée à faire poser. Le <strong>raccordement dédié en 32 A</strong> demande une ligne posée avant la livraison, mais il alimente des spas plus puissants, à deux pompes et davantage de jets. C'est le point qui fait reporter le plus d'installations : faites poser la ligne dès la commande, pas la veille.</p>"
           }
         },
         "q3": {
